@@ -1,0 +1,15 @@
+[t18]
+FileName1=t18.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=3
+RequestHeaderFile=t18_RequestHeader.txt
+RequestBodyFile=t18_RequestBody.txt
+ResponseHeaderFile=t18_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_18.xml
+FileName2=t18_zul.sel.html
+URL2=http://10.125.2.182/bin-java/zkau/web/_zv2015042817/js/zul.sel.wpd
+FileName3=t18_zul.mesh.html
+URL3=http://10.125.2.182/bin-java/zkau/web/_zv2015042817/js/zul.mesh.wpd
+[ProtocolInfo]
+ProtocolId=QTWeb

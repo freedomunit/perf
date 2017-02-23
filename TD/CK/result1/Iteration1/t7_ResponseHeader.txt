@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Date: Wed, 30 Nov 2016 02:17:46 GMT
+Server: Apache
+Set-Cookie: JSESSIONID=BC6F877FB7F5235F4F6E89E42C319734.tomcat01; Path=/bin-java
+Keep-Alive: timeout=15, max=99
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html
+

@@ -1,0 +1,4 @@
+"dtid=z_g8k&cmd_0=dummy&opt_0=i&cmd_1=onCellFocus&uuid_1=jU0Qo&data_1=%7B%22sheetId%22%3A%22bc_"
+"sheet_18%22%2C%22row%22%3A17%2C%22col%22%3A34%7D&cmd_2=onCellSelection&uuid_2=jU0Qo&data_2=%7B"
+"%22sheetId%22%3A%22bc_sheet_18%22%2C%22type%22%3A%22cell%22%2C%22left%22%3A34%2C%22top%22%3A17"
+"%2C%22right%22%3A34%2C%22bottom%22%3A17%7D"

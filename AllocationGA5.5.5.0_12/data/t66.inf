@@ -1,0 +1,13 @@
+[t66]
+FileName1=t66.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=2
+RequestHeaderFile=t66_RequestHeader.txt
+RequestBodyFile=t66_RequestBody.txt
+ResponseHeaderFile=t66_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_66.xml
+FileName2=t66_IconMenuUpArrow.png
+URL2=http://10.125.2.182/bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/IconMenuUpArrow.png
+[ProtocolInfo]
+ProtocolId=QTWeb

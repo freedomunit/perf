@@ -1,0 +1,13 @@
+[t89]
+FileName1=t89.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=2
+RequestHeaderFile=t89_RequestHeader.txt
+RequestBodyFile=t89_RequestBody.txt
+ResponseHeaderFile=t89_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_89.xml
+FileName2=t89_ss_jU0Qo_nl_sheet_12.css
+URL2=http://10.125.2.182/bin-java/zkau/view/z_g8k/jU0Qo/j0l/j/ss_jU0Qo_nl_sheet_12.css
+[ProtocolInfo]
+ProtocolId=QTWeb

@@ -1,0 +1,13 @@
+[t49]
+FileName1=t49.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t49_RequestHeader.txt
+RequestBodyFile=t49_RequestBody.txt
+ResponseHeaderFile=t49_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_49.xml
+FileName2=t49_zkau.txt
+URL2=https://10.125.2.174/bin-java/zkau?dtid=z_ed6&cmd_0=rmDesktop&opt_0=i
+[ProtocolInfo]
+ProtocolId=QTWeb

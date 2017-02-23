@@ -1,0 +1,9 @@
+[t86]
+SnapshotXmlFile=snapshot_86.xml
+FileName1=t86.htm
+URL1=https://10.125.2.174/bin-java/login?f=general/login.htm
+Total=1
+RequestHeaderFile=t86_RequestHeader.txt
+RequestBodyFile=NONE
+ResponseHeaderFile=t86_ResponseHeader.txt
+ContentType=text/html

@@ -1,0 +1,15 @@
+[t18]
+FileName1=t18.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=3
+RequestHeaderFile=t18_RequestHeader.txt
+RequestBodyFile=t18_RequestBody.txt
+ResponseHeaderFile=t18_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_18.xml
+FileName2=t18_ss_w60Qn_p0_sheet_1.css
+URL2=https://10.125.2.174/bin-java/zkau/view/z_ed6/w60Qn/0kp/1/ss_w60Qn_p0_sheet_1.css
+FileName3=t18_ss_w60Qn_p0_sheet_3.css
+URL3=https://10.125.2.174/bin-java/zkau/view/z_ed6/w60Qn/0kp/2/ss_w60Qn_p0_sheet_3.css
+[ProtocolInfo]
+ProtocolId=QTWeb

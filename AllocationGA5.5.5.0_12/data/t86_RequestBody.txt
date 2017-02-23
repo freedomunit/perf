@@ -1,0 +1,3 @@
+"dtid=z_g8k&cmd_0=onCellFocus&uuid_0=jU0Qo&data_0=%7B%22sheetId%22%3A%22bc_sheet_24%22%2C%22row"
+"%22%3A14%2C%22col%22%3A0%7D&cmd_1=onClick&uuid_1=jU0Q66&data_1=%7B%22pageX%22%3A1013%2C%22page"
+"Y%22%3A116%2C%22which%22%3A1%2C%22x%22%3A26%2C%22y%22%3A4%7D"

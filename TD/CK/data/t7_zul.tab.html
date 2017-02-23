@@ -1,0 +1,1373 @@
+zk.load('zul.wgt',function(){if(zk._p=zkpi('zul.tab'))try{
+
+
+
+
+zul.tab.Tabbox = zk.$extends(zul.Widget, {
+	_orient: 'top',
+	_tabscroll: true,
+	_maximalHeight: false,
+	
+	_animating: false,
+
+	$define: {
+    	
+    	
+		tabscroll: _zkf = function () {
+			this.rerender();
+		},
+		
+		
+		orient: function (orient) {
+			if (orient == 'horizontal')
+				this._orient = 'top';
+			else if (orient == 'vertical')
+				this._orient = 'left';
+			this.rerender();
+		},
+		
+		
+		
+		maximalHeight: _zkf,
+		
+		
+		panelSpacing: _zkf
+	},
+	
+	getTabs: function () {
+		return this.tabs;
+	},
+	
+	getTabpanels: function () {
+		return this.tabpanels;
+	},
+	
+	getToolbar: function () {
+		return this.toolbar;
+	},
+	domClass_: function (no) {
+		var sc = this.$supers('domClass_', arguments);
+		if (!no || !no.zclass) {
+			var cls = this.inAccordionMold() ?
+					this.$s('accordion') : this.$s(this.getOrient());
+			sc += ' ' + cls;
+		}
+		return sc;
+	},
+	
+	isHorizontal: function() {
+		var orient = this.getOrient();
+		return 'horizontal' == orient || 'top' == orient || 'bottom' == orient;
+	},
+	
+	isTop: function() {
+		var orient = this.getOrient();
+		return 'horizontal' == orient || 'top' == orient;
+	},
+	
+	isBottom: function() {
+		return 'bottom' == this.getOrient();
+	},
+	
+	isVertical: function() {
+		var orient = this.getOrient();
+		return 'vertical' == orient || 'left' == orient || 'right' == orient;
+	},
+	
+	isRight: function() {
+		var orient = this.getOrient();
+		return 'vertical' == orient || 'left' == orient;
+	},
+	
+	isLeft: function() {
+		return 'left' == this.getOrient();
+	},
+	
+	inAccordionMold: function () {
+		return this.getMold().indexOf('accordion') != -1;
+	},
+	
+	getSelectedIndex: function() {
+		return this._selTab ? this._selTab.getIndex() : -1 ;
+	},
+	
+	setSelectedIndex: function(index) {
+		if (this.tabs)
+			this.setSelectedTab(this.tabs.getChildAt(index));
+	},
+	
+	getSelectedPanel: function() {
+		return this._selTab ? this._selTab.getLinkedPanel() : null;
+	},
+	
+	setSelectedPanel: function(panel) {
+		if (panel && panel.getTabbox() != this)
+			return
+		var tab = panel.getLinkedTab();
+		if (tab)
+			this.setSelectedTab(tab);
+	},
+	
+	getSelectedTab: function() {
+		return this._selTab;
+	},
+	
+	setSelectedTab: function(tab) {
+		if (this._selTab != tab) {
+			if (tab)
+				tab.setSelected(true);
+				
+			this._selTab = tab;
+		}
+	},
+	bind_: function (desktop, skipper, after) {
+		this.$supers(zul.tab.Tabbox, 'bind_', arguments);
+		
+		
+		this._scrolling = false;
+		var toolbar = this.getToolbar();
+		
+		if (this.inAccordionMold())
+			zWatch.listen({onResponse: this});
+		else if (toolbar && this.getTabs()) {
+			zWatch.listen({onResponse: this});
+			this._toolbarWidth = jq(toolbar.$n()).width();
+		}
+		
+		for (var btn, key = ['right', 'left', 'down', 'up'], le = key.length; le--;) 
+			if (btn = this.$n(key[le])) 				
+				this.domListen_(btn, 'onClick', '_doClick', key[le]);
+		this._fixMaxHeight();
+	},
+	unbind_: function () {
+		zWatch.unlisten({onResponse: this});
+		for (var btn, key = ['right', 'left', 'down', 'up'], le = key.length; le--;)
+			if (btn = this.$n(key[le]))
+				this.domUnlisten_(btn, 'onClick', '_doClick', key[le]);
+		this._toolbarWidth = null;
+		this.$supers(zul.tab.Tabbox, 'unbind_', arguments);
+	},
+	_doClick: function(evt, direction) {
+		if (!this.tabs || !this.tabs.nChildren) return; 
+
+		var cave = this.tabs.$n('cave'),
+			allTab =  jq(cave).children(),
+			move = 0,
+			tabbox = this,
+			head = this.tabs.$n(),
+			isVert = tabbox.isVertical(),
+			scrollLength = isVert ? head.scrollTop : head.scrollLeft,
+			offsetLength = isVert ? head.offsetHeight : head.offsetWidth,
+			plus = scrollLength + offsetLength;
+		
+		switch (direction) {
+		case 'right':
+			for (var i = 0, count = allTab.length; i < count; i++) {
+				if (allTab[i].offsetLeft + allTab[i].offsetWidth > plus) {
+					move = allTab[i].offsetLeft + allTab[i].offsetWidth - scrollLength - offsetLength;
+					if (!move || isNaN(move))
+						return;
+					this.tabs._doScroll('right', move);
+					return;
+				}
+			}
+			break;
+		case 'left':
+			for (var i = 0, count = allTab.length; i < count; i++) {
+				if (allTab[i].offsetLeft >= scrollLength) {
+					
+					var tabli = jq(allTab[i]).prev('li')[0];
+					if (!tabli)  return;
+					move = scrollLength - tabli.offsetLeft;
+					if (isNaN(move)) return;
+					this.tabs._doScroll('left', move);
+					return;
+				};
+			};
+			move = scrollLength - allTab[allTab.length-1].offsetLeft;
+			if (isNaN(move)) return;
+			this.tabs._doScroll('left', move);
+			break;
+		case 'up':
+			for (var i = 0, count = allTab.length; i < count; i++) {
+				if (allTab[i].offsetTop >= scrollLength) {
+					var preli = jq(allTab[i]).prev('li')[0];
+					if (!preli) return;
+					move = scrollLength - preli.offsetTop ;
+					this.tabs._doScroll('up', move);
+					return;
+				};
+			};
+			var preli = allTab[allTab.length-1];
+			if (!preli) return;
+			move = scrollLength - preli.offsetTop ;
+			this.tabs._doScroll('up', move);
+			break;
+		case 'down':
+			for (var i = 0, count = allTab.length; i < count; i++) {
+				if (allTab[i].offsetTop + allTab[i].offsetHeight > plus) {
+					move = allTab[i].offsetTop + allTab[i].offsetHeight - scrollLength - offsetLength;
+					if (!move || isNaN(move)) return ;
+					this.tabs._doScroll('down', move);
+					return;
+				};
+			}
+			break;
+		}
+	},
+	
+	syncSize: function () {
+		this._shallSize = false;
+		if (this.desktop)
+			zUtl.fireSized(this, -1); 
+	},
+	onResponse: function () {
+		if (this.inAccordionMold()) {
+			if (this._shallSize)
+				this.syncSize();
+		} else if (this._toolbarWidth) { 
+			var toolbarWidth = jq(this.getToolbar().$n()).width();
+			if (toolbarWidth != this._toolbarWidth) { 
+				this._toolbarWidth = toolbarWidth;
+				this.getTabs().onSize();
+			}
+		}
+	},
+	_syncSize: function () {
+		if (this.desktop)
+			this._shallSize = true;
+	},
+	
+	onChildAdded_: function (child) {
+		this.$supers('onChildAdded_', arguments);
+		if (child.$instanceof(zul.wgt.Toolbar))
+			this.toolbar = child;
+		else if (child.$instanceof(zul.tab.Tabs))
+			this.tabs = child;
+		else if (child.$instanceof(zul.tab.Tabpanels)) {
+			this.tabpanels = child;
+		}
+		this.rerender();
+	},
+	onChildRemoved_: function (child) {
+		this.$supers('onChildRemoved_', arguments);
+		if (child == this.toolbar)
+			this.toolbar = null;
+		else if (child == this.tabs)
+			this.tabs = null;
+		else if (child == this.tabpanels)
+			this.tabpanels = null;
+		if (!this.childReplacing_)
+			this.rerender();
+	},
+	setWidth: function (width) {
+		this.$supers('setWidth', arguments);
+		if (this.desktop)
+			zUtl.fireSized(this, -1); 
+	},
+	setHeight: function (height) {
+		this.$supers('setHeight', arguments);
+		if (this.desktop)
+			zUtl.fireSized(this, -1); 
+	},
+	
+	_fixMaxHeight: function() {
+		var tabbox = this;
+		if (tabbox._maximalHeight) {
+			var max = 0,
+				pnls = tabbox.getTabpanels(),
+				fc = pnls.firstChild;
+			
+			for(var c = fc; c; c = c.nextSibling) {
+				var panel = c ? c.getCaveNode() : null;
+				if (!panel) 
+					return;
+				else {
+					var hgh = jq(panel).outerHeight();
+					if (hgh > max)
+						max = hgh;
+				}
+			}
+			
+			for(var c = fc; c; c = c.nextSibling) {
+				var panel = c.getCaveNode();
+				if (panel)
+					panel.style.height = jq.px0(max);
+			}
+		}
+	}
+});
+
+zkreg('zul.tab.Tabbox');zk._m={};
+zk._m['accordion-lite']=
+function (out) {
+	out.push('<div ', this.domAttrs_(), '>');
+	var tps = this.getTabpanels();
+	if (tps) tps.redraw(out);
+	out.push("</div>");
+}
+;zk._m['default']=
+function (out) {
+	var icon = this.$s('icon'),
+		uuid = this.uuid,
+		tabscroll = this.isTabscroll(),
+		tabs = this.tabs,
+		tabpanels = this.tabpanels,
+		toolbar = this.toolbar,
+		getIcon = function(fontIconCls) {
+			return '<i class="z-icon-chevron-' + fontIconCls + '"></i>';
+		};
+	out.push('<div ', this.domAttrs_(), '>');
+	if (this.isHorizontal()) { 
+		if (this.isBottom()) {
+			if (tabpanels)
+				tabpanels.redraw(out);
+			if (tabs)
+				tabs.redraw(out);
+		} else {
+			if (tabs)
+				tabs.redraw(out);
+			if (tabpanels)
+				tabpanels.redraw(out);
+		}
+		if (tabscroll) {
+			out.push(
+				'<div id="', uuid , '-left" class="', icon, ' ', this.$s('left-scroll'), '">', getIcon('left'), '</div>',
+				'<div id="', uuid , '-right" class="', icon, ' ', this.$s('right-scroll'), '">' , getIcon('right'),  '</div>');
+		}
+		if (tabscroll && toolbar)
+			toolbar.redraw(out);
+	} else { 
+		if (tabs)
+			tabs.redraw(out);
+		if (tabpanels)
+			tabpanels.redraw(out);
+		if (this.isVertical()) { 
+			if (tabscroll) {
+				out.push(
+					'<div id="', uuid , '-up" class="', icon, ' ', this.$s('up-scroll'), '">', getIcon('up'), '</div>',
+					'<div id="', uuid , '-down" class="', icon, ' ', this.$s('down-scroll'), '">' , getIcon('down'),  '</div>');
+			}
+			out.push('<div class="z-clear"></div>');
+		}
+	}
+	out.push("</div>");
+}
+;zk._m['accordion']=[zk._p.p.Tabbox,'accordion-lite'];zkmld(zk._p.p.Tabbox,zk._m);
+
+zul.tab.Tabs = zk.$extends(zul.Widget, {
+	
+	getTabbox: function() {
+		return this.parent;
+	},
+	
+	getWidth: function () {
+		var wd = this._width;
+		if (!wd) {
+			var tabbox = this.getTabbox();
+			if (tabbox && tabbox.isVertical())
+				return '50px';
+		}
+		return wd;
+	},
+	onSize: function () {
+		this._fixWidth();
+		
+		
+		this._scrollcheck('init');
+	},
+	insertChildHTML_: function (child, before, desktop) {
+		var last = child.previousSibling;
+		if (before) 
+			jq(before).before(child.redrawHTML_());
+		else if (last) 
+			jq(last).after(child.redrawHTML_());
+		else {
+			var edge = this.$n('edge');
+			if (edge) 
+				jq(edge).before(child.redrawHTML_());
+			else
+				jq(this.getCaveNode()).append(child.redrawHTML_());
+		}
+		child.bind(desktop);
+	},
+	
+	setVflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$super(zul.tab.Tabs, 'setVflex', v);
+	},
+	
+	setHflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$super(zul.tab.Tabs, 'setHflex', v);
+	},
+	bind_: function (desktop, skipper, after) {
+		this.$supers(zul.tab.Tabs, 'bind_', arguments);
+		zWatch.listen({onSize: this, onResponse: this});		
+	},
+	unbind_: function () {
+		zWatch.unlisten({onSize: this, onResponse: this});
+		this.$supers(zul.tab.Tabs, 'unbind_', arguments);
+	},
+	_scrollcheck: function(way, tb) {
+		this._shallCheck = false;
+		var tabbox = this.getTabbox();
+		if (!this.desktop || 
+				(tabbox && (!tabbox.isRealVisible() || !tabbox.isTabscroll())))
+			return;
+
+		var tabs = this.$n(),
+			tbx = tabbox.$n();
+
+		if (!tabs || !tbx) 
+			return;	
+
+		if (tabbox.isVertical()) { 
+			var tabsOffsetHeight = tabs.offsetHeight,
+				tabsScrollTop = tabs.scrollTop,
+				childHeight = 0;
+			
+			jq(this.$n('cave')).children().each(function () {
+				childHeight += this.offsetHeight;
+			});
+
+			if (tabbox._scrolling) { 
+				var btnsize = this._getArrowSize();
+				if (tabs.offsetHeight <= btnsize)  return;
+				
+				var sel = tabbox.getSelectedTab(),
+					node = tb ? tb.$n() : (sel ? sel.$n() : null),
+					nodeOffsetTop = node ? node.offsetTop : 0,
+					nodeOffsetHeight = node ? node.offsetHeight : 0;
+					
+				if (childHeight <= tabsOffsetHeight + btnsize) {
+					tabbox._scrolling = false;
+					this._showbutton(false)
+					tabs.style.height = jq.px0(tbx.offsetHeight-2);
+					tabs.scrollTop = 0;
+				}
+				switch (way) {
+				case 'end':
+					var d = childHeight - tabsOffsetHeight - tabsScrollTop;
+					this._doScroll(d >= 0 ? 'down' : 'up', d >= 0 ? d : Math.abs(d));
+					break;
+				case 'init':
+				case 'vsel':
+					if (nodeOffsetTop < tabsScrollTop) {
+						this._doScroll('up', tabsScrollTop - nodeOffsetTop);
+					} else if (nodeOffsetTop + nodeOffsetHeight > tabsScrollTop + tabsOffsetHeight) {
+						this._doScroll('down', nodeOffsetTop + nodeOffsetHeight - tabsScrollTop - tabsOffsetHeight);
+					}
+					break;
+				}
+			} else { 
+				if (childHeight - tabsOffsetHeight > 0) {
+					tabbox._scrolling = true;
+					this._showbutton(true);
+					var btnsize = this._getArrowSize(),
+						temp = tbx.offsetHeight - btnsize;
+					tabs.style.height = temp > 0 ? temp + 'px' : '';
+					if (way == 'end') {
+						var d = childHeight - tabsOffsetHeight - tabsScrollTop + 2;
+						if (d >= 0)
+							this._doScroll(this.uuid, 'down', d);
+					}
+				} else {
+					this._showbutton(false);
+				}
+			}
+		} else if(!tabbox.inAccordionMold()) {
+			var cave = this.$n('cave'),
+			 	sel = tabbox.getSelectedTab(),
+				node = tb ? tb.$n() : ( sel ? sel.$n() : null),
+			 	nodeOffsetLeft = node ? node.offsetLeft : 0,
+				nodeOffsetWidth = node ? node.offsetWidth : 0,
+				tabsOffsetWidth = tabs.offsetWidth,
+				tabsScrollLeft = tabs.scrollLeft,
+				childWidth = 0,
+				toolbar = tabbox.toolbar,
+				toolbarWidth = 0;
+
+			jq(cave).children().each(function () {
+				childWidth += this.offsetWidth;
+			});
+			
+			if (toolbar && toolbar.desktop)
+				toolbarWidth = toolbar.$n().offsetWidth;
+			
+			if (tabbox._scrolling) { 
+				var btnsize = this._getArrowSize();
+				tabbox.$n('right').style.right = toolbarWidth + 'px';
+				
+				if (tabs.offsetWidth <= btnsize) return;
+				if (childWidth <= tabsOffsetWidth + btnsize) {
+					tabbox._scrolling = false;
+					this._showbutton(false);
+					tabs.style.width = jq.px0(tbx.offsetWidth - toolbarWidth);
+					tabs.scrollLeft = 0;
+				}
+				
+				switch (way) {
+				case 'end':
+					var d = childWidth - tabsOffsetWidth - tabsScrollLeft;
+					this._doScroll(d >= 0 ? 'right' : 'left', d >= 0 ? d : Math.abs(d));
+					break;
+				case 'init':
+				case 'sel':
+					if (nodeOffsetLeft == tabsScrollLeft) 
+						break;
+					
+					if (nodeOffsetLeft < tabsScrollLeft) {
+						this._doScroll('left', tabsScrollLeft - nodeOffsetLeft);
+					} else if (nodeOffsetLeft + nodeOffsetWidth > tabsScrollLeft + tabsOffsetWidth) {
+						this._doScroll('right', nodeOffsetLeft + nodeOffsetWidth - tabsScrollLeft - tabsOffsetWidth);
+					}
+					break;
+				}
+			} else { 
+				if (childWidth - tabsOffsetWidth > 0) {
+					tabbox._scrolling = true;
+					this._showbutton(true);
+					var cave = this.$n('cave'),
+						btnsize = this._getArrowSize(),
+						temp = tbx.offsetWidth - toolbarWidth - btnsize;
+					cave.style.width = '5555px';
+					tabs.style.width = temp > 0 ? temp + 'px' : '';
+					tabbox.$n('right').style.right = toolbarWidth + 'px';
+					
+					if (way == 'sel') {
+						if (nodeOffsetLeft < tabsScrollLeft) {
+							this._doScroll('left', tabsScrollLeft - nodeOffsetLeft);
+						} else if (nodeOffsetLeft + nodeOffsetWidth > tabsScrollLeft + tabsOffsetWidth) {
+							this._doScroll('right', nodeOffsetLeft + nodeOffsetWidth - tabsScrollLeft - tabsOffsetWidth);
+						}
+					}
+				} else {
+					this._showbutton(false);
+				}
+			}
+		}
+	},
+	_doScroll: function(to, move) {
+		if (!this._doingScroll)
+			this._doingScroll = {};
+		if (move <= 0 || this._doingScroll[to])
+			return;
+		var step,
+			self = this,
+			tabs = this.$n();
+		
+		this._doingScroll[to] = move;
+		
+		step = move <= 60 ? 5 : (5 * (zk.parseInt(move / 60) + 1));
+		
+		var goscroll = function(tabs, to, step) {
+			switch (to) {
+			case 'right':
+				tabs.scrollLeft += step;
+				break;
+			case 'left':
+				tabs.scrollLeft -= step;
+				break;
+			case 'up':
+				tabs.scrollTop -= step;
+				break;
+			default:
+				tabs.scrollTop += step;
+			}
+			tabs.scrollLeft = (tabs.scrollLeft <= 0 ? 0 : tabs.scrollLeft);
+			tabs.scrollTop = (tabs.scrollTop <= 0 ? 0 : tabs.scrollTop);
+		}
+		var run = setInterval(function() {
+			if (!move) {
+				delete self._doingScroll[to];
+				clearInterval(run);
+				return;
+			} else {
+				
+				move < step ? goscroll(tabs, to, move) : goscroll(tabs, to, step);
+				move -= step;
+				move = move < 0 ? 0 : move;
+			}
+		}, 10);
+	},
+	_getArrowSize: function() {
+		var tabbox = this.getTabbox(),
+			isVer = tabbox.isVertical(),
+			btnA = isVer ? tabbox.$n('up') : tabbox.$n('left'),
+			btnB = isVer ? tabbox.$n('down') : tabbox.$n('right'),
+			size = 0;
+		if (btnA && btnB) {
+			size = isVer ? btnA.offsetHeight + btnB.offsetHeight : btnA.offsetWidth + btnB.offsetWidth;
+		}
+		return size;
+	},
+	_showbutton : function(show) {
+		var tabbox = this.getTabbox();
+		if (tabbox.isTabscroll()) {
+			var cls = tabbox.$s('scroll');
+			jq(tabbox).removeClass(cls);
+			if (show) {
+				
+				if(!tabbox.isVertical() && !tabbox.inAccordionMold()) {					
+					var tb = tabbox.toolbar;
+					tabbox.$n('left').style.height =  tabbox.$n('right').style.height = '';
+					if (tb) 
+						tb.$n().style.height = '';
+				}
+				
+				jq(tabbox).addClass(cls);
+			}
+		}
+	},
+	_fixWidth: function() {
+		var tabs = this.$n(),
+			tabbox = this.getTabbox(),
+			tbx = tabbox.$n(),
+			btnsize = tabbox._scrolling ? this._getArrowSize() : 0;
+		this._fixHgh();
+		if (tabbox.isVertical()) {
+			var panels = tabbox.getTabpanels();
+			if (panels)
+				panels._fixWidth();
+			
+			if (tabs.style.width) {
+				tabs._width = tabs.style.width;
+			} else {
+				
+				tabs.style.width = tabs._width ? tabs._width : '50px';
+			}
+		} else if (!tabbox.inAccordionMold()) {
+			if (tbx.offsetWidth < btnsize) 
+				return;
+			if (tabbox.isTabscroll()) {
+				var toolbar = tabbox.toolbar;
+				if (toolbar) 
+					toolbar = toolbar.$n();
+				if (!tbx.style.width) {
+					tbx.style.width = '100%';
+					if (tabbox._scrolling) 
+						tabs.style.width = jq.px0(zk(tbx).contentWidth() - (toolbar ? toolbar.offsetWidth : 0) - btnsize);
+					else 
+						tabs.style.width = jq.px0(zk(tbx).contentWidth() - (toolbar ? toolbar.offsetWidth : 0));
+				} else {
+					if (tabbox._scrolling)
+						tabs.style.width = jq.px0(zk(tbx).contentWidth() - (toolbar ? toolbar.offsetWidth : 0) - btnsize);
+					else 
+						tabs.style.width = jq.px0(zk(tbx).contentWidth() - (toolbar ? toolbar.offsetWidth : 0));
+				}
+				if (toolbar && tabbox._scrolling) 
+					tabbox.$n('right').style.right = toolbar.offsetWidth + 'px';
+				
+			} else {
+				if (!tbx.style.width) {
+					if (tbx.offsetWidth) {
+						tbx.style.width = jq.px0(tbx.offsetWidth);
+						tabs.style.width = jq.px0(zk(tbx).contentWidth() - zk(tabs).marginWidth());
+					}
+				} else {
+					tabs.style.width = jq.px0(zk(tbx).contentWidth() - zk(tabs).marginWidth());
+				}
+			}
+		}
+	},
+	_fixHgh: function () {
+		var tabbox = this.getTabbox();
+		
+		
+		if (tabbox.isVertical()) {
+			var tabs = this.$n(),
+				tbx = tabbox.$n(),
+				u = tabbox.$n('up'),
+				d = tabbox.$n('down'),
+				cave =  this.$n('cave'),
+				child = jq(tbx).children('div'),
+				allTab = jq(cave).children();
+			if (!tabbox.getHeight() && (!tabbox._vflex || tabbox._vflex == 'min')) { 
+				var tabsHgh = allTab.length * allTab[0].offsetHeight, 
+					seldPanel = tabbox.getSelectedPanel(),
+					panelsHgh = seldPanel && seldPanel.getPanelContentHeight_() || 0 ,  
+				realHgh = Math.max(tabsHgh, panelsHgh);
+				tbx.style.height = jq.px0(realHgh + zk(tbx).padBorderHeight());
+			}
+			tabs.style.height =  jq.px0(zk(tbx).contentHeight() - zk(tabs).marginHeight());
+			
+			if(u && d) {
+				u.style.width = d.style.width = tabs.style.width;
+			}
+		} else {
+			var r = tabbox.$n('right'),
+				l = tabbox.$n('left'),
+				tb = tabbox.toolbar,
+				tabs = this.$n(),
+				hgh = jq.px0(tabs ? tabs.offsetHeight : 0);
+			if (r && l) {
+				r.style.height = l.style.height = hgh;
+			}
+			if (tb && (tb = tb.$n())) {
+				tb.style.height = hgh;
+			}
+			if (tabs)
+				tabs.style.height = '';
+		}
+	},
+	onResponse: function () {
+		if (this._shallCheck) {
+			this._scrollcheck('init');	
+		}
+	},
+	onChildRemoved_: function (child) {
+		var p = this.parent;
+		if (p && child == p._selTab) {
+			p._selTab = null;
+		}
+		if (this.desktop)
+			this._shallCheck = true;
+		this.$supers('onChildRemoved_', arguments);
+	},
+	onChildAdded_: function () {
+		if (this.desktop)
+			this._shallCheck = true;
+		this.$supers('onChildAdded_', arguments);
+	},
+	
+	ignoreFlexSize_: function(attr) {
+		var p = this.getTabbox();
+		return (p.isVertical() && 'h' == attr)
+			|| (p.isHorizontal() && 'w' == attr); 
+	}
+});
+zkreg('zul.tab.Tabs');zk._m={};
+zk._m['default']=
+function (out) {
+	var tbx = this.getTabbox(),
+		uuid = this.uuid;
+	out.push('<div ', this.domAttrs_(), '>', 	
+			   '<ul id="', uuid, '-cave" class="', this.$s('content'), '">');
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	out.push(  '</ul>',
+			 '</div>');
+	
+}
+;zkmld(zk._p.p.Tabs,zk._m);
+(function () {
+
+	
+	
+	
+	
+	
+	
+	
+	function _logId(wgt) {
+		if (!wgt._oldId) {
+			wgt._oldId = wgt.uuid;
+			setTimeout(function () {
+				delete wgt._oldId;
+			}, 0);
+		}
+	}
+
+zul.tab.Tab = zk.$extends(zul.LabelImageWidget, {
+	$init: function () {
+		this.$supers('$init', arguments);
+		this.listen({onClose: this}, -1000);
+	},
+	$define: {
+		
+		
+		closable: _zkf = function() {
+			this.rerender();
+		},
+		image: function (v) {
+			if (v && this._preloadImag) zUtl.loadImage(v);
+			this.rerender();
+		},
+		
+		
+		disabled: _zkf,
+		
+		
+		selected: function(selected) {
+			this._sel();
+		}
+	},
+	
+	getTabbox: function() {
+		return this.parent ? this.parent.parent : null;
+	},
+	
+	getIndex: function() {
+		return this.getChildIndex();
+	},
+	
+	getLinkedPanel: function() {
+		var w;
+		return (w = this.getTabbox()) && (w = w.getTabpanels()) ?
+			w.getChildAt(this.getIndex()): null;
+	},
+	_doCloseClick : function(evt) {
+		if (!this._disabled) {
+			this.fire('onClose');
+			evt.stop();
+		}
+	},
+	_sel: function(notify, init) {
+		var tabbox = this.getTabbox();
+		
+		
+		if (!tabbox || tabbox._animating) return;
+
+		var	tabs = this.parent,
+			oldtab = tabbox._selTab;
+		if (oldtab != this || init) {
+			if (oldtab && tabbox.inAccordionMold()) {
+				var p = this.getLinkedPanel();
+				if (p) p._changeSel(oldtab.getLinkedPanel());
+			}
+			if (oldtab && oldtab != this)
+				this._setSel(oldtab, false, false, init);
+			this._setSel(this, true, notify, init);
+		}
+	},
+	_setSel: function(tab, toSel, notify, init) {
+		var tabbox = this.getTabbox(),
+			panel = tab.getLinkedPanel();
+		if (tab.isSelected() == toSel && notify)
+			return;
+
+		if (toSel) {
+			tabbox._selTab = tab; 
+			var ps;
+			if (ps = tabbox.tabpanels){
+				if(ps._selPnl && ps._selPnl != panel) ps._selPnl._sel(false, tabbox.inAccordionMold());
+				ps._selPnl = panel; 
+			}
+		}
+		tab._selected = toSel;
+		
+		if (!this.desktop) return;
+		
+		if (toSel)
+			jq(tab).addClass(this.$s('selected'));
+		else
+			jq(tab).removeClass(this.$s('selected'));
+
+		if (panel && panel.isVisible()) 
+			panel._sel(toSel, !init);
+
+		if (!tabbox.inAccordionMold()) {
+			var tabs = this.parent;
+			if (tabs) tabs._fixWidth();
+		}
+		
+		if (tab == this) {
+			if (tabbox.isVertical())
+				tabs._scrollcheck('vsel', this);
+			else if (!tabbox.inAccordionMold())
+				tabs._scrollcheck('sel', this);
+		}
+		
+		if (notify)
+			this.fire('onSelect', {items: [this], reference: this.uuid});
+	},
+	setHeight: function (height) {
+		this.$supers('setHeight', arguments);
+		if (this.desktop) {
+			this._calcHgh();			
+			zUtl.fireSized(this.parent);
+		}
+	},
+	setWidth: function (width) {
+		this.$supers('setWidth', arguments);
+		if (this.desktop)
+			zUtl.fireSized(this.parent);
+	},
+	_calcHgh: function () {
+		var n = this.$n(),
+			tabbox = this.getTabbox();
+		
+		if (!tabbox.isVertical()) {
+			var r = tabbox.$n('right'),
+				l = tabbox.$n('left'),
+				tb = tabbox.toolbar,
+				tabs = tabbox.tabs.$n(),
+				hgh = jq.px0(tabs ? tabs.offsetHeight : 0);
+				
+			if (r && l) {
+				r.style.height = l.style.height = hgh;
+			}
+			if (tb && (tb = tb.$n())) {
+				tb.style.height = hgh;
+			}
+		}
+	},
+	
+	doClick_: function(evt) {
+		if (this._disabled) return;
+		this._sel(true);
+		this.$supers('doClick_', arguments);
+	},
+	domClass_: function (no) {
+		var scls = this.$supers('domClass_', arguments);
+		if (!no || !no.zclass) {
+			if (this.isDisabled()) scls += ' ' + this.$s('disabled');
+			if (this.isSelected()) scls += ' ' + this.$s('selected');
+		}
+		return scls;
+	},
+	domContent_: function () {
+		var label = zUtl.encodeXML(this.getLabel()),
+			img = this.getImage(),
+			iconSclass = this.domIcon_();
+		
+		if (!label) label = '&nbsp;';
+		if (!img && !iconSclass) return label;
+		if (!img) {
+			img = iconSclass;
+		} else
+			img = '<img src="' + img + '" class="' + this.$s('image') + '"/>'
+			+ (iconSclass ? ' ' + iconSclass : '');
+		return label ? img + ' ' + label: img;
+	},
+	
+	setVflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$supers('setVflex', arguments);
+	},
+	
+	setHflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$supers('setHflex', arguments);
+	},
+	bind_: function (desktop, skipper, after) {
+		this.$supers(zul.tab.Tab, 'bind_', arguments);
+		var closebtn = this.isClosable() ? this.$n('cls') : null,
+			tab = this;
+		if (closebtn) {
+			this.domListen_(closebtn, 'onClick', '_doCloseClick');			
+		}
+		if (tab.isSelected()) {
+			zk.afterMount(function () {
+				if (tab.desktop && tab.getTabbox().inAccordionMold()) {
+					var panel = tab.getLinkedPanel(),
+						cave = panel? panel.$n('cave') : null;
+					
+					if (cave && cave.style.display == 'none')
+						panel._sel(true, true);
+				}
+				tab._sel(false, true);
+			});
+		}
+		
+		if (this.getHeight())
+			this._calcHgh();
+	},
+	unbind_: function () {
+		var closebtn = this.$n('cls');
+		
+		_logId(this);
+		if (closebtn) {
+			this.domUnlisten_(closebtn, 'onClick', '_doCloseClick');
+		}
+		this.$supers(zul.tab.Tab, 'unbind_', arguments);
+	},
+	
+	onClose: function () {
+		if (this.getTabbox().inAccordionMold()) {
+			this.getTabbox()._syncSize();
+		}
+	},
+	deferRedrawHTML_: function (out) {
+		var tbx = this.getTabbox(),
+			tag = tbx.inAccordionMold() ? 'div' : 'li';
+		out.push('<', tag, this.domAttrs_({domClass:1}), ' class="z-renderdefer"></', tag,'>');
+	},
+	rerender: function (skipper) {
+		
+		if (this.desktop)
+			_logId(this);
+		this.$supers(zul.tab.Tab, 'rerender', arguments);
+	},
+	contentRenderer_: function (out) {
+		out.push('<span id="', this.uuid, '-cnt" class="', this.$s('text'), '">', this.domContent_(), '</span>');
+	}
+});
+
+zul.tab.TabRenderer = {
+	
+	isFrameRequired: function () {
+		return false;
+	}
+};
+})();
+zkreg('zul.tab.Tab',true);zk._m={};
+zk._m['default']=
+function (out) {
+	var tbx = this.getTabbox(),
+		uuid = this.uuid,
+		icon = this.$s('icon'),
+		removeIcon = '<i id="' + uuid + '-cls" class="z-icon-times ' + icon + '"></i>',
+		isAccordion = tbx.inAccordionMold(),
+		tag = isAccordion ? 'div' : 'li', 
+		panel = isAccordion ? this.getLinkedPanel() : null,
+		n = panel? panel.$n() : null;
+	 
+	if (isAccordion) {
+		var c = n? n.firstChild : null;
+		
+		
+		
+		
+		
+		
+		
+		if (!panel || (c && c != panel.$n('cave')
+			&& (this._oldId? c.id != this._oldId : c != this.$n()))) 
+			return;
+		
+		out = n? [] : out;
+	}
+
+	out.push('<', tag, ' ', this.domAttrs_(), '>');
+	var c = this.firstChild,
+		hasCaption = c ? c.$instanceof(zul.wgt.Caption) : false;
+	if (!hasCaption) 
+		out.push('<a id="', uuid, '-cave" class="', this.$s('content'), '" >');
+
+	if (this.isClosable())
+		out.push('<div id="', uuid , '-btn" class="', this.$s('button'), '">', removeIcon, '</div>');
+
+	this.contentRenderer_(out);
+		
+	if (!hasCaption)
+		out.push('</a>');
+	out.push('</', tag, '>');
+
+	if (isAccordion && n) 
+		jq(n).prepend(out.join(''));
+	
+}
+;zkmld(zk._p.p.Tab,zk._m);
+
+(function () {
+	function _syncSelectedPanels(panels) {
+		
+		var box;
+		if (panels.desktop && (box = panels.getTabbox())) {
+			var oldSel = panels._selPnl,
+				sel = box._selTab;
+			if (oldSel != (sel && (sel = sel.getLinkedPanel()))) {
+				if (oldSel && oldSel.desktop) oldSel._sel(false, true);
+				if (sel) sel._sel(true, true);
+				panels._selPnl = sel;
+			}
+		}
+	}
+
+
+zul.tab.Tabpanels = zk.$extends(zul.Widget, {
+	
+	getTabbox: function() {
+		return this.parent;
+	},
+	setWidth: function (val) {
+		var n = this.$n(),
+			tabbox = this.getTabbox(),
+			isVer = n && tabbox ? tabbox.isVertical() : false;
+		if (isVer && !this.__width)
+			n.style.width = '';
+
+		this.$supers('setWidth', arguments);
+		
+		if (isVer) {
+			if (n.style.width)
+				this.__width = n.style.width;
+
+			zUtl.fireSized(this);
+		}
+	},
+	setStyle: function (val) {
+		var n = this.$n(),
+			tabbox = this.getTabbox(),
+			isVer = n && tabbox ? tabbox.isVertical() : false;
+		if (isVer && !this.__width) {
+			n.style.width = '';
+		}
+		this.$supers('setStyle', arguments);
+
+		if (isVer) {
+			if (n.style.width)
+				this.__width = n.style.width;
+
+			zUtl.fireSized(this);
+		}
+	},
+	
+	setVflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$supers('setVflex', arguments);
+	},
+	
+	setHflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$supers('setHflex', arguments);
+	},
+	bind_: function () {
+		this.$supers(zul.tab.Tabpanels, 'bind_', arguments);
+		if (this.getTabbox().isVertical()) {
+			this._zwatched = true;
+			zWatch.listen({onSize: this, beforeSize: this});
+			var n = this.$n();
+			if (n.style.width)
+				this.__width = n.style.width;
+		}
+		zWatch.listen({onResponse: this});
+	},
+	unbind_: function () {
+		if (this._zwatched) {
+			zWatch.unlisten({onSize: this, beforeSize: this});
+			this._zwatched = false;
+		}
+		zWatch.unlisten({onResponse: this});
+		this.$supers(zul.tab.Tabpanels, 'unbind_', arguments);
+	},
+	onSize: function () {
+		this._fixWidth();
+	},
+	_fixWidth: function () {
+		var parent = this.parent.$n();
+		if (this.__width || !zk(parent).isRealVisible())
+			return;
+
+		var width = parent.offsetWidth,
+			n = this.$n();
+
+		width -= jq(parent).find('>div:first')[0].offsetWidth;
+
+		n.style.width = jq.px0(width);
+	},
+	beforeSize: function () {
+		this.$n().style.width = this.__width || '';
+	},
+	onChildRemoved_: function (child) {
+		this.$supers("onChildRemoved_", arguments);
+		this._shallSync = true;
+	},
+	onChildAdded_: function (child) {
+		this.$supers('onChildAdded_', arguments);
+		
+		
+		var tabbox = this.getTabbox(), 
+			cave;
+		if (tabbox && (!tabbox.inAccordionMold()
+				|| (cave = child.$n('cave')) && cave.style.display != 'none'))
+			this._shallSync = true;
+	},
+	onResponse: function () {
+		
+		if (this._shallSync) {
+			_syncSelectedPanels(this);
+			this._shallSync = false;
+		}
+	}
+});
+})();
+zkreg('zul.tab.Tabpanels');zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<div', this.domAttrs_(), '>');
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	out.push('</div>');
+}
+;zkmld(zk._p.p.Tabpanels,zk._m);
+
+zul.tab.Tabpanel = zk.$extends(zul.ContainerWidget, {
+	
+	getTabbox: function() {
+		return this.parent ? this.parent.parent : null;
+	},
+	isVisible: function() {
+		return this.$supers('isVisible', arguments) && this.isSelected();
+	},
+	setVisible: function() {
+		this.$supers('setVisible', arguments);
+		if (this.desktop && !this.isSelected()) 
+			this.$n().style.display = 'none';
+	},
+	domClass_: function() {
+		var cls = this.$supers('domClass_', arguments),
+			tabbox = this.getTabbox();
+		if (tabbox.inAccordionMold())
+			cls += ' ' + this.$s('content');
+		return cls;
+	},
+	
+	getLinkedTab: function() {
+		var tabbox =  this.getTabbox();
+		if (!tabbox) return null;
+
+		var tabs = tabbox.getTabs();
+		return tabs ? tabs.getChildAt(this.getIndex()) : null;
+	},
+	
+	getIndex:function() {
+		return this.getChildIndex();
+	},
+	
+	isSelected: function() {
+		var tab = this.getLinkedTab();
+		return tab && tab.isSelected();
+	},
+	
+	_changeSel: function (oldPanel) {
+		if (oldPanel) {
+			var cave = this.$n('cave');
+			if (cave && !cave.style.height && (oldPanel = oldPanel.$n('cave')))
+				cave.style.height = oldPanel.style.height;
+		}
+	},
+	_sel: function (toSel, animation) { 
+		var tabbox = this.getTabbox();
+		if(!tabbox) return; 
+		var accd = tabbox.inAccordionMold();
+
+		if (accd && animation) {
+			var zkp = zk(this.$n('cave'));
+			if (toSel) {
+				
+				tabbox._animating = true;
+				zkp.slideDown(
+					this,
+					{'afterAnima': function(){delete tabbox._animating;}}
+				);
+			} else {
+				zkp.slideUp(this);
+			}
+		} else {
+			var $pl = jq(accd ? this.$n('cave') : this.$n()),
+				vis = $pl.zk.isVisible();
+			if (toSel) {
+				if (!vis) {
+					$pl.show();
+					
+					if (zk.ie8 || zk.webkit)
+						$pl.scrollTop(this._lastScrollTop);
+					zUtl.fireShown(this);
+				}
+			} else if (vis) {
+				zWatch.fireDown('onHide', this);
+				
+				if (zk.ie8 || zk.webkit)
+					this._lastScrollTop = $pl.scrollTop();
+				$pl.hide();
+			}
+		}
+	},
+	getPanelContentHeight_: function () {
+		var node = this.$n(),
+			tabpanelsNode = this.parent && this.parent.$n(),
+			panelContentHeight = tabpanelsNode &&
+				(tabpanelsNode.scrollHeight + zk(tabpanelsNode).padBorderHeight());
+
+		return Math.max(node && node.offsetHeight,panelContentHeight) ; 
+	},
+	_fixPanelHgh: function() {
+		var tabbox = this.getTabbox(),
+			tbx = tabbox.$n(),
+			hgh = tbx.style.height;
+		
+		if (hgh && hgh != 'auto') {
+			if (!tabbox.inAccordionMold()) {
+				var n = this.$n(),
+					isHor = tabbox.isHorizontal();
+
+				hgh = isHor ? zk(tabbox).contentHeight() - zk(tabbox.tabs).offsetHeight() 
+						    : zk(tabbox).contentHeight() - zk(n.parentNode).padBorderHeight();
+					
+				n.style.height = jq.px0(hgh);
+			} else {
+				var n = this.$n(),
+					hgh = tbx.offsetHeight,
+					zkp = zk(n.parentNode);
+				hgh = hgh - zkp.padBorderHeight();
+				for (var e = n.parentNode.firstChild; e; e = e.nextSibling)
+					if (e != n)
+						hgh -= e.offsetHeight;
+				hgh -= n.firstChild.offsetHeight;
+				var cave = this.$n('cave'),
+					s = cave.style;
+				s.height = jq.px0(hgh);
+			}
+		}
+	},
+	onSize: function() {
+		var tabbox = this.getTabbox();
+		if (tabbox.inAccordionMold() && !zk(this.$n('cave')).isVisible())
+			return;
+		this._fixPanelHgh();		
+	},
+
+	
+	setVflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$supers('setVflex', arguments);
+	},
+	
+	setHflex: function (v) { 
+		if (v != 'min') v = false;
+		this.$supers('setHflex', arguments);
+	},
+	bind_: function(desktop) {
+		this.$supers(zul.tab.Tabpanel, 'bind_', arguments);
+		zWatch.listen({onSize: this});
+		
+		var tab;
+		if (this.getTabbox().inAccordionMold()
+				&& (tab=this.getLinkedTab())) {
+			
+			if (!tab.$n())
+				tab.unbind().bind(desktop);
+			else if (!jq.isAncestor(this.$n(), tab.$n())) {
+				
+				
+				
+				var cave = this.$n('cave');
+				if (cave) cave.style.display = 'none';
+			}
+		}
+	},
+	unbind_: function () {
+		zWatch.unlisten({onSize: this});
+		this._lastScrollTop = null;
+		this.$supers(zul.tab.Tabpanel, 'unbind_', arguments);
+	}
+});
+zkreg('zul.tab.Tabpanel',true);zk._m={};
+zk._m['default']=
+function (out) {
+	var uuid = this.uuid,
+		tabbox = this.getTabbox();
+	if (tabbox.inAccordionMold()) {
+		var tab = this.getLinkedTab();
+		
+		out.push('<div class="', this.getZclass() , '" id="', uuid, '">');
+		
+		if (tab && !tab.$n())
+			tab.redraw(out);
+		out.push('<div id="', uuid, '-cave"', this.domAttrs_({id:1, zclass:1}), '>');
+		for (var w = this.firstChild; w; w = w.nextSibling)
+			w.redraw(out);
+		out.push('</div></div>');
+
+	} else {
+		out.push('<div ', this.domAttrs_(), '>');
+		for (var w = this.firstChild; w; w = w.nextSibling)
+			w.redraw(out);
+		out.push('</div>');
+	}
+}
+;zkmld(zk._p.p.Tabpanel,zk._m);
+}finally{zk.setLoaded(zk._p.n);}});zk.setLoaded('zul.tab',1);

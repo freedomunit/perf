@@ -1,0 +1,13 @@
+[t102]
+FileName1=t102.txt
+URL1=https://10.125.2.179/bin-java/zkau
+Total=2
+RequestHeaderFile=t102_RequestHeader.txt
+RequestBodyFile=t102_RequestBody.txt
+ResponseHeaderFile=t102_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_102.xml
+FileName2=t102_zkau.txt
+URL2=https://10.125.2.179/bin-java/zkau?dtid=z_hxu&cmd_0=rmDesktop&opt_0=i
+[ProtocolInfo]
+ProtocolId=QTWeb

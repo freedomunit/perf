@@ -1,0 +1,9 @@
+[t99]
+SnapshotXmlFile=snapshot_99.xml
+FileName1=t99.htm
+URL1=http://10.125.2.182/bin-java/login?f=general/login.htm
+Total=1
+RequestHeaderFile=t99_RequestHeader.txt
+RequestBodyFile=NONE
+ResponseHeaderFile=t99_ResponseHeader.txt
+ContentType=text/html

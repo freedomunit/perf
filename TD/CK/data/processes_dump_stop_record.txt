@@ -1,0 +1,225 @@
+Failed to get information of process Id: 0
+Failed to get information of process Id: 4
+Failed to get information of process Id: 276
+Failed to get information of process Id: 364
+Failed to get information of process Id: 416
+Failed to get information of process Id: 428
+Failed to get information of process Id: 472
+Failed to get information of process Id: 504
+Failed to get information of process Id: 516
+Failed to get information of process Id: 524
+Failed to get information of process Id: 656
+Failed to get information of process Id: 716
+Failed to get information of process Id: 760
+Failed to get information of process Id: 824
+Failed to get information of process Id: 844
+Failed to get information of process Id: 892
+Failed to get information of process Id: 952
+Failed to get information of process Id: 992
+Failed to get information of process Id: 1068
+Failed to get information of process Id: 1244
+Failed to get information of process Id: 1276
+Failed to get information of process Id: 1484
+Failed to get information of process Id: 1596
+Failed to get information of process Id: 1648
+Failed to get information of process Id: 1712
+Failed to get information of process Id: 2040
+PROCESS 0x7d0       nvservicesj.exe
+Failed to get information of process Id: 2528
+Failed to get information of process Id: 2844
+Failed to get information of process Id: 3052
+Failed to get information of process Id: 344
+Failed to get information of process Id: 1036
+Failed to get information of process Id: 2296
+Failed to get information of process Id: 788
+Failed to get information of process Id: 2292
+PROCESS 0x6d8       magentproc.exe
+Failed to get information of process Id: 2192
+Failed to get information of process Id: 3312
+Failed to get information of process Id: 3604
+Failed to get information of process Id: 3652
+Failed to get information of process Id: 3780
+Failed to get information of process Id: 1468
+PROCESS 0x910       vugen.exe
+Failed to get information of process Id: 3920
+PROCESS 0x570       firefox.exe
+		31.0                          C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\SysWOW64\ntdll.dll
+		6.1.7601.17965 (win7sp1_gdr.121004-0333)C:\Windows\syswow64\kernel32.dll
+		6.1.7601.17965 (win7sp1_gdr.121004-0333)C:\Windows\syswow64\KERNELBASE.dll
+		10.00.30319.1                 C:\Program Files (x86)\Mozilla Firefox\MSVCR100.dll
+		31.0                          C:\Program Files (x86)\Mozilla Firefox\mozglue.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\VERSION.dll
+		7.0.7601.17744 (win7sp1_gdr.111215-1535)C:\Windows\syswow64\msvcrt.dll
+		10.00.30319.1                 C:\Program Files (x86)\Mozilla Firefox\MSVCP100.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\bin\bbhook.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\syswow64\USER32.dll
+		6.1.7601.18898 (win7sp1_gdr.150617-0600)C:\Windows\syswow64\GDI32.dll
+		6.1.7601.18985 (win7sp1_gdr.150901-1452)C:\Windows\syswow64\LPK.dll
+		1.0626.7601.19054 (win7sp1_gdr.151103-0600)C:\Windows\syswow64\USP10.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\ADVAPI32.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\SysWOW64\sechost.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\RPCRT4.dll
+		6.1.7601.19045 (win7sp1_gdr.151019-1254)C:\Windows\syswow64\SspiCli.dll
+		6.1.7601.19045 (win7sp1_gdr.151019-1254)C:\Windows\syswow64\CRYPTBASE.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\IMM32.DLL
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\MSCTF.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\bin\api_trapper.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\mosifs32.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\thrdutil.dll
+		11.00.51106.1 built by: Q11RELC:\Windows\system32\MSVCR110.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\CrtInitiator.dll
+		9.20.0.0                      C:\Program Files (x86)\HP\LoadRunner\Bin\CrtLoader_VS6.dll
+		9.20.0.0                      C:\Program Files (x86)\HP\LoadRunner\Bin\CrtLoader_VS8_0_50727_1433.dll
+		8.00.50727.6195               C:\Windows\WinSxS\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.6195_none_d09154e044272b9a\MSVCR80.dll
+		9.20.0.0                      C:\Program Files (x86)\HP\LoadRunner\Bin\CrtLoader_VS9_0_21022_8.dll
+		9.00.30729.6161               C:\Windows\WinSxS\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.6161_none_50934f2ebcb7eb57\MSVCR90.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\USERENV.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\profapi.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\syswow64\SHELL32.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\SHLWAPI.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\IPHLPAPI.DLL
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\NSI.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\WINNSI.DLL
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\PathResolver.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\runtime_code_injection_lib.dll
+		11.00.51106.1 built by: Q11RELC:\Windows\system32\MSVCP110.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\api_sock_proxy.dll
+		                              C:\Program Files (x86)\HP\LoadRunner\Bin\pcre-8.10.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\VnpLog.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\VnpUtils.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\MicSocket.dll
+		1.0.2d                        C:\Program Files (x86)\HP\LoadRunner\Bin\libeay32_lt.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\WS2_32.dll
+		1.0.2d                        C:\Program Files (x86)\HP\LoadRunner\Bin\ssleay32_lt.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\LRUN50.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\WSOCK32.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\trans.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\MLIB_DS.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\msg_handler.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\config.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\lr_exp.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\trans_server.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\timediff_ext.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\xdr.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\comm_util.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\libxdrutil.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\wrapzlib.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\libdatatypes.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\data_types_ifs.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\jrequestor_srv.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\dc_requests.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\ipng_utils.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\merc_uuid.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\ole32.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\runlogic.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\run_time_context.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\rtc_protocol.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\parameng.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\faserver.dll
+		12.50.855.0                   C:\Program Files (x86)\HP\LoadRunner\Bin\wrapicu.dll
+		3, 6, 0, 0                    C:\Program Files (x86)\HP\LoadRunner\Bin\icuuc36.dll
+		3, 6, 0, 0                    C:\Program Files (x86)\HP\LoadRunner\Bin\icudt36.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\api_http_filter.dll
+		6.1.7601.18640                C:\Windows\syswow64\OLEAUT32.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\api_trapper1.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\WebMultiInProcNotify.dll
+		31.0                          C:\Program Files (x86)\Mozilla Firefox\nss3.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\WINMM.dll
+		                              C:\Program Files (x86)\Mozilla Firefox\mozjs.dll
+		52, 1, 0, 0                   C:\Program Files (x86)\Mozilla Firefox\icuin52.dll
+		52, 1, 0, 0                   C:\Program Files (x86)\Mozilla Firefox\icuuc52.dll
+		52, 1, 0, 0                   C:\Program Files (x86)\Mozilla Firefox\icudt52.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\PSAPI.DLL
+		31.0                          C:\Program Files (x86)\Mozilla Firefox\mozalloc.dll
+		31.0                          C:\Program Files (x86)\Mozilla Firefox\gkmedias.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\MSIMG32.dll
+		31.0                          C:\Program Files (x86)\Mozilla Firefox\xul.dll
+		6.1.7601.17887 (win7sp1_gdr.120704-0720)C:\Windows\system32\NETAPI32.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\netutils.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\srvcli.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\wkscli.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\SAMCLI.DLL
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\UxTheme.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\SETUPAPI.dll
+		6.1.7601.17621 (win7sp1_gdr.110523-2108)C:\Windows\syswow64\CFGMGR32.dll
+		6.1.7601.17621 (win7sp1_gdr.110523-2108)C:\Windows\syswow64\DEVOBJ.dll
+		6.1.7601.18741 (win7sp1_gdr.150202-1526)C:\Windows\syswow64\WINTRUST.dll
+		6.1.7601.18741 (win7sp1_gdr.150202-1526)C:\Windows\syswow64\CRYPT32.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\syswow64\MSASN1.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\dwmapi.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\system32\dwrite.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\dbghelp.dll
+		6.10 (win7_rtm.090713-1255)   C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.18837_none_41e855142bd5705d\comctl32.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\type_info_pool.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\SXS.DLL
+		2001.12.8530.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\CLBCatQ.DLL
+		7.00.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\propsys.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\ntmarta.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\WLDAP32.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\mswsock.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\api_openssl_proxy.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\WebGetClientCertificate.dll
+		11.0.60610.1 built by: Q11REL C:\Windows\system32\mfc110.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\WebCertificateCreator.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\wshtcpip.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\WebSocketAnalyzer.dll
+		6.1.7601.18685 (win7sp1_gdr.141205-1623)C:\Windows\system32\NLAapi.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\napinsp.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\pnrpnsp.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\DNSAPI.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\winrnr.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\fwpuclnt.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\rasadhlp.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\wship6.dll
+		12.50.1096.0                  C:\Program Files (x86)\HP\LoadRunner\Bin\api_sock_util.dll
+		6.1.7601.18288 (win7sp1_gdr.131018-1533)C:\Windows\syswow64\imagehlp.dll
+		31.0                          C:\Program Files (x86)\Mozilla Firefox\browser\components\browsercomps.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\wbem\wbemprox.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\wbemcomn.dll
+		6.1.7601.18741 (win7sp1_gdr.150202-1526)C:\Windows\system32\CRYPTSP.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\rsaenh.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\RpcRtRemote.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\wbem\wbemsvc.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\wbem\fastprox.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\NTDSAPI.dll
+		1.0.0.1                       C:\Windows\System32\Wpc.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\wevtapi.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\SAMLIB.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\MMDevApi.dll
+		6.1.7601.18540 (win7sp1_gdr.140716-1508)C:\Windows\system32\WINSTA.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\rdpendp.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\MSACM32.dll
+		6.1.7601.17514 (win7sp1_rtm.101119-1850)C:\Windows\system32\WTSAPI32.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\slc.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\AUDIOSES.DLL
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\mscms.dll
+		3.16.2 Basic ECC              C:\Program Files (x86)\Mozilla Firefox\softokn3.dll
+		3.16.2 Basic ECC              C:\Program Files (x86)\Mozilla Firefox\nssdbm3.dll
+		3.16.2 Basic ECC              C:\Program Files (x86)\Mozilla Firefox\freebl3.dll
+		1.98                          C:\Program Files (x86)\Mozilla Firefox\nssckbi.dll
+		11.00.9600.16428 (winblue_gdr.131013-1700)C:\Windows\syswow64\WININET.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\syswow64\api-ms-win-downlevel-user32-l1-1-0.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\syswow64\api-ms-win-downlevel-shlwapi-l1-1-0.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\syswow64\api-ms-win-downlevel-version-l1-1-0.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\syswow64\api-ms-win-downlevel-normaliz-l1-1-0.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\syswow64\normaliz.DLL
+		11.00.9600.18124 (winblue_ltsb.151109-1247)C:\Windows\syswow64\iertutil.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\syswow64\api-ms-win-downlevel-advapi32-l1-1-0.dll
+		6.1.7601.19045 (win7sp1_gdr.151019-1254)C:\Windows\system32\Secur32.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\system32\api-ms-win-downlevel-advapi32-l2-1-0.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\syswow64\api-ms-win-downlevel-ole32-l1-1-0.dll
+		6.2.9200.16492 (win8_gdr_oobssr.130113-0015)C:\Windows\system32\api-ms-win-downlevel-shlwapi-l2-1-0.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\explorerframe.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\DUser.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\DUI70.dll
+		5.0.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\MSISIP.DLL
+		5.8.7600.16385                C:\Windows\SysWOW64\wshext.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\SysWOW64\WindowsPowerShell\v1.0\pwrshsip.dll
+		11.00.9600.18124 (winblue_ltsb.151109-1247)C:\Windows\SysWOW64\urlmon.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\netprofm.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\dhcpcsvc6.DLL
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\System32\npmproxy.dll
+		6.1.7600.16385 (win7_rtm.090713-1255)C:\Windows\system32\dhcpcsvc.DLL
+Failed to get information of process Id: 2280
+Failed to get information of process Id: 2492

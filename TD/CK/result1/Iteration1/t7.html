@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+	<title>7thonline</title>
+	<link rel="shortcut icon" href="/images/common/favicon.ico" type="image/ico" />
+	<link rel="styleSheet" type="text/css" href="/javascript/7thonline_default_v4.css" />
+	<link rel="stylesheet" type="text/css" href="/branding/7thonline/stylesheet.css" title="branding" />
+	<style type="text/css">
+		.parenthide {display:none;}
+		#hidden {display:inline !important;}
+	</style>
+	<script>
+		vb='V';
+		pleasewait='Please Wait';
+		wait='Wait';
+		self.onError = null; 
+		if( top.location != location ) { 
+		top.location.href = location.href; 
+		} 
+	</script>
+	<script src="/javascript/jquery-3.1.1.min.js"></script>
+	<script src="/javascript/jquery-ui-1.12.0.min.js"></script>   
+	<script src="/javascript/jquery4.js"></script>
+</head>
+
+<body>
+<!---   version <branch: http://10.125.2.204/svn/7thonline/TD7thOnline 2016 NOV - GA7.1.0.0, Version updated to: head (HEAD=latest), Latest version:  64940> (Do not remove)    -->
+<a name="t" id="t" tabindex="6" accesskey="t"></a>
+<div id="ff">
+<div id="topcontainer">
+  <div class="topbar">
+    <div class="loht">
+      <div id="logouthelp">
+<!--vendorhomepageaccess-->
+<script type="text/javascript">
+	$(function(){
+		corporateaccess();
+		$("#corporate-select select").change(function(){
+		    corporateaccess();
+			$(this).css('display','none');
+			$("#corporate-text").css('display','inline-block');
+			$.ajax({
+				type: 'POST',
+				url: encodeURI('/bin-java/cmm.do_userGoHomeUpdate'),
+				data: $(this).attr('name') + '=' + $(this).val(),
+				success: function(data) {
+					if (data.indexOf('[ER-10003]') != -1){
+	         			location.reload();
+	                }else {
+					    window.location.href="/bin-java/efsnPackage.do_userGoHome";
+				    }
+				},
+	            error:function(result){ console.log(["error", result]); }
+			});
+			return;
+		});
+		
+		parentaccess();
+		$("#parent-select select").change(function(){
+		    parentaccess();
+			$(this).css('display','none');
+			$("#parent-text").css('display','inline-block');
+			$.ajax({
+				type: 'POST',
+				url: encodeURI('/bin-java/cmm.do_userGoHomeUpdate'),
+				data: $(this).attr('name') + '=' + $(this).val()+"&switchparent=1",
+				success: function(data) {
+					if (data.indexOf('[ER-10003]') != -1){
+	         			location.reload();
+	                }else {
+					    window.location.href="/bin-java/efsnPackage.do_userGoHome";
+				    }
+				},
+	            error:function(result){ console.log(["error", result]); }
+			});
+			return;
+		});
+		
+		$("#corporate-text").click(function(){
+			  $("#corporate-text").css('display','none');
+			  $("#corporate-select select").css('display','inline-block');
+		});
+		
+		$("#parent-text").click(function(){
+			  $("#parent-text").css('display','none');
+			  $("#parent-select select").css('display','inline-block');
+		});
+	});
+  
+	function corporateaccess(){
+        var str = "";
+        $("#corporate-select select option:selected").each(function () {
+            str += $(this).text() + " ";
+        });
+        $("#corporate-text").text(str);
+	};
+	
+	function parentaccess(){
+		if($("#parent-select select option").length > 1){
+			var str = "";
+			$("#parent-select select option:selected").each(function () {
+			    str += $(this).text() + " ";
+			});
+			$("#parent-text").text(str);
+		}else{
+			$("#parent-text").css('display','none');
+            $("#parent-select").css('display','none');
+		}
+	};
+</script>
+
+<form id="parent-select">
+	<select name="parent">
+		
+		<option selected value="100440">
+			Calvin Klein Asia
+		</option>
+		
+	</select>
+	<div id="parent-text" title="Click to change parent">Calvin Klein Asia</div>  | 
+</form>
+
+<form id="corporate-select">
+	<select name="access">
+		<!--parentcompany-->
+		<option selected value="100440">
+			Calvin Klein Asia
+		</option>
+		<!--parentcompanye-->
+		<!--hideforapplet-->
+		<optgroup label="Business Unit">
+		
+		<option  value="100442">
+			CK Asia - CSAP
+		</option>
+		
+		<option  value="100441">
+			CK Asia - China
+		</option>
+		
+		<option  value="100443">
+			CK Asia - ECOM
+		</option>
+		
+		<option  value="100560">
+			CK Asia - JV - Australia
+		</option>
+		
+		<option  value="100444">
+			CK Asia - JV - India
+		</option>
+		
+		<option  value="100900">
+			CK Asia - Japan
+		</option>
+		
+		<option  value="100445">
+			CK Asia - Korea
+		</option>
+		
+		<option  value="100446">
+			CK Asia - Travel Retail
+		</option>
+		
+		<option  value="100447">
+			CK Asia - Wholesale
+		</option>
+		
+		</optgroup>
+		<!--hideforapplete-->
+	</select>
+	<div id="corporate-text" title="Click to change access">Calvin Klein Asia</div>  | 
+</form>
+<!--vendorhomepageaccesse-->
+
+      <!--toptemplatedisablecollaborate--><input type="hidden" id="tcollassort" /><!--toptemplatedisablecollaboratee-->
+      
+      <a href="#" id="help" title="Download the Help Manual" class="help">Help</a>
+                  | 
+      <a href="/bin-java/efsnPackage.do_userLogoff" class="logout"><small>Log&nbsp;Out</small></a>
+      </div>
+      <div id="support2">Client Support: 1.800.775.7571</div>
+    </div>
+    <a href="/bin-java/efsnPackage.do_userGoHome"  id="mlogo" title="&lt;&lt; Home">Home</a>
+  </div>
+  <div id="topMenu">
+    <div id="nav-container">
+      <div id="menuContent">
+      
+<div style="padding:5px 5px 10px 0">
+<!---------------eShowroom--------------->
+    <div class="tdright" style="display:table-cell">
+    <ul>
+	<li class="navtitle"><span>eShowroom</span></li>
+
+  		
+  		<li><a href="/bin-java/efsnPackage.do_vendorStyleBank?CompleteStyleList=true&amp;dump=1">Style Bank</a></li>
+  		<li><a href="/bin-java/efsnPackage.do_vendorPlaceholderStyleList?CompleteStyleList=true&amp;dump=1">PH Styles</a></li>
+    	
+  		<li><a href="/bin-java/efsnPackage.do_vendorFabrication?dump=1">Gender</a></li>
+  		<li><a href="/bin-java/efsnPackage.do_vendorCompanySize?dump=1">Size Profile</a></li>
+		
+
+	</ul></div>
+  
+<!---------------Assortment Planner--------------->
+	<!--toptemplatedisablecollaborate-->
+	<div class="tdright" style="display:table-cell">
+	<ul>
+  	<li class="navtitle"><span>Assortment Planner</span></li>
+
+  		<li><a href="/bin-java/efsnPackage.do_worksheetList?source=menubar&amp;dump=1">Collaborative Assortments</a></li>
+
+  		
+
+  		<li><a href="/bin-java/efsnPackage.do_customizedSummary?dump=1">Customized Summaries</a></li>
+  		<li><a href="/bin-java/efsnPackage.do_planNumber?dump=1">Assortment Plans</a></li>
+  		
+  		<li><a href="/bin-java/efsnPackage.do_sizeScale?dump=1">Size Scales</a></li>
+  		<li><a href="/bin-java/efsnPackage.do_orderWorksheetBatchCopy?function=copyall&amp;dump=1">Copy All</a></li>
+
+  		<li><a href="/bin-java/efsnPackage.do_dollsheetPreference?dump=1">Assortment Profile</a></li>
+
+		
+
+	</ul>
+	</div>
+  	<!--toptemplatedisablecollaboratee-->
+  	
+<!---------------Top-down Planning--------------->
+<!--topdownplanning-->
+<!--displaymp-->
+	<div class="tdright" style="display:table-cell">
+	<ul>
+	<li class="navtitle"><span>Merchandise Planner</span></li>
+		<!--security_merchandise_plan_list-->
+		<!--toptemplatedisablemerchandiseplan-->
+		<!--mpdefaute-->
+		<li><a href="/bin-java/cmm.do_merchandisePlanEntryApplet?cmplanid=0&amp;page=ly&amp;dump=1">Merchandise Plan</a></li>
+		<!--mpdefautee-->
+		
+        <!--mplist-->
+		<li><a href="/bin-java/cmm.do_mpIntegration?dump=1">MP Integration</a></li>
+		<li><a href="/bin-java/cmm.do_cmPlanDashboard?plantype=2&amp;dump=1" class="random">MP List</a></li>
+		<!--mpliste-->
+		<!--toptemplatedisablemerchandiseplane-->
+		<!--security_merchandise_plan_liste-->
+		<!--securitysetup-->
+		<!--planlevel-->
+		<li><a href="/bin-java/cmm.do_setPlanAttribute?plantype=2&dump=1" class="random">MP Levels</a></li>
+		<!--planlevele-->
+		<!--securitysetupe-->
+	</ul></div>
+<!--displaympe-->
+<!--topdownplanninge-->
+<!---------------Report Builder--------------->
+<!--toptemplatedisablereportbuilder-->
+	<div class="tdright" style="display:table-cell">
+    <ul>
+	<li class="navtitle"><span>Reporting</span></li>
+		<!--toptemplateallowbuildreportsonly-->
+		<li><a href="/bin-java/report.do_reportBuilder?dump=1">Report Builder</a></li>
+		<li><a href="/bin-java/report.do_reportGroupList?dump=1">Report User Group</a></li>
+		<!--toptemplateallowbuildreportsonlye-->
+		<li><a href="/bin-java/report.do_myReports?dump=1">My Reports</a></li>
+
+		
+
+    </ul><br>
+<!---------------Production Planning--------------->
+
+    
+
+    </div>
+<!--toptemplatedisablereportbuildere-->
+
+<!---------------Administration--------------->
+	<div class="tdright" style="display:table-cell">
+	<ul>
+	<li id="tdadmin" class="navtitle"><span>Administration</span></li>
+		<li><a href="/bin-java/efsnPackage.do_vendorInfo?dump=1">Company Info</a></li>
+		<li><a href="/bin-java/cmm.do_cmmCompanyProfileSettings?dump=1">Company Profile</a></li>
+		<li><a href="/bin-java/efsnPackage.do_companyUserList?dump=1">Company Users</a></li>
+
+		
+
+		<li><a href="/bin-java/efsnPackage.do_memberPassword">Password</a></li>
+
+		<li><a href="/bin-java/efsnPackage.do_orderWorksheetOwnershipTransfer?dump=1">Ownership</a></li>
+		<!--securitysetup-->
+		
+		<!--hidesecuritysetupzk-->
+		<li><a href="/bin-java/efsnPackage.do_securityEntry?dump=0.48839701739406727">Security Setup</a></li>
+		<!--hidesecuritysetupzke-->
+		<!--securitysetupe-->
+		<li><a href="/bin-java/efsnPackage.do_fileUploads?dump=1">File Uploads</a></li>
+
+	</ul></div>	
+<!---------------Accounts--------------->
+	<div style="display:table-cell">
+	<ul>
+	<li id="tdaccounts" class="navtitle"><span>Accounts</span></li>
+		<li><a href="/bin-java/efsnPackage.do_vendorCustomerDirectoryList?dump=1">Customer Directory</a></li>
+		
+		<li><a href="/bin-java/efsnPackage.do_vendorViewEdi850OrderHist?dump=1">850 History</a></li>
+		<!--security_optiplan_doorinfo-->
+		<!-- Keep Applet and ZK version for Door Info screen before we replace Door Info from Applet to ZK thoroughly -->
+		
+		<!--hidedoorinfozk-->
+		<li><a href='/bin-java/efsnPackage.do_doorInfoEntry'>Account Group Info </a></li >
+		<!--hidedoorinfozke-->
+		<!--security_optiplan_doorinfoe-->
+	</ul>
+
+<!--hidecurrencyconversion-->
+<script type="text/javascript">	
+    $(function(){
+		currencyaccess();
+		$("#currency-select select").change(function(){
+		    currencyaccess();
+			$(this).css('display','none');
+			$("#currency-text").css('display','inline-block');
+			$.ajax({
+				type: 'POST',
+				url: encodeURI('/bin-java/cmm.do_userGoHomeUpdate'),
+				data: $(this).attr('name') + '=' + $(this).val(),
+				success: function() {location.reload();}
+			});
+			return;
+		});
+		
+		$("#currency-text").click(function(){
+			  $("#currency-text").css('display','none');
+			  $("#currency-select select").css('display','inline-block');
+		});
+	});
+	
+	function currencyaccess(){
+		var str = "";
+		$("#currency-select select option:selected").each(function () {
+	          str += $(this).text() + " ";
+		});
+		$("#currency-text").text(str);
+	};
+</script>
+<br>
+<ul>
+  <li id="tdcurrency" class="navtitle"><span>Currency</span></li>
+  <li>
+	  <form id="currency-select">
+		  <select name="localcurrency">
+		  	<option selected value="USD">
+		  		USD - US Dollar
+	  		</option>
+		  	<option  value="LOCAL">
+		  		Local Currency
+	  		</option>
+		  </select>
+		  <div id="currency-text" title="Change Currency">USD - US Dollar</div>  | 
+	  </form></li>
+	 </ul>
+<!--hidecurrencyconversione-->
+	
+	</div>
+</div></div></div></div>
+	
+      <div class="tog-container"><div id="tog"><a href="javascript:void(0)" onfocus="this.hideFocus=true;" id="menuTrigger" title="Click to Open/Close">NAVIGATION</a></div></div>
+      <div id="poweredby"><em>Powered by</em> <b>7th</b><span>Online</span><em>, Inc.</em></div>
+    </div>
+    <div id="maincontent">
+      <div id="wrapper">
+      
+      <!--enabletab-->
+        <div id="wfview"></div>
+        <div class="wftab" id="wftab"><a href="#" onfocus="this.hideFocus=true;" id="wfviewtab"  title="Logical Workflow">Logical Workflow</a></div>
+        <div id="content">
+        <script type="text/javascript">
+          $(function(){
+          $('div#wfview').load('/bin-java/efsnPackage.do_logicalWorkflow?dump=1');
+        $('div#wfview li').hoverClass("aHover");
+          });
+          </script>
+      <!--enabletabe-->
+        <!-- begin vendorhome.htm -->
+<div class="newnavtip">
+<script type="text/javascript" src="/javascript/navtips.js"></script>
+</div>
+<table cellpadding="0" cellspacing="0" border="0" width="98%">
+	<tr>
+		<td valign="top" colspan="3"><b>
+		<big>Helen Chu</big></b>
+		<big>-Calvin Klein Asia</big><br /><b>	Welcome to your 7thonline homepage</b></td>
+	</tr>
+	<tr>
+		<td width="100%">
+			<table border="0" cellspacing="0" cellpadding="0" width="100%" class="table1">
+				<tr>
+					<th colspan="3">&nbsp;Company Information</th>
+				</tr>
+				<tbody class="nohover" style="background-color:#fff">
+				<tr>
+					<td style="padding:10px;background-color:#fff">7thonline provides dynamic web and application based demand chain solutions specifically targeted to the unique buying, planning and order process needs of vendors and retailers in the global retail industry.  7thonline's two primary product offerings, eSHOWROOM and COLLABORATE, encompass sophisticated visual merchandise and assortment planning tools, powerful financial and order management engines as well as automatic order transmission capabilities in multiple formats.  7thonline's applications encourage the sharing of key business information between trading partners and represent the core beginning of the first CPFR offering targeted to the specific needs of the apparel, accessories and footwear community.<br /><br />7thonline eSHOWROOM is a secure, web-based application that displays detailed product images and real time product information in a virtual showroom created and managed by vendors for use with their specialty retailer customers.  Through its automatic order management and processing capabilities, 7thonline eSHOWROOM EDI-enables the specialty retailer community for the first time.<br /><br />7thonline's flagship COLLABORATE application is an industry first with its powerful collaborative capabilities. COLLABORATE contains a multitude of merchandising and visual assortment planning tools specifically designed for the retail environment; sophisticated yet flexible financial and order management algorithms as well as automatic EDI, XML and other electronic order transmission engines.   7thonline COLLABORATE streamlines the planning, buying and order management processes between vendor and retailer through its dynamic visual assortment and merchandise planning tools and is unique in the industry.<br /><br />7thonline fosters collaborative planning, forecasting, merchandising and communication between vendors and retailers resulting in better production planning and inventory management.  Whether through eSHOWROOM or COLLABORATE, the benefits derived from 7thonline applications and process enhancements lead to tangible revenue increases, cost savings through efficiencies gained in inventory management and lower instances of markdowns.</td>
+				</tr>
+				</tbody>
+			</table>
+		</td>
+		<td><img src="/images/common/x.gif" width="10" border="0"/></td>
+		<td width="200" valign="top">
+			<!--start messagecenter_template.htm-->
+<!-- it is used in login user's home page-->
+<table width="100%" border="0" cellspacing="1" cellpadding="1" class="table4">
+	<tr>
+		<th>&nbsp;Message&nbsp;Center</th>
+	</tr>
+	<tr>
+		<td nowrap="nowrap" height="20" valign="middle" width="100%">&nbsp;
+		<!-- email-icon.gif -->
+		
+		<!--nomessages-->
+		<a href="/bin-java/efsnPackage.do_viewMessageList?dump=1">No&nbsp;new&nbsp;messages</a>
+		&nbsp;<img src="/images/common/icon_emailN.png" border="0" class="inline" />
+		<!--nomessagese-->
+		</td>
+	</tr>
+</table>
+<!--end messagecenter_template.htm-->
+
+		</td>
+	</tr>
+</table><!-- end vendorhome.htm -->
+
+        </div>
+      </div></div>
+  </div>
+<!-- Start footer.htm -->
+<div id="foot" >
+	<div class="printcreateby">
+		Wed Nov 30 10:17:46 CST 2016 Created by Helen Chu
+	</div>
+	<div id="bottomlinks">
+		<a href="/bin-java/foot?d=legal&amp;f=common_privacypolicy.htm">Privacy Policy</a> | 
+		<a href="/bin-java/foot?d=legal&amp;f=common_termofuse.htm">Terms of Use</a> |   
+		<a href="/bin-java/foot?d=legal&amp;f=common_copyrights.htm">Copyright</a> |  
+		<a href="/bin-java/foot?d=legal&amp;f=common_security.htm">Security</a> |  
+		<a href="/bin-java/foot?d=content&amp;f=common_help_contact.htm">Contact Us</a>
+	</div>
+	<div id="copy"><small>&copy; 1999-</small><small class="currentyear">2016</small><small> 7thonline, Inc. All Rights Reserved. Patent Pending.</small></div>
+		<a name="b" id="b" tabindex="6" accesskey="b"></a>
+</div>
+<!-- End footer.htm-->
+
+
+</body>
+</html>
+<!-- End top level template vendorparentcompaniestemplate.htm -->
+

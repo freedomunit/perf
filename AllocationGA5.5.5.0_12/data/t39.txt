@@ -1,0 +1,155 @@
+{"rs":[["rm",["jU0Q82"]],["rm",["jU0Qa2"]],["rm",["jU0Qc2"]],["rm",["jU0Qe2"]],["rm",["jU0Qg2"]],["rm",["jU0Qi2"]],["rm",["jU0Qk2"]],["rm",["jU0Qm2"]],["rm",["jU0Qo2"]],["rm",["jU0Qq2"]],["rm",["jU0Qs2"]],["rm",["jU0Qu2"]],["rm",["jU0Qw2"]],["rm",["jU0Qy2"]],["rm",["jU0Q_3"]],["rm",["jU0Q13"]],["rm",["jU0Q33"]],["rm",["jU0Q53"]],["rm",["jU0Q73"]],["rm",["jU0Q93"]],["rm",["jU0Qb3"]],["rm",["jU0Qd3"]],["rm",["jU0Qf3"]],["rm",["jU0Qh3"]],["rm",["jU0Qj3"]],["rm",["jU0Ql3"]],["rm",["jU0Qn3"]],["rm",["jU0Qp3"]],["rm",["jU0Qr3"]],["rm",["jU0Qt3"]],["rm",["jU0Qv3"]],["rm",["jU0Qx3"]],["rm",["jU0Qz3"]],["rm",["jU0Q04"]],["rm",["jU0Q24"]],["rm",["jU0Q44"]],["rm",["jU0Q64"]],["rm",["jU0Q84"]],["rm",["jU0Qa4"]],["rm",["jU0Qc4"]],["rm",["jU0Qe4"]],["rm",["jU0Qg4"]],["rm",["jU0Qi4"]],["rm",["jU0Qk4"]],["rm",["jU0Qm4"]],["rm",["jU0Qo4"]],["rm",["jU0Qq4"]],["rm",["jU0Qs4"]],["rm",["jU0Qu4"]],["rm",["jU0Qw4"]],["addChd",["jU0Q12",[
+['zul.wnd.Panel','jU0Qq',{$$0onSwipe:true,$$0onAfterSize:true,$$0onSize:true,$$0onMaximize:true,$$0onMinimize:true,$$0onZIndex:true,$onClose:true,$$0onMove:true,vflex:'1',hflex:'1',sclass:'pwrapper',prolog:'\n\t'},[
+['zul.wnd.Panelchildren','jU0Qr',{$$0onSwipe:true,$$0onAfterSize:true,hflex:'1',vflex:'1'},[
+['zul.box.Hlayout','jU0Qs',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',prolog:'\n\t\t\t'},[
+['zul.wgt.Div','jU0Qt',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'border-right:1px solid #ccc'},[
+['zul.sel.Listbox','jU0Qu',{$$0onBlur:true,$$onRender:true,$$0onRender:true,$$onSelect:false,$onSelect:true,$$0onSwipe:true,$$0onTopPad:true,$$0onAfterSize:true,$$onDataLoading:true,$$0onDataLoading:true,$$onAnchorPos:false,$$0onAnchorPos:true,$$onAcrossPage:true,$$0onAcrossPage:true,$$onCheckSelectAll:false,$$0onCheckSelectAll:true,$$onInnerWidth:false,$$0onInnerWidth:true,$$onPageSize:true,$$0onPageSize:true,$$0onFocus:true,$$onScrollPos:false,$$0onScrollPos:true,vflex:'1',hflex:'1',style:'border:0',prolog:'\n\t',_nativebar:true,oddRowSclass:'none',checkmark:true,multiple:true,model:true,_topPad:0,_totalSize:23,_offset:0},[
+['zul.mesh.Auxhead','jU0Qv',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.mesh.Auxheader','jU0Qw',{$$0onSwipe:true,$$0onAfterSize:true,style:'line-height:22px;font-weight:bold',label:'Select Attribute Columns'},[]]]],
+['zul.sel.Listhead','jU0Qx',{visible:false,$$0onSwipe:true,$$0onAfterSize:true,$$onColSize:false},[
+['zul.sel.Listheader','jU0Qy',{$$0onSwipe:true,$$0onAfterSize:true,$$0onSort:true,$onSort:true,$$0onGroup:true,$$0onUngroup:true,style:'line-height:22px;font-weight:bold',label:'Select Attribute Columns'},[]]]],
+['zul.sel.Listitem','jU0Qx4',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:0},[
+['zul.sel.Listcell','jU0Qy4',{$$0onSwipe:true,$$0onAfterSize:true,label:'ASN #'},[]]]],
+['zul.sel.Listitem','jU0Qz4',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:1},[
+['zul.sel.Listcell','jU0Q_5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Brand'},[]]]],
+['zul.sel.Listitem','jU0Q05',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:2},[
+['zul.sel.Listcell','jU0Q15',{$$0onSwipe:true,$$0onAfterSize:true,label:'Category'},[]]]],
+['zul.sel.Listitem','jU0Q25',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:3},[
+['zul.sel.Listcell','jU0Q35',{$$0onSwipe:true,$$0onAfterSize:true,label:'Color Code'},[]]]],
+['zul.sel.Listitem','jU0Q45',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:4},[
+['zul.sel.Listcell','jU0Q55',{$$0onSwipe:true,$$0onAfterSize:true,label:'Color Family'},[]]]],
+['zul.sel.Listitem','jU0Q65',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:5},[
+['zul.sel.Listcell','jU0Q75',{$$0onSwipe:true,$$0onAfterSize:true,label:'Color Name'},[]]]],
+['zul.sel.Listitem','jU0Q85',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:6},[
+['zul.sel.Listcell','jU0Q95',{$$0onSwipe:true,$$0onAfterSize:true,label:'Feeling'},[]]]],
+['zul.sel.Listitem','jU0Qa5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',selected:true,_loaded:true,_index:7},[
+['zul.sel.Listcell','jU0Qb5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Gender'},[]]]],
+['zul.sel.Listitem','jU0Qc5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',selected:true,_loaded:true,_index:8},[
+['zul.sel.Listcell','jU0Qd5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Image'},[]]]],
+['zul.sel.Listitem','jU0Qe5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:9},[
+['zul.sel.Listcell','jU0Qf5',{$$0onSwipe:true,$$0onAfterSize:true,label:'In DC Date'},[]]]],
+['zul.sel.Listitem','jU0Qg5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:10},[
+['zul.sel.Listcell','jU0Qh5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Job Ticket #'},[]]]],
+['zul.sel.Listitem','jU0Qi5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:11},[
+['zul.sel.Listcell','jU0Qj5',{$$0onSwipe:true,$$0onAfterSize:true,label:'PO #'},[]]]],
+['zul.sel.Listitem','jU0Qk5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:12},[
+['zul.sel.Listcell','jU0Ql5',{$$0onSwipe:true,$$0onAfterSize:true,label:'PO Update #'},[]]]],
+['zul.sel.Listitem','jU0Qm5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:13},[
+['zul.sel.Listcell','jU0Qn5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Product Line'},[]]]],
+['zul.sel.Listitem','jU0Qo5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',selected:true,_loaded:true,_index:14},[
+['zul.sel.Listcell','jU0Qp5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Receiver #'},[]]]],
+['zul.sel.Listitem','jU0Qq5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:15},[
+['zul.sel.Listcell','jU0Qr5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Shop Date'},[]]]],
+['zul.sel.Listitem','jU0Qs5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',selected:true,_loaded:true,_index:16},[
+['zul.sel.Listcell','jU0Qt5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Status'},[]]]],
+['zul.sel.Listitem','jU0Qu5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',selected:true,_loaded:true,_index:17},[
+['zul.sel.Listcell','jU0Qv5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Store #'},[]]]],
+['zul.sel.Listitem','jU0Qw5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',selected:true,_loaded:true,_index:18},[
+['zul.sel.Listcell','jU0Qx5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Store Description'},[]]]],
+['zul.sel.Listitem','jU0Qy5',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',selected:true,_loaded:true,_index:19},[
+['zul.sel.Listcell','jU0Qz5',{$$0onSwipe:true,$$0onAfterSize:true,label:'Style #'},[]]]],
+['zul.sel.Listitem','jU0Q_6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:20},[
+['zul.sel.Listcell','jU0Q06',{$$0onSwipe:true,$$0onAfterSize:true,label:'Style Description'},[]]]],
+['zul.sel.Listitem','jU0Q16',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:21},[
+['zul.sel.Listcell','jU0Q26',{$$0onSwipe:true,$$0onAfterSize:true,label:'Style Season'},[]]]],
+['zul.sel.Listitem','jU0Q36',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,sclass:'nohover',_loaded:true,_index:22},[
+['zul.sel.Listcell','jU0Q46',{$$0onSwipe:true,$$0onAfterSize:true,label:'Style Year'},[]]]]]]]],
+['zul.wgt.Div','jU0Qz',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'border-right:1px solid #ccc;overflow-x:hidden;overflow-y:auto;'},[
+['zk.Macro','jU0Q_0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',style:'overflow:hidden;',prolog:'\n\t\t\t\t\t'},[
+['zul.utl.Style','jU0Q00',{visible:false,content:'\n\t.z-window-embedded>.z-window-content:last-child {border-bottom: 1px solid #ddd;}\n'},[]],
+['zul.wnd.Window','jU0Q10',{$$0onSwipe:true,$$0onAfterSize:true,$$0onSize:true,$$0onMaximize:true,$$0onMinimize:true,$$0onZIndex:true,$onClose:true,$$0onMove:true,width:'100%',vflex:'1',prolog:'\n',title:'Set Attribute Column Order',contentStyle:'padding:0;'},[
+['zul.box.Hlayout','jU0Q20',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1'},[
+['zul.wgt.Div','jU0Q30',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'overflow-x:hidden;overflow-y:auto;'},[
+['zul.sel.Listbox','jU0Q40',{id:'d3',$$0onBlur:true,$$0onRender:true,$onSelect:true,$$0onSwipe:true,$$0onTopPad:true,$$0onAfterSize:true,$$0onDataLoading:true,$$0onAnchorPos:true,$$0onAcrossPage:true,$$0onCheckSelectAll:true,$$0onInnerWidth:true,$$0onPageSize:true,$$0onFocus:true,$$0onScrollPos:true,vflex:'1',hflex:'1',sclass:'colorselect draggable',style:'border:0',prolog:'\n\t\t\t',_nativebar:true,oddRowSclass:'none',multiple:true,model:true,_topPad:0,_totalSize:7,_offset:0},[
+['zul.sel.Listitem','jU0Q56',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:0},[
+['zul.sel.Listcell','jU0Q66',{$$0onSwipe:true,$$0onAfterSize:true,label:'Receiver #'},[]]]],
+['zul.sel.Listitem','jU0Q76',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:1},[
+['zul.sel.Listcell','jU0Q86',{$$0onSwipe:true,$$0onAfterSize:true,label:'Status'},[]]]],
+['zul.sel.Listitem','jU0Q96',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:2},[
+['zul.sel.Listcell','jU0Qa6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Style #'},[]]]],
+['zul.sel.Listitem','jU0Qb6',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:3},[
+['zul.sel.Listcell','jU0Qc6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Store #'},[]]]],
+['zul.sel.Listitem','jU0Qd6',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:4},[
+['zul.sel.Listcell','jU0Qe6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Store Description'},[]]]],
+['zul.sel.Listitem','jU0Qf6',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:5},[
+['zul.sel.Listcell','jU0Qg6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Image'},[]]]],
+['zul.sel.Listitem','jU0Qh6',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:6},[
+['zul.sel.Listcell','jU0Qi6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Gender'},[]]]]]]]],
+['zul.wgt.Div','jU0Q50',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',style:'width:40px;padding-top:5px;border-left:1px solid #ccc;',align:'center'},[
+['zul.box.Vlayout','jU0Q60',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',prolog:'\n\t\t\t'},[
+['zul.wgt.Div','jU0Q70',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',sclass:'udwrap',style:'position:relative;'},[
+['zul.wgt.Div','jU0Q80',{$$0onSwipe:true,$$0onAfterSize:true,style:'position:absolute;top:50%;transform: translateY(-50%);',prolog:'\n\t\t  \t\t\t'},[
+['zul.wgt.Button','jU0Q90',{$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,sclass:'udb',tooltiptext:'Move to Top',prolog:'\n\t\t\t\t\t\t',iconSclass:'z-icon-angle-double-up'},[]],
+['zul.wgt.Button','jU0Qa0',{$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,tooltiptext:'Move Up',prolog:'\n\t\t\t\t\t\t',iconSclass:'z-icon-angle-up'},[]],
+['zul.wgt.Button','jU0Qb0',{$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,tooltiptext:'Move Down',prolog:'\n\t\t\t\t\t\t',iconSclass:'z-icon-angle-down'},[]],
+['zul.wgt.Button','jU0Qc0',{$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,sclass:'udb',tooltiptext:'Move to Bottom',prolog:'\n\t\t\t\t\t\t',iconSclass:'z-icon-angle-double-down'},[]]]]]]]]]]]]]]]]]],
+['zul.wgt.Div','jU0Qd0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'overflow-x:hidden;overflow-y:auto;'},[
+['zul.box.Vlayout','jU0Qe0',{$$0onSwipe:true,$$0onAfterSize:true,prolog:'\n\t\t\t\t\t'},[
+['zul.box.Hlayout','jU0Qf0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.wgt.Div','jU0Qg0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'border-right:1px solid #ccc'},[
+['zul.wnd.Window','jU0Qh0',{$$0onSwipe:true,$$0onAfterSize:true,$$0onSize:true,$$0onMaximize:true,$$0onMinimize:true,$$0onZIndex:true,$onClose:true,$$0onMove:true,width:'100%',prolog:'\n\t\t\t\t\t\t\t\t',title:'Select Size Columns',contentStyle:'padding:0;'},[
+['zul.sel.Listbox','jU0Qa1',{$$0onBlur:true,$$0onRender:true,$onSelect:true,$$0onSwipe:true,$$0onTopPad:true,$$0onAfterSize:true,$$0onDataLoading:true,$$0onAnchorPos:true,$$0onAcrossPage:true,$$0onCheckSelectAll:true,$$0onInnerWidth:true,$$0onPageSize:true,$$0onFocus:true,$$0onScrollPos:true,width:'100%',style:'border:0',_nativebar:true,oddRowSclass:'none',checkmark:true,multiple:true,model:true,_topPad:0,_totalSize:9,_offset:0},[
+['zul.sel.Listitem','jU0Qj6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,selected:true,_loaded:true,_index:0},[
+['zul.sel.Listcell','jU0Qk6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj Qty'},[]]]],
+['zul.sel.Listitem','jU0Ql6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,selected:true,_loaded:true,_index:1},[
+['zul.sel.Listcell','jU0Qm6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj Prepack'},[]]]],
+['zul.sel.Listitem','jU0Qn6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,selected:true,_loaded:true,_index:2},[
+['zul.sel.Listcell','jU0Qo6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj Open Stock'},[]]]],
+['zul.sel.Listitem','jU0Qp6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:3},[
+['zul.sel.Listcell','jU0Qq6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Pull Qty'},[]]]],
+['zul.sel.Listitem','jU0Qr6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:4},[
+['zul.sel.Listcell','jU0Qs6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Pull Prepack'},[]]]],
+['zul.sel.Listitem','jU0Qt6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:5},[
+['zul.sel.Listcell','jU0Qu6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Pull Open Stock'},[]]]],
+['zul.sel.Listitem','jU0Qv6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:6},[
+['zul.sel.Listcell','jU0Qw6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Push Qty'},[]]]],
+['zul.sel.Listitem','jU0Qx6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:7},[
+['zul.sel.Listcell','jU0Qy6',{$$0onSwipe:true,$$0onAfterSize:true,label:'Push Prepack'},[]]]],
+['zul.sel.Listitem','jU0Qz6',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:8},[
+['zul.sel.Listcell','jU0Q_7',{$$0onSwipe:true,$$0onAfterSize:true,label:'Push Open Stock'},[]]]]]]]]]],
+['zul.wgt.Div','jU0Qb1',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'border-right:1px solid #ccc;'},[
+['zul.wnd.Window','jU0Qc1',{$$0onSwipe:true,$$0onAfterSize:true,$$0onSize:true,$$0onMaximize:true,$$0onMinimize:true,$$0onZIndex:true,$onClose:true,$$0onMove:true,width:'100%',vflex:'1',prolog:'\n\t\t\t\t\t\t\t\t',title:'Set Size Column Order X',contentStyle:'padding:0;'},[
+['zul.box.Hlayout','jU0Qd1',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1'},[
+['zul.wgt.Div','jU0Qe1',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'overflow-x:hidden;overflow-y:auto;'},[
+['zul.sel.Listbox','jU0Qi0',{$$0onBlur:true,$$0onRender:true,$onSelect:true,$$0onSwipe:true,$$0onTopPad:true,$$0onAfterSize:true,$$0onDataLoading:true,$$0onAnchorPos:true,$$0onAcrossPage:true,$$0onCheckSelectAll:true,$$0onInnerWidth:true,$$0onPageSize:true,$$0onFocus:true,$$0onScrollPos:true,hflex:'1',sclass:'colorselect draggable',style:'border:0',droppable:'true',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t',_nativebar:true,oddRowSclass:'none',multiple:true,model:true,_topPad:0,_totalSize:1,_offset:0},[
+['zul.sel.Listitem','jU0Q07',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',draggable:'true',droppable:'true',_loaded:true,_index:0},[
+['zul.sel.Listcell','jU0Q17',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj'},[]]]]]]]],
+['zul.wgt.Div','jU0Qj0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',style:'width:40px;padding-top:5px;border-left:1px solid #ccc;',align:'center'},[
+['zul.box.Vlayout','jU0Qk0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t'},[
+['zul.wgt.Div','jU0Ql0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',style:'display:table-cell;text-align:center;vertical-align:middle;'},[
+['zul.wgt.Button','jU0Qm0',{id:'upBtn',$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,sclass:'b',tooltiptext:'Move Up',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t\t\t',iconSclass:'z-icon-angle-up'},[]],
+['zul.wgt.Button','jU0Qv0',{id:'downBtn',$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,sclass:'b',tooltiptext:'Move Down',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t\t\t',iconSclass:'z-icon-angle-down'},[]]]]]]]]]]]]]]]],
+['zul.box.Hlayout','jU0Qw0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.wgt.Div','jU0Qx0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'border-right:1px solid #ccc'},[
+['zul.wnd.Window','jU0Qy0',{$$0onSwipe:true,$$0onAfterSize:true,$$0onSize:true,$$0onMaximize:true,$$0onMinimize:true,$$0onZIndex:true,$onClose:true,$$0onMove:true,width:'100%',prolog:'\n\t\t\t\t\t\t\t\t',title:'Select Total Columns',contentStyle:'padding:0;'},[
+['zul.sel.Listbox','jU0Qn0',{$$0onBlur:true,$$0onRender:true,$onSelect:true,$$0onSwipe:true,$$0onTopPad:true,$$0onAfterSize:true,$$0onDataLoading:true,$$0onAnchorPos:true,$$0onAcrossPage:true,$$0onCheckSelectAll:true,$$0onInnerWidth:true,$$0onPageSize:true,$$0onFocus:true,$$0onScrollPos:true,width:'100%',style:'border:0',_nativebar:true,oddRowSclass:'none',checkmark:true,multiple:true,model:true,_topPad:0,_totalSize:9,_offset:0},[
+['zul.sel.Listitem','jU0Q27',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,selected:true,_loaded:true,_index:0},[
+['zul.sel.Listcell','jU0Q37',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj Qty'},[]]]],
+['zul.sel.Listitem','jU0Q47',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,selected:true,_loaded:true,_index:1},[
+['zul.sel.Listcell','jU0Q57',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj Prepack'},[]]]],
+['zul.sel.Listitem','jU0Q67',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,selected:true,_loaded:true,_index:2},[
+['zul.sel.Listcell','jU0Q77',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj Open Stock'},[]]]],
+['zul.sel.Listitem','jU0Q87',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:3},[
+['zul.sel.Listcell','jU0Q97',{$$0onSwipe:true,$$0onAfterSize:true,label:'Pull Qty'},[]]]],
+['zul.sel.Listitem','jU0Qa7',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:4},[
+['zul.sel.Listcell','jU0Qb7',{$$0onSwipe:true,$$0onAfterSize:true,label:'Pull Prepack'},[]]]],
+['zul.sel.Listitem','jU0Qc7',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:5},[
+['zul.sel.Listcell','jU0Qd7',{$$0onSwipe:true,$$0onAfterSize:true,label:'Pull Open Stock'},[]]]],
+['zul.sel.Listitem','jU0Qe7',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:6},[
+['zul.sel.Listcell','jU0Qf7',{$$0onSwipe:true,$$0onAfterSize:true,label:'Push Qty'},[]]]],
+['zul.sel.Listitem','jU0Qg7',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:7},[
+['zul.sel.Listcell','jU0Qh7',{$$0onSwipe:true,$$0onAfterSize:true,label:'Push Prepack'},[]]]],
+['zul.sel.Listitem','jU0Qi7',{$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,_loaded:true,_index:8},[
+['zul.sel.Listcell','jU0Qj7',{$$0onSwipe:true,$$0onAfterSize:true,label:'Push Open Stock'},[]]]]]]]]]],
+['zul.wgt.Div','jU0Qo0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'border-right:1px solid #ccc;'},[
+['zul.wnd.Window','jU0Qp0',{$$0onSwipe:true,$$0onAfterSize:true,$$0onSize:true,$$0onMaximize:true,$$0onMinimize:true,$$0onZIndex:true,$onClose:true,$$0onMove:true,width:'100%',vflex:'1',prolog:'\n\t\t\t\t\t\t\t\t',title:'Set Total Column Order',contentStyle:'padding:0;'},[
+['zul.box.Hlayout','jU0Qq0',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1'},[
+['zul.wgt.Div','jU0Qf1',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',hflex:'1',style:'overflow-x:hidden;overflow-y:auto;'},[
+['zul.sel.Listbox','jU0Qg1',{$$0onBlur:true,$$0onRender:true,$onSelect:true,$$0onSwipe:true,$$0onTopPad:true,$$0onAfterSize:true,$$0onDataLoading:true,$$0onAnchorPos:true,$$0onAcrossPage:true,$$0onCheckSelectAll:true,$$0onInnerWidth:true,$$0onPageSize:true,$$0onFocus:true,$$0onScrollPos:true,hflex:'1',sclass:'colorselect draggable',style:'border:0',droppable:'true',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t',_nativebar:true,oddRowSclass:'none',multiple:true,model:true,_topPad:0,_totalSize:1,_offset:0},[
+['zul.sel.Listitem','jU0Qk7',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',draggable:'true',droppable:'true',_loaded:true,_index:0},[
+['zul.sel.Listcell','jU0Ql7',{$$0onSwipe:true,$$0onAfterSize:true,label:'Adj'},[]]]]]]]],
+['zul.wgt.Div','jU0Qh1',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',style:'width:40px;border-left:1px solid #ccc;',align:'center'},[
+['zul.box.Vlayout','jU0Qi1',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t'},[
+['zul.wgt.Div','jU0Qj1',{$$0onSwipe:true,$$0onAfterSize:true,vflex:'1',style:'display:table-cell;text-align:center;vertical-align:middle;'},[
+['zul.wgt.Button','jU0Q52',{id:'upBtn',$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,sclass:'b',tooltiptext:'Move Up',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t\t\t',iconSclass:'z-icon-angle-up'},[]],
+['zul.wgt.Button','jU0Q62',{id:'downBtn',$$0onBlur:true,$$0onSwipe:true,$onClick:true,$$0onAfterSize:true,$$0onFocus:true,sclass:'b',tooltiptext:'Move Down',prolog:'\n\t\t\t\t\t\t\t\t\t\t\t\t\t',iconSclass:'z-icon-angle-down'},[]]]]]]]]]]]]]]]]]]]]]]]]]]]]],["setAttr",[{$u:'jU0Q31'},"disabled",true]],["setAttr",[{$u:'jU0Q31'},"sclass","MenuImage IconSave menuitem-disabled"]],["setAttr",[{$u:'jU0Q41'},"disabled",true]],["setAttr",[{$u:'jU0Q41'},"sclass","MenuImage IconSaveClose menuitem-disabled"]],["setAttr",[{$u:'jU0Q51'},"disabled",true]],["setAttr",[{$u:'jU0Q51'},"sclass","MenuImage IconDailyTask menuitem-disabled"]],["setAttr",[{$u:'jU0Q61'},"disabled",true]],["setAttr",[{$u:'jU0Q61'},"sclass","MenuImage IconDoorFilter menuitem-disabled"]],["setAttr",[{$u:'jU0Q71'},"disabled",true]],["setAttr",[{$u:'jU0Q71'},"sclass","MenuImage IconFreezePane-OC menuitem-disabled"]],["setAttr",[{$u:'jU0Q81'},"disabled",true]],["setAttr",[{$u:'jU0Q81'},"sclass","MenuImage IconPopulate-OC menuitem-disabled"]],["setAttr",[{$u:'jU0Q91'},"disabled",true]],["setAttr",[{$u:'jU0Q91'},"sclass","menuText-OC menuitem-disabled"]],["setAttr",[{$u:'jU0Qs0'},"disabled",true]],["setAttr",[{$u:'jU0Qs0'},"sclass","menuText-OC menuitem-disabled"]],["setAttr",[{$u:'jU0Qr0'},"disabled",true]],["setAttr",[{$u:'jU0Qr0'},"sclass","MenuImage IconExcel menuitem-disabled"]],["setAttr",[{$u:'jU0Qu0'},"disabled",true]],["setAttr",[{$u:'jU0Qu0'},"sclass","MenuImage IconInfo-OC menuitem-disabled"]],["setAttr",[{$u:'jU0Qt0'},"disabled",true]],["setAttr",[{$u:'jU0Qt0'},"sclass","MenuImage IconNotes-OC menuitem-disabled"]],["setAttr",[{$u:'jU0Qk1'},"disabled",true]],["setAttr",[{$u:'jU0Qk1'},"sclass","MenuImage IconViewingCriteria-OC menuitem-disabled"]],["setAttr",[{$u:'jU0Ql1'},"sclass","MenuImage IconOptions-OC opened"]],["setAttr",[{$u:'jU0Ql1'},"$onClick",null]]],"rid":30}

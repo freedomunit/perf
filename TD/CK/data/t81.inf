@@ -1,0 +1,13 @@
+[t81]
+FileName1=t81.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t81_RequestHeader.txt
+RequestBodyFile=t81_RequestBody.txt
+ResponseHeaderFile=t81_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_81.xml
+FileName2=t81_SecurityAccessDownload_20161124-100205.html
+URL2=https://10.125.2.174/bin-java/zkau/view/z_fd6/dwnmed-3/4oo/SecurityAccessDownload_20161124-100205.xlsx
+[ProtocolInfo]
+ProtocolId=QTWeb

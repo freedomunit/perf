@@ -1,0 +1,11 @@
+[t97]
+FileName1=t97.txt
+URL1=http://10.125.2.182/bin-java/zkau/comet?dtid=z_g8k
+Total=1
+RequestHeaderFile=t97_RequestHeader.txt
+RequestBodyFile=NONE
+ResponseHeaderFile=t97_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_97.xml
+[ProtocolInfo]
+ProtocolId=QTWeb

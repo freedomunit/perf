@@ -1,0 +1,25 @@
+{"rs":[["rm",["v71Qm40"]],["rm",["v71Q560"]],["rm",["v71Qlq"]],["rm",["v71Qnq"]],["addBfr",["v71Q4o0",[
+['zul.sel.Listitem','v71Qoq',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:0},[
+['zul.sel.Listcell','v71Qpq',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'Group Default'},[]],
+['zul.sel.Listcell','v71Qvp',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qwp',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'deny',style:'width:100%',_value:'Deny',readonly:true},[]]]],
+['zul.sel.Listcell','v71Qxp',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qyp',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'deny',style:'width:100%',_value:'Deny',readonly:true},[]]]],
+['zul.sel.Listcell','v71Qzp',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q_q',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'view',style:'width:100%',_value:'View',readonly:true},[]]]],
+['zul.sel.Listcell','v71Q0q',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q1q',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'view',style:'width:100%',_value:'View',readonly:true},[]]]],
+['zul.sel.Listcell','v71Q2q',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q3q',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'view',style:'width:100%',_value:'View',readonly:true},[]]]]]]],[
+['zul.sel.Listitem','v71Qn20',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'dblline',_loaded:true,_index:1},[
+['zul.sel.Listcell','v71Qo20',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',style:'font-weight:bold',label:'Apply to All'},[]],
+['zul.sel.Listcell','v71Ql20',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qm20',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qj20',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qk20',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qc30',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qd30',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qa30',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qb30',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q830',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q930',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]]]],["echo2",[{$u:'v71Q0'},"onSave",0]],["showBusy",[{$u:'v71Q0'},"Processing..."]],["echo2",[{$u:'v71Q0'},"onSave",1]],["setAttr",[{$u:'v71Q3o0'},"_lastoffset",0]],["setAttr",[{$u:'v71Q3o0'},"resetDataLoader",true]],["setAttr",[{$u:'v71Q3o0'},"model",true]],["setAttr",[{$u:'v71Q3o0'},"visibleItemCount",27]]],"rid":27}

@@ -1,0 +1,151 @@
+(function(){if(zk._p=zkpi('zkex.cmsp'))try{
+
+(function () {
+	var _auSIE = zAu.shallIgnoreESC, _nStart = 0;
+	zAu.shallIgnoreESC = function () {
+		return _auSIE() || _nStart > 0;
+	};
+
+	function _onRespReady() {
+		var req = this._req;
+		try {
+			if (req && req.readyState == 4) {
+				this._req = null;
+
+				var cerr, rqst, v;
+				if ((cerr = req.getResponseHeader("ZK-Comet-Error")) == "Disabled"
+				|| cerr == "DesktopUnavailable"
+				|| (rqst = req.status) == 404 || rqst == 405 || rqst == 410
+				|| (v=req.getResponseHeader("ZK-Error")) == "404"
+				|| v == "410") {
+					v = zAu.getPushErrorURI(rqst == 404 || v == "404" ? 404: 410);
+					if (typeof v == "string")
+						zUtl.go(v);
+					this.stop();
+
+				} else if (rqst == 200) {
+					this._nfail = 0;
+					if (req.getResponseHeader("ZK-Comet") == "echo"
+						|| cerr == 'Hibernate') {
+						zAu.cmd0.echo(this.desktop);
+					}
+					if (cerr != 'Hibernate') {
+						
+						if ((v = cerr == "Busy")) {
+							this._send();
+							var self = this;
+							setTimeout(function () { 
+								if (self.desktop)
+									zAu.cmd0.echo(self.desktop);
+							}, 200);
+						} else
+							this._asend(0);
+					}
+
+				} else if (rqst == 502) {
+					this._send(); 
+					var self = this;
+					setTimeout(function () { 
+						zAu.cmd0.echo(self.desktop);
+					}, 200);
+				} else
+					this._retry(5000); 
+			}
+		} catch (e) {
+			this._retry(5000); 
+		}
+	}
+	function _onAbort() {
+		this.stop();
+	}
+
+zkex.cmsp.SPush = zk.$extends(zk.Object, {
+	_nfail: 0,
+	start: function (dt, cometURI) {
+		++_nStart;
+		this.desktop = dt;
+		this.cometURI = cometURI;
+		this._asend(90);
+	},
+	stop: function () {
+		--_nStart;
+		this._stopped = true;
+		var req = this._req;
+		if (req) {
+			this._req = null;
+			try {
+				if(typeof req.abort == "function") req.abort();
+			} catch (e2) {
+			}
+		}
+	},
+	visibilityChanged: function () {
+		if (document.hidden || document[zk.vendor_ + 'Hidden']) {
+			
+			try {
+				var req = this._req = zAu.ajaxSettings.xhr(),
+					dt = this.desktop;
+				req.open("POST", this.cometURI(dt) + '&hibernate=true', true);
+				req.setRequestHeader("Content-Type", zAu.ajaxSettings.contentType);
+				req.send(null);
+			} catch (e) {
+			}
+		} else {
+			this._stopped = false;
+			this.start(this.desktop, this.cometURI);
+		}
+	},
+	_send: function () {
+		this._asending = false;
+		var req = this._req = zAu.ajaxSettings.xhr(),
+			dt = this.desktop;
+		try {
+			req.onreadystatechange = this.proxy(_onRespReady);
+			req.onabort = this.proxy(_onAbort);
+			req.open("POST", this.cometURI(dt), true);
+			req.setRequestHeader("Content-Type", zAu.ajaxSettings.contentType);
+			req.send(null);
+		} catch (e) {
+			this._req = null;
+			this._asend(5000); 
+		}
+	},
+	_asend: function (timeout) {
+		if (!this._asending && !this._stopped) {
+			this._asending = true;
+			setTimeout(this.proxy(this._send), timeout);
+		}
+	},
+	_retry: function (timeout) {
+		if (++this._nfail < 10)
+			this._asend(timeout);
+		else
+			this.stop();
+	}
+});
+
+zk.copy(zkex.cmsp, {
+	start: function (dtid, disabledSmartConnection) {
+		var dt = zk.Desktop.$(dtid);
+		if (dt._cmsp) dt._cmsp.stop();
+		(dt._cmsp = new zkex.cmsp.SPush()).start(dt, this.cometURI);
+			
+		if (!disabledSmartConnection)
+			jq(document).bind((document.hidden !== undefined ? '' : zk.vendor_) + 'visibilitychange', dt._cmsp.proxy(dt._cmsp.visibilityChanged));
+	},
+	stop: function (dtid) {
+		var dt = zk.Desktop.$(dtid);
+		if (dt && dt._cmsp) {
+			jq(document).unbind((document.hidden !== undefined ? '' : zk.vendor_) + 'visibilitychange', dt._cmsp.proxy(dt._cmsp.visibilityChanged));
+			dt._cmsp.stop();
+			dt._cmsp = null;
+		}
+	},
+	cometURI: function (dt) {
+		return zk.ajaxURI("/comet?dtid="+dt.id, {desktop:dt,au:true});
+	}
+});
+
+})();
+
+}finally{zk.setLoaded(zk._p.n);}})();

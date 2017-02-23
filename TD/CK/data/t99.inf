@@ -1,0 +1,13 @@
+[t99]
+FileName1=t99.txt
+URL1=https://10.125.2.179/bin-java/zkau
+Total=2
+RequestHeaderFile=t99_RequestHeader.txt
+RequestBodyFile=t99_RequestBody.txt
+ResponseHeaderFile=t99_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_99.xml
+FileName2=t99_SecurityTemplateDownload_20161125-180026.html
+URL2=https://10.125.2.179/bin-java/zkau/view/z_hxu/dwnmed-0/pul1/SecurityTemplateDownload_20161125-180026.xlsx
+[ProtocolInfo]
+ProtocolId=QTWeb

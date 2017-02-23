@@ -1,0 +1,1626 @@
+zk.load('zul.wgt',function(){if(zk._p=zkpi('zul.menu'))try{
+
+
+
+
+(function () {
+	function _closeOnOut(menubar) {
+		
+		
+		
+		
+		if (!menubar._noFloatUp && !menubar._bOver && zul.menu._nOpen)
+			zWatch.fire('onFloatUp', menubar); 
+	}
+	
+
+zul.menu.Menubar = zk.$extends(zul.Widget, {
+	_orient: 'horizontal',
+
+	$define: {
+		
+		
+		orient: function () {
+			this.rerender();
+		},
+		
+		
+		scrollable: function (scrollable) {
+			if (this.checkScrollable())
+				this.rerender();	
+		},
+		
+		
+		autodrop: null
+	},
+	
+	setWidth: function () {
+		this.$supers('setWidth', arguments);
+		this._checkScrolling();
+	},
+	domClass_: function (no) {
+		var sc = this.$supers('domClass_', arguments);
+		if (!no || !no.zclass) {
+			sc += ' ' + this.$s("vertical" == this.getOrient() ? 'vertical' : 'horizontal');
+		}
+		return sc;
+	},
+	unbind_: function () {
+		if (this.checkScrollable()) {
+			var left = this.$n('left'),
+				right = this.$n('right');
+			if (left && right) {
+				this.domUnlisten_(left, 'onClick', '_doScroll')
+					.domUnlisten_(right, 'onClick', '_doScroll');
+			}
+			zWatch.unlisten({onSize: this});
+		}
+		var n = this.$n();
+		this.domUnlisten_(n, 'onMouseEnter').domUnlisten_(n, 'onMouseLeave');
+
+		this._lastTarget = null;
+		this.$supers(zul.menu.Menubar, 'unbind_', arguments);
+	},
+	bind_: function () {
+		this.$supers(zul.menu.Menubar, 'bind_', arguments);
+		var n = this.$n();
+		this.domListen_(n, 'onMouseEnter').domListen_(n, 'onMouseLeave');
+		if (this.checkScrollable()) {
+			var left = this.$n('left'),
+				right = this.$n('right');
+			if (left && right) {
+				this.domListen_(left, 'onClick', '_doScroll')
+					.domListen_(right, 'onClick', '_doScroll');
+			}
+			zWatch.listen({onSize: this});
+		}
+	},
+	
+	checkScrollable: function () {
+		return this._scrollable && ('horizontal' == this.getOrient());
+	},
+	onSize: function () {
+		this._checkScrolling();
+	},
+
+	onChildAdded_: function (child) {
+		this.$supers('onChildAdded_', arguments);
+		this._checkScrolling();
+	},
+	onChildRemoved_: function (child) {
+		this.$supers('onChildRemoved_', arguments);
+		if (!this.childReplacing_)
+			this._checkScrolling();
+	},
+	
+	_checkScrolling: function () {
+		if (!this.checkScrollable()) return;
+		
+		var node = this.$n();
+		if (!node) return;
+		jq(node).addClass(this.$s('scroll'));
+		
+		var nodeWidth = zk(node).offsetWidth(),
+			body = this.$n('body'),
+			childs = jq(this.$n('cave')).children(),
+			totalWidth = 0;
+		
+		for (var i = childs.length; i-- ;)
+			totalWidth += childs[i].offsetWidth;
+
+		if (zk.ie) 
+			totalWidth += childs.length;
+
+		var fixedSize = nodeWidth -
+						zk(this.$n('left')).offsetWidth() -
+						zk(this.$n('right')).offsetWidth();
+		if (this._scrolling) {
+			if (totalWidth < nodeWidth) {
+				this._scrolling = false;
+				body.scrollLeft = 0;
+				if (body.offsetWidth <= totalWidth)
+					body.style.width = jq.px0(fixedSize);
+			} else {
+				body.style.width = jq.px0(fixedSize);
+				this._fixScrollPos(node);
+			}
+		} else {
+			if (totalWidth >= nodeWidth) {
+				this._scrolling = true;
+				body.style.width = jq.px0(fixedSize);
+			}
+		}
+		this._fixButtonPos(node);
+	},
+	_fixScrollPos: function () {
+		var body = this.$n('body'),
+			childs = jq(this.$n('cave')).children();
+		if (childs[childs.length - 1].offsetLeft < body.scrollLeft) {
+			var movePos = childs[childs.length - 1].offsetLeft;
+			body.scrollLeft = movePos;
+		}
+	},
+	_fixButtonPos: function (node) {
+		var zcls = this.getZclass(),
+			body = this.$n('body'),
+			left = this.$n('left'),
+			right = this.$n('right'),
+			css = this._scrolling ? 'addClass' : 'removeClass';
+		
+		body.style.marginLeft = this._scrolling ? jq.px(left.offsetWidth) : '0';
+		body.style.marginRight = this._scrolling ? jq.px(right.offsetWidth) : '0';
+		left.style.display = right.style.display = this._scrolling ? 'block' : 'none';
+		jq(node)[css](this.$s('scroll'));
+	},
+	_forceStyle: function (node, value) {
+		if (zk.parseInt(value) < 0)
+			return;
+		node.style.width = value;
+	},
+	_doMouseEnter: function (evt) {
+		this._bOver = true;
+		this._noFloatUp = false;
+	},
+	_doMouseLeave: function (evt) {
+		this._bOver = false;
+		this._closeOnOut();
+	},
+	_doScroll: function (evt) {
+		this._scroll(evt.domTarget == this.$n('left') || evt.domTarget.parentNode == this.$n('left') ? 'left' : 'right');
+	},
+	_scroll: function (direction) {
+		if (!this.checkScrollable() || this._runId) return;
+		var self = this,
+			body = this.$n('body'),
+			currScrollLeft = body.scrollLeft,
+			childs = jq(this.$n('cave')).children(),
+			childLen = childs.length,
+			movePos = 0;
+
+		if (!childLen) return;
+		switch (direction) {
+		case 'left':
+			for (var i = 0; i < childLen; i++) {
+				
+				
+				if (childs[i].offsetLeft >= currScrollLeft ||
+						childs[i].offsetLeft+(childs[i].offsetWidth - body.offsetWidth) >= currScrollLeft) {
+					var preChild = childs[i].previousSibling;
+					if (!preChild)	return;
+					movePos = currScrollLeft - (currScrollLeft - preChild.offsetLeft);
+					if (isNaN(movePos)) return;
+					self._runId = setInterval(function () {
+						if(!self._moveTo(body, movePos)){
+							clearInterval(self._runId);
+							self._runId = null;
+						}
+					}, 10);
+					return;
+				}
+			}
+			break;
+		case 'right':
+			var currRight = currScrollLeft + body.offsetWidth;
+			for (var i = 0; i < childLen; i++) {
+				var currChildRight =  childs[i].offsetLeft + childs[i].offsetWidth;
+				if (currChildRight > currRight) {
+					movePos = currScrollLeft + (currChildRight - currRight);
+					if (isNaN(movePos)) return;
+					self._runId = setInterval(function () {
+						if (!self._moveTo(body, movePos)) {
+							clearInterval(self._runId);
+							self._runId = null;
+						}
+					}, 10);
+					return;
+				}
+			}
+			break;
+		}
+	},
+	_moveTo: function (body, moveDest) {
+		var currPos = body.scrollLeft;
+		if (currPos == moveDest)
+			return false;
+		
+		var step = 5,
+			delta = currPos > moveDest ? -step : step,
+			setTo = currPos + delta;
+		if ((setTo < moveDest && delta < 0) || (setTo > moveDest && delta > 0))
+			setTo = moveDest;
+		
+		body.scrollLeft = setTo;
+		return true;
+	},
+	insertChildHTML_: function (child, before, desktop) {
+		var vert = 'vertical' == this.getOrient();
+		if (before)
+			jq(before.$n('chdextr') || before.$n()).before(
+				this.encloseChildHTML_({child: child, vertical: vert}));
+		else
+			jq(this.$n('cave')).append(
+				this.encloseChildHTML_({child: child, vertical: vert}));
+
+		child.bind(desktop);
+	},
+	removeChildHTML_: function (child) {
+		this.$supers('removeChildHTML_', arguments);
+		jq(child.$n('chdextr')).remove();
+	},
+	encloseChildHTML_: function (opts) {
+		var out = opts.out || [],
+			child = opts.child;
+		child.redraw(out);
+		if (!opts.out) return out.join('');
+	},
+
+	
+	_closeOnOut: function () {
+		var self = this;
+		if (self._autodrop && !zul.Widget.getOpenTooltip()) 
+			setTimeout(function () {_closeOnOut(self);}, 200);
+	}
+});
+
+})();
+zkreg('zul.menu.Menubar');zk._m={};
+zk._m['default']=
+function (out) {
+	var uuid = this.uuid;
+	if ('vertical' == this.getOrient()) {
+		out.push('<div', this.domAttrs_(), '><ul id="', uuid, '-cave">');
+		for (var w = this.firstChild; w; w = w.nextSibling)
+			this.encloseChildHTML_({out: out, child: w, vertical: true});
+		out.push('</ul></div>');
+	} else {
+		var scrollable;
+		out.push('<div', this.domAttrs_(), '>')
+		if (scrollable = this.checkScrollable()) {
+			var scrollableCls = this.$s('scrollable'),
+				scrollIcon = this.$s('icon');
+				
+			out.push('<div id="', uuid, '-left" class="', this.$s('left'), ' ',
+						scrollableCls, '"><i class="', scrollIcon,
+						' z-icon-chevron-left"></i></div>',
+					'<div id="', uuid, '-right" class="', this.$s('right'), ' ',
+						scrollableCls, '"><i class="', scrollIcon,
+						' z-icon-chevron-right"></i></div>',
+					'<div id="', uuid, '-body" class="', this.$s('body'), '">',
+					'<div id="', uuid, '-cnt" class="', this.$s('content'), '">');
+		}
+		out.push('<ul id="', uuid, '-cave">');
+		for (var w = this.firstChild; w; w = w.nextSibling)
+			w.redraw(out);
+		out.push('</ul>');
+		if (scrollable)
+			out.push('</div></div>');
+		out.push('</div>');
+	}
+}
+;zkmld(zk._p.p.Menubar,zk._m);
+(function () {
+	function _toggleClickableCSS(wgt, remove) {
+		if (wgt.isListen('onClick')) {
+			jq(wgt.$n())[remove ? 'removeClass' : 'addClass'](wgt.$s('hover'));
+		}
+	}
+	function _doClick(wgt, evt) {
+		if (wgt.isListen('onClick')) {
+			var clk = jq(wgt.$n()).find('.' + wgt.$s('separator')),
+				zclk = zk(clk),
+				offsetX = zclk.revisedOffset()[0];
+
+			if (evt.pageX > offsetX) { 
+				jq(wgt.$n()).addClass(wgt.$s('selected'));
+				wgt.menupopup._shallClose = false;
+				wgt._togglePopup();
+				evt.stop();
+			} else
+				wgt.fireX(new zk.Event(wgt, 'onClick', evt.data));
+				
+		} else {
+			jq(wgt.$n()).addClass(wgt.isTopmost() ? wgt.$s('selected') : wgt.$s('hover'));
+			wgt.menupopup._shallClose = false;
+			wgt._togglePopup();
+		}
+	}
+
+	function _isActiveItem(wgt) {
+		return wgt.isVisible() && wgt.$instanceof(zul.menu.Menu);
+	}
+	function _nextVisibleMenu(menu) {
+		for (var m = menu; m; m = m.nextSibling) {
+			if (_isActiveItem(m))
+				return m;
+		}
+		var mb = menu.parent;
+		if (mb.firstChild == menu)
+			return menu;
+		return _nextVisibleMenu(mb.firstChild);
+	}
+
+	function _prevVisibleMenu(menu) {
+		for (var m = menu; m; m = m.previousSibling) {
+			if (_isActiveItem(m))
+				return m;
+		}
+		var mb = menu.parent;
+		if (mb.lastChild == menu)
+			return menu;
+		return _prevVisibleMenu(mb.lastChild);
+	}
+
+zul.menu.Menu = zk.$extends(zul.LabelImageWidget, {
+	$define: {
+		
+		
+		content: function (content) {
+			if (!content || content.length == 0) return;
+			
+			if (!this._contentHandler) {
+				if (zk.feature.pe) {
+					var self = this;
+					zk.load('zkex.inp', null, function () { 
+						self._contentHandler = new zkex.inp.ContentHandler(self, content);
+					});
+					return;
+				}
+				this._contentHandler = new zul.menu.ContentHandler(this, content);
+			} else
+				this._contentHandler.setContent(content);
+		},
+		image: function (v) {
+			if (v && this._preloadImage) zUtl.loadImage(v);
+			this.rerender();
+		}
+	},
+	
+	open: function () {
+		if (this.desktop && this.isTopmost()) {
+			jq(this.$n()).addClass(this.$s('selected'));
+			var mb = this.getMenubar();
+			if (mb._lastTarget)
+				this.$class._rmActive(mb._lastTarget);
+			mb._lastTarget = this;
+			this.menupopup._shallClose = false;
+			this._togglePopup();
+		}
+	},
+	
+	getAnchor_: function () {
+		return this.$n('a');
+	},
+	domContent_: function () { 
+		var label = '<span class="' + this.$s('text') + '">' + 
+			(zUtl.encodeXML(this.getLabel())) + '</span>',
+		img = this.getImage(),
+		icon = '<i class="' + this.$s('icon') + ' z-icon-caret-' +
+				(this.isTopmost() && !this.isVertical_() ? 'down' : 'right') + '"></i>',
+		separator = '<div class="' + this.$s('separator') + '"></div>',
+		iconSclass = this.domIcon_();
+	
+		if (img)
+			img = '<img id="' + this.uuid + '-img" src="' + img + '" class="' + this.$s('image') + '" align="absmiddle" />'
+				+ (iconSclass ? ' ' + iconSclass : '');
+		else {
+			if (iconSclass) {
+				img = iconSclass;
+			} else {
+				img = '<img id="'+ this.uuid  + '-img" ' + (this.isTopmost() ? 'style="display:none"' : '') +
+					' src="data:image/png;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" class="' +
+					this.$s('image') + '" align="absmiddle" />';
+			}
+		}
+		return img + ' ' + label + ' ' + separator + icon;
+	},
+	
+	isTopmost: function () {
+		return this._topmost;
+	},
+	beforeParentChanged_: function (newParent) {
+		this._topmost = newParent && !(newParent.$instanceof(zul.menu.Menupopup));
+		this.$supers("beforeParentChanged_", arguments);
+	},
+	onChildAdded_: function (child) {
+		this.$supers('onChildAdded_', arguments);
+		if (child.$instanceof(zul.menu.Menupopup)) {
+			this.menupopup = child;
+
+			if (this._contentHandler)
+				this._contentHandler.destroy();
+		}
+	},
+	onChildRemoved_: function (child) {
+		this.$supers('onChildRemoved_', arguments);
+		if (child == this.menupopup) {
+			this.menupopup = null;
+
+			if (this._contentHandler)
+				this._contentHandler.setContent(this._content);
+		}
+	},
+	
+	getMenubar: function () {
+		for (var p = this.parent; p; p = p.parent) {
+			if (p.$instanceof(zul.menu.Menubar))
+				return p;
+
+			if (!p.$instanceof(zul.menu.Menupopup, zul.menu.Menu))
+				break; 
+		}
+		return null;
+	},
+	onShow: function () {
+		if (this._contentHandler)
+			this._contentHandler.onShow();
+	},
+	onFloatUp: function (ctl) {
+		if (this._contentHandler)
+			this._contentHandler.onFloatUp(ctl);
+	},
+	onHide: function () {
+		if (this._contentHandler)
+			this._contentHandler.onHide();
+	},
+	focus_: function (timeout, ignoreActive) {
+		if (this.isTopmost() && zk(this.getAnchor_()).focus(timeout)) {
+			
+            
+			
+			
+			if (ignoreActive) {
+				this._ignoreActive = true;
+			}
+			return true;
+		}
+		return this.$supers('focus_', arguments);
+	},
+	
+	_getPrevVisibleMenu: function () {
+		var prev = this.previousSibling;
+		if (!prev) {
+			var mb = this.getMenubar();
+			if (mb)
+				prev = mb.lastChild;
+		}
+		return prev ? _prevVisibleMenu(prev) : this;
+	},
+	
+	_getNextVisibleMenu: function () {
+		var next = this.nextSibling;
+		if (!next) {
+			var mb = this.getMenubar();
+			if (mb)
+				next = mb.firstChild;
+		}
+		return next ? _nextVisibleMenu(next) : this;
+	},
+	doKeyDown_: function (evt) {
+		
+		
+		if (this.isTopmost()) {
+			var keyCode = evt.keyCode;
+			
+			
+			if (this.isVertical_()) {
+				switch (keyCode) {
+				case 38: 
+					keyCode = 37;
+					break;
+				case 40: 
+					keyCode = 39;
+					break;
+				case 37: 
+					keyCode = 38;
+					break;
+				case 39: 
+					keyCode = 40;
+					break;
+				}
+			}
+			switch (keyCode) {
+			case 38: 
+				
+				
+				var pp = this.menupopup;
+				if (pp && pp.isOpen()) {
+					jq(this.$n()).removeClass(this.$s('hover')).removeClass(this.$s('selected'));
+					pp.close();
+				}
+				this.$class._addActive(this); 
+				evt.stop();
+				break;
+			case 40: 
+				
+				
+				if (this.menupopup) {
+					jq(this.$n()).addClass(this.$s('selected')).removeClass(this.$s('hover'));
+					this.menupopup._shallClose = false;
+					this.menupopup.open();
+				}
+				evt.stop();
+				break;
+			case 37: 
+			case 39: 
+				
+				
+				var target = keyCode == 37 ? this._getPrevVisibleMenu() : this._getNextVisibleMenu();
+				if (target)
+					target.focus();
+				evt.stop();
+				break;
+			case 13: 
+				
+				if (this.menupopup)
+					_doClick(this, evt);
+				evt.stop();
+				break;
+			case 9:
+				
+				this.$class._rmActive(this);
+				break;
+			}
+		}
+		this.$supers('doKeyDown_', arguments);
+	},
+	doFocus_: function () {
+		if (this.isTopmost()) {
+			var menubar = this.getMenubar(),
+				$menu = this.$class;
+
+			
+			if (menubar && menubar._lastTarget)
+				$menu._rmActive(menubar._lastTarget);
+			if (!this._ignoreActive)
+				$menu._addActive(this);
+		}
+		
+		delete this._ignoreActive;
+		this.$supers('doFocus_', arguments);
+	},
+	bind_: function () {
+		this.$supers(zul.menu.Menu, 'bind_', arguments);
+
+		var anc = this.getAnchor_();
+
+		this.domListen_(anc, 'onFocus', 'doFocus_') 
+			.domListen_(anc, 'onBlur', 'doBlur_')
+			.domListen_(anc, 'onMouseEnter')
+			.domListen_(anc, 'onMouseLeave');
+		
+		
+		if (this.isTopmost() && this.isListen('onClick')) {
+			jq(this.$n()).addClass(this.$s('clickable'));
+		}
+
+		if (this._contentHandler)
+			this._contentHandler.bind();
+	},
+	unbind_: function () {
+		var anc = this.getAnchor_();
+		this.domUnlisten_(anc, 'onFocus', 'doFocus_')
+			.domUnlisten_(anc, 'onBlur', 'doBlur_')
+			.domUnlisten_(anc, 'onMouseEnter')
+			.domUnlisten_(anc, 'onMouseLeave');
+
+		if (this._contentHandler)
+			this._contentHandler.unbind();
+
+		this.$supers(zul.menu.Menu, 'unbind_', arguments);
+	},
+	
+	_getArrowWidth: function () {
+		return 20;
+	},
+	_showContentHandler: function () {
+		var content = this._contentHandler;
+		if (content && !content.isOpen())
+			content.onShow();
+	},
+	doClick_: function (evt) {
+		if (this.menupopup) {
+			if (this.isTopmost())
+				this.getMenubar()._lastTarget = this;
+			
+			_doClick(this, evt);
+		} else {
+			this._showContentHandler();
+		}
+	},
+	doMouseOver_: function () {
+		if (!this.isTopmost()) {
+			this._showContentHandler();
+		}
+		this.$supers('doMouseOver_', arguments);
+	},
+	_togglePopup: function () {
+		
+		if (!this.menupopup && this._contentHandler) {
+			this._showContentHandler();
+		} else {
+			if (!this.menupopup.isOpen()){
+				if(this.isTopmost())
+					_toggleClickableCSS(this);
+				this.menupopup.open();
+			} else if (this.isTopmost()) 
+				this.menupopup.close({sendOnOpen: true});
+			else
+				zk(this.menupopup.$n('a')).focus(); 
+		}
+	},
+	_doMouseEnter: function (evt) {
+		var menubar = this.getMenubar();
+		if (menubar) {
+			menubar._noFloatUp = false;
+		}
+		
+		var	topmost = this.isTopmost();
+		if(topmost)
+			_toggleClickableCSS(this);
+		if (topmost && zk.ie < 11 && !jq.isAncestor(this.getAnchor_(), evt.domTarget))
+				return; 
+
+		if (this.menupopup)
+			this.menupopup._shallClose = false;
+		if (!topmost) {
+			zWatch.fire('onFloatUp', this); 
+			if (this.menupopup && !this.menupopup.isOpen()) this.menupopup.open();
+		} else {
+			if (this.menupopup && menubar._autodrop) {
+				zWatch.fire('onFloatUp', this); 
+				if (!this.menupopup.isOpen()) this.menupopup.open();
+			} else {
+				var target = menubar._lastTarget;
+				if (target && target != this && target.menupopup
+						&& target.menupopup.isVisible()) {
+					target.menupopup.close({sendOnOpen:true});
+					this.$class._rmActive(target);
+					if (this.menupopup) this.menupopup.open();
+				}
+			}
+		}
+		this.$class._addActive(this);
+	},
+	_doMouseLeave: function (evt) { 
+		var menubar = this.getMenubar();
+		this._updateHoverImage(); 
+	
+		var topmost = this.isTopmost(),
+			menupopup = this.menupopup;
+		if (topmost) { 
+			this.$class._rmActive(this, true);
+			if (menupopup && menubar._autodrop) {
+				if (menupopup.isOpen())
+					menupopup._shallClose = true; 
+			}
+		} else if (!menupopup || !menupopup.isOpen())
+			this.$class._rmActive(this);
+	},
+	
+	getImageNode: function () {
+		if (!this._eimg && (this._image || this._hoverImage)) {
+			var n = this.$n();
+			if (n) 
+				this._eimg = this.$n('a').firstChild;
+		}
+		return this._eimg;
+	},
+	ignoreDescendantFloatUp_: function (des) {
+		return des && des.$instanceof(zul.menu.Menupopup);
+	},
+	isVertical_: function () {
+		if (this.isTopmost()) {
+			var bar = this.getMenubar();
+			if (bar)
+				return 'vertical' == bar.getOrient();
+		}
+		return false;
+	}
+}, {
+	_isActive: function (wgt) {
+		var top = wgt.isTopmost(),
+			n = wgt.$n(),
+			menupopup = wgt.menupopup,
+			cls = top ? menupopup && menupopup.isOpen() ? wgt.$s('selected') : wgt.$s('hover') : wgt.$s('hover');
+		return jq(n).hasClass(cls);
+	},
+	_addActive: function (wgt) {
+		var top = wgt.isTopmost(),
+			n = wgt.$n(),
+			menupopup = wgt.menupopup,
+			cls = top ? menupopup && menupopup.isOpen() ? wgt.$s('selected') : wgt.$s('hover') : wgt.$s('hover');
+		jq(n).addClass(cls);
+		if (top) {
+			var mb = wgt.getMenubar();
+			if (mb)
+				mb._lastTarget = wgt;
+		}
+		if (!top && wgt.parent.parent.$instanceof(zul.menu.Menu))
+			this._addActive(wgt.parent.parent);
+	},
+	_rmActive: function (wgt, ignoreSeld) {
+		var top = wgt.isTopmost(),
+			n = wgt.$n(),
+			menupopup = wgt.menupopup,
+			cls = top ? (!ignoreSeld && menupopup && menupopup.isOpen()) ? wgt.$s('selected') : wgt.$s('hover') : wgt.$s('hover');
+		var anode = jq(n).removeClass(cls);
+		if(top && !(anode.hasClass(wgt.$s('selected')) || anode.hasClass(wgt.$s('hover'))))
+			_toggleClickableCSS(wgt, true);
+	}
+});
+
+zul.menu.ContentHandler = zk.$extends(zk.Object, {
+	$init: function(wgt, content) {
+		this._wgt = wgt;
+		this._content = content;
+	},
+	setContent: function (content) {
+	 	if (this._content != content || !this._pp) {
+			this._content = content;
+			this._wgt.rerender();	
+		}
+	},
+	redraw: function (out) {
+	 	var wgt = this._wgt,
+			zcls = wgt.getZclass();
+
+	 	out.push('<div id="', wgt.uuid, '-cnt-pp" class="', wgt.$s('content-popup'),
+		'" style=""><div class="', wgt.$s('content-body'), '">', this._content, '</div></div>');
+	},
+	bind: function () {
+	 	var wgt = this._wgt;
+	 	if (!wgt.menupopup) {
+			wgt.domListen_(wgt.$n(), 'onClick', 'onShow');
+			zWatch.listen({onFloatUp: wgt, onHide: wgt});
+		}
+		
+		this._pp = wgt.$n('cnt-pp');
+
+	 	jq(this._pp, zk).bind('mouseenter', this.proxy(this._doMouseEnter))
+	 		.bind('mouseleave', this.proxy(this._doMouseLeave));
+	},
+	unbind: function () {
+	 	var wgt = this._wgt;
+	 	if (!wgt.menupopup) {
+			if (this._shadow) {
+				this._shadow.destroy();
+				this._shadow = null;
+			}
+			wgt.domUnlisten_(wgt.$n(), 'onClick', 'onShow');
+			zWatch.unlisten({onFloatUp: wgt, onHide: wgt});
+		}
+
+	 	jq(this._pp, zk).unbind('mouseenter', this.proxy(this._doMouseEnter))
+	 		.unbind('mouseleave', this.proxy(this._doMouseLeave));
+		this._pp = null;
+	},
+	isOpen: function () {
+		var pp = this._pp;
+		return (pp && zk(pp).isVisible());
+	},
+	_doMouseEnter: function () {
+		var menubar = this._wgt.getMenubar();
+		if (menubar) menubar._bOver = true;
+	},
+	_doMouseLeave: function () {
+		var menubar = this._wgt.getMenubar();
+		if (menubar) menubar._bOver = false;
+	},
+	onShow: function () {
+	 	var wgt = this._wgt,
+			pp = this._pp;
+		if (!pp) return;
+		
+		pp.style.display = 'block';
+			
+		jq(pp).zk.makeVParent();
+		zWatch.fireDown('onVParent', this);
+
+		zk(pp).position(wgt.$n(), this.getPosition());
+		this.syncShadow();
+	 },
+	onHide: function () {
+		var pp = this._pp;
+		if (!pp || !zk(pp).isVisible()) return;
+		
+		pp.style.display = 'none';
+		jq(pp).zk.undoVParent();
+		zWatch.fireDown('onVParent', this);
+
+		this.hideShadow();
+	},
+	onFloatUp: function (ctl) {
+		if (!zUtl.isAncestor(this._wgt, ctl.origin))
+			this.onHide();
+	},
+	syncShadow: function () {
+	 	if (!this._shadow)
+			this._shadow = new zk.eff.Shadow(this._wgt.$n('cnt-pp'), {stackup: zk.useStackup});
+		this._shadow.sync();
+	},
+	hideShadow: function () {
+		if (this._shadow)
+			this._shadow.hide();
+	},
+	destroy: function () {
+	 	this._wgt.rerender();
+	},
+	getPosition: function () {
+	 	var wgt = this._wgt;
+	 	return wgt.isVertical_() ? 'end_before' : 'after_start';
+	},
+	deferRedrawHTML_: function (out) {
+		out.push('<li', this.domAttrs_({domClass:1}), ' class="z-renderdefer"></li>');
+	}
+});
+
+})();
+zkreg('zul.menu.Menu');zk._m={};
+zk._m['default']=
+function (out) {
+	var uuid = this.uuid,
+		zcls = this.getZclass(),
+		contentHandler = this._contentHandler;
+	
+	out.push('<li', this.domAttrs_(), '><a href="javascript:;" id="', uuid,
+			'-a" class="', this.$s('content'), '">', this.domContent_(), '</a>');
+	if (this.menupopup)
+		this.menupopup.redraw(out);
+	else if (contentHandler)
+		contentHandler.redraw(out);
+	
+	out.push('</li>');
+}
+;zkmld(zk._p.p.Menu,zk._m);
+(function () {
+
+	function _initUpld(wgt) {
+		zWatch.listen({onShow: wgt});
+		var v;
+		if (v = wgt._upload)
+			wgt._uplder = new zul.Upload(wgt, wgt._getUploadRef(), v);
+	}
+	
+	function _cleanUpld(wgt) {
+		var v;
+		if (v = wgt._uplder) {
+			zWatch.unlisten({onShow: wgt});
+			wgt._uplder = null;
+			v.destroy();
+		}
+	}
+	
+(
+zul.menu.Menuitem = zk.$extends(zul.LabelImageWidget, {
+	_value: '',
+
+	$define: {
+		
+		
+		checkmark: _zkf = function () {
+			this.rerender();
+		},
+		
+		
+		disabled: [
+			
+			
+			function (v, opts) {
+		    	if (opts && opts.adbs)
+		    		
+		    		this._adbs = true;	
+		    	else if (!opts || opts.adbs === undefined)
+		    		
+		    		this._adbs = false;	
+		    	if (!v) {
+		    		if (this._adbs)
+		    			
+		    			this._adbs = false;
+		    		else if (opts && opts.adbs === false)
+		    			
+		    			return this._disabled;
+		    	}
+		    	return v;
+			}, 
+			function (v, opts) {
+				this.rerender(opts && opts.skip ? -1 : 0); 
+			}
+		],
+		
+		
+		href: _zkf,
+		
+		
+		value: null,
+		
+		
+		checked: function (checked) {
+			if (checked)
+				this._checkmark = checked;
+			var n = this.$n();
+			if (n && !this.isTopmost() && !this.getImage()) {
+				var $n = jq(n);
+				$n[checked ? 'addClass' : 'removeClass'](this.$s('checked'));
+				if (this._checkmark)
+					$n.addClass(this.$s('checkable'));
+			}
+		},
+		
+		
+		autocheck: null,
+		
+		
+		target: function (target) {
+			var anc = this.$n('a');
+			if (anc) {
+				if (this.isTopmost())
+					anc = anc.parentNode;
+				anc.target = this._target;
+			}
+		},
+		
+		
+		autodisable: null,
+		
+		
+		upload: function (v) {
+			var n = this.$n();
+			if (n) {
+				_cleanUpld(this);
+				if (v && v != 'false') _initUpld(this);
+			}
+		}
+	},
+	
+	isTopmost: function () {
+		return this._topmost;
+	},
+	beforeParentChanged_: function (newParent) {
+		this._topmost = newParent && !(newParent.$instanceof(zul.menu.Menupopup));
+		this.$supers('beforeParentChanged_', arguments);
+	},
+	domClass_: function (no) {
+		var scls = this.$supers('domClass_', arguments);
+		if (!no || !no.zclass) {
+			var added = this.isDisabled() ? this.$s('disabled') : '';
+			if (added) scls += (scls ? ' ': '') + added;
+			added = (!this.getImage() && this.isCheckmark()) ? 
+						this.$s('checkable') + (this.isChecked() ? ' ' + this.$s('checked') : '') : '';
+			if (added) scls += (scls ? ' ': '') + added;
+		}
+		return scls;
+	},
+	domContent_: function () {
+		var label = '<span class="' + this.$s('text') + '">' + 
+				(zUtl.encodeXML(this.getLabel())) + '</span>',
+			icon = '<i class="' + this.$s('icon') + ' z-icon-check"></i>',
+			img = this.getImage(),
+			iconSclass = this.domIcon_();
+		
+		if (img)
+			img = '<img src="' + img + '" class="' + this.$s('image') + '" align="absmiddle" />'
+				+ (iconSclass ? ' ' + iconSclass : '');
+		else {
+			if (iconSclass) {
+				img = iconSclass;
+			} else {
+				img = '<img ' + (this.isTopmost() ? 'style="display:none"' : '') +
+					' src="data:image/png;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" class="' +
+					this.$s('image') + '" align="absmiddle" />';
+			}
+		}
+		return img + (this.isAutocheck() || this.isCheckmark() ? icon : '') + ' ' + label;
+	},
+	
+	getMenubar: function () {
+		for (var p = this.parent; p; p = p.parent)
+			if (p.$instanceof(zul.menu.Menubar))
+				return p;
+		return null;
+	},
+	bind_: function () {
+		this.$supers(zul.menu.Menuitem, 'bind_', arguments);
+
+		if (!this.isDisabled()) {
+			var anc = this.$n('a');
+			if (this.isTopmost()) {
+				this.domListen_(anc, 'onFocus', 'doFocus_')
+					.domListen_(anc, 'onBlur', 'doBlur_');
+			}
+			this.domListen_(anc, 'onMouseEnter');
+			if (this._upload) _initUpld(this);
+		}
+	},
+	unbind_: function () {
+		if (!this.isDisabled()) {
+			if (this._upload) _cleanUpld(this);
+			var anc = this.$n('a');
+			if (this.isTopmost()) {
+				this.domUnlisten_(anc, 'onFocus', 'doFocus_')
+					.domUnlisten_(anc, 'onBlur', 'doBlur_');
+			}
+			this.domUnlisten_(anc, 'onMouseEnter');
+		}
+
+		this.$supers(zul.menu.Menuitem, 'unbind_', arguments);
+	},
+
+	doClick_: function (evt) {
+		if (this._disabled)
+			evt.stop();
+		else {
+			if (!this._canActivate(evt)) return;
+			if (!this._upload)
+				zul.wgt.ADBS.autodisable(this);
+			else if (!zk.ie || zk.ie > 10) 
+				this._uplder.openFileDialog();
+
+			var topmost = this.isTopmost(),
+				anc = this.$n('a');
+			
+			if (anc.href.startsWith('javascript:')) {
+				if (this.isAutocheck()) {
+					this.setChecked(!this.isChecked());
+					this.fire('onCheck', this.isChecked());
+				}
+				this.fireX(evt);
+			} else if (anc.href.toLowerCase().startsWith('mailto:')) { 
+				var ifrm = jq.newFrame('mailtoFrame', anc.href, null);
+				jq(ifrm).remove();
+				evt.stop();
+			} else {
+				if (zk.ie < 11 && topmost && this.$n().id != anc.id)
+					zUtl.go(anc.href, {target: anc.target});
+					
+					
+					
+				if (zk.gecko && topmost && this.$n().id != anc.id) {
+					zUtl.go(anc.href, {target: anc.target});
+					evt.stop();
+					
+				}
+			}
+			if (!topmost)
+				for (var p = this.parent; p; p = p.parent)
+					if (p.$instanceof(zul.menu.Menupopup)) {
+						
+						if (!p.isOpen() || this._uplder )
+							break;
+						this._updateHoverImage(); 
+						p.close({sendOnOpen:true});
+					} else if (!p.$instanceof(zul.menu.Menu)) 
+						break;
+					else
+						p._updateHoverImage(); 
+
+			var menubar;
+			if (zk.webkit && (menubar=this.getMenubar()) && menubar._autodrop)
+				menubar._noFloatUp = true;
+				
+			this.$super('doClick_', evt, true);
+		}
+	},
+	_canActivate: function (evt) {
+		return !this.isDisabled() && (!zk.ie < 11 || !this.isTopmost() || this._uplder
+				|| jq.isAncestor(this.$n('a'), evt.domTarget));
+	},
+	_getUploadRef: function () {
+		return this.isTopmost() ? this.$n() : this.$n('a');
+	},
+	_doMouseEnter: function (evt) {
+		if (zul.menu._nOpen || this.isTopmost())
+			zWatch.fire('onFloatUp', this); 
+	},
+	deferRedrawHTML_: function (out) {
+		var tag = this.isTopmost() ? 'td' : 'li';
+		out.push('<', tag, this.domAttrs_({domClass:1}), ' class="z-renderdefer"></', tag,'>');
+	},
+	
+	getImageNode: function () {
+		if (!this._eimg && (this._image || this._hoverImage)) {
+			var n = this.$n();
+			if (n) 
+				this._eimg = this.$n('a').firstChild;
+		}
+		return this._eimg;
+	}
+}, {
+	_isActive: function (wgt) {
+		return jq(wgt.$n()).hasClass(wgt.$s('hover'));
+	},
+	_addActive: function (wgt) {
+		var top = wgt.isTopmost();
+		jq(wgt.$n()).addClass(wgt.$s('hover'));
+		if (!top && wgt.parent.parent.$instanceof(zul.menu.Menu))
+			this._addActive(wgt.parent.parent);
+	},
+	_rmActive: function (wgt) {
+		return jq(wgt.$n()).removeClass(wgt.$s('hover'));
+	}
+})).prototype['onShow'] = function () {
+	if (this._uplder)
+		this._uplder.sync();
+};
+
+})();
+zkreg('zul.menu.Menuitem');zk._m={};
+zk._m['default']=
+function (out) {
+	var uuid = this.uuid,
+	target = this.getTarget();
+	
+	out.push('<li', this.domAttrs_(), '>');
+	
+	out.push('<a href="', this.getHref() ? this.getHref() : 'javascript:;', '"');
+	if (target)
+		out.push(' target="', target, '"');
+	out.push(' id="', uuid, '-a" class="', this.$s('content'), '"',
+			this._disabled ? ' disabled="disabled"' : '',
+			'>', this.domContent_(), '</a></li>'); 
+}
+
+;zkmld(zk._p.p.Menuitem,zk._m);
+
+zul.menu.Menuseparator = zk.$extends(zul.Widget, {
+	
+	isPopup: function () {
+		return this.parent && this.parent.$instanceof(zul.menu.Menupopup);
+	},
+	
+	getMenubar: function () {
+		for (var p = this.parent; p; p = p.parent)
+			if (p.$instanceof(zul.menu.Menubar))
+				return p;
+		return null;
+	},
+	doMouseOver_: function () {
+		if (zul.menu._nOpen)
+			zWatch.fire('onFloatUp', this); 
+		this.$supers('doMouseOver_', arguments);
+	}
+});
+
+zkreg('zul.menu.Menuseparator');zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<li', this.domAttrs_(), '>&nbsp;</li>');
+}
+
+;zkmld(zk._p.p.Menuseparator,zk._m);
+(function () {
+	function _getMenu(wgt) {
+		var p = wgt.parent;
+		return p.$instanceof(zul.menu.Menu) ? p: null;
+	}
+	function _getRootMenu(wgt) {
+		for (var w = wgt; w && (w = _getMenu(w)); w = w.parent) {
+			if (w.isTopmost())
+				return w;
+		}
+		return null;
+	}
+	function _isActiveItem(wgt) {
+		return wgt.isVisible() && (wgt.$instanceof(zul.menu.Menu) || (wgt.$instanceof(zul.menu.Menuitem) && !wgt.isDisabled()));
+	}
+	
+	function _prevChild(popup, child) {
+		if (child)
+			while (child = child.previousSibling)
+				if (_isActiveItem(child)) {
+					popup._curIndex--;
+					return child;
+				}
+
+		
+		popup._curIndex = -1;
+		for (var w = popup.firstChild; w; w = w.nextSibling)
+			if (_isActiveItem(w)) { 
+				child = w;
+				popup._curIndex++;
+			}
+		return child;
+	}
+	
+	function _nextChild(popup, child) {
+		if (child)
+			while (child = child.nextSibling)
+				if (_isActiveItem(child)) {
+					popup._curIndex++;
+					return child;
+				}
+
+		
+		for (var w = popup.firstChild; w; w = w.nextSibling)
+			if (_isActiveItem(w)) { 
+				popup._curIndex = 0;
+				return w;
+			}
+	}
+	function _indexOfVisibleMenu(popup, child) {
+		var i = -1;
+		for (var c = popup.firstChild; c; c = c.nextSibling) {
+			
+			if (_isActiveItem(c)) {
+				i++;
+			}
+			if (c == child)
+				return i;
+		}
+		return i;
+	}
+	function _currentChild(popup) {
+		var index = popup._curIndex;
+		if (index >= 0)
+			for (var w = popup.firstChild, k = 0; w; w = w.nextSibling)
+				if (_isActiveItem(w) && k++ == index)
+					return w;
+	}
+	function _activateNextMenu(menu) {
+		var pp = menu.menupopup;
+		if (pp) {
+			pp._shallClose = false;
+			if (!pp.isOpen()) pp.open();
+		}
+		menu.$class._addActive(menu);
+		zWatch.fire('onFloatUp', menu); 
+	}
+
+
+zul.menu.Menupopup = zk.$extends(zul.wgt.Popup, {
+	_curIndex: -1,
+
+	zsync: function () {
+		this.$supers('zsync', arguments);
+
+		if (!this._shadow)
+			this._shadow = new zk.eff.Shadow(this.$n());
+		this._shadow.sync();
+	},
+	_hideShadow: function () {
+		if (this._shadow) this._shadow.hide();
+	},
+	_syncPos: function () {
+		var menu = _getMenu(this);
+		if (menu) {
+			var n = this.$n(),
+				m = menu.$n(),
+				$n = jq(n),
+				$m = jq(m),
+				nol = $n.offset().left,
+				mol = $m.offset().left,
+				nwd = $n.outerWidth(),
+				mwd = $m.outerWidth(),
+				mp = menu.parent,
+				mb = menu.getMenubar(),
+				ori = mb ? mb.getOrient() : '';
+
+			
+			if (menu.isTopmost() && ori == 'horizontal' && n) 
+				n.style.top = jq.px0(zk.parseInt(n.style.top) + 
+					zk.parseInt(jq(this.getMenubar()).css('paddingBottom')));
+			
+			while(mp && !mp.$instanceof(zul.menu.Menupopup))
+				mp = mp.parent;
+			
+			 
+			if ((zk(n).isOverlapped(m, 1) 
+					&& (((mol + mwd - nol > 5) && (ori != 'vertical'))
+					|| ((nol < mol + mwd / 2) && (ori == 'vertical')))) 
+					|| (mp && mp._shallSync)) {
+				this._shallSync = true;
+				n.style.left = jq.px0(mol - nwd);
+				
+				if (zk.ie)
+					this.onShow();
+			}
+		}
+	},
+	close: function () {
+		if (this.isOpen())
+			zul.menu._nOpen--;
+
+		this.$supers('close', arguments);
+		jq(this.$n()).hide(); 
+		this._hideShadow();
+		var menu;
+		if ((menu = _getMenu(this)) && menu.isTopmost())
+			jq(menu.$n()).removeClass(menu.$s('selected'));
+
+		var item = _currentChild(this);
+		if (item) item.$class._rmActive(item);
+		this._curIndex = -1;
+		this.$class._rmActive(this);
+		
+		this._shallSync = null;
+	},
+	open: function (ref, offset, position, opts) {
+		if (!this.isOpen())
+			zul.menu._nOpen++;
+		var menu;
+		if (menu = _getMenu(this)) {
+			if (!offset) {
+				ref = menu.getAnchor_();
+				if (!position)
+					if (menu.isTopmost())
+						position = menu.parent.getOrient() == 'vertical'
+							? 'end_before' : 'after_start';
+					else position = 'end_before';
+			}
+		}
+		this.$super('open', ref, offset, position, opts || {sendOnOpen: true, disableMask: true});
+			
+		
+		this._syncPos(); 
+	},
+	shallStackup_: function () {
+		return false;
+	},
+	setTopmost: function () {
+		this.$supers('setTopmost', arguments);
+		this.zsync();
+	},
+	onFloatUp: function(ctl, opts) {
+		if (!this.isVisible())
+			return;
+		
+		var openInfo = this._openInfo;
+		
+		
+		if (this._shallToggle && openInfo && opts && (
+				opts.triggerByClick === undefined || (
+				openInfo[3].which == opts.triggerByClick && zUtl.isAncestor(this._openInfo[0], ctl.origin)))) {
+				return;
+		}
+
+		this._doFloatUp(ctl);
+	},
+	_doFloatUp: function (ctl) {
+		if (!this.isVisible())
+			return;
+
+		var org = ctl.origin;
+		if (this.parent.menupopup == this && !this.parent.isTopmost() && !this.parent.$class._isActive(this.parent)) {
+			this.close({sendOnOpen:true});
+			return;
+		}
+
+		
+		for (var floatFound, wgt = org; wgt; wgt = wgt.parent) {
+			if (wgt == this || (wgt.menupopup == this && !this._shallClose)) {
+				if (!floatFound)
+					this.setTopmost();
+				return;
+			}
+			floatFound = floatFound || wgt.isFloating_();
+		}
+
+		
+		if (org && org.ignoreDescendantFloatUp_(this)) {
+			for (var floatFound, wgt = this; wgt = wgt.parent;) {
+				if (wgt == org) {
+					if (this._shallClose)
+						break; 
+					if (!floatFound)
+						this.setTopmost();
+					return;
+				}
+				floatFound = floatFound || wgt.isFloating_();
+			}
+
+			
+		}
+		this.close({sendOnOpen:true});
+	},
+	onShow: function () {
+		this.zsync();
+		var anc = this.$n('a');
+		if (anc) {
+			if(zk(anc).isRealVisible()) {
+				anc.focus();
+				zk.currentFocus = this; 
+			}
+		}
+		
+		zk(this).redoCSS(-1, {'fixFontIcon': true});
+		
+	},
+	onHide: function () {
+		if (this.isOpen())
+			this.close();
+		this._hideShadow();
+	},
+	bind_: function () {
+		this.$supers(zul.menu.Menupopup, 'bind_', arguments);
+		zWatch.listen({onHide: this, onResponse: this});
+
+		var n = this.$n();
+		this.domListen_(n, 'onMouseEnter').domListen_(n, 'onMouseLeave');
+		if (!zk.css3) jq.onzsync(this);
+	},
+	unbind_: function () {
+		if (this.isOpen())
+			this.close();
+		if (this._shadow)
+			this._shadow.destroy();
+		if (!zk.css3) jq.unzsync(this);
+		this._shadow = null;
+		zWatch.unlisten({onHide: this, onResponse: this});
+
+		var n = this.$n();
+		this.domUnlisten_(n, 'onMouseEnter').domUnlisten_(n, 'onMouseLeave');
+		
+		this.$supers(zul.menu.Menupopup, 'unbind_', arguments);
+	},
+	onResponse: function () {
+		if (!this.isOpen())
+			return; 
+		this.zsync();
+		
+		this.$supers('onResponse', arguments); 
+
+		this._syncPos(); 
+	},
+	doKeyDown_: function (evt) {
+		var w = _currentChild(this),
+			menu,
+			keyCode = evt.keyCode;
+		switch (keyCode) {
+		case 38: 
+		case 40: 
+			
+			
+			if (w) w.$class._rmActive(w);
+			w = keyCode == 38 ? _prevChild(this, w) : _nextChild(this, w);
+			if (w) w.$class._addActive(w);
+			break;
+		case 37: 
+			
+			
+			
+			
+			if (w && w.$instanceof(zul.menu.Menu) && w._contentHandler && w._contentHandler.isOpen()) {
+				w._contentHandler.onHide();
+			} else if (((menu = _getMenu(this))) && !menu.isTopmost()) {
+				this.close();
+				menu.$class._addActive(menu);
+				var pp = menu.parent;
+				if (pp) {
+					var anc = pp.$n('a');
+					if (anc) anc.focus();
+					pp._curIndex = _indexOfVisibleMenu(pp, menu);
+				}
+			} else {
+				var root = _getRootMenu(this);
+				if (root && (root = root._getPrevVisibleMenu()))
+					_activateNextMenu(root);
+				else 
+					this.close();
+				
+			}
+			break;
+		case 39: 
+			
+			
+			if (w && w.$instanceof(zul.menu.Menu)) {
+				w._togglePopup();
+			} else {
+				var root = _getRootMenu(this);
+				if (root && (root = root._getNextVisibleMenu()))
+					_activateNextMenu(root);
+			}
+			break;
+		case 13: 
+			
+			
+			
+			if (w && w.$instanceof(zul.menu.Menuitem)) {
+				
+				w.doClick_(new zk.Event(w, 'onClick',{}));
+				zWatch.fire('onFloatUp', w); 
+				this.close({sendOnOpen:true});
+			} else if (w && w.$instanceof(zul.menu.Menu)) {
+				w._togglePopup();
+			} else {
+				if ((menu = _getMenu(this))) {
+					this.close();
+					if (menu.isTopmost()) {
+						menu.focus();
+					} else {
+						menu.$class._addActive(menu);
+						var pp = menu.parent;
+						if (pp) {
+							var anc = pp.$n('a');
+							if (anc) anc.focus();
+						}
+					}
+				}
+			}
+			break;
+		case 27: 
+			
+			
+			if ((menu = _getMenu(this))) {
+				if (menu.isTopmost()) {
+					this.close();
+					menu.focus();
+				} else {
+					if (menu._contentHandler && menu._contentHandler.isOpen()) {
+						content.onHide();
+					} else {
+						this.close();
+						menu.$class._addActive(menu);
+						var pp = menu.parent;
+						if (pp) {
+							var anc = pp.$n('a');
+							if (anc) anc.focus();
+						}
+					}
+				}
+			}
+			break;
+		case 9: 
+			
+			
+			var root = _getRootMenu(this);
+			if (root) {
+				
+				root.focus_(undefined, zk.ie < 11);
+			}
+			this.close();
+			break;
+		}
+		if (keyCode != 9) 
+			evt.stop(); 
+		this.$supers('doKeyDown_', arguments);
+	},
+	
+	getMenubar: function () {
+		for (var p = this.parent; p; p = p.parent) {
+			if (p.$instanceof(zul.menu.Menubar))
+				return p;
+			if (p.$instanceof(zul.menu.Menu))
+				return p.getMenubar();
+			break; 
+		}
+		return null;
+	},
+	_doMouseEnter: function (evt) {
+		var menubar = this.getMenubar();
+		if (menubar) menubar._bOver = true;
+		this._shallClose = false;
+	},
+	_doMouseLeave: function (evt) {
+		var menubar = this.getMenubar();
+		if (menubar) {
+			menubar._bOver = false;
+		 	if (menubar._autodrop)
+		 		menubar._closeOnOut();
+		}
+	}
+}, {
+	_rmActive: function (wgt) {
+		if (wgt.parent.$instanceof(zul.menu.Menu)) {
+			wgt.parent.$class._rmActive(wgt.parent);
+		}
+	}
+});
+zul.menu._nOpen = 0;
+})();
+zkreg('zul.menu.Menupopup');zk._m={};
+zk._m['default']=
+function (out) {
+	var uuid = this.uuid,
+		tags = zk.ie < 11 || zk.gecko ? 'a' : 'button';
+	out.push('<div', this.domAttrs_(), '><', tags, ' id="', uuid,
+			'-a" tabindex="-1" onclick="return false;" href="javascript:;"',
+			' class="z-focus-a"></',
+			tags, '><div class="', this.$s('separator') ,'"></div><ul class="', this.$s('content'), '" id="', uuid, '-cave">');
+
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+
+	out.push('</ul></div>');
+}
+
+;zkmld(zk._p.p.Menupopup,zk._m);
+}finally{zk.setLoaded(zk._p.n);}});zk.setLoaded('zul.menu',1);

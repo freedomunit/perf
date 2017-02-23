@@ -1,0 +1,48 @@
+html, body, #wrap {height: 100%;}
+	body > #wrap {height: auto; min-height: 100%;}
+	#main {padding-bottom:20px;}  /* must be same height as the footer */
+	#footer {position:relative;text-align:right;height:20px;clear:both;margin-top:-20px;margin-right:25px;color:#fff;} /* negative value of footer height */ 
+
+/* CLEAR FIX*/
+	.clearfix:after {content: ".";display:block;height:0;clear:both;visibility:hidden;}
+	.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+	* html .clearfix { height: 1%;}
+	.clearfix {display: block;}
+/* End hide from IE-mac */
+
+	body { margin:0;padding:0;color:#000;background:#036 url('os_bg.jpg') repeat-x; }
+	body * {font-family:arial,verdana,sans-serif;font-size:12px; }
+	#newuserwrapper {padding:20px 20px 0 20px;}
+	a:visited, a:active, a:link { color:#69c; }
+	.title1, .title2, tt, .hidepublic { display:none }
+	h2 {color:#036;font-size:12px;font-weight:bold;display:inline;}
+	h2 span {color:#390;}
+	form { margin:0px;padding:0px; }
+	h1 {display:inline;}
+	.publicnone, .none { display:none; }
+	.required, .red {color:#f00;font-weight:bold;} 
+	div {padding:0;margin:0;}
+/*============ START BUTTONS ==================================*/
+	
+	#password {height:16px;*height:18px;background:#fff url('bg_password.gif') no-repeat center left;}
+	#login1, #username {height:16px;*height:18px;background:#fff url('bg_username.gif') no-repeat center left;}
+	#email {height:16px;*height:18px;background:#fff url('bg_email.gif') no-repeat center left;}
+
+	#errorpage {}
+	#er1 {text-align:right;padding:15px 10px;width:620px;display:inline-block;*display:inline;}
+	#er2 {padding:15px 10px;width:50px;display:inline-block;*display:inline;}
+	.error {color:#f00;}
+	
+	.hbg {background-image:url('/images/common/x.gif') !important;}
+
+	.sb, .mb {height:20px;font-size:11px;font-weight:bold;cursor:pointer;border:outset 1px #ccc;background:#999;color:#444;
+		font-weight:bold;padding:0 10px;width:auto;overflow:visible;
+	    background: -ms-linear-gradient(top, rgb(253, 253, 254) 0%, rgb(205, 206, 206) 100%);
+	    background: linear-gradient(to bottom, rgb(253, 253, 254) 0%, rgb(205, 206, 206) 100%);
+	}
+	#loginwrapper {padding-top:53px;margin:50px auto;border:solid #666 2px;width:350px;background:#e7e7e7 url(/branding/opti/login.gif) left top no-repeat;}
+	#sorrywrapper {padding-top:53px;margin:50px auto;border:solid #666 2px;width:350px;background:#e7e7e7 url(/branding/opti/weresorry.gif) left top no-repeat;}
+	
+	#terms {height:200px;overflow:scroll;}
+	

@@ -1,0 +1,13 @@
+[t38]
+FileName1=t38.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t38_RequestHeader.txt
+RequestBodyFile=t38_RequestBody.txt
+ResponseHeaderFile=t38_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_38.xml
+FileName2=t38_AccoutGroupDownload_20161124-093915.html
+URL2=https://10.125.2.174/bin-java/zkau/view/z_ed6/dwnmed-1/j3o/AccoutGroupDownload_20161124-093915.xlsx
+[ProtocolInfo]
+ProtocolId=QTWeb

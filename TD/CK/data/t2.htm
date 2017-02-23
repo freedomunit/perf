@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	<title>7thonline The Leader in Cross Channel Merchandise &amp; Assortment Management</title>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="imagetoolbar" content="false" /> 
+	<meta name="robots" content="all" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="copyright" content="Copyright (c)1999-2016 7thonline, Inc. All Rights Reserved. Patent Pending." />
+	<meta name="description" content="7thonline The Leader in Cross Channel Merchandise &amp; Assortment Management" />
+	<meta name="abstract" content="7thonline, assortment planning and inventory software and services for global retailers and wholesalers." />
+	<meta name="keywords" content="Cross Channel Merchandise, Assortment Management" />
+	<link rel="shortcut icon" href="/images/public_2013/favicon128.ico" type="image/ico" />
+	<link rel="apple-touch-icon" href="/images/public_2013/apple-touch-icon.png" />
+	<link rel="stylesheet" type="text/css" media="all" href="/branding/7thonline/login.css" />
+
+	<script src="/javascript/jquery-3.1.1.min.js"></script>
+	<script src="/javascript/jquery-ui-1.10.0.min.js"></script>
+	<script src="/javascript/jquery4.js"></script>
+	<script src="/javascript/jquery.cookie.js"></script>
+	<script>
+		pleasewait='Please Wait';
+		wait='Wait';
+		$(function(){
+			var action = $('#loginform').attr('action');
+			$('#mapcheck').each(function() {
+		        var name = $(this).attr('name');
+		        if ($.cookie(name) && $.cookie(name) == 'true') {
+		            $(this).prop('checked', $.cookie(name));
+		            $('#loginform').attr('action', action);     
+		        }else{
+		        	$('#loginform').attr('action', 'https://www.7thonline.com'+action);
+		        }
+		    }).on('click', function(){
+		    	if($(this).is(':checked')){
+		    		$('#loginform').attr('action', action);
+		    	}else{
+			        	$('#loginform').attr('action', 'https://www.7thonline.com'+action);
+			        };
+		    	var name = $(this).attr('name');
+			       $.cookie(name, $(this).prop('checked'), {
+			            path: '/',
+			            expires: 365
+			        });
+		    });
+			
+			var deviceAgent = navigator.userAgent.toLowerCase();
+		    var agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/);
+		    if (agentID) {
+				$(':text,:password').attr({autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off'});
+		    }
+		    $('input:visible:enabled:first').focus();
+			$(':text,:password').keyup(function(){
+				if ($.trim($(this).val()) != ''){
+					$(this).addClass('hbg');
+				}else{
+					$(this).removeClass('hbg');
+				}	
+			});
+		});
+	</script>
+</head>
+<body id="top">
+<div id="wrap">
+	<div id="main" class="clearfix">
+		<a href="../" id="logo" title="&lt;&lt; Home">Home</a><br />
+<!-- End publictop_template.htm -->
+
+<!-- start userloginwarning.htm -->
+<div id="loginwrapper">
+	<div><b class="red">Warning:</b> You may not have logged out properly last time  or 
+			someone else from your company may be in the system at this time using your log 
+			in information. Do you want to continue logging in?<br><br>
+	<form name="message" method="post" action="/bin-java/efsnPackage.do_userAuth">
+	<table width="100%" cellpadding="0" cellspacing="1" border="0">
+		<tr>
+			<td><input type="submit" value="Yes" name="answeryes" class="sb" /></td>
+			<td align="right"><input type="submit" value="No" name="answerNo" class="sb" /></td>
+		</tr>
+	</table>
+	</form></div>
+</div>
+<!-- end userloginwarning.htm -->
+<!-- Start publicbottom_template.htm -->
+	</div>
+</div>
+<div id="footer">&copy; 1999-2016 7thonline, Inc. All Rights Reserved.</div>
+</body>
+</html>
+<!-- End publicbottom_template.htm -->
+

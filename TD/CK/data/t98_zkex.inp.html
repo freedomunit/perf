@@ -1,0 +1,1284 @@
+zk.load('zul.wgt',function(){if(zk._p=zkpi('zkex.inp'))try{
+
+(function () {
+	function _initPopup () {
+		this._picker = new zkex.inp.Colorpicker({_wgt: this});
+		this._palette = new zkex.inp.Colorpalette({_wgt: this});
+		this.appendChild(this._picker);
+		this.appendChild(this._palette);
+	}
+
+var Colorbox =
+
+zkex.inp.Colorbox = zk.$extends(zk.Widget, {
+	_open: false,
+	$init: function () {
+		this.$supers('$init', arguments);
+		this.afterInit(_initPopup);
+		this._currColor = new zkex.inp.Color();
+	},
+    $define: {
+		
+		
+        disabled: function (disabled) {
+        	var node = this.$n();
+        	if (node) {
+        		var disabled = this._disabled;
+
+            	this[disabled ? 'domUnlisten_' : 'domListen_'](node, 'onClick', '_doBtnClick');
+            	jq(node)[disabled ? 'addClass' : 'removeClass'](this.$s('disabled'));
+        	}
+        }
+    },
+    
+    setColor: function(hex) {
+		var currHex = this._currColor.getHex();
+		if (currHex != hex) {
+			this._currColor.setHex(hex);
+			var colorNode = this.$n('currcolor');
+			if (colorNode)
+				colorNode.style.backgroundColor = this._currColor.getHex();
+		}
+    },
+    
+	getColor: function() {
+    	return this._currColor.getHex();
+    },
+	
+    setValue: function (value) {
+    	this.setColor(value);
+    },
+	
+    getValue: function () {
+    	return this.getColor();
+    },
+    _syncPopupPosition: function () {
+    	zk(this.$n('pp')).position(this.$n(), this._getPosition());
+    },
+	_getPosition: function () {
+		var parent = this.parent;
+		if (!parent) return;
+		if (parent.$instanceof(zul.wgt.Toolbar))
+			return 'vertical' == parent.getOrient() ? 'end_before' : 'after_start';
+		return 'after_start';
+	},
+	_syncShadow: function (target) {
+		if (!this._popupShadow)
+			this._popupShadow = new zk.eff.Shadow(this.$n('pp'), {stackup: zk.useStackup});
+		this._popupShadow.sync();
+	},
+	_hideShadow: function (target) {
+		var shadow = this._popupShadow;
+		if (shadow)
+			shadow.hide();
+	},
+	bind_:function () {
+		this.$supers('bind_', arguments);
+		
+		if (!this._disabled)
+			this.domListen_(this.$n(), zk.android ? 'onTouchstart' : 'onClick', '_doBtnClick');
+
+		var paletteBtn = this.$n('palette-btn'),
+			pickerBtn = this.$n('picker-btn');
+		if (paletteBtn) {
+			this._palette.$n().style.display = 'none';
+			this.domListen_(paletteBtn, 'onClick', 'openPalette');
+		}
+		if (pickerBtn) {
+			this._picker.$n().style.display = 'none';
+			this.domListen_(pickerBtn, 'onClick', 'openPicker');
+		}
+
+
+		var colorNode = this.$n('currcolor');
+		if (colorNode)
+			colorNode.style.backgroundColor = this._currColor.getHex();
+	},
+	unbind_: function () {
+		if (!this._disabled)
+			this.domUnlisten_(this.$n(), zk.android ? 'onTouchstart' : 'onClick', '_doBtnClick');
+		
+		if (this._popupShadow)
+			this._popupShadow.destroy();
+
+		this.domUnlisten_(this.$n('palette-btn'), 'onClick', 'openPalette')
+			.domUnlisten_(this.$n('picker-btn'), 'onClick', 'openPicker');
+		this.$supers('unbind_', arguments);
+	},
+	domClass_: function (no) {
+		var sc = this.$supers('domClass_', arguments);
+		if (!no || !no.zclass) {
+			if (this._disabled)
+				sc += ' ' + this.$s('disabled');
+		}
+		return sc;
+	},
+	_doBtnClick: function (evt) {
+		var isOpen = this._open;
+		if (this._open = !isOpen)
+			this.openPopup();
+		else
+			this.closePopup();
+		evt.stop();
+	},
+	openPopup: function () {
+		this._open = true;
+		var node = this.$n(),
+			pp = this.$n('pp'),
+			picker = this._picker.$n();
+
+		this.closePicker();
+		this.openPalette();
+		
+		pp.style.width = pp.style.height = 'auto';
+		pp.style.display = 'block';
+		jq(pp).zk.makeVParent();
+		this._syncPopupPosition();
+		this._syncShadow();
+	},
+	closePopup: function () {
+		this._open = false;
+		var node = this.$n(),
+			pp = this.$n('pp');
+		pp.style.display= 'none';
+		jq(pp).zk.undoVParent();
+		this._hideShadow();
+	},
+	onChange: function (hex) {
+		this.$n('currcolor').style.backgroundColor = hex;
+		
+		this._currColor.setHex(hex);
+		this.fire('onChange', {color: hex}, {toServer:true}, 150);	
+	},
+	onHide: function () {
+		this._open = false;
+		var node = this.$n(),
+			pp = this.$n('pp');
+		pp.style.display= 'none';
+		jq(pp).zk.undoVParent();
+		this._hideShadow();
+	},
+	
+	
+	openPalette: function () {
+		var pp = this._palette.$n();
+		if (!pp)
+			return;
+
+		var picker = this._picker.$n();
+		if (picker && zk(picker).isVisible())
+			this.closePicker();
+		pp.style.display = 'block';
+		jq(this.$n('pp')).addClass(this._palette.$s('popup'));
+		this._syncPopupPosition();
+		this._syncShadow();
+
+		var palette = this._palette;
+		palette.setColor(this._currColor.getHex());
+		palette.onShow();
+	},
+	
+	closePalette: function (close) {
+		var pp = this._palette.$n();
+		if (!pp || !zk(pp).isVisible()) return;
+
+		pp.style.display = 'none';
+		jq(this.$n('pp')).removeClass(this._palette.$s('popup'));
+		
+		if (close)
+			this.closePopup();
+	},
+	
+	openPicker: function () {
+		var pp = this._picker.$n();
+		if (!pp)
+			return;
+
+		this.closePalette();
+		pp.style.display = 'block';
+		jq(this.$n('pp')).addClass(this._picker.$s('popup'));
+		this._syncPopupPosition();
+		this._syncShadow();
+		
+		var picker = this._picker;
+		picker.setColor(this._currColor.getHex());
+		picker.onShow();
+	},
+	
+	closePicker: function () {
+		var pp = this._picker.$n();
+		if (!pp || !zk(pp).isVisible()) return;
+
+		pp.style.display = 'none';
+		jq(this.$n('pp')).removeClass(this._picker.$s('popup'));
+	}
+});
+})();
+zkreg('zkex.inp.Colorbox');zk._m={};
+zk._m['default']=
+function (out) {
+	var uuid = this.uuid,
+		picker = this._picker,
+		palette = this._palette;
+		
+	out.push('<div', this.domAttrs_(), '>',
+		'<i id="', uuid, '-currcolor" class="', this.$s('current'), '">&nbsp;</i>',
+		'<span id="', uuid, '-btn" class="', this.$s('button'), '"><i class="',
+		this.$s('icon'), ' z-icon-caret-down"></i></span>');
+	
+	if (picker || palette) {
+		out.push('<div id="', uuid, '-pp" style="display:none;" class="',
+			this.$s('popup'), '">',
+			palette ? '<div id="' + uuid + '-palette-btn" class="' + this.$s('paletteicon')+ '"></div>' : '', 
+			picker ? '<div id="' + uuid + '-picker-btn" class="' + this.$s('pickericon') + '"></div>' : '');
+		if (picker)
+			picker.redraw(out);
+		if (palette)
+			palette.redraw(out);
+		out.push('</div>');
+	}
+	out.push('</div>');
+}
+;zkmld(zk._p.p.Colorbox,zk._m);
+(function () {
+	function arrowsIgnoreDrag (dg, pt, evt) {
+		var wgt = dg.control,
+			newColor = wgt.getNewColor(),
+			arrowsNode = dg.node,
+			offset = zk(wgt.$n('bar')).revisedOffset(),
+			y = pt[1] - offset[1];
+		arrowsNode.style.top = jq.px(y);
+		newColor.setHSV((256 - y) * 359.99 / 255,
+						newColor.getSaturation(),
+						newColor.getValue());
+		wgt._colorChanged('arrows');
+		return false;
+	}
+	function arrowsSnap (dg, pt) {
+		var lowBound = 0,
+			upBound = 255,
+			y = pt[1];
+		y = y < lowBound ? lowBound : y > upBound ? upBound : y;
+
+		return [pt[0], y];
+	}
+	function onArrowsChanging (dg, pt, evt) {
+		var wgt = dg.control,
+			newColor = wgt._newColor,
+			arrowsNode = wgt.$n('arrows'),
+			y = zk.parseInt(arrowsNode.style.top);
+
+		newColor.setHSV((256 - y) * 359.99 / 255,
+						newColor.getSaturation(),
+						newColor.getValue());
+		wgt._colorChanged('arrows');
+	}
+	function circleIgnoreDrag (dg, pt, evt) {
+		var wgt = dg.control,
+			newColor = wgt.getNewColor(),
+			offset = zk(wgt.$n('overlay')).revisedOffset(),
+			circleNode = dg.node,
+			x = pt[0] - offset[0],
+			y = pt[1] - offset[1],
+			sat = x / 255,
+			val = 1 - y / 255;
+
+		circleNode.style.left = jq.px(x);
+		circleNode.style.top = jq.px(y);
+		newColor.setHSV(newColor.getHue(), sat, val);
+		wgt._colorChanged();
+		return false;
+	}
+	function circleSnap (dg, pt) {
+		var lowBound = 0,
+			upBound = 255,
+			x = pt[0],
+			y = pt[1];
+		x = x < lowBound ? lowBound : x > upBound ? upBound : x;
+		y = y < lowBound ? lowBound : y > upBound ? upBound : y;
+		return [x, y];
+	}
+	function onCircleChanging (dg, pt, evt) {
+		var wgt = dg.control,
+			newColor = wgt._newColor,
+			circleNode = wgt.$n('circle'),
+			x = zk.parseInt(circleNode.style.left),
+			y = zk.parseInt(circleNode.style.top),
+			sat = x / 255,
+			val = 1 - (y / 255);
+
+		newColor.setHSV(newColor.getHue(), sat, val);
+		wgt._colorChanged();
+	}
+
+var Colorpicker =
+
+zkex.inp.Colorpicker = zk.$extends(zk.Widget, {
+	_inpChanged: false,
+	$init: function (wgt) {
+		this.$supers('$init', arguments);
+		this._currColor = new zkex.inp.Color();
+		this._newColor = new zkex.inp.Color();
+		this._wgt = wgt._wgt;
+	},
+	$define: {
+		
+		
+		color: function(hex) {
+			this._currColor.setHex(hex);
+			this._newColor.setHex(hex);
+		}
+	},
+	
+	getNewColor: function () {
+		return this._newColor;
+	},
+	
+	getInputType: function () {
+		return 'text';
+	},
+	
+	redraw: function (out) {
+		var uuid = this.uuid;
+		
+		out.push('<div', this.domAttrs_(), '>',
+		'<div id="', uuid, '-gradient" class="', this.$s('gradient'), '">',
+		'<div id="', uuid, '-overlay" class="', this.$s('overlay'), '"></div>',
+		'<div id="', uuid, '-circle" class="', this.$s('circle'), '"></div></div>',
+		'<div id="', uuid, '-hue" class="', this.$s('hue'), '">',
+		'<div id="', uuid, '-bar" class="', this.$s('bar'), '"></div>',
+		'<div id="', uuid, '-arrows" class="', this.$s('arrows'), '"></div></div>',
+		'<div id="', uuid, '-color" class="', this.$s('color'), '">',
+		'<div id="', uuid, '-newcolor" class="', this.$s('newcolor'), '"></div>',
+		'<div id="', uuid, '-currcolor" class="', this.$s('current'), '"></div></div>',
+		'<div id="', uuid, '-hex" class="', this.$s('hex'), '" >',
+		'<label id="', uuid, '-hex-text" class="', this.$s('text'), '">Hex:</label>',
+		'<input id="', uuid, '-hex-inp" class="', this.$s('input'), '" type="text" size="8" maxlength="7"></input></div>',
+		'<div id="', uuid, '-r" class="', this.$s('r'), '">',
+		'<label id="', uuid, '-r-text" class="', this.$s('text'), '">R.</label>',
+		'<input id="', uuid, '-r-inp" class="', this.$s('input'), '" type="', this.getInputType(), '" size="3" maxlength="3"></input></div>',
+		'<div id="', uuid, '-g" class="', this.$s('g'), '">',
+		'<label id="', uuid, '-g-text" class="', this.$s('text'), '">G.</label>',
+		'<input id="', uuid, '-g-inp" class="', this.$s('input'), '" type="', this.getInputType(), '" size="3" maxlength="3"></input></div>',
+		'<div id="', uuid, '-b" class="', this.$s('b'), '">',
+		'<label id="', uuid, '-b-text" class="', this.$s('text'), '">B.</label>',
+		'<input id="', uuid, '-b-inp" class="', this.$s('input'), '" type="', this.getInputType(), '" size="3" maxlength="3"></input></div>',
+		'<div id="', uuid, '-h" class="', this.$s('h'), '">',
+		'<label id="', uuid, '-h-text" class="', this.$s('text'), '">H.</label>',
+		'<input id="', uuid, '-h-inp" class="', this.$s('input'), '" type="', this.getInputType(), '" size="3" maxlength="3"></input></div>',
+		'<div id="', uuid, '-s" class="', this.$s('s'), '">',
+		'<label id="', uuid, '-s-text" class="', this.$s('text'), '">S.</label>',
+		'<input id="', uuid, '-s-inp" class="', this.$s('input'), '" type="', this.getInputType(), '" size="3" maxlength="3"></input></div>',
+		'<div id="', uuid, '-v" class="', this.$s('v'), '">',
+		'<label id="', uuid, '-v-text" class="', this.$s('text'), '">V.</label>',
+		'<input id="', uuid, '-v-inp" class="', this.$s('input'), '" type="', this.getInputType(), '" size="3" maxlength="3"></input></div>',
+		'<button type="button" id="', uuid, '-ok-btn" class="', this.$s('button'),
+		'"><i class="', this.$s('icon'),' z-icon-check"></i></button>',
+		'</div>');
+	},
+	bind_: function () {
+		this.$supers(Colorpicker, 'bind_', arguments);
+
+		var arrowsNode = this.$n('arrows'),
+			hueHandle = this.$n('hue'),
+			circleNode = this.$n('circle'),
+			overlayHandle = this.$n('gradient');
+
+		this._arrowsDrag = new zk.Draggable(this, arrowsNode, {
+			constraint: 'vertical',
+			handle: hueHandle,
+			ignoredrag: arrowsIgnoreDrag,
+			snap: arrowsSnap,
+			change: onArrowsChanging,
+			endeffect: zk.$void
+		});
+		this._circleDrag = new zk.Draggable(this, circleNode, {
+			handle: overlayHandle,
+			ignoredrag: circleIgnoreDrag,
+			snap: circleSnap,
+			change: onCircleChanging,
+			endeffect: zk.$void
+		});
+
+		this.domListen_(this.$n('ok-btn'), 'onClick', '_doOk');
+		this.domListen_(this.$n('hex-inp'), 'onBlur', '_doHexChange');
+
+		zWatch.listen({onShow: this, onFloatUp: this, onHide: this});
+	},
+	unbind_: function () {
+		if (this._arrowsDrag) {
+			this._arrowsDrag.destroy();
+			this._arrowsDrag = null;
+		}
+		if (this._circleDrag) {
+			this._circleDrag.destroy();
+			this._circleDrag = null;
+		}
+
+		this.domUnlisten_(this.$n('ok-btn'), 'onClick', '_doOk');
+		this.domUnlisten_(this.$n('hex-inp'), 'onBlur', '_doHexChange');
+
+		zWatch.unlisten({onShow: this, onFloatUp: this, onHide: this});
+		this.$supers(Colorpicker, 'unbind_', arguments);
+	},
+	onHide: function () {
+		this._wgt.onHide();
+	},
+	onFloatUp: function (ctl) {
+		if (!zUtl.isAncestor(this.parent, ctl.origin))
+			this._wgt.onHide();
+	},
+	onShow: function () {
+		this._colorChanged('onShow');
+	},
+	_doHexChange: function () {
+		this._newColor.setHex(this.$n('hex-inp').value);
+		this._colorChanged('inp');
+	},
+	_colorChanged: function (source) {
+		var newColor = this._newColor,
+			hue = newColor.getHue(),
+			sat = newColor.getSaturation(),
+			val = newColor.getValue(),
+			hex = newColor.getHex(),
+			rgb = newColor.getRGB();
+
+		this.$n('r-inp').value = rgb[0];
+		this.$n('g-inp').value = rgb[1];
+		this.$n('b-inp').value = rgb[2];
+		this.$n('hex-inp').value = hex;
+		this.$n('h-inp').value = Math.round(hue);
+		this.$n('s-inp').value = Math.round(sat * 100);
+		this.$n('v-inp').value = Math.round(val * 100);
+
+		if (source == 'arrows' || source == 'inp' || source == 'onShow') {
+			var color = new zkex.inp.Color();
+			color.setHSV(hue, 1, 1);
+			this.$n('overlay').style.backgroundColor = color.getHex();
+		}
+		if (source == 'inp' || source == 'onShow') {
+			var arrowsNode = this.$n('arrows'),
+				hueOffset = (256 - hue * 255 / 359.99),
+				arrowsTop = hueOffset < 0 ? 0 : hueOffset > 255 ? 255 : hueOffset,
+				circleNode = this.$n('circle'),
+				x = sat * 255,
+				y = (1 - val) * 255;
+
+			arrowsNode.style.top = jq.px(arrowsTop);
+			circleNode.style.top = jq.px(y);
+			circleNode.style.left = jq.px(x);
+		}
+		if (source == 'onShow')
+			this.$n('currcolor').style.backgroundColor = this._currColor.getHex();
+		this.$n('newcolor').style.backgroundColor = hex;
+	},
+	_doInpChanged: function (evt) {
+		if (!this._inpChanged || evt.domTarget == this.$n('hex-inp')) return;
+
+		var target = evt.domTarget,
+			color = this._newColor,
+			rgb = color.getRGB(),
+			hue = color.getHue(),
+			sat = color.getSaturation(),
+			val = color.getValue(),
+			inpValue = zk.parseInt(target.value);
+
+		switch (target.id.split('-')[1]) {
+		case 'r':
+			color.setRGB(inpValue, rgb[1], rgb[2]);
+			break;
+		case 'g':
+			color.setRGB(rgb[0], inpValue, rgb[2]);
+			break;
+		case 'b':
+			color.setRGB(rgb[0], rgb[1], inpValue);
+			break;
+		case 'h':
+			color.setHSV(inpValue, sat, val);
+			break;
+		case 's':
+			color.setHSV(hue, inpValue/100, val);
+			break;
+		case 'v':
+			color.setHSV(hue, sat, inpValue/100);
+			break;
+		}
+		this._colorChanged('inp');
+		this._inpChanged = false;
+	},
+	doKeyDown_: function (evt) {
+		var keyCode = evt.keyCode,
+			target = evt.domTarget,
+			hexInp = this.$n('hex-inp');
+
+		switch (keyCode) {
+		case 48:case 96:
+		case 49:case 97:
+		case 50:case 98:
+		case 51:case 99:
+		case 52:case 100:
+		case 53:case 101:
+		case 54:case 102:
+		case 55:case 103:
+		case 56:case 104:
+		case 57:case 105:
+		case 37:
+		case 39:
+		case 46:
+		case 8:
+			break;
+		case 13:
+			if (target == hexInp) {
+				this._doHexChange();
+				return;
+			}
+			break;
+		case 9:
+			break;
+		default:
+			if (target == hexInp && 'ABCDEF'.indexOf(String.fromCharCode(keyCode)) >= 0) 
+				break;
+			evt.stop();
+			return;
+		}
+		this._inpChanged = true;
+		
+	},
+	doKeyUp_: function (evt) {
+		this._doInpChanged(evt);
+	},
+	_doOk: function (evt) {
+		var wgt = this._wgt;
+		wgt.onChange(this._newColor.getHex());
+		wgt.onHide(true);
+		evt.stop();
+	}
+});
+})();
+zkreg('zkex.inp.Colorpicker');
+(function () {
+	function getCell (out, r, g, b, zcls, index) {
+		var color = new zkex.inp.Color();
+		color.setRGB(r, g, b);
+
+		var hex = color.getHex();
+		out.push('<span class="', zcls, '-color" data-color="', hex, '" ',  
+				'data-index="', index ,'" style="background-color: ', hex,
+				';"></span>');
+	}
+
+var Colorpalette =
+
+zkex.inp.Colorpalette = zk.$extends(zk.Widget, {
+	$init: function (wgt) {
+		this.$supers('$init', arguments);
+		this._wgt = wgt._wgt;
+		this._color = new zkex.inp.Color();
+	},
+	redraw: function (out) {
+		var zcls = this.$s(),
+			uuid = this.uuid,
+			tagnm = zk.ie < 11 || zk.gecko ? 'a' : 'button',
+			i, j, k, index = 0;
+		out.push('<div id="', uuid, '" class="', zcls, '">',
+		'<div id="', uuid, '-newcolor" class="', this.$s('newcolor'), '"></div>',
+		'<input id="', uuid, '-hex-inp" class="', this.$s('input'), '" type="text" size="7" maxlength="7"></input>');
+		for (j = 0; j < 12; j++) {
+			for (k = 0; k < 3; k++)
+				for (i = 0; i <= 5; i++)
+					out.push(getCell(out, k * 51 + (j % 2) * 51 * 3, Math.floor(j / 2) * 51, i * 51, zcls, index++));
+		}
+
+		
+		for (i = 0; i < 16; i++) {
+			j = Math.floor((i + i * 16) % 256);
+			out.push(getCell(out, j, j, j, zcls, index++));
+		}
+		
+		out.push(getCell(out, 255, 255, 255, zcls, index++),
+				 getCell(out, 255, 255, 255, zcls, index++),
+				 '<', tagnm, ' id="', uuid, 
+					'-a" tabindex="-1" onclick="return false;" href="javascript:;" class="z-focus-a"></',
+					tagnm, '></div>');
+	},
+	onFloatUp: function (ctl) {
+		if (!zUtl.isAncestor(this, ctl.origin))
+			this._clearSelected({clearIndex: true});
+		else if (!zUtl.isAncestor(this.parent, ctl.origin))
+			this._wgt.onHide(); 
+	},
+	bind_: function () {
+		this.$supers(Colorpalette, 'bind_', arguments);
+
+		this.domListen_(this.$n('btn'), 'onClick', '_doPopupPicker');
+		zWatch.listen({onShow: this, onFloatUp: this, onHide: this});
+	},
+	unbind_: function () {
+		this.domUnlisten_(this.$n('btn'), 'onClick', '_doPopupPicker');
+		zWatch.unlisten({onShow: this, onFloatUp: this, onHide: this});
+		this._selectedIndex = null;
+		this.syncIndex = null;
+		this.$supers(Colorpalette, 'unbind_', arguments);
+	},
+	onShow: function () {
+		this.$n('newcolor').style.backgroundColor = this._color.getHex();
+		this._focus(true); 
+	},
+	onHide: function () {
+		this._wgt.onHide();
+	},
+	
+	setColor: function (hex) {
+		this._color.setHex(hex);
+	},
+	_doPopupPicker: function (evt) {
+		var wgt = this._wgt;
+		wgt.closePalette();
+		wgt.openPicker();
+		evt.stop();
+	},
+	doMouseOver_: function (evt) {
+		var target = evt.domTarget;
+		if (jq(target).hasClass(this.$s('color'))) {
+			this._clearSelected({clearIndex: true}); 
+			this._doColorOver(target);
+			this.syncIndex = true;
+			evt.stop();
+		}
+		this.$supers('doMouseOver_', arguments);
+	},
+	doMouseOut_: function (evt) {
+		this._doColorOut(evt.domTarget);
+		
+	},
+	doClick_: function (evt) {
+		var target = evt.domTarget;
+		if (jq(target).hasClass(this.$s('color'))) {
+			
+			var hexInp = this.$n('hex-inp');
+			if(!hexInp.value) {
+				hexInp.value = jq(target).data('color');
+			}
+			
+			var colorbox = this._wgt;
+			colorbox.onChange(hexInp.value);
+			colorbox.closePalette(true);
+			
+			jq(target).removeClass(this.$s('selected'));
+			evt.stop();
+		} else if (target == this.$n('hex-inp'))
+			this._clearSelected({clearIndex: true}); 
+		else
+			this._focus(); 
+		this.$supers('doClick_', arguments);
+	},
+	_doHexChange: function () {
+		var wgt = this._wgt,
+			color = this._color;
+		color.setHex(this.$n('hex-inp').value);
+		var hex = color.getHex();
+		this.$n('hex-inp').value = hex;
+		wgt.onChange(hex);
+		wgt.closePalette(true);
+	},
+	doKeyDown_: function (evt) {
+		var keyCode = evt.keyCode,
+			target = evt.domTarget,
+			hexInp = this.$n('hex-inp');
+
+		switch (keyCode) {
+		case 48:case 96:
+		case 49:case 97:
+		case 50:case 98:
+		case 51:case 99:
+		case 52:case 100:
+		case 53:case 101:
+		case 54:case 102:
+		case 55:case 103:
+		case 56:case 104:
+		case 57:case 105:
+		case 46:
+		case 8:
+			break;
+		
+		case 37:
+		case 38:
+		case 39:
+		case 40:
+			if (target != hexInp) {
+				var ofs = keyCode == 37 ? -1 : keyCode == 39 ? 1 : keyCode == 38 ? -18 : keyCode == 40 ? 18 : 0;
+				this._shift(ofs); 
+				evt.stop();
+			}
+			break;
+		case 13:
+			var index = this._selectedIndex;
+			if (target == hexInp || index || index == 0 || this._syncIndex()) {
+				this._doHexChange();
+				return;
+			}
+		default:
+			if (target == hexInp && 'ABCDEF'.indexOf(String.fromCharCode(keyCode)) >= 0) 
+				break;
+			evt.stop();
+			return;
+		}
+		
+	},
+	
+	
+	doKeyUp_: function (evt) {
+		var keyCode = evt.keyCode;
+
+		switch (keyCode) {
+			case 37:
+			case 38:
+			case 39:
+			case 40:
+				if (evt.domTarget != this.$n('hex-inp'))
+					evt.stop();
+				return;
+		}
+	},
+	
+	_focus: function (timeout) {
+		var a = this.$n('a');
+		if (a)
+			if (timeout)
+				setTimeout(function () {
+					zk(a).focus();
+				});
+			else zk(a).focus();
+	},
+	
+	_shift: function (ofs) {
+		var colors = jq(this.$n()).find('.' + this.$s('color')),
+			length = colors.length,
+			index = this._selectedIndex;
+
+		if (index || index == 0) 
+			index = index + ofs;
+		else if (this._syncIndex()) 
+			index = this._selectedIndex + ofs;
+		else
+			index = 0;
+		this._clearSelected();
+		if (index < 0) index = 0;
+		else if (index >= length)
+			index = length - 1;
+		this._selectedIndex = index;
+		this._doColorOver(colors[index]);
+	},
+	
+	_syncIndex: function () {
+		if (this.syncIndex) {
+			this.syncIndex = null;
+			var select = jq(this.$n()).find('.' + this.$s('selected'));
+			if (select.length) {
+				this._selectedIndex = select.data('index');
+				return true;
+			}
+		}
+		return false;
+	},
+	
+	_clearSelected: function (opts) {
+		var index = this._selectedIndex;
+		this.syncIndex = null;
+		if (index || index == 0) {
+			this._doColorOut(jq(this.$n()).find('[data-index="' + index + '"]'));
+			if (opts && opts.clearIndex)
+				this._selectedIndex = null;
+		}
+	},
+	
+	_doColorOver: function (target) {
+		this.$n('hex-inp').value = this.$n('newcolor').style.backgroundColor =
+			jq(target).data('color');
+		jq(target).addClass(this.$s('selected'));
+	},
+	
+	_doColorOut: function (target) {
+		jq(target).removeClass(this.$s('selected'));
+	}
+});
+})();
+zkreg('zkex.inp.Colorpalette');
+
+
+
+(function () {
+
+	function _rgbToHex(r, g, b) {
+		var	rStr = r.toString(16), 
+			gStr = g.toString(16), 
+			bStr = b.toString(16), 
+			hexStr = ['#'];
+				
+		hexStr.push(rStr.length == 1 ? '0' + rStr : rStr);
+		hexStr.push(gStr.length == 1 ? '0' + gStr : gStr);
+		hexStr.push(bStr.length == 1 ? '0' + bStr : bStr);
+	
+	   	return hexStr.join(''); 	
+	}
+	function _calcRGB(clr) {
+		var value = clr.value, 
+			saturation = clr.saturation, 
+			red = clr.red = value, 
+			green = clr.green = value, 
+			blue = clr.blue = value;
+		
+		if (value == 0 || saturation == 0) 
+			return;
+
+		var tHue = clr.hue / 60,
+			i = Math.floor(tHue), 
+			f = tHue - i,
+			p = value * (1 - saturation), 
+			q = value * (1 - saturation * f), 
+			t = value * (1 - saturation * (1 - f));
+		switch (i) {
+		case 0:
+			red = value;
+			green = t;
+			blue = p;
+			break;
+		case 1:
+			red = q; 
+			green = value; 
+			blue = p;
+			break;
+		case 2: 
+			red = p; 
+			green = value; 
+			blue = t;
+			break;
+		case 3:
+			red = p; 
+			green = q; 
+			blue = value;
+			break;
+		case 4:
+			red = t; 
+			green = p; 
+			blue = value;
+			break;
+		default:
+			red = value; 
+			green = p; 
+			blue = q;
+			break;
+		}
+		_setRGB(clr, red, green, blue);
+	}
+	function _calcHSV(clr) {
+		var red = clr.red, 
+			green = clr.green, 
+			blue = clr.blue, 
+			hue = 0, 
+			max = Math.max(Math.max(red, green), blue), 
+			min = Math.min(Math.min(red, green), blue);
+		clr.value = max;
+		
+		clr.saturation = 0;
+		if (max != 0) 
+			clr.saturation = 1 - min / max;
+		
+		clr.hue = hue;
+		if (min == max) 
+			return;
+		
+		var delta = max - min;
+		if (red == max) 
+			hue = (green - blue) / delta;
+		else 
+			if (green == max) 
+				hue = 2 + ((blue - red) / delta);
+			else 
+				hue = 4 + ((red - green) / delta);
+		hue = hue * 60;
+		if (hue < 0) 
+			hue += 360;
+		
+		clr.hue = hue;
+	}
+	function _setRGB(clr, r, g, b) {
+		clr.red = r > 1 ? 1 : r < 0 ? 0 : r;
+		clr.green = g > 1 ? 1 : g < 0 ? 0 : g;
+		clr.blue = b > 1 ? 1 : b < 0 ? 0 : b;
+	}
+
+zkex.inp.Color = zk.$extends(zk.Object, {
+	
+	$init: function (hex) {
+		this.$supers('$init', arguments);
+		this.red = this.green = this.blue = this.hue = this.saturation = this.value =0;
+		if (hex)
+			this.setHex(hex);
+	},
+	
+	setRGB: function(r, g, b) {
+		if (isNaN(r) || isNaN(g) || isNaN(b)) 
+			return false;
+		
+		r = r / 255.0;
+		g = g / 255.0;
+		b = b / 255.0;
+		_setRGB(this, r, g, b);
+		_calcHSV(this);
+		return true;
+	},
+	
+	getRGB: function() {
+		return [Math.round(this.red * 255), Math.round(this.green * 255), Math.round(this.blue * 255)];
+	},
+	
+	getHue: function () {
+		return this.hue;
+	},
+	
+	getSaturation: function () {
+		return this.saturation;
+	},
+	
+	getValue: function () {
+		return this.value;
+	},
+	
+	setHex: function(str) {
+		if (str == null || typeof(str) != 'string') 
+			return false;
+		if (str.substr(0, 1) == '#') 
+			str = str.substr(1);
+		if (str.length != 6) 
+			return false;
+		var r = zk.parseInt(str.substring(0, 2), 16),
+			g = zk.parseInt(str.substring(2, 4), 16), 
+			b = zk.parseInt(str.substring(4, 6), 16);
+		return this.setRGB(r, g, b);
+	},
+	
+	getHex: function() {
+		var rgb = this.getRGB();
+		return _rgbToHex(rgb[0], rgb[1], rgb[2]);
+	},
+	
+	setHSV: function(h, s, v) {
+		if (isNaN(h) || isNaN(s) || isNaN(v))
+			return false;
+
+	  	this.hue = (h >= 360) ? 359.99 : (h < 0) ? 0 : h;
+	  	this.saturation = (s > 1) ? 1 : (s < 0) ? 0 : s;
+	  	this.value = (v > 1) ? 1 : (v < 0) ? 0 : v;
+	  	_calcRGB(this);
+	  	return true;
+	}
+});
+
+})();
+
+
+zkex.inp.ContentHandler = zk.$extends(zk.Object, {
+	$init: function(wgt, content) {
+	 	this.$supers('$init', arguments);
+		this._wgt = wgt;
+		this.setContent(content);
+	},
+	redraw: function (out) {
+	 	var wgt = this._wgt,
+			uuid = wgt.uuid,
+			zcls = wgt.getZclass(),
+			picker = this._picker,
+			palette = this._palette;
+
+		switch (this._type) {
+		case 'color':
+			out.push('<div id="', uuid, '-cnt-pp" style="display:none;" class="',
+					wgt.$s('popup'), '">',
+					palette ? '<div id="' + uuid + '-palette-btn" class="' +
+							wgt.$s('paletteicon') + '"></div>' : '',
+					picker ? '<div id="' + uuid + '-picker-btn" class="' +
+							wgt.$s('pickericon') + '"></div>' : '');
+			if (picker)
+				this._picker.redraw(out);
+			if (palette)
+				this._palette.redraw(out);
+			out.push('</div>');
+			break;
+		case 'content':
+			out.push('<div id="', uuid, '-cnt-pp" class="', wgt.$s('content-popup'),
+					'" style="display:none"><div class="', zcls,'-cnt-body">',
+					this._content, '</div></div>');
+		}
+	},
+	bind: function () {
+	 	var wgt = this._wgt,
+			uuid = wgt.uuid,
+			type = this._type;
+		if (!wgt.menupopup) {
+			wgt.domListen_(wgt.$n(), 'onClick', 'onShow');
+			zWatch.listen({onFloatUp: wgt, onHide: wgt});
+		}
+
+		this._pp = wgt.$n('cnt-pp');
+		jq(this._pp, zk).bind('mouseenter', this.proxy(this._doMouseOver))
+				.bind('mouseleave', this.proxy(this._doMouseOut));
+		switch (type) {
+		case 'color':
+			if (!this._color)
+				this._color = new zkex.inp.Color(this._hex);
+
+			var img = wgt.$n('img');
+			if (img)
+				img.style.backgroundColor = this._color.getHex();
+
+			var self = this;
+			jq(wgt.$n('palette-btn')).bind('click', function () {
+				self.openPalette();
+			});
+			jq(wgt.$n('picker-btn')).bind('click', function () {
+				self.openPicker();
+			});
+			break;
+		case 'content':
+			break;
+		}
+	},
+	unbind: function () {
+	 	var wgt = this._wgt,
+	 		uuid = wgt.uuid;
+	 	if (!wgt.menupopup) {
+			wgt.domUnlisten_(wgt.$n(), 'onClick', 'onShow');
+
+			if (this._shadow) {
+				this._shadow.destroy();
+				this._shadow = null;
+			}
+			jq(this._pp, zk).unbind('mouseenter', this.proxy(this._doMouseOver))
+					.unbind('mouseleave', this.proxy(this._doMouseOut));
+			this._pp = null;
+			switch (this._type) {
+			case 'color':
+				jq(wgt.$n('palette-btn')).unbind('click');
+				jq(wgt.$n('picker-btn')).unbind('click');
+				this._color = null;
+				break;
+			case 'content':
+				zWatch.unlisten({onFloatUp: this, onHide: this});
+				break;
+			}
+		}
+	},
+	_doMouseOver: function () {
+		var menubar = this._wgt.getMenubar();
+		if (menubar) menubar._bOver = true;
+	},
+	_doMouseOut: function () {
+		var menubar = this._wgt.getMenubar();
+		if (menubar) menubar._bOver = false;
+	},
+	
+	isOpen: function () {
+		var pp = this._pp;
+		return pp && zk(pp).isVisible();
+	},
+	onShow: function () {
+		this.openContent();
+	},
+	onHide: function (close) {
+		var pp = this._pp;
+		if (!pp || !zk(pp).isVisible()) return;
+
+		pp.style.display = 'none';
+		jq(pp).zk.undoVParent();
+		this._hideShadow();
+		if (close)
+			zWatch.fire('onFloatUp', null);
+	},
+	onFloatUp: function (ctl) {
+		if (!zUtl.isAncestor(this._wgt, ctl.origin))
+			this.onHide();
+	},
+	onChange: function (hex) {
+	 	var type = this._type;
+		switch (type) {
+		case 'color':
+			var wgt = this._wgt,
+				img = wgt.$n('img');
+			if (img)
+				img.style.backgroundColor = this._hex = hex;
+			this._color.setHex(hex);
+			wgt.fire('onChange', {color: hex, value: hex}, {toServer: true}, 150);
+			break;
+		case 'content':
+			break;
+		}
+	},
+	_syncShadow: function (target) {
+		if (!this._shadow)
+			this._shadow = new zk.eff.Shadow(this._pp, {stackup: zk.useStackup});
+		this._shadow.sync();
+	},
+	_hideShadow: function (target) {
+		this._shadow.hide();
+	},
+	
+	setContent: function (content) {
+		if (!content || this._wgt.menupopup)
+			return;
+
+		this._content = content;
+		var oldType = this._type,
+			type = this._getType(content),
+			wgt = this._wgt;
+
+		if (oldType != type)
+			this.destroy();
+
+		this._type = type;
+		switch (type) {
+		case 'color':
+			var hex =content.substr(content.indexOf('#color') + '#color'.length + 1);
+
+			if (!this._color) {
+				this._color = new zkex.inp.Color(hex);
+				this._hex = this._color.getHex();
+			}
+			else {
+				var c = this._color,
+					img = wgt.$n('img');
+				c.setHex(hex);
+				if (img)
+					img.style.backgroundColor = c.getHex();
+			}
+
+			if (!this._picker && !this._palette) {
+				this._picker = new zkex.inp.Colorpicker({_wgt: this});
+				wgt.appendChild(this._picker);
+				this._palette = new zkex.inp.Colorpalette({_wgt: this});
+				wgt.appendChild(this._palette);
+				wgt.rerender(); 
+			}
+			break;
+		case 'content':
+			wgt.rerender();
+			break;
+		}
+	},
+	
+	destroy: function () {
+	 	var type = this._type;
+		if (!type) return;
+
+		switch (type) {
+		case 'color':
+			var picker = this._picker,
+				palette = this._palette,
+				wgt = this._wgt;
+			if (this._color)
+				this._color = null;
+
+			if (picker && palette) {
+				wgt.removeChild(picker);
+				wgt.removeChild(palette);
+				this._picker = this._palette = this._type = this._hex = null;
+				wgt.rerender();
+			}
+			break;
+		case 'content':
+			this._wgt.rerender();
+			break;
+		}
+	},
+	_getType: function (content) {
+	 	if (!content) return;
+
+		if (content.indexOf('#color') == 0)
+			return 'color';
+		else
+			return 'content';
+	},
+	
+	openContent: function () {
+		var	pp = this._pp;
+		if (!pp) return;
+
+		if (this._type == 'color')
+			this.openPalette();
+
+		pp.style.width = pp.style.height = 'auto';
+		pp.style.display = 'block';
+		jq(pp).zk.makeVParent();
+
+		zk(pp).position(this._wgt.$n(), this.getPosition());
+		this._syncShadow();
+	},
+	
+	openPalette: function () {
+		var node = this._wgt.$n(),
+			pp = this._palette.$n();
+		if (!node || !pp)
+			return;
+
+		var picker = this._picker.$n();
+		if (picker && zk(picker).isVisible())
+			this.closePicker();
+
+		pp.style.display = 'block';
+		jq(this._wgt.$n('cnt-pp')).addClass(this._palette.$s('popup'));
+		this._syncShadow();
+
+		var palette = this._palette;
+		palette.setColor(this._color.getHex());
+		palette.onShow();
+	},
+	
+	closePalette: function (close) {
+	 	var pp = this._palette.$n();
+		if (!pp || !zk(pp).isVisible()) return;
+
+		pp.style.display = 'none';
+		jq(this._wgt.$n('cnt-pp')).removeClass(this._palette.$s('popup'));
+		if (close)
+			zWatch.fire('onFloatUp', null);
+	},
+	
+	openPicker: function () {
+		var wgt = this._wgt,
+			node = wgt.$n(),
+			pp = this._picker.$n();
+		if (!node || !pp)
+			return;
+
+		this.closePalette();
+		pp.style.display = 'block';
+		jq(this._wgt.$n('cnt-pp')).addClass(this._picker.$s('popup'));
+		this._syncShadow();
+
+		var picker = this._picker;
+		picker.setColor(this._color.getHex());
+		picker.onShow();
+	},
+	
+	closePicker: function (close) {
+		var pp = this._picker.$n();
+		if (!pp || !zk(pp).isVisible()) return;
+
+		pp.style.display = 'none';
+		jq(this._wgt.$n('cnt-pp')).removeClass(this._picker.$s('popup'));
+		if (close)
+			zWatch.fire('onFloatUp', null);
+	},
+	
+	getPosition: function () {
+	 	var wgt = this._wgt;
+		if (wgt.isTopmost()) {
+			var bar = wgt.getMenubar();
+			if (bar)
+				return 'vertical' == bar.getOrient() ? 'end_before' : 'after_start';
+		}
+		return 'end_before';
+	}
+});
+
+}finally{zk.setLoaded(zk._p.n);}});zk.setLoaded('zkex.inp',1);

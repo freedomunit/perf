@@ -1,0 +1,13 @@
+[t36]
+FileName1=t36.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=2
+RequestHeaderFile=t36_RequestHeader.txt
+RequestBodyFile=t36_RequestBody.txt
+ResponseHeaderFile=t36_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_36.xml
+FileName2=t36_ss_jU0Qo_bc_sheet_18.css
+URL2=http://10.125.2.182/bin-java/zkau/view/z_g8k/jU0Qo/j0l/7/ss_jU0Qo_bc_sheet_18.css
+[ProtocolInfo]
+ProtocolId=QTWeb

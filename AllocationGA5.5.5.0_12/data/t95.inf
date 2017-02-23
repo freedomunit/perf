@@ -1,0 +1,13 @@
+[t95]
+FileName1=t95.txt
+URL1=http://10.125.2.182/bin-java/zkau/comet?dtid=z_g8k
+Total=2
+RequestHeaderFile=t95_RequestHeader.txt
+RequestBodyFile=NONE
+ResponseHeaderFile=t95_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_95.xml
+FileName2=t95_zkau.txt
+URL2=http://10.125.2.182/bin-java/zkau?dtid=z_g8k&cmd_0=rmDesktop&opt_0=i
+[ProtocolInfo]
+ProtocolId=QTWeb

@@ -1,0 +1,9 @@
+-+
+-DCCI
+-D_IDA_XL
+-DWINNT
+-ID:\LoadTesting\AllocationGA5.5.5.0_12
+-IC:\Program Files (x86)\HP\LoadRunner\include
+-ed:\loadtesting\allocationga5.5.5.0_12\\logfile.log
+d:\loadtesting\allocationga5.5.5.0_12\\combined_AllocationGA5.5.5.0_12.c
+d:\loadtesting\allocationga5.5.5.0_12\\pre_cci.c

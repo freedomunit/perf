@@ -1,0 +1,4502 @@
+zk.load('zul.mesh',function(){if(zk._p=zkpi('zul.sel'))try{
+
+
+
+
+(function() {
+	function _beforeChildKey(wgt, evt) {
+		return zAu.processing() || wgt._shallIgnore(evt);
+	}
+	function _afterChildKey(evt) {
+		switch (evt.data.keyCode) {
+		case 33: 
+		case 34: 
+		case 38: 
+		case 40: 
+		case 37: 
+		case 39: 
+		case 32: 
+		case 36: 
+		case 35: 
+			evt.stop();
+			return false;
+		}
+		return true;
+	}
+	
+	function listenOnFitSize(wgt) {
+		if (wgt._rows && !wgt._rowsOnFitSize) {
+			zWatch.listen({onFitSize: wgt});
+			wgt._rowsOnFitSize = true;
+		}
+	}
+	function unlistenOnFitSize(wgt) {
+		if (wgt._rowsOnFitSize) {
+			zWatch.unlisten({onFitSize: wgt});
+			delete wgt._rowsOnFitSize;
+		}
+	}
+	function _updHeaderCM(box) { 
+		if (--box._nUpdHeaderCM <= 0 && box.desktop && box._headercm && box._multiple) {
+			var zcls = zk.Widget.$(box._headercm).getZclass() + '-checked',
+				$headercm = jq(box._headercm);
+			$headercm[box._isAllSelected() ? 'addClass': 'removeClass'](zcls);
+			
+			
+		}
+	}
+	function _isButton(evt) {
+		return evt.target.$button 
+			|| (zk.isLoaded('zul.wgt')
+			&& evt.target.$instanceof(zul.wgt.Button, zul.wgt.Toolbarbutton));
+	}
+	function _isInputWidget(evt) { 
+		return evt.target.$inputWidget 
+			|| (zk.isLoaded('zul.inp') && evt.target.$instanceof(zul.inp.InputWidget));
+	}
+	function _focusable(evt) {
+		return (jq.nodeName(evt.domTarget, 'input', 'textarea', 'button', 'select', 'option', 'a')
+				&& !evt.target.$instanceof(zul.sel.SelectWidget))
+			|| _isButton(evt) || _isInputWidget(evt);
+	}
+	function _fixReplace(w) {
+		return w && (w = w.uuid) ? zk.Widget.$(w): null;
+	}
+	function _isListgroup(w) {
+		return zk.isLoaded('zkex.sel') && w.$instanceof(zkex.sel.Listgroup);
+	}
+	function _isListgroupfoot(w) {
+		return zk.isLoaded('zkex.sel') && w.$instanceof(zkex.sel.Listgroupfoot);
+	}
+
+var SelectWidget =
+
+zul.sel.SelectWidget = zk.$extends(zul.mesh.MeshWidget, {
+	_rows: 0,
+	
+	rightSelect: true,
+	_anchorTop:0,
+	_anchorLeft:0,
+	_isSelecting: true,
+	$init: function () {
+		this.$supers('$init', arguments);
+		this._selItems = [];
+	},
+	$define: {
+		
+		
+		rows: function (rows) {
+			listenOnFitSize(this);
+			var n = this.$n();
+			if (n) {
+				n._lastsz = null;
+				this.onSize();
+			}
+		},
+		
+		
+		checkmark: function (checkmark) {
+			if (this.desktop)
+				this.rerender();
+		},
+		
+		
+		multiple: function (multiple) {
+			if (!this._multiple && this._selItems.length) {
+				var item = this.getSelectedItem();
+				for (var it; (it = this._selItems.pop());)
+					if (it != item) {
+						if (!this._checkmark)
+							it._setSelectedDirectly(false);
+						else it._selected = false;
+					}
+
+				this._selItems.push(item);
+			}
+			if (this._checkmark && this.desktop)
+				this.rerender();
+		},
+		
+		
+		selectedIndex: [
+			function (v) {
+				return v < -1 || (!v && v !== 0) ? -1 : v;
+			},
+			function() {
+				var selected = this._selectedIndex;
+				this.clearSelection();
+				this._selectedIndex = selected;
+				if (selected > -1) {
+					var w;
+					for (var it = this.getBodyWidgetIterator(); selected-- >=0;)
+						w = it.next();
+					if (w) {
+						var isMultiSelected = this._selItems.length > 1;
+						this._selectOne(w, true);
+						
+						
+						if (!isMultiSelected) {
+							var bar = this._scrollbar;
+							if (bar)
+								bar.scrollToElement(item.$n());
+							else
+								zk(w).scrollIntoView(this.ebody);
+						}
+					}
+				}
+			}
+		],
+		
+		
+		name: function () {
+			if (this.destkop) this.updateFormData();
+		},
+		
+		
+		
+		tabindex: function(tabindex) {
+			var n = this.$n();
+			if (n)
+				n.tabindex = tabindex || '';
+		},
+		selectOnHighlightDisabled: _zkf
+	},
+	setChgSel: function (val) { 
+		var sels = {};
+		for (var j = 0;;) {
+			var k = val.indexOf(',', j),
+				s = (k >= 0 ? val.substring(j, k): val.substring(j)).trim();
+			if (s) sels[s] = true;
+			if (k < 0) break;
+			j = k + 1;
+		}
+		for (var it = this.getBodyWidgetIterator(), w; (w = it.next());)
+			this._changeSelect(w, sels[w.uuid] == true);
+	},
+	setFocusIndex: function (index) { 
+		
+		if (index < 0)
+			return;
+		var self = this;
+		setTimeout(function () { 
+			var w;
+			for (var it = self.getBodyWidgetIterator(); (w = it.next()) && index--;)
+				if (!it.hasNext())
+					break;
+			self._focusItem = w;
+		});
+	},
+	updateFormData: function () {
+		if (this._name) {
+			if (!this.efield)
+				this.efield = jq(this.$n()).append('<div style="display:none;"></div>').find('> div:last-child')[0];
+
+			jq(this.efield).children().remove();
+
+			
+			var data = [],
+				tmp = '<input type="hidden" name="' + this._name + '" value="';
+			for (var i = 0, j = this._selItems.length; i < j; i++)
+				data.push(tmp, this._selItems[i].getValue(), '"/>');
+
+			jq(this.efield).append(data.join(''));
+		} else if (this.efield) {
+			jq(this.efield).remove();
+			this.efield = null;
+		}
+	},
+	
+	setSelectedItem: function (item) {
+		if (!item)
+			this.clearSelection();
+		else {
+			var isMultiSelected = this._selItems.length > 1;
+			this._selectOne(item, true);
+			
+			
+			if (!isMultiSelected) {
+				var bar = this._scrollbar;
+				if (bar)
+					bar.scrollToElement(item.$n());
+				if (this._nativebar)
+					zk(item).scrollIntoView(this.ebody);
+			}
+			
+			if (zk.ff >= 4 && this.ebody && this._nativebar) { 
+				
+				this._currentTop = this.ebody.scrollTop; 
+				this._currentLeft = this.ebody.scrollLeft;
+			}
+		}
+	},
+	
+	getSelectedItem: function () {
+		return this._selItems[0];
+	},
+	
+	getSelectedItems: function () {
+		
+		return this._selItems.$clone();
+	},
+	setHeight: function (height) {
+		if (!this._nvflex && this._height != height) {
+			this._height = height;
+			var n = this.$n();
+			if (n) {
+				n.style.height = height || '';
+				this.onSize();
+			}
+		}
+	},
+	setVflex: function(v) {
+		this.$supers('setVflex', arguments);
+		if (this.desktop) this.onSize();
+	},
+	setHflex: function(v) {
+		this.$supers('setHflex', arguments);
+		if (this.desktop) this.onSize();
+	},
+	_getEbodyWd: function () {
+		var anchor = this.$n('a');
+		
+		if (zk.webkit)
+			anchor.style.display = 'none';
+
+		
+		var tblwd = zk.opera && this.ebody.offsetHeight == 0 ? 
+				this.ebody.offsetWidth : this.ebody.clientWidth;
+
+		if (zk.webkit)
+			anchor.style.display = '';
+		return tblwd;
+	},
+	_beforeCalcSize: function () {
+		
+		if (zk.ie8) {
+			var anchor = this.$n('a');
+			this._oldCSS = anchor.style.display;
+			anchor.style.display = 'none';
+		}
+
+		
+		if (zk.ie < 11)
+			this._syncFocus(this._focusItem);
+
+		this._calcHgh();
+	},
+	_afterCalcSize: function () {
+		
+		if (zk.ie8) {
+			this.$n('a').style.display = this._oldCSS;
+			delete this._oldCSS;
+		}
+		this.$supers('_afterCalcSize', arguments);
+	},
+	onFitSize: function () {
+		
+		if (this._rows)
+			this._calcHgh();
+	},
+	_calcHgh: function () {
+		var rows = this.ebodyrows.rows,
+			n = this.$n(),
+			hgh = n.style.height,
+			isHgh = hgh && hgh != 'auto' && hgh.indexOf('%') < 0;
+		if (isHgh) {
+			hgh = zk.parseInt(hgh) - zk(n).padBorderHeight();
+			if (hgh) {
+				hgh -= this._headHgh(0);
+				if (hgh < 20) hgh = 20;
+				var sz = 0;
+				l_out:
+				for (var h, j = 0, rl = rows.length; j < rl; ++sz, ++j) {
+					
+					var r;
+					for (;; ++j) {
+						if (j >= rl) break l_out;
+						r = rows[j];
+						if (zk(r).isVisible()) break;
+					}
+
+					var $r = zk(r);
+					h = $r.offsetTop() + $r.offsetHeight();
+					if (h >= hgh) {
+						if (h > hgh + 2) ++sz; 
+						break;
+					}
+				}
+				sz = Math.ceil(sz && h ? (hgh * sz)/h: hgh/this._headHgh(20));
+				this._visibleRows(sz);
+				hgh -= (this.efoot ? this.efoot.offsetHeight : 0);
+				
+                hgh -= (this.efrozen && this._nativebar ? this.efrozen.offsetHeight : 0);
+                this.ebody.style.height = (hgh < 0 ? 0 : hgh) + 'px';
+				return; 
+			}
+		}
+
+		var nVisiRows = 0, nRows = this.getRows(), lastVisiRow, firstVisiRow, midVisiRow;
+		for (var j = 0, rl = rows.length; j < rl; ++j) { 
+			var r = rows[j];
+			if (zk(r).isVisible()) {
+				++nVisiRows;
+				if (!firstVisiRow)
+					firstVisiRow = r;
+
+				if (nRows === nVisiRows) {
+					midVisiRow = r;
+					break;
+					
+					
+				}
+				lastVisiRow = r;
+			}
+		}
+
+		hgh = 0;
+		var diff = 2;
+		if (!nRows) {
+			if (this.isVflex()) {
+				hgh = this._vflexSize(n.style.height);
+
+				if (zk.ie < 11 && this._cachehgh != hgh) {
+					hgh -= 1; 
+					this._cachehgh = hgh;
+				}
+				if (hgh < 25) hgh = 25;
+
+				var rowhgh = firstVisiRow ? zk(firstVisiRow).offsetHeight(): null;
+				if (!rowhgh)
+					rowhgh = this._headHgh(20);
+
+				nRows = Math.round((hgh - diff)/ rowhgh);
+			}
+			this._visibleRows(nRows);
+		}
+
+		if (nRows) {
+			if (!hgh) {
+				if (!nVisiRows) {
+					hgh = this._headHgh(20, true) * nRows;
+				} else if (nRows <= nVisiRows) {
+					var $midVisiRow = zk(midVisiRow);
+					hgh = $midVisiRow.offsetTop() + $midVisiRow.offsetHeight();
+				} else {
+					var $lastVisiRow = zk(lastVisiRow);
+					hgh = $lastVisiRow.offsetTop() + $lastVisiRow.offsetHeight();
+					hgh = Math.ceil((nRows * hgh) / nVisiRows);
+				}
+			}
+			this.ebody.style.height = hgh + 'px';
+		} else {
+			this.ebody.style.height = '';
+			var focusEL = this.$n('a');
+			if ((this.paging || this._paginal) && focusEL)
+				focusEL.style.top = '0px'; 
+		}
+	},
+	
+	_visibleRows: function (v) {
+		if ('number' == typeof v) {
+			this._visiRows = v;
+		} else
+			return this.getRows() || this._visiRows || 0;
+	},
+	
+	_headHgh: function (defVal, isExcludeAuxhead) {
+		var headWidget = this.getHeadWidget(), 
+			head = this.ehead,
+			hgh = isExcludeAuxhead ? (headWidget ? headWidget.$n().offsetHeight : 0) : (head ? head.offsetHeight : 0);
+		if (this.paging) {
+			var pgit = this.$n('pgit'),
+				pgib = this.$n('pgib');
+			if (pgit) hgh += pgit.offsetHeight;
+			if (pgib) hgh += pgib.offsetHeight;
+		}
+		return hgh ? hgh: defVal;
+	},
+	
+	indexOfItem: function (item) {
+		if (item.getMeshWidget() == this) {
+			for (var i = 0, it = this.getBodyWidgetIterator(), w; (w = it.next()); i++)
+				if (w == item) return i;
+		}
+		return -1;
+	},
+	toggleItemSelection: function (item) {
+		if (item.isSelected()) this._removeItemFromSelection(item);
+		else this._addItemToSelection(item);
+		this.updateFormData();
+	},
+	
+	selectItem: function (item) {
+		if (!item)
+			this.setSelectedIndex(-1);
+		else if (this._multiple || !item.isSelected())
+			this.setSelectedIndex(this.indexOfItem(item));
+	},
+	_addItemToSelection: function (item) {
+		if (!item.isSelected()) {
+			if (!this._multiple) {
+				this._selectedIndex = this.indexOfItem(item);
+			} else {
+				var index = this.indexOfItem(item);
+				if (index < this._selectedIndex || this._selectedIndex < 0) {
+					this._selectedIndex = index;
+				}
+				item._setSelectedDirectly(true);
+			}
+			this._selItems.push(item);
+		}
+	},
+	_removeItemFromSelection: function (item) {
+		if (item.isSelected()) {
+			if (!this._multiple) {
+				this.clearSelection();
+			} else {
+				item._setSelectedDirectly(false);
+				this._selItems.$remove(item);
+			}
+		}
+	},
+	
+	clearSelection: function () {
+		if (this._selItems.length) {
+			for(var item;(item = this._selItems.pop());)
+				item._setSelectedDirectly(false);
+			this._selectedIndex = -1;
+			this._updHeaderCM();
+		} else {
+			
+			this._anchorTop = this._anchorLeft = 0;
+			this._syncFocus();
+		}
+	},
+	
+	focus_: function (timeout) {
+		var btn;
+		if (btn = this.$n('a')) {
+			if (this._focusItem) {
+				for (var it = this.getBodyWidgetIterator(), w; (w = it.next());) 
+					if (this._isFocus(w)) {
+						w.focus_(timeout);
+						break;
+					}
+			} else {
+				
+				if (this._currentTop)
+					btn.style.top = this._currentTop + 'px';
+				if (this._currentLeft)
+					btn.style.left = this._currentLeft + 'px'; 	
+			}
+			this.focusA_(btn, timeout);
+			return true;
+		}
+		return false;
+	},
+	focusA_: function(btn, timeout) { 
+		
+		if (!this._multiple || this._isSelecting)
+			zk(btn).focus(timeout);
+	},
+	bind_: function () {
+		this.$supers(SelectWidget, 'bind_', arguments);
+		var btn = this.$n('a');
+		if (btn)
+			this.domListen_(btn, 'onFocus', 'doFocus_')
+				.domListen_(btn, 'onKeyDown')
+				.domListen_(btn, 'onBlur', 'doBlur_');
+		this.updateFormData();
+		this._updHeaderCM();
+	},
+	unbind_: function () {
+		unlistenOnFitSize(this);
+		var btn = this.$n('a');
+		if (btn)
+			this.domUnlisten_(btn, 'onFocus', 'doFocus_')
+				.domUnlisten_(btn, 'onKeyDown')
+				.domUnlisten_(btn, 'onBlur', 'doBlur_');
+		this.$supers(SelectWidget, 'unbind_', arguments);
+	},
+	clearCache: function () {
+		this.$supers('clearCache', arguments);
+		this.efield = null;
+	},
+	doFocus_: function (evt) {
+		var row	= this._focusItem || this._lastSelectedItem;
+		if (row) row._doFocusIn();
+		this.$supers('doFocus_', arguments);
+	},
+	doBlur_: function (evt) {
+		if (this._focusItem) {
+			this._lastSelectedItem = this._focusItem;
+			this._focusItem._doFocusOut();
+		}
+		this._focusItem = null;
+		this.$supers('doBlur_', arguments);
+	},
+	
+	shallIgnoreSelect_: function (evt) { 
+		
+		return evt.name == 'onRightClick' ? this.rightSelect ? -1: true: false;
+	},
+	
+	_shallIgnore: function(evt, bSel) { 
+		
+		if (this.checkOnHighlightDisabled_())
+			return true;
+		
+		if (!evt.domTarget || !evt.target.canActivate())
+			return true;
+
+		if (bSel) {
+			try {
+				var el = evt.domTarget;
+				if (el) 
+					for (;;) {
+						if (el.id == this.uuid) 
+							break;
+						if (!(el = el.parentNode))
+							return true; 
+					}
+			} catch (e) {
+			}
+
+			if (typeof (bSel = this.nonselectableTags) == 'string') {
+				if (!bSel)
+					return; 
+				if (bSel == '*')
+					return true;
+
+				var tn = jq.nodeName(evt.domTarget),
+					bInpBtn = tn == 'input' && evt.domTarget.type.toLowerCase() == 'button';
+				if (bSel.indexOf(tn) < 0) {
+					return bSel.indexOf('button') >= 0
+						&& (_isButton(evt) || bInpBtn);
+				}
+				return !bInpBtn || bSel.indexOf('button') >= 0;
+			}
+		}
+
+		return _focusable(evt);
+	},
+	
+	checkOnHighlightDisabled_: zk.$void,
+	_doItemSelect: function (row, evt) { 
+		
+		
+		
+		
+		var alwaysSelect,
+			tg = evt.domTarget,
+			cm = row.$n('cm'),
+			cmClicked = this._checkmark && (tg == cm || tg.parentNode == cm);
+		if (zk.dragging || (!cmClicked && (this._shallIgnore(evt, true)
+		|| ((alwaysSelect = this.shallIgnoreSelect_(evt, row))
+			&& !(alwaysSelect = alwaysSelect < 0)))))
+			return;
+
+		var skipFocus = _focusable(evt); 
+		if (this._checkmark
+		&& !evt.data.shiftKey && !(evt.data.ctrlKey || evt.data.metaKey) 
+		&& (!this._cdo || cmClicked)) {
+			
+			this._syncFocus(row);
+
+			if (this._multiple) {
+				var seled = row.isSelected();
+				if (!seled || !alwaysSelect)
+					this._toggleSelect(row, !seled, evt, skipFocus);
+			} else
+				this._select(row, evt, skipFocus);
+		} else {
+		
+		
+		
+			if ((zk.gecko || zk.webkit) && row.isListen('onDoubleClick')) {
+				var now = jq.now(), last = row._last;
+				row._last = now;
+				if (last && now - last < 900)
+					return; 
+			}
+			this._syncFocus(row);
+			if (this._multiple) {
+				if (evt.data.shiftKey)
+					this._selectUpto(row, evt, skipFocus);
+				else if (evt.data.ctrlKey || evt.data.metaKey || zk.mobile) 
+					this._toggleSelect(row, !row.isSelected(), evt, skipFocus);
+				else if (!alwaysSelect || !row.isSelected())
+					this._select(row, evt, skipFocus);
+			} else
+				this._select(row, evt, skipFocus);
+
+			
+			if (!skipFocus)
+				row.focus();
+			
+			
+			
+		}
+	},
+	
+	doKeyDown_: function (evt) {
+		if (!this._shallIgnore(evt)) {
+
+		
+		
+		
+		
+			switch (evt.data.keyCode) {
+			case 33: 
+			case 34: 
+			case 38: 
+			case 40: 
+			case 37: 
+			case 39: 
+			case 32: 
+			case 36: 
+			case 35: 
+				if (!jq.nodeName(evt.domTarget, 'a'))
+					this.focus();
+				if (evt.domTarget == this.$n('a')) {
+					if (evt.target == this) 
+						evt.target = this._focusItem || this.getSelectedItem() || this;
+					this._doKeyDown(evt);
+				}
+				evt.stop();
+				return false;
+			}
+		}
+
+		if (!zk.gecko || !jq.nodeName(evt.domTarget, 'input', 'textarea'))
+			zk(this.$n()).disableSelection();
+
+		
+		if (evt.target == this) 
+			evt.target = this._focusItem || this.getSelectedItem() || this;
+		this.$supers('doKeyDown_', arguments);
+	},
+	doKeyUp_: function (evt) {
+		zk(this.$n()).enableSelection();
+		evt.stop({propagation: true});
+		this.$supers('doKeyUp_', arguments);
+	},
+	_doKeyDown: function (evt) { 
+		if (_beforeChildKey(this, evt))
+			return true;
+
+		var row = this._focusItem || this.getSelectedItem(),
+			data = evt.data,
+			shift = data.shiftKey, ctrl = (data.ctrlKey || data.metaKey);
+		if (shift && !this._multiple)
+			shift = false; 
+
+		var endless = false, step, lastrow;
+
+		
+		if (zk.webkit && typeof data.keyCode == 'string')
+			data.keyCode = zk.parseInt(data.keyCode);
+		switch (data.keyCode) {
+		case 33: 
+		case 34: 
+			var pgnl = this.paging || this._paginal;
+			if (row && pgnl) { 
+				var npg = this.getActivePage() + (data.keyCode == 33 ? -1 : 1);
+				
+				if (npg > -1 && npg < this.getPageCount())
+					this.fire('onAcrossPage', {
+						page: npg, 
+						offset: this.indexOfItem(row),
+						shift: !shift || !this._multiple ? 0 : 
+							data.keyCode == 33 ? this.getPageSize() : -this.getPageSize()
+					});
+				return;
+			}
+			step = this._visibleRows();
+			if (step == 0)
+				step = this.getPageSize() || 20;
+			if (data.keyCode == 33)
+				step = -step;
+			break;
+		case 38: 
+		case 40: 
+			step = data.keyCode == 40 ? 1: -1;
+			break;
+		case 32: 
+			if (row) {
+				if (this._multiple)
+					this._toggleSelect(row, !row.isSelected(), evt);
+				else
+					this._select(row, evt);
+			}
+			break;
+		case 36: 
+		case 35: 
+			step = data.keyCode == 35 ? 1: -1;
+			endless = true;
+			break;
+		case 37: 
+			if (row)
+				this._doLeft(row);
+			break;
+		case 39: 
+			if (row)
+				this._doRight(row);
+			break;
+		}
+		
+		if (step > 0 || (step < 0 && row)) {
+			if (row && shift && !row.isDisabled()) 
+				this._toggleSelect(row, true, evt);
+			var nrow = row ? row.$n() : null;
+			for (;;) {
+				if (!nrow) { 
+					var w = this.getBodyWidgetIterator().next();
+					if (w)
+						nrow = w.$n(); 
+					else
+						return; 
+				} else
+					nrow = step > 0 ? nrow.nextSibling : nrow.previousSibling;
+				
+				if (!nrow) { 
+					if (endless)
+						break; 
+					var pg = this.paging || this._paginal, pnum;
+					if (pg) {
+						pnum = pg.getActivePage();
+						
+						if (step > 0 ? (pnum + 1 < pg.getPageCount()) : pnum > 0)
+							this.fire('onAcrossPage', {
+								page: pnum + (step > 0 ? 1 : 0), 
+								offset: step > 0 ? 0 : -1,
+								shift: !this._multiple || !shift ? 0 : step > 0 ? -1 : 1
+							});
+					}
+					break;
+				}
+				var r = zk.Widget.$(nrow);
+				if (r.$instanceof(zul.sel.Treerow))
+					r = r.parent;
+				if (!r.isDisabled()) {
+					if (shift) this._toggleSelect(r, true, evt);
+
+					if (zk(nrow).isVisible()) {
+						if (!shift) lastrow = r;
+						if (!endless) {
+							if (step > 0) --step;
+							else ++step;
+							if (step == 0) break;
+						}
+					}
+				}
+			}
+		}
+		
+		if (lastrow) {
+			if (ctrl)
+				this._focus(lastrow);
+			else
+				this._select(lastrow, evt);
+			this._syncFocus(lastrow);
+			var bar = this._scrollbar;
+			if (bar)
+				bar.scrollToElement(lastrow.$n());
+			else {
+				
+				zk(lastrow.$n()).scrollIntoView(this.ebody); 
+			} 
+				
+		}
+
+		return _afterChildKey(evt);
+	},
+	_doKeyUp: function (evt) { 
+		return _beforeChildKey(this, evt) || _afterChildKey(evt);
+	},
+	_doLeft: zk.$void,
+	_doRight: zk.$void,
+	
+	_syncFocus: function (row) {
+		var focusEl = this.$n('a');
+		if (!focusEl) 
+			return;
+		
+		var focusElStyle = focusEl.style,
+			oldTop = this._anchorTop,
+			oldLeft = this._anchorLeft,
+			offs, n;
+		if (row && (n = row.$n())) {
+			offs = zk(n).revisedOffset();
+			offs = this._toStyleOffset(focusEl, offs[0] + this.ebody.scrollLeft, offs[1]);
+		} else	
+			offs = [oldLeft? oldLeft : 0, oldTop? oldTop : 0];
+
+		this.fixAnchor_(offs, focusEl);
+		if( this._anchorTop != offs[1] || this._anchorLeft != offs[0]){
+			
+			
+			this._anchorTop = offs[1];
+			this._anchorLeft = offs[0];
+			this.fire('onAnchorPos',{top:this._anchorTop,left:this._anchorLeft});			
+		}
+		
+		focusElStyle.top = this._anchorTop + 'px';
+		focusElStyle.left = this._anchorLeft + 'px';
+	},
+	_toStyleOffset: function (el, x, y) {
+		var ofs1 = zk(el).revisedOffset(),
+			x2 = zk.parseInt(el.style.left), y2 = zk.parseInt(el.style.top);;
+		return [x - ofs1[0] + x2, y  - ofs1[1] + y2];
+	},
+	
+	fixAnchor_: function (offs, focusEl) {
+		var body = this.ebody,
+			sw = body.scrollWidth,
+			sh = body.scrollHeight;
+		if (offs[0] >= sw) offs[0] = sw - jq(focusEl).width();
+		if (offs[1] >= sh) offs[1] = sh - jq(focusEl).height();
+	},
+	
+	_select: function (row, evt, skipFocus) {
+		if (this._selectOne(row, skipFocus)) {
+			
+			this.fireOnSelect(row, evt);
+		}
+	},
+	
+	_selectUpto: function (row, evt, skipFocus) {
+		if (row.isSelected()) {
+			if (!skipFocus)
+				this._focus(row);
+			return; 
+		}
+
+		var focusfound = false, rowfound = false,
+			
+			lastSelected = this._focusItem || this._lastSelectedItem; 
+		for (var it = this.getBodyWidgetIterator(), si = this.getSelectedItem(), w; (w = it.next());) {
+			if (w.isDisabled()) continue; 
+			if (focusfound) {
+				this._changeSelect(w, true);
+				if (w == row)
+					break;
+			} else if (rowfound) {
+				this._changeSelect(w, true);
+				if (this._isFocus(w) || w == lastSelected)
+					break;
+			} else if (!si) { 
+				if (w != row)
+					continue;
+				this._changeSelect(w, true);
+				break;
+			} else {
+				rowfound = w == row;
+				focusfound = this._isFocus(w) || w == lastSelected;
+				if (rowfound || focusfound) {
+					this._changeSelect(w, true);
+					if (rowfound && focusfound)
+						break;
+				}
+			}
+		}
+
+		if (!skipFocus)
+			this._focus(row);
+		this.fireOnSelect(row, evt);
+	},
+	
+	setSelectAll: _zkf = function (notify, evt) {
+		for (var it = this.getBodyWidgetIterator(), w; (w = it.next());)
+			if (!w.isDisabled())
+				this._changeSelect(w, true);
+		if (notify && evt !== true)
+			this.fireOnSelect(this.getSelectedItem(), evt);
+	},
+	
+	selectAll: _zkf,
+	
+	_selectOne: function (row, skipFocus) {
+		var selItem = this.getSelectedItem();
+		if (this._multiple) {
+			if (row && !skipFocus) this._unsetFocusExcept(row);
+			var changed = this._unsetSelectAllExcept(row);
+			if (!changed && row && selItem == row) {
+				if (!skipFocus) this._setFocus(row, true);
+				return false; 
+			}
+		} else {
+			if (selItem) {
+				if (selItem == row) {
+					if (!skipFocus) this._setFocus(row, true);
+					return false; 
+				}
+				this._changeSelect(selItem, false);
+				if (row)
+					if(!skipFocus) this._setFocus(selItem, false);
+			}
+			if (row && !skipFocus) this._unsetFocusExcept(row);
+		}
+		
+		if (row) {
+			this._changeSelect(row, true);
+			if (!skipFocus) this._setFocus(row, true);
+		}
+		return true;
+	},
+	
+	_toggleSelect: function (row, toSel, evt, skipFocus) {
+		
+		this._isSelecting = toSel;
+		if (!this._multiple) {
+			var old = this.getSelectedItem();
+			if (row != old && toSel)
+				this._changeSelect(row, false);
+		}
+
+		this._changeSelect(row, toSel);
+		if (!skipFocus) {
+			
+			
+			var rowIndex = this.indexOfItem(row), 
+				min = Number.MAX_VALUE, 
+				closestSelItem;
+			for (var i = 0; i < this._selItems.length; ++i) {
+				var item = this._selItems[i],
+					index = this.indexOfItem(item),
+					diff = rowIndex - index,
+					oldmin = min;
+				if ((diff <= 0) && closestSelItem) 
+					break;
+				min = Math.min(diff, min);
+				if (min != oldmin)
+					closestSelItem = item;
+			}
+			
+			if (toSel || !closestSelItem)
+				this._focus(row);
+			else 
+				this._focus(closestSelItem);
+		}
+
+		
+		this.fireOnSelect(row, evt);
+	},
+	
+	fireOnSelect: function (ref, evt) {
+		var data = [];
+
+		for (var it = this.getSelectedItems(), j = it.length; j--;)
+			if (it[j].isSelected())
+				data.push(it[j]);
+
+		var edata, keep = true;
+		var checkSelectAll = evt.domTarget.id && evt.domTarget.id.endsWith('-cm');
+		if (evt) {
+			edata = evt.data;
+			if (this._multiple) 
+				keep = (edata.ctrlKey || edata.metaKey) || edata.shiftKey || 
+					(this._checkmark && (!this._cdo || checkSelectAll));
+		}
+
+		this.fire('onSelect', zk.copy({items: data, reference: ref, clearFirst: !keep, selectAll: checkSelectAll}, edata));
+	},
+	
+	_focus: function (row) {
+		if (this.canActivate({checkOnly:true})) {
+			this._unsetFocusExcept(row);
+			this._setFocus(row, true);
+		}
+	},
+	
+	_changeSelect: function (row, toSel) {
+		var changed = !!row.isSelected() != toSel;
+		if (changed) {
+			row.setSelected(toSel);
+			
+		}
+		return changed;
+	},
+	_isFocus: function (row) {
+		return this._focusItem == row;
+	},
+	
+	_setFocus: function (row, bFocus) {
+		var changed = this._isFocus(row) != bFocus;
+		if (changed) {
+			if (bFocus) {
+				if (!row.focus())
+					this.focus();
+
+				if (!this.paging && zk.gecko)
+					this.fireOnRender(5);
+					
+			}
+		}
+		if (!bFocus)
+			row._doFocusOut();
+		return changed;
+	},
+	
+	_unsetSelectAllExcept: function (row) {
+		var changed = false;
+		for (var it = this.getSelectedItems(), j = it.length; j--;) {
+			if (it[j] != row && this._changeSelect(it[j], false))
+				changed = true;
+		}
+		return changed;
+	},
+	
+	_unsetFocusExcept: function (row) {
+		if (this._focusItem && this._focusItem != row)
+			this._setFocus(this._focusItem, false)
+		else
+			this._focusItem = null;
+	},
+	_updHeaderCM: function () { 
+		if (this._headercm && this._multiple) {
+			var box = this, v;
+			this._nUpdHeaderCM = (v = this._nUpdHeaderCM) > 0 ? v + 1: 1;
+			setTimeout(function () {_updHeaderCM(box);}, 100); 
+		}
+	},
+	_isAllSelected: function () {
+		
+		if (!this._selItems.length)
+			return false;
+		var isGroupSelect = this.groupSelect;
+		for (var it = this.getBodyWidgetIterator({skipHidden:true}), w; (w = it.next());) {
+			
+			if ((_isListgroup(w) || _isListgroupfoot(w)) && !isGroupSelect)
+				continue;
+			if (!w.isDisabled() && !w.isSelected())
+				return false;
+		}
+		return true;
+	},
+	_ignoreHghExt: function () {
+		return this._rows > 0;
+	},
+	
+	onResponse: function () {
+		if (this._shallSyncFocus) {
+			var child = this._shallSyncFocus;
+			
+			
+			
+			
+			
+			if (!child.desktop) {
+				child = this.getSelectedItem();
+				if (!child && jq.isNumeric(this.getSelectedIndex())) {
+					var selIndex = this.getSelectedIndex();
+					if (selIndex >= 0) {
+						for (var it = this.getBodyWidgetIterator(); it.hasNext();) {
+							var row = it.next();
+							if (row && row._index == selIndex) {
+								child = row;
+								break;
+							}
+								
+						}
+					}
+				}
+			}
+			this._focusItem = child;
+			this._syncFocus(child);
+			this._shallSyncFocus = false;
+		}
+		this.$supers(SelectWidget, 'onResponse', arguments);
+	},
+	onChildAdded_: function (child) {
+		this.$supers('onChildAdded_', arguments);
+		if (this.desktop) {
+			if (child.$instanceof(zul.sel.ItemWidget) && child.isSelected())
+				this._shallSyncFocus = child;
+		}
+	},
+	
+	onChildRemoved_: function (child) {
+		this.$supers('onChildRemoved_', arguments);
+		var selItems = this._selItems, len;
+		if (this.desktop && (len = selItems.length) && child.$instanceof(zul.sel.ItemWidget))
+			this._shallSyncFocus = selItems[len - 1];
+		
+		
+		
+		if (this._focusItem == child)
+			this._focusItem = null;
+	},
+	
+	replaceWidget: function (newwgt) {
+		this.$supers('replaceWidget', arguments);
+
+		newwgt._lastSelectedItem = _fixReplace(this._lastSelectedItem);
+		newwgt._focusItem = _fixReplace(this._focusItem);
+	}
+});
+
+})();
+
+
+(function () {
+	function _isListgroup(w) {
+		return zk.isLoaded('zkex.sel') && w.$instanceof(zkex.sel.Listgroup);
+	}
+	function _isListgroupfoot(w) {
+		return zk.isLoaded('zkex.sel') && w.$instanceof(zkex.sel.Listgroupfoot);
+	}
+
+zul.sel.ItemWidget = zk.$extends(zul.Widget, {
+	_checkable: true,
+	$define: {
+		
+		
+		checkable: function () {
+			if (this.desktop)
+				this.rerender();
+		},
+		
+		
+		disabled: function () {
+			if (this.desktop)
+				this.rerender();
+		},
+		
+		
+		value: null
+	},
+	
+	setSelected: function (selected) {
+		if (this._selected != selected) {
+			var box = this.getMeshWidget();
+			if (box)
+				box.toggleItemSelection(this);
+				
+			this._setSelectedDirectly(selected);
+		}
+	},
+	_setSelectedDirectly: function (selected) {
+		var n = this.$n();
+		if (n) {
+			jq(n)[selected ? 'addClass' : 'removeClass'](this.$s('selected'));
+			
+            
+			this._updHeaderCM();
+		}
+		this._selected = selected;
+	},
+	
+	getLabel: function () {
+		return this.firstChild ? this.firstChild.getLabel() : null; 
+	},
+	
+	isSelected: function () {
+		return this._selected;
+	},
+	
+	isStripeable_: function () {
+		return true;
+	},
+	
+	getMeshWidget: function () {
+		return this.parent;
+	},
+	_getVisibleChild: function (row) {
+		for (var i = 0, j = row.cells.length; i < j; i++)
+			if (zk(row.cells[i]).isVisible()) return row.cells[i];
+		return row;
+	},
+	
+	setVisible: function (visible) {
+		if (this._visible != visible) { 
+			this.$supers('setVisible', arguments);
+			if (this.isStripeable_()) {
+				var p = this.getMeshWidget();
+				if (p) p.stripe();
+			}
+		}
+	},
+	domClass_: function (no) {
+		var scls = this.$supers('domClass_', arguments);
+		if (!no || !no.zclass) {
+			var zcls = this.getZclass();
+			if (this.isDisabled())
+				scls += (scls ? ' ': '') + this.$s('disabled');
+			
+			if (_isListgroup(this) || _isListgroupfoot(this)) {
+				if (this.getMeshWidget().groupSelect && this.isSelected())
+					scls += (scls ? ' ': '') + this.$s('selected');
+			} else {
+				if (this.isSelected())
+					scls += (scls ? ' ': '') + this.$s('selected');
+			}
+		}
+		return scls;
+	},
+	focus_: function (timeout) {
+		var mesh = this.getMeshWidget();
+		this._doFocusIn();
+		mesh._syncFocus(this);
+		mesh.focusA_(mesh.$n('a'), timeout);
+		return true;
+	},
+	_doFocusIn: function () {
+		var n = this.$n();
+		if (n)
+			jq(this._getVisibleChild(n)).addClass(this.$s('focus'));
+		
+		if (n = this.getMeshWidget())
+			n._focusItem = this;			
+	},
+	_doFocusOut: function () {
+		var n = this.$n();
+		if (n) {
+			var cls = this.$s('focus');
+			jq(n).removeClass(cls);
+			jq(n.cells).removeClass(cls);
+		}
+	},
+	_updHeaderCM: function (bRemove) { 
+		var box;
+		if ((box = this.getMeshWidget()) && box._headercm && box._multiple) {
+			if (bRemove) {
+				box._updHeaderCM();
+				return;
+			}
+
+			var zcls = zk.Widget.$(box._headercm).$s('checked'),
+				$headercm = jq(box._headercm);
+
+			if (!this.isSelected())
+				$headercm.removeClass(zcls);
+			else if (!$headercm.hasClass(zcls))
+				box._updHeaderCM(); 
+		}
+	},
+	
+	beforeParentChanged_: function (newp) {
+		if (!newp) 
+			this._updHeaderCM(true);
+		this.$supers('beforeParentChanged_', arguments);
+	},
+	
+	afterParentChanged_: function () {
+		if (this.parent) 
+			this._updHeaderCM();
+		this.$supers('afterParentChanged_', arguments);
+	},
+
+	
+	doSelect_: function(evt) {
+		if (this.isDisabled() || !this.isCheckable()) return;
+		if (!evt.itemSelected) {
+			this.getMeshWidget()._doItemSelect(this, evt);
+			evt.itemSelected = true;
+		}
+		this.$supers('doSelect_', arguments);
+	},
+	doKeyDown_: function (evt) {
+		var mesh = this.getMeshWidget();
+		if (!zk.gecko || !jq.nodeName(evt.domTarget, 'input', 'textarea'))
+			zk(mesh.$n()).disableSelection();
+		mesh._doKeyDown(evt);
+		this.$supers('doKeyDown_', arguments);
+	},
+	doKeyUp_: function (evt) {
+		var mesh = this.getMeshWidget();
+		zk(mesh.$n()).enableSelection();
+		mesh._doKeyUp(evt);
+		this.$supers('doKeyUp_', arguments);
+	},
+	deferRedrawHTML_: function (out) {
+		out.push('<tr', this.domAttrs_({domClass:1}), ' class="z-renderdefer"></tr>');
+	}
+});
+})();
+
+(function () {
+
+	function _isListgroup(wgt) {
+		return zk.isLoaded('zkex.sel') && wgt.$instanceof(zkex.sel.Listgroup);
+	}
+	function _syncFrozen(wgt) {
+		if (wgt._nativebar && (wgt = wgt.frozen))
+			wgt._syncFrozen();
+	}
+	function _fixForEmpty(wgt) {
+		if (wgt.desktop) {
+			var empty = wgt.$n('empty'),
+				colspan = 0;
+			if (wgt._nrows) {
+				empty.style.display = 'none';
+			} else {
+				if (wgt.listhead) {
+					for (var w = wgt.listhead.firstChild; w; w = w.nextSibling)
+						if (w.isVisible())
+							colspan++;
+				}
+				empty.colSpan = colspan || 1;
+				
+				empty.style.display = 'table-cell';
+			}
+		}
+		wgt._shallFixEmpty = false;
+	}
+
+var Listbox =
+
+zul.sel.Listbox = zk.$extends(zul.sel.SelectWidget, {
+	_nrows: 0,
+	
+	groupSelect: false,
+	_scrollbar: null,
+	$define: {
+		
+		
+		emptyMessage: function(msg) {
+			if(this.desktop)
+				jq(this.$n('empty')).html(msg);
+		}
+	},	
+	$init: function () {
+		this.$supers(Listbox, '$init', arguments);
+		this._groupsInfo = [];
+	},
+	
+	getGroupCount: function () {
+		return this._groupsInfo.length;
+	},
+	
+	getGroups: function () {
+		return this._groupsInfo.$clone();
+	},
+	
+	hasGroup: function () {
+		return this._groupsInfo.length;
+	},
+	
+	nextItem: function (p) {
+		if (p)
+			while ((p = p.nextSibling) && !p.$instanceof(zul.sel.Listitem));
+		return p;
+	},
+	
+	previousItem: function (p) {
+		if (p)
+			while ((p = p.previousSibling) && !p.$instanceof(zul.sel.Listitem));
+		return p;
+	},
+	
+	getOddRowSclass: function () {
+		return this._scOddRow == null ? this.$s('odd') : this._scOddRow;
+	},
+	
+	setOddRowSclass: function (scls) {
+		if (!scls) scls = null;
+		if (this._scOddRow != scls) {
+			this._scOddRow = scls;
+			var n = this.$n();
+			if (n && this.rows)
+				this.stripe();
+		}
+		return this;
+	},
+	
+	inSelectMold: function () {
+		return 'select' == this.getMold();
+	},
+	
+	onSize: function () {
+		this.$supers(Listbox, 'onSize', arguments);
+		var self = this,
+			canInitScrollbar =  this.desktop && !this.inSelectMold() && !this._nativebar;
+		if (!this._scrollbar && canInitScrollbar)
+			this._scrollbar = zul.mesh.Scrollbar.init(this); 
+		setTimeout(function () {
+			if(self.desktop) {
+				if (canInitScrollbar) {
+					self.refreshBar_();
+				}
+				
+				self._syncSelInView();
+			}
+		}, 300);
+	},
+	destroyBar_: function () {
+		var bar = this._scrollbar;
+		if (bar) {
+			bar.destroy();
+			bar = this._scrollbar = null;
+		}
+	},
+	bind_: function (desktop, skipper, after) {
+		this.$supers(Listbox, 'bind_', arguments); 
+		this._shallStripe = true;
+		var w = this;
+		after.push(function () {
+			w.stripe();
+			_syncFrozen(w);
+			_fixForEmpty(w);
+		});
+		this._shallScrollIntoView = true;
+	},
+	unbind_: function () {
+		this.destroyBar_();
+		this.$supers(Listbox, 'unbind_', arguments);
+	},
+	_syncSelInView: function () {
+		if (this._shallScrollIntoView) {
+			var index = this.getSelectedIndex();
+			if (index >= 0) { 
+				var si, bar = this._scrollbar;
+				if (bar) {
+					for (var it = this.getBodyWidgetIterator(); index-- >= 0;)
+						si = it.next();
+					
+					if (si)
+						bar.scrollToElement(si.$n());
+				} else {
+					var si;
+					for (var it = this.getBodyWidgetIterator(); index-- >= 0;) 
+						si = it.next();
+					if (si) {
+						zk(si).scrollIntoView(this.ebody);
+						this._tmpScrollTop = this.ebody.scrollTop;
+					}
+				}
+			}
+			
+			this._shallScrollIntoView = false;
+		}
+	},
+	_doScroll: function () {
+		
+		
+		if (this._tmpScrollTop) {
+			this.ebody.scrollTop = this._tmpScrollTop; 
+			this._tmpScrollTop = null;
+		}
+		this.$super(zul.sel.Listbox, '_doScroll');
+	},
+	onResponse: function (ctl, opts) {
+		if (this.desktop) {
+			if (this._shallStripe)
+				this.stripe();
+			if (this._shallFixEmpty) 
+				_fixForEmpty(this);
+		}
+		this.$supers(Listbox, 'onResponse', arguments);
+	},
+	_syncStripe: function () {
+		this._shallStripe = true;
+	},
+	
+	stripe: function () {
+		var scOdd = this.getOddRowSclass();
+		if (!scOdd) return;
+		var odd = this._offset & 1,
+			even = !odd,
+			it = this.getBodyWidgetIterator();
+		for (var j = 0, w; w = it.next(); j++) {
+			if (w.isVisible() && w.isStripeable_()) {
+				jq(w)[even ? 'removeClass' : 'addClass'](scOdd);
+				even = !even;
+			}
+		}
+		this._shallStripe = false;
+		return this;
+	},
+	rerender: function () {
+		this.$supers(Listbox, 'rerender', arguments);
+		this._syncStripe();
+		return this;
+	},
+	getCaveNode: function () {
+		return this.$n('rows') || this.$n('cave');
+	},	
+	insertChildHTML_: function (child, before, desktop) {
+		if (before = before && (!child.$instanceof(zul.sel.Listitem) || before.$instanceof(zul.sel.Listitem)) ? before.getFirstNode_(): null)
+			jq(before).before(child.redrawHTML_());
+		else
+			jq(this.getCaveNode()).append(child.redrawHTML_());
+		child.bind(desktop);
+	},
+	insertBefore: function (child, sibling, ignoreDom) {
+		if (this.$super('insertBefore', child, sibling,
+		ignoreDom || (!this.z_rod && !child.$instanceof(zul.sel.Listitem)))) {
+			this._fixOnAdd(child, ignoreDom);
+			return true;
+		}
+	},
+	appendChild: function (child, ignoreDom) {
+		if (this.$super('appendChild', child,
+		ignoreDom || (!this.z_rod && !child.$instanceof(zul.sel.Listitem)))) {
+			if (!this.insertingBefore_)
+				this._fixOnAdd(child, ignoreDom);
+			return true;
+		}
+	},
+	_fixOnAdd: function (child, ignoreDom, stripe, ignoreAll) {
+		var noRerender;
+		if (child.$instanceof(zul.sel.Listitem)) {
+			if (_isListgroup(child))
+				this._groupsInfo.push(child);
+			if (!this.firstItem || !this.previousItem(child))
+				this.firstItem = child;
+			if (!this.lastItem || !this.nextItem(child))
+				this.lastItem = child;
+			++this._nrows;
+			
+			if (child.isSelected() && !this._selItems.$contains(child))
+				this._selItems.push(child);
+			noRerender = stripe = true;
+		} else if (child.$instanceof(zul.sel.Listhead)) {
+			this.listhead = child;
+		} else if (child.$instanceof(zul.mesh.Paging)) {
+			this.paging = child;
+		} else if (child.$instanceof(zul.sel.Listfoot)) {
+			this.listfoot = child;
+		} else if (child.$instanceof(zul.mesh.Frozen)) {
+			this.frozen = child;
+		}
+		
+		this._syncEmpty();
+		
+		if (!ignoreAll) {
+			if (!ignoreDom && !noRerender)
+				return this.rerender();
+			if (stripe)
+				this._syncStripe();
+			if (!ignoreDom)
+				this._syncSize();
+			if (this.desktop)
+				_syncFrozen(this);
+		}
+	},
+	removeChild: function (child, ignoreDom) {
+		if (this.$super('removeChild', child, ignoreDom)) {
+			this._fixOnRemove(child, ignoreDom);
+			return true;
+		}
+	},
+	_fixOnRemove: function (child, ignoreDom) {
+		var stripe;
+		if (child == this.listhead)
+			this.listhead = null;
+		else if (child == this.paging)
+			this.paging = null;
+		else if (child == this.frozen) {
+			this.frozen = null;
+			this.destroyBar_();
+		} else if (child == this.listfoot)
+			this.listfoot = null;
+		else if (!child.$instanceof(zul.mesh.Auxhead)) {
+			if (child == this.firstItem) {
+				for (var p = this.firstChild, Listitem = zul.sel.Listitem;
+				p && !p.$instanceof(Listitem); p = p.nextSibling)
+					;
+				this.firstItem = p;
+			}
+			if (child == this.lastItem) {
+				for (var p = this.lastChild, Listitem = zul.sel.Listitem;
+				p && !p.$instanceof(Listitem); p = p.previousSibling)
+					;
+				this.lastItem = p;
+			}
+			if (_isListgroup(child))
+				this._groupsInfo.$remove(child);
+			--this._nrows;
+			
+			if (child.isSelected())
+				this._selItems.$remove(child);
+			stripe = true;
+		}
+		this._syncEmpty();
+		if (!ignoreDom) { 
+			if (stripe) this._syncStripe();
+			this._syncSize();
+		}
+	},
+	
+	redrawEmpty_: function (out) {
+		out.push('<tbody class="', this.$s('emptybody'), '"><tr><td id="', 
+				this.uuid, '-empty" style="display:none">',
+				this._emptyMessage ,'</td></tr></tbody>');
+	},
+	replaceChildHTML_: function (child, n, desktop, skipper, _trim_) {
+		if(child._renderdefer) {
+			var scOdd = this.getOddRowSclass(),
+				isOdd = jq(n).hasClass(scOdd); 
+			
+			this.$supers('replaceChildHTML_', arguments);
+			if(isOdd) jq(child).addClass(scOdd);
+		} else 
+			this.$supers('replaceChildHTML_', arguments);
+	},
+	
+	_syncEmpty: function () {
+		this._shallFixEmpty = true;
+	},
+	onChildReplaced_: function (oldc, newc) {
+		this.$supers(Listbox, 'onChildReplaced_', arguments);
+
+		if (oldc) this._fixOnRemove(oldc, true);
+		if (newc) this._fixOnAdd(newc, true, false, true); 
+
+		if ((oldc && oldc.$instanceof(zul.sel.Listitem))
+				|| (newc && newc.$instanceof(zul.sel.Listitem)))
+			this._syncStripe();
+		this._syncSize();
+		if (this.desktop)
+			_syncFrozen(this);
+	},
+	
+	getHeadWidgetClass: function () {
+		return zul.sel.Listhead;
+	},
+	
+	itemIterator: _zkf = function (opts) {
+		return new zul.sel.ItemIter(this, opts);
+	},
+	
+	getBodyWidgetIterator: _zkf,
+	_updHeaderCM: function () {
+		
+		var lh;
+		if (this._headercm && this._multiple 
+			&& (lh = this.listhead) && (lh = lh.firstChild))
+			lh._checked = this._isAllSelected();
+		this.$supers(Listbox, '_updHeaderCM', arguments);
+	},
+	checkOnHighlightDisabled_: function() {
+		if (this._selectOnHighlightDisabled) {
+			var selection = window.getSelection || document.selection;
+			if (selection) {
+				if (zk.ie && zk.ie < 9) {
+					return selection.type == 'Text' && selection.createRange().htmlText.length > 0;
+				} else {
+					return selection().toString().length > 0;
+				}
+			}
+		}
+	}
+});
+
+zul.sel.ItemIter = zk.$extends(zk.Object, {
+	
+	$init: function (box, opts) {
+		this.box = box;
+		this.opts = opts;
+	},
+	_init: function () {
+		if (!this._isInit) {
+			this._isInit = true;
+			var p = this.box.firstItem;
+			if(this.opts && this.opts.skipHidden)
+				for (; p && !p.isVisible(); p = p.nextSibling) {}
+			this.p = p;
+		}
+	},
+	 
+	hasNext: function () {
+		this._init();
+		return this.p;
+	},
+	
+	next: function () {
+		this._init();
+		var p = this.p,
+			q = p ? p.parent.nextItem(p) : null;
+		if (this.opts && this.opts.skipHidden)
+			for (; q && !q.isVisible(); q = q.parent.nextItem(q)) {}
+		if (p) 
+			this.p = q;
+		return p;
+	}
+});
+
+})();
+
+zkreg('zul.sel.Listbox');zk._m={};
+zk._m['paging']=
+function (out) {
+	var uuid = this.uuid,
+		zcls = this.getZclass(),
+		innerWidth = this.getInnerWidth(),
+		wdAttr = innerWidth == '100%' ? ' width="100%"' : '',
+		wdStyle =  innerWidth != '100%' ? 'width:' + innerWidth : '',
+		inPaging = this.inPagingMold(), pgpos,
+		tag = zk.ie < 11 || zk.gecko ? 'a' : 'button';
+
+	out.push('<div', this.domAttrs_(), '>');
+
+	if (inPaging && this.paging) {
+		pgpos = this.getPagingPosition();
+		if (pgpos == 'top' || pgpos == 'both') {
+			out.push('<div id="', uuid, '-pgit" class="', this.$s('paging-top'), '">');
+			this.paging.redraw(out);
+			out.push('</div>');
+		}
+	}
+
+	if (this.listhead) {
+		out.push('<div id="', uuid, '-head" class="', this.$s('header'), '">',
+			'<table id="', uuid, '-headtbl"', wdAttr, ' style="table-layout:fixed;',
+			wdStyle,'">');
+		this.domFaker_(out, '-hdfaker');
+		
+		out.push('<tbody id="', uuid, '-headrows">');
+		for (var hds = this.heads, j = 0, len = hds.length; j < len;)
+			hds[j++].redraw(out);
+	
+		out.push('</tbody></table></div><div class="', this.$s('header-border'), '"></div>');
+	}
+	out.push('<div id="', uuid, '-body" class="', this.$s('body'));
+	if (this._autopaging)
+		out.push(' ', this.$s('autopaging'));
+	out.push('"');
+	
+	var hgh = this.getHeight();
+	if (hgh)
+		out.push(' style="overflow:hidden;height:', hgh, '"');
+	out.push('>');
+	
+	if (this.domPad_ && !inPaging)
+		this.domPad_(out, '-tpad');
+	
+	out.push('<table', wdAttr, ' id="', uuid, '-cave"', ' style="table-layout:fixed;', wdStyle,'">');
+	
+	if (this.listhead)
+		this.domFaker_(out, '-bdfaker', zcls);
+
+	out.push('<tbody id="',uuid,'-rows">');
+	for (var item = this.firstItem; item; item = this.nextItem(item))
+		item.redraw(out);
+	out.push('</tbody>');
+	
+	this.redrawEmpty_(out);
+
+	out.push('</table>');
+
+	if (this.domPad_ && !inPaging)
+		this.domPad_(out, '-bpad');
+	
+	out.push('<', tag, ' id="', uuid, '-a" style="top:',jq.px0(this._anchorTop),';left:',jq.px0(this._anchorLeft), 
+			 '" onclick="return false;" href="javascript:;" class="z-focus-a"');
+	var tabindex = this._tabindex; 
+	if (tabindex)
+		out.push(' tabindex="' + tabindex + '"');
+	out.push('></', tag, '>', "</div>");
+	
+	if (this._nativebar && this.frozen) {
+		out.push('<div id="', uuid, '-frozen" class="', this.$s('frozen'), '">');
+		this.frozen.redraw(out);
+		out.push('</div>');
+	}
+
+	if (this.listfoot) {
+		out.push('<div id="', uuid, '-foot" class="', this.$s('footer'), '">',
+			'<table id="', uuid, '-foottbl"', wdAttr, ' style="table-layout:fixed;', wdStyle,'">');
+		if (this.listhead) 
+			this.domFaker_(out, '-ftfaker');
+		
+		out.push('<tbody id="', uuid, '-footrows">');
+		this.listfoot.redraw(out);
+		out.push('</tbody></table></div>');
+	}
+
+	if (pgpos == 'bottom' || pgpos == 'both') {
+		out.push('<div id="', uuid, '-pgib" class="', this.$s('paging-bottom'), '">');
+		this.paging.redraw(out);
+		out.push('</div>');
+	}
+	out.push('</div>');
+}
+;zk._m['default']=[zk._p.p.Listbox,'paging'];zkmld(zk._p.p.Listbox,zk._m);
+(function () {
+
+	function _isPE() {
+		return zk.isLoaded('zkex.sel');
+	}
+	
+	function updateImg(drag) {
+		var dragImg = drag._dragImg;
+		if (dragImg) {
+			
+			var allow = jq(drag.node).hasClass('z-drop-allow');
+			for (var len = 0; len < dragImg.length; len ++) {
+				if (allow)
+					jq(dragImg[len]).removeClass('z-icon-times').addClass('z-icon-check');
+				else
+					jq(dragImg[len]).removeClass('z-icon-check').addClass('z-icon-times');
+			}
+		}
+	}
+
+zul.sel.Listitem = zk.$extends(zul.sel.ItemWidget, {
+	
+	getListbox: function () {
+		return this.parent;
+	},
+	
+	getListgroup: function () {
+		
+		if (_isPE() && this.parent && this.parent.hasGroup())
+			for (var w = this; w; w = w.previousSibling)
+				if (w.$instanceof(zkex.sel.Listgroup))
+					return w;
+				
+		return null;
+	},
+	
+	setLabel: function (val) {
+		this._autoFirstCell().setLabel(val);
+	},
+	
+	getDragMessage_: function () {
+		var p = this.parent,
+			p_sel = p._selItems,
+			length = p_sel.length,
+			inst = zul.sel.Listitem,
+			msg,
+			cnt = 2;
+		
+		
+		
+		
+		if (!this.isSelected() || !length || (length == 1 && p_sel[0] == this))
+			return this.getLabel();
+		for (var w = p.firstChild; w; w = w.nextSibling)
+			if (w.$instanceof(inst) && w.isSelected()) {
+				var label = w.getLabel();
+				if (label.length > 9)
+					label = label.substring(0, 9) + "...";
+				if (!msg)
+					msg = label;
+				else
+					msg += '</div><div class="z-drop-content"><span id="zk_ddghost-img'
+						+ (cnt++) + '" class="z-drop-icon"></span>&nbsp;'
+						+ label;
+			}
+		return msg;
+	},
+	
+	getDragOptions_: function (map) {
+		var old = map.change;
+		map.change =  function (drag, pt, evt) {
+			old(drag, pt, evt);
+			
+			updateImg(drag);
+		};
+		return this.$supers('getDragOptions_', arguments);
+	},
+	
+	
+	cloneDrag_: function (drag, ofs) {
+		
+		var msg = this.getDragMessage_();
+		var dgelm = zk.DnD.ghost(drag, ofs, msg);
+
+		drag._orgcursor = document.body.style.cursor;
+		document.body.style.cursor = 'pointer';
+		jq(this.getDragNode()).addClass('z-dragged'); 
+		
+		drag._dragImg = jq('span[id^="zk_ddghost-img"]');
+		return dgelm;
+	},
+	
+	setImage: function (val) {
+		this._autoFirstCell().setImage(val);
+	},
+	_autoFirstCell: function () {
+		if (!this.firstChild)
+			this.appendChild(new zul.sel.Listcell());
+		return this.firstChild;
+	},
+	
+	domStyle_: function (no) {
+		if (_isPE() && (this.$instanceof(zkex.sel.Listgroup) || this.$instanceof(zkex.sel.Listgroupfoot))
+				|| (no && no.visible))
+			return this.$supers('domStyle_', arguments);
+			
+		var style = this.$supers('domStyle_', arguments),
+			group = this.getListgroup();
+		return group && !group.isOpen() ? style + 'display:none;' : style;
+	},
+	domClass_: function () {
+		var cls = this.$supers('domClass_', arguments),
+			list = this.getListbox();
+		if (list && jq(this.$n()).hasClass(list = list.getOddRowSclass()))
+			return cls + ' ' + list; 
+		return cls;
+	},
+	replaceWidget: function (newwgt) {
+		this._syncListitems(newwgt);
+		this.$supers('replaceWidget', arguments);
+	},
+	scrollIntoView: function () {
+		var bar = this.getListbox()._scrollbar;
+		if (bar) {
+			bar.syncSize();
+			bar.scrollToElement(this.$n());
+		} else {
+			this.$supers('scrollIntoView', arguments);
+		}
+	},
+	_updHeaderCM: function (bRemove) {
+		
+		var box, lh;
+		if (!this.isSelected() && (box = this.getListbox()) 
+			&& box._headercm && box._multiple && 
+				(lh = box.listhead) && (lh = lh.firstChild))
+			lh._checked = false;
+		this.$supers('_updHeaderCM', arguments);
+	},
+	_syncListitems: function (newwgt) {
+		var box;
+		if (box = this.getListbox()) {
+			if (box.firstItem.uuid == newwgt.uuid)
+				box.firstItem = newwgt;
+			if (box.lastItem.uuid == newwgt.uuid)
+				box.lastItem = newwgt;
+
+			var items = box._selItems, b1, b2;
+			if (b1 = this.isSelected())
+				items.$remove(this);
+			if (b2 = newwgt.isSelected())
+				items.push(newwgt);
+			if (b1 != b2)
+				box._updHeaderCM();
+		}
+	}
+});
+})();
+zkreg('zul.sel.Listitem');zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<tr', this.domAttrs_(), '>');
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	out.push('</tr>');
+}
+
+;zkmld(zk._p.p.Listitem,zk._m);
+(function () {
+
+	function _isListgroup(wgt) {
+		return zk.isLoaded('zkex.sel') && wgt.$instanceof(zkex.sel.Listgroup);
+	}	
+	function _isListgroupfoot(wgt) {
+		return zk.isLoaded('zkex.sel') && wgt.$instanceof(zkex.sel.Listgroupfoot);
+	}	
+
+zul.sel.Listcell = zk.$extends(zul.LabelImageWidget, {
+	_colspan: 1,
+	$define: {
+    	
+    	
+		colspan: [
+			function (colspan) {
+				return colspan > 1 ? colspan: 1;
+			},
+			function () {
+				var n = this.$n();
+				if (n) n.colSpan = this._colspan;
+			}]
+	},
+	setLabel: function () {
+		this.$supers('setLabel', arguments);
+		if (this.desktop) {
+			var p = this.parent;
+	 		if (_isListgroup(p))
+				p.rerender();
+			else if (p.$instanceof(zul.sel.Option))
+				this.getListbox().rerender(); 
+		}
+	},
+	
+	getListbox: function () {
+		var p = this.parent;
+		return p ? p.parent: null;
+	},
+
+	
+	getTextNode: function () {
+		return jq(this.$n()).find('>div:first')[0];
+	},
+	
+	getMaxlength: function () {
+		var box = this.getListbox();
+		if (!box) return 0;
+		if (box.getMold() == 'select')
+			return box.getMaxlength();
+		var lc = this.getListheader();
+		return lc ? lc.getMaxlength() : 0;
+	},
+	
+	getListheader: function () {
+		var box = this.getListbox();
+		if (box && box.listhead) {
+			var j = this.getChildIndex();
+			if (j < box.listhead.nChildren)
+				return box.listhead.getChildAt(j);
+		}
+		return null;
+	},
+	domLabel_: function () {
+		return zUtl.encodeXML(this.getLabel(), {maxlength: this.getMaxlength()});
+	},
+	domContent_: function () {
+		var s1 = this.$supers('domContent_', arguments),
+			s2 = this._colHtmlPre();
+		return s1 ? s2 ? s2 + '&nbsp;' + s1: s1: s2;
+	},
+	domClass_: function (no) {
+		var scls = this.$supers('domClass_', arguments),
+			p = this.parent;
+		
+		if ((!no || !no.zclass) && (_isListgroup(p) || _isListgroupfoot(p)))
+			scls += ' ' + p.$s('inner');
+		
+		return scls;
+	},
+	_colHtmlPre: function () {
+		var s = '',
+			box = this.getListbox(),
+			p = this.parent;
+		if (box != null && p.firstChild == this) {
+			var isGrp = _isListgroup(p);
+			
+			
+			if (box.isCheckmark() && !_isListgroupfoot(p) 
+					&& (!isGrp || (box.groupSelect && box.isMultiple()))) {
+				var chkable = p.isCheckable(),
+					multi = box.isMultiple();
+				s += '<span id="' + p.uuid + '-cm" class="' + p.$s('checkable') 
+					+ ' ' + (multi ? p.$s('checkbox') : p.$s('radio'));
+				
+				if (!chkable || p.isDisabled())
+					s += ' ' + p.$s('disabled');
+				
+				s += '"';
+				if (!chkable)
+					s += ' style="visibility:hidden"';
+				
+				s += '><i class="' + p.$s('icon') + ' ' 
+					+ (multi ? 'z-icon-check' : 'z-icon-radio') + '"></i></span>';
+			}
+			
+			if (isGrp) {
+				var cls = p._open ? 
+						p.getIconOpenClass_() + ' ' + p.$s('icon-open') : 
+						p.getIconCloseClass_() + ' ' + p.$s('icon-close');
+				s += '<span id="' + p.uuid + '-img" class="' + p.$s('icon') + 
+					'"><i class="' + cls + '"></i></span>';
+			}
+			if (s) return s;
+		}
+		return (!this.getImage() && !this.getLabel() && !this.firstChild) ? '&nbsp;': '';
+	},
+	doFocus_: function (evt) {
+		this.$supers('doFocus_', arguments);
+		
+		var box = this.getListbox(),
+			frozen = box ? box.frozen : null,
+			node = this.$n(),
+			td, tds;
+		if (frozen && node)
+			box._moveToHidingFocusCell(node.cellIndex);
+	},
+	doMouseOver_: function(evt) {
+		var n = this.$n();
+		
+		
+		if (n && zk.gecko && (this._draggable || this.parent._draggable)
+				&& !jq.nodeName(evt.domTarget, 'input', 'textarea')) {
+			jq(n).addClass('z-draggable-over');
+		}
+		this.$supers('doMouseOver_', arguments);
+	},
+	doMouseOut_: function(evt) {
+		var n = this.$n();
+		
+		
+		if (n && zk.gecko && (this._draggable || this.parent._draggable)
+				&& !jq.nodeName(evt.domTarget, 'input', 'textarea')) {
+			jq(n).removeClass('z-draggable-over'); 
+		}
+		this.$supers('doMouseOut_', arguments);
+	},
+	domAttrs_: function () {
+		return this.$supers('domAttrs_', arguments)
+			+ (this._colspan > 1 ? ' colspan="' + this._colspan + '"' : '');
+	},
+	
+	domStyle_: function (no) {
+		var style = this.$supers('domStyle_', arguments),
+			head = this.getListheader();
+		if (head) {
+			if (!head.isVisible())
+				style += 'display:none;';
+			if (head._align)
+				style += 'text-align:' + head._align + ';';
+			if (head._valign)
+				style += 'vertical-align:' + head._valign + ';';
+		}
+		return style;
+	},
+	bindChildren_: function () {
+		var p;
+		if (!(p = this.parent) || !p.$instanceof(zul.sel.Option))
+			this.$supers('bindChildren_', arguments);
+	},
+	unbindChildren_: function () {
+		var p;
+		if (!(p = this.parent) || !p.$instanceof(zul.sel.Option))
+			this.$supers('unbindChildren_', arguments);
+	},
+	deferRedrawHTML_: function (out) {
+		out.push('<td', this.domAttrs_({domClass:1}), ' class="z-renderdefer"></td>');
+	}
+});
+})();
+zkreg('zul.sel.Listcell',true);zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<td', this.domAttrs_(), '><div id="', this.uuid,
+		'-cave" class="', this.$s('content'), '"', 
+		this.domTextStyleAttr_(), '>', this.domContent_());
+	
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	
+	out.push('</div></td>');
+}
+
+;zkmld(zk._p.p.Listcell,zk._m);
+
+zul.sel.Listhead = zk.$extends(zul.mesh.ColumnMenuWidget, {	
+	
+	getListbox: function () {
+		return this.parent;
+	},
+	getGroupPackage_: function () {
+		return 'zkex.sel';
+	}
+});
+zkreg('zul.sel.Listhead');zk._m={};
+zk._m['default']=
+zul.mesh.HeadWidget.redraw
+;zkmld(zk._p.p.Listhead,zk._m);
+
+zul.sel.Listheader = zk.$extends(zul.mesh.SortWidget, {
+	
+	getListbox: _zkf = function () {
+		return this.parent ? this.parent.parent : null;
+	},
+
+	$init: function () {
+		this.$supers('$init', arguments);
+		this.listen({onGroup: this}, -1000);
+	},
+	
+	getMeshBody: _zkf,
+	checkClientSort_: function (ascending) {
+		var body;
+		return !(!(body = this.getMeshBody()) || body.hasGroup()) && 
+			this.$supers('checkClientSort_', arguments);
+	},
+	$define: {
+		
+		
+		maxlength: [function (v) {
+			return !v || v < 0 ? 0 : v; 
+		}, function () {
+			if (this.desktop) {
+				this.rerender();
+				this.updateCells_();
+			}
+		}]
+	},
+	
+	group: function (ascending, evt) {
+		var dir = this.getSortDirection();
+		if (ascending) {
+			if ('ascending' == dir) return false;
+		} else {
+			if ('descending' == dir) return false;
+		}
+
+		var sorter = ascending ? this._sortAscending: this._sortDescending;
+		if (sorter == 'fromServer')
+			return false;
+		else if (sorter == 'none') {
+			evt.stop();
+			return false;
+		}
+		
+		var mesh = this.getMeshWidget();
+		if (!mesh || mesh.isModel() || !zk.feature.pe || !zk.isLoaded('zkex.sel')) return false;
+			
+		
+		var	body = this.getMeshBody();
+		if (!body) return false;
+		evt.stop();
+		
+		var desktop = body.desktop,
+			node = body.$n();
+		try {
+			body.unbind();
+			if (body.hasGroup()) {
+				for (var gs = body.getGroups(), len = gs.length; --len >= 0;) 
+					body.removeChild(gs[len]);
+			}
+			
+			var d = [], col = this.getChildIndex();
+			for (var i = 0, z = 0, it = mesh.getBodyWidgetIterator(), w; (w = it.next()); z++) 
+				for (var k = 0, cell = w.firstChild; cell; cell = cell.nextSibling, k++) 
+					if (k == col) {
+						d[i++] = {
+							wgt: cell,
+							index: z
+						};
+					}
+			
+			var dsc = dir == 'ascending' ? -1 : 1,
+				fn = this.sorting,
+				isNumber = sorter == 'client(number)';
+			d.sort(function(a, b) {
+				var v = fn(a.wgt, b.wgt, isNumber) * dsc;
+				if (v == 0) {
+					v = (a.index < b.index ? -1 : 1);
+				}
+				return v;
+			});
+			
+			
+			for (var item = body.firstItem; item; item = body.nextItem(item))
+				body.removeChild(item);
+			
+			for (var previous, row, index = this.getChildIndex(), i = 0, k = d.length; i < k; i++) {
+				row = d[i];
+				if (!previous || fn(previous.wgt, row.wgt, isNumber) != 0) {
+					
+					var group, cell = row.wgt.parent.getChildAt(index);
+					if (cell) {
+						if (cell.getLabel()) {
+							group = new zkex.sel.Listgroup({
+								label: cell.getLabel()
+							});
+						} else {
+							var cc = cell.firstChild;
+							if (cc && cc.$instanceof(zul.wgt.Label)) {
+								group = new zkex.sel.Listgroup({
+									label: cc.getValue()
+								});
+							} else {
+								group = new zkex.sel.Listgroup({
+									label: msgzul.GRID_OTHER
+								});
+							}
+						}
+					}
+					body.appendChild(group);
+				}
+				body.appendChild(row.wgt.parent);
+				previous = row;
+			}
+			this._fixDirection(ascending);
+		} finally {
+			body.replaceHTML(node, desktop);
+		}
+		return true;
+	},
+	
+	onGroup: function (evt) {
+		var dir = this.getSortDirection();
+		if ('ascending' == dir)
+			this.group(false, evt);
+		else if ('descending' == dir)
+			this.group(true, evt);
+		else if (!this.group(true, evt))
+			this.group(false, evt);
+	},
+	
+	updateCells_: function () {
+		var box = this.getListbox();
+		if (box == null || box.getMold() == 'select')
+			return;
+
+		var jcol = this.getChildIndex(), w;
+		for (var it = box.getBodyWidgetIterator(); (w = it.next());)
+			if (jcol < w.nChildren)
+				w.getChildAt(jcol).rerender();
+
+		w = box.listfoot;
+		if (w && jcol < w.nChildren)
+			w.getChildAt(jcol).rerender();
+	},
+	
+	bind_: function () {
+		this.$supers(zul.sel.Listheader, 'bind_', arguments);
+		var cm = this.$n('cm'),
+			n = this.$n();
+		if (cm) {
+			var box = this.getListbox();
+			if (box) box._headercm = cm;
+			this.domListen_(cm, 'onClick', '_doClick');
+		}
+		if (n)
+			this.domListen_(n, 'onMouseOver', '_doMouseOver')
+				.domListen_(n, 'onMouseOut', '_doMouseOut');
+		var btn = this.$n('btn');
+		if (btn)
+			this.domListen_(btn, 'onClick', '_doMenuClick');
+	},
+	unbind_: function () {
+		var cm = this.$n('cm'),
+			n = this.$n();
+		if (cm) {
+			var box = this.getListbox();
+			if (box) box._headercm = null;
+			this._checked = null;
+			this.domUnlisten_(cm, 'onClick', '_doClick');
+		}
+		if (n)
+			this.domUnlisten_(n, 'onMouseOver', '_doMouseOver')
+				.domUnlisten_(n, 'onMouseOut', '_doMouseOut');
+		var btn = this.$n('btn');
+		if (btn)
+			this.domUnlisten_(btn, 'onClick', '_doMenuClick');
+		this.$supers(zul.sel.Listheader, 'unbind_', arguments);
+	},
+	_doMouseOver: function (evt) {
+		if (this.isSortable_() ||
+				(this.parent._menupopup && this.parent._menupopup != 'none'))
+			jq(this.$n()).addClass(this.$s('hover'));
+	},
+	_doMouseOut: function (evt) {
+		if (this.isSortable_() ||
+				(this.parent._menupopup && this.parent._menupopup != 'none')) {
+			var $n = jq(this.$n());
+			if (!$n.hasClass(this.$s('visited')))
+				$n.removeClass(this.$s('hover'));
+		}
+	},
+	_doClick: function (evt) {
+		this._checked = !this._checked;
+		var box = this.getListbox(),
+			cm = this.$n('cm'),
+			$n = jq(cm);
+		if (this._checked) {
+			$n.addClass(this.$s('checked'));
+			
+			
+			box.selectAll(true, evt);
+		} else {
+			$n.removeClass(this.$s('checked'));
+			box._select(null, evt);
+		}
+		box.fire('onCheckSelectAll', this._checked);
+	},
+	
+	doClick_: function (evt) {
+		var box = this.getListbox(),
+			cm = this.$n('cm');
+		if (box && box._checkmark) {
+			var n = evt.domTarget;
+			if (n == cm || n.parentNode == cm) 
+				return; 
+		}
+		this.$supers('doClick_', arguments);
+	},
+	
+	domContent_: function () {
+		var s = this.$supers('domContent_', arguments),
+			box = this.getListbox();
+		if (box != null && this.parent.firstChild == this 
+				&& box._checkmark && box._multiple && !box._listbox$noSelectAll) 
+			s = '<span id="' + this.uuid + '-cm" class="' + this.$s('checkable') + 
+				'"><i class="' + this.$s('icon') + ' z-icon-check"></i></span>'
+				+ (s ? '&nbsp;' + s:'');
+		return s;
+	},
+	
+	domLabel_: function () {
+		return zUtl.encodeXML(this.getLabel(), {maxlength: this._maxlength});
+	}
+});
+
+zkreg('zul.sel.Listheader',true);zk._m={};
+zk._m['default']=
+zul.mesh.HeaderWidget.redraw
+;zkmld(zk._p.p.Listheader,zk._m);
+
+zul.sel.Listfoot = zk.$extends(zul.Widget, {
+	
+	getListbox: function () {
+		return this.parent;
+	},
+	
+	setVflex: function (v) { 
+		v = false;
+		this.$super(zul.sel.Listfoot, 'setVflex', v);
+	},
+	
+	setHflex: function (v) { 
+		v = false;
+		this.$super(zul.sel.Listfoot, 'setHflex', v);
+	},
+	deferRedrawHTML_: function (out) {
+		out.push('<tr', this.domAttrs_({domClass:1}), ' class="z-renderdefer"></tr>');
+	}
+});
+
+zkreg('zul.sel.Listfoot');zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<tr', this.domAttrs_(), '>');
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	
+	var listbox = this.getListbox();
+	if (listbox._nativebar && !listbox.frozen)
+		out.push('<td class="', this.$s('bar'), '" />');
+	
+	out.push('</tr>');
+}
+
+;zkmld(zk._p.p.Listfoot,zk._m);
+
+zul.sel.Listfooter = zk.$extends(zul.mesh.FooterWidget, {
+	
+	
+	getListbox: function () {
+		return this.getMeshWidget();
+	},
+	
+	getListheader: function () {
+		return this.getHeaderWidget();
+	},
+	
+	getMaxlength: function () {
+		var lc = this.getListheader();
+		return lc ? lc.getMaxlength() : 0;
+	},
+	
+	domLabel_: function () {
+		return zUtl.encodeXML(this.getLabel(), {maxlength: this.getMaxlength()});
+	}
+});
+
+zkreg('zul.sel.Listfooter',true);zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<td', this.domAttrs_(), '><div id="', this.uuid,
+		'-cave" class="', this.$s('content'), '">', this.domContent_());
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	out.push('</div></td>');
+}
+
+;zkmld(zk._p.p.Listfooter,zk._m);
+
+zul.sel.Option = zk.$extends(zul.Widget, {
+	_selected: false,
+	$define: {
+    	
+    	
+		disabled: function (disabled) {
+			var n = this.$n();
+			if (n) n.disabled = disabled ? 'disabled' : '';
+		},
+		
+		
+		value: null
+	},
+	
+	focus: function (timeout) {
+		var p = this.parent;
+		if (p) p.focus(timeout);
+	},
+
+	
+	setVisible: function (visible) {
+		if (this._visible != visible) {
+			this._visible = visible;
+			if (this.desktop)
+				this.parent.rerender();
+		}
+	},
+	
+	setSelected: function (selected) {
+		if (this.__updating__) { 
+			delete this.__updating__;
+			return; 
+		}
+		try {
+			selected = selected || false;
+			this.__updating__ = true;
+			if (this._selected != selected) {
+				if (this.parent)
+					this.parent.toggleItemSelection(this);
+				this._setSelectedDirectly(selected); 
+			}
+		} finally {
+			delete this.__updating__;
+		}
+	},
+	_setSelectedDirectly: function (selected) {
+		var n = this.$n();
+		
+		if (n && n.selected != selected) {
+			n.selected = selected ? 'selected' : '';
+		}
+		this._selected = selected;
+	},
+	
+	isSelected: function () {
+		return this._selected;
+	},
+	
+	getLabel: function () {
+		return this.firstChild ? this.firstChild.getLabel() : null; 
+	},
+	
+	getMaxlength: function () {
+		return this.parent ? this.parent.getMaxlength() : 0;
+	},
+	bind_: function () {
+		this.$supers('bind_', arguments);
+		
+		if (this.isSelected())
+			this.parent._selectedIndex = this._index;
+	},
+	
+	getOptionIndex_: function () {
+		var parent = this.parent, ret = -1;
+		if (parent) {
+			for (w = parent.firstChild; w; w = w.nextSibling) {
+				if (w.$instanceof(zul.sel.Option)) {
+					ret++;
+					if(w == this) break;
+				}		
+			}
+		}
+		return ret;
+	},
+	domLabel_: function () {
+		return zUtl.encodeXML(this.getLabel(), {maxlength: this.getMaxlength()});
+	},
+	domAttrs_: function () {
+		var value = this.getValue();
+		return this.$supers('domAttrs_', arguments) + (this.isDisabled() ? ' disabled="disabled"' :'') +
+		(this.isSelected() ? ' selected="selected"' : '') + (value ? ' value="' + value + '"': '');
+	},
+	replaceWidget: function (newwgt) {
+		this._syncItems(newwgt);
+		this.$supers('replaceWidget', arguments);
+	},
+	_syncItems: function (newwgt) {
+		if (this.parent && this.isSelected()) {
+			var items = this.parent._selItems;
+			if (items && items.$remove(this))
+				items.push(newwgt);
+		}
+	}
+});
+zkreg('zul.sel.Option');zk._m={};
+zk._m['select']=
+function (out) {
+	out.push('<option', this.domAttrs_(), '>', this.domLabel_(), '</option>');
+}
+
+;zkmld(zk._p.p.Option,zk._m);
+
+zul.sel.Select = zk.$extends(zul.Widget, {
+	_selectedIndex: -1,
+	
+	_rows: 0,
+	$init: function () {
+		this.$supers('$init', arguments);
+		this._selItems = [];
+	},
+	$define: {
+		
+		
+		multiple: function (multiple) {
+			var n = this.$n();
+			if (n) n.multiple = multiple ? 'multiple' : '';
+		},
+		
+		
+		disabled: function (disabled) {
+			var n = this.$n();
+			if (n) n.disabled = disabled ? 'disabled' : '';
+		},
+		
+		
+		selectedIndex: function (selectedIndex) {
+			var i = 0, j = 0, w, n = this.$n();
+			this.clearSelection();
+			
+			
+			for (w = this.firstChild; w && i < selectedIndex; w = w.nextSibling, i++) {
+				if (w.$instanceof(zul.sel.Option)) {
+    				if (!w.isVisible())
+    					j++;
+				} else i--;
+			}
+
+			selectedIndex -= j;
+			if (n)
+				n.selectedIndex = selectedIndex;
+
+			if (selectedIndex > -1 && w && w.$instanceof(zul.sel.Option)) {
+				w.setSelected(true);
+				this._selItems.push(w);
+			}
+		},
+		
+		
+		tabindex: function (tabindex) {
+			var n = this.$n();
+			if (n) n.tabindex = tabindex||'';
+		},
+		
+		
+		name: function (name) {
+			var n = this.$n();
+			if (n) n.name = name;
+		},
+		
+		
+		rows: function (rows) {
+			var n = this.$n();
+			if (n) n.size = rows;
+		},
+		
+		
+		maxlength: function (maxlength) {
+			if (this.desktop)
+				this.rerender();
+		}
+	},
+	
+	
+	setChgSel: function (val) { 
+	    var sels = {};
+	    for (var j = 0;;) {
+	    	var k = val.indexOf(',', j),
+	        s = (k >= 0 ? val.substring(j, k): val.substring(j)).trim();
+	    	if (s) sels[s] = true;
+	    	if (k < 0) break;
+	    	j = k + 1;
+	    }
+	    for (var w = this.firstChild; w; w = w.nextSibling)
+	    	this._changeSelect(w, sels[w.uuid] == true);
+	},
+	  
+	
+	_changeSelect: function (option, toSel) {
+		var changed = !!option.isSelected() != toSel;
+		if (changed) {
+			option.setSelected(toSel);
+		}
+		return changed;
+	},
+	
+	toggleItemSelection: function (item) {
+		if (item.isSelected()) this._removeItemFromSelection(item);
+		else this._addItemToSelection(item);
+	},
+	
+	selectItem: function (item) {
+		if (!item)
+			this.setSelectedIndex(-1);
+		else if (this._multiple || !item.isSelected()){
+			if(item.getOptionIndex_)
+				this.setSelectedIndex(item.getOptionIndex_());
+			else
+				this.setSelectedIndex(item.getChildIndex());
+		}
+	},
+	_addItemToSelection: function (item) {
+		if (!item.isSelected()) {
+			if (!this._multiple) {
+				this.selectItem(item);
+			} else {
+				var index = item.getOptionIndex_ ? item.getOptionIndex_() : item.getChildIndex();
+				if (index < this._selectedIndex || this._selectedIndex < 0) {
+					this._selectedIndex = index;
+				}
+				item._setSelectedDirectly(true);
+				this._selItems.push(item);
+			}
+		}
+	},
+	_removeItemFromSelection: function (item) {
+		if (item.isSelected()) {
+			if (!this._multiple) {
+				this.clearSelection();
+			} else {
+				item._setSelectedDirectly(false);
+				this._selItems.$remove(item);
+			}
+		}
+	},
+	
+	clearSelection: function () {
+		if (this._selItems.length) {
+			var item;
+			for(;(item = this._selItems.pop());)
+				item._setSelectedDirectly(false);
+			this._selectedIndex = -1;
+		}
+	},
+	domAttrs_: function () {
+		var v;
+		return this.$supers('domAttrs_', arguments)
+			+ (this.isDisabled() ? ' disabled="disabled"' :'')
+			+ (this.isMultiple() ? ' multiple="multiple"' : '')
+			+ ((v=this.getSelectedIndex()) > -1 ? ' selectedIndex="' + v + '"': '')
+			+ ((v=this.getTabindex()) ? ' tabindex="' + v + '"': '')
+			+ ((v=this.getRows()) > 0 ? ' size="' + v + '"': '')
+			+ ((v=this.getName()) ? ' name="' + v + '"': '');
+	},
+	bind_: function () {
+		this.$supers(zul.sel.Select, 'bind_', arguments);
+
+		var n = this.$n();
+		this.domListen_(n, 'onChange')
+			.domListen_(n, 'onFocus', 'doFocus_')
+			.domListen_(n, 'onBlur', 'doBlur_');
+
+		if (!zk.gecko) {
+			var fn = [this,  this._fixSelIndex];
+			zWatch.listen({onRestore: fn, onVParent: fn});
+		}
+
+		this._fixSelIndex();
+	},
+	unbind_: function () {
+		var n = this.$n();
+		this.domUnlisten_(n, 'onChange')
+			.domUnlisten_(n, 'onFocus', 'doFocus_')
+			.domUnlisten_(n, 'onBlur', 'doBlur_')
+			.$supers(zul.sel.Select, 'unbind_', arguments);
+
+		var fn = [this,  this._fixSelIndex];
+		zWatch.unlisten({onRestore: fn, onVParent: fn});
+	},
+	_fixSelIndex: function () {
+		if (this._selectedIndex < 0)
+			this.$n().selectedIndex = -1;
+	},
+	_doChange: function (evt) {
+		var data = [], reference, n = this.$n();
+		if (this._multiple) {
+			var opts = n.options, changed;
+			for (var j = 0, ol = opts.length; j < ol; ++j) {
+				var opt = opts[j],
+					o = zk.Widget.$(opt.id),
+					v = opt.selected;
+				if (o && o._selected != v) {
+					o.setSelected(v);
+					changed = true;
+				}
+				if (v) {
+					data.push(opt.id);
+					if (!reference) reference = opt.id;
+				}
+			}
+			if (!changed)
+				return;
+		} else {
+			var v = n.selectedIndex;
+			if (zk.opera) n.selectedIndex = v; 
+			
+			var rv = v < 0 ? v : -1;
+			for (var w = this.firstChild, j = v; w && j > -1; w = w.nextSibling) {
+				if (!w.$instanceof(zul.sel.Option)) 
+					continue;
+				if (w.isVisible())
+					j--;
+				rv++;
+			}
+			if (this._selectedIndex == rv)
+				return;
+
+			this.setSelectedIndex(rv);
+			data.push(reference = n.options[v].id);
+		}
+
+		this.fire('onSelect', {items: data, reference: reference});
+	},
+	
+	doBlur_: zk.ie8_ ? function (evt) { 
+		this._doChange(evt);
+		return this.$supers('doBlur_', arguments);
+	} : zk.$void,
+	
+	beforeCtrlKeys_: function (evt) {
+		this._doChange(evt);
+	},
+	onChildAdded_: function () {
+		this.rerender();
+	},
+	onChildRemoved_: function () {
+		if (!this.childReplacing_)
+			this.rerender();
+	}
+});
+
+zkreg('zul.sel.Select');zk._m={};
+zk._m['select']=
+function (out) {
+	out.push('<select', this.domAttrs_(), '>');
+	
+	for (var w = this.firstChild; w; w = w.nextSibling) {
+		if (w.$instanceof(zul.sel.Option) && w.isVisible()) w.redraw(out);
+	}
+		
+	out.push('</select>');
+}
+;zkmld(zk._p.p.Select,zk._m);
+var Tree =
+
+zul.sel.Tree = zk.$extends(zul.sel.SelectWidget, {
+	_scrollbar: null,
+	_barPos: null,
+	unbind_: function () {
+		this.destroyBar_();
+		this.$supers(Tree, 'unbind_', arguments);
+	},
+	onSize: function () {
+		this.$supers(Tree, 'onSize', arguments);
+		var self = this, 
+			frozen = this.frozen;
+		if (this._shallSyncFrozen && frozen && this._nativebar) {
+			frozen.onSize();
+			this._shallSyncFrozen = false;
+		}
+		setTimeout(function () {
+			if (self.desktop && !self._nativebar) {
+				if (!self._scrollbar)
+					self._scrollbar = zul.mesh.Scrollbar.init(self);
+				self.refreshBar_();
+			}
+		}, 200);
+	},
+	refreshBar_: function (showBar) {
+		var bar = this._scrollbar;
+		if (bar) {
+			var scrollPosition;
+			if (this._currentLeft || this._currentTop) {
+				scrollPosition = {l: this._currentLeft, t: this._currentTop};
+			}
+			
+			
+			if (this.inPagingMold() && scrollPosition) {
+				showBar = true;
+			}
+			bar.syncSize(showBar || this._shallShowScrollbar);
+			delete this._shallShowScrollbar; 
+			
+			
+			if (scrollPosition) {
+				bar.scrollTo(scrollPosition.l, scrollPosition.t);
+				scrollPosition = null;
+			}
+			
+			
+			var frozen = this.frozen,
+				start;
+			if (frozen && (start = frozen._start) != 0) {
+				frozen._doScrollNow(start);
+				bar.setBarPosition(start);
+			}
+		}
+	},
+	destroyBar_: function () {
+		var bar = this._scrollbar;
+		if (bar) {
+			bar.destroy();
+			bar = this._scrollbar = null;
+		}
+	},
+	
+	clear: function () {
+		if (!this._treechildren || !this._treechildren.nChildren)
+			return;
+		for (var w = this._treechildren.firstChild; w; w = w.nextSibling)
+			w.detach();
+	},
+	insertBefore: function (child, sibling, ignoreDom) {
+		if (this.$super('insertBefore', child, sibling, !this.z_rod)) {
+			this._fixOnAdd(child, ignoreDom, ignoreDom);
+			return true;
+		}
+	},
+	appendChild: function (child, ignoreDom) {
+		if (this.$super('appendChild', child, !this.z_rod)) {
+			if (!this.insertingBefore_)
+				this._fixOnAdd(child, ignoreDom, ignoreDom);
+			return true;
+		}
+	},
+	_fixOnAdd: function (child, ignoreDom, _noSync) {
+		if (child.$instanceof(zul.sel.Treecols))
+			this.treecols = child;
+		else if (child.$instanceof(zul.sel.Treechildren)) {
+			this.treechildren = child;
+			this._fixSelectedSet();
+		} else if (child.$instanceof(zul.mesh.Paging))
+			this.paging = child;
+		else if (child.$instanceof(zul.sel.Treefoot))
+			this.treefoot = child;
+		else if (child.$instanceof(zul.mesh.Frozen)) 
+			this.frozen = child;
+		if (!ignoreDom)
+			this.rerender();
+		if (!_noSync)
+			this._syncSize();
+	},
+	onChildRemoved_: function (child) {
+		this.$supers('onChildRemoved_', arguments);
+
+		if (child == this.treecols)
+			this.treecols = null;
+		else if (child == this.treefoot)
+			this.treefoot = null;
+		else if (child == this.treechildren) {
+			this.treechildren = null;
+			this._selItems = [];
+			this._sel = null;
+		} else if (child == this.paging)
+			this.paging = null;
+		else if (child == this.frozen) {
+			this.frozen = null;
+			this.destroyBar_();
+		}
+
+		if (!this.childReplacing_) 
+			this._syncSize();
+	},
+	onChildAdded_: function(child) {
+		this.$supers('onChildAdded_', arguments);
+		if (this.childReplacing_) 
+			this._fixOnAdd(child, true);
+		
+	},
+	_onTreeitemAdded: function (item) {
+		this._fixNewChild(item);
+		this._onTreechildrenAdded(item.treechildren);
+	},
+	_onTreeitemRemoved: function (item) {
+		var fixSel, upperItem;
+		if (item.isSelected()) {
+			this._selItems.$remove(item);
+			fixSel = this._sel == item;
+			if (fixSel && !this._multiple) {
+				this._sel = null;
+			}
+		}
+		this._onTreechildrenRemoved(item.treechildren);
+		if (fixSel) this._fixSelected();
+		if (upperItem = item.previousSibling || item.getParentItem()) this._syncFocus(upperItem);
+		else jq(this.$n('a')).offset({top: 0, left: 0});
+	},
+	_onTreechildrenAdded: function (tchs) {
+		if (!tchs || tchs.parent == this)
+			return; 
+
+		
+		for (var j = 0, items = tchs.getItems(), k = items.length; j < k; ++j)
+			if (items[j]) this._fixNewChild(items[j]);
+	},
+	_onTreechildrenRemoved: function (tchs) {
+		if (tchs == null || tchs.parent == this)
+			return; 
+
+		
+		var item, fixSel;
+		for (var j = 0, items = tchs.getItems(), k = items.length; j < k; ++j) {
+			item = items[j];
+			if (item.isSelected()) {
+				this._selItems.$remove(item);
+				if (this._sel == item) {
+					if (!this._multiple) {
+						this._sel = null;
+						return; 
+					}
+					fixSel = true;
+				}
+			}
+		}
+		if (fixSel) this._fixSelected();
+	},
+	_fixNewChild: function (item) {
+		if (item.isSelected()) {
+			if (this._sel && !this._multiple) {
+				item._selected = false;
+				item.rerender();
+			} else {
+				if (!this._sel)
+					this._sel = item;
+				this._selItems.push(item);
+			}
+		}
+	},
+	_fixSelectedSet: function () {
+		this._sel = null;
+		this._selItems = [];
+		for (var j = 0, items = this.getItems(), k = items.length; j < k; ++j) {
+			if (items[j].isSelected()) {
+				if (this._sel == null) {
+					this._sel = items[j];
+				} else if (!this._multiple) {
+					items[j]._selected = false;
+					continue;
+				}
+				this._selItems.push(items[j]);
+			}
+		}
+	},
+	_fixSelected: function () {
+		var sel;
+		switch (this._selItems.length) {
+		case 1:
+			sel = this._selItems[0];
+		case 0:
+			break;
+		default:
+			for (var j = 0, items = this.getItems(), k = items.length; j < k; ++j) {
+				if (items[j].isSelected()) {
+					sel = items[j];
+					break;
+				}
+			}
+		}
+
+		if (sel != this._sel) {
+			this._sel = sel;
+			return true;
+		}
+		return false;
+	},
+	_sizeOnOpen: function () {
+		this._shallShowScrollbar = true;
+		var cols = this.treecols, w, wd;
+		if (!cols || this.isSizedByContent() || this._hflex == 'min')
+			this.syncSize();
+		else {
+			for (w = cols.firstChild; w; w = w.nextSibling)
+				if (w._hflex || !(wd = w._width) || wd == 'auto') {
+					this.syncSize();
+					return;
+				}
+		}
+	},
+	
+	getHeadWidgetClass: function () {
+		return zul.sel.Treecols;
+	},
+	
+	itemIterator: _zkf = function (opts) {
+		return new zul.sel.TreeItemIter(this, opts);
+	},
+	
+	getBodyWidgetIterator: _zkf,
+
+	
+	getItems: function (opts) {
+		return this.treechildren ? this.treechildren.getItems(null, opts): [];
+	},
+	
+	getItemCount: function () {
+		return this.treechildren != null ? this.treechildren.getItemCount(): 0;
+	},
+	_doLeft: function (row) {
+		if (row.isOpen()) {
+			row.setOpen(false);
+		}
+	},
+	_doRight: function (row) {
+		if (!row.isOpen()) {
+			row.setOpen(true);
+		}
+	},
+
+	
+	shallIgnoreSelect_: function (evt) {
+		var n = evt.domTarget;
+		if (n) {
+			var id = n.id;
+			return id.endsWith('open') || id.endsWith('icon') ||
+				(evt.name == 'onRightClick' && !this.rightSelect);
+		}
+	},
+	clearSelection: function () {
+		this.$supers('clearSelection', arguments);
+		this._sel = null;
+	},
+	_addItemToSelection: function () {
+		this.$supers('_addItemToSelection', arguments);
+		this._sel = this._selItems[0]; 
+	},
+	_removeItemFromSelection: function () {
+		this.$supers('_removeItemFromSelection', arguments);
+		this._sel = this._selItems[0]; 
+	},
+	checkOnHighlightDisabled_: function() {
+		if (this._selectOnHighlightDisabled) {
+			var selection = window.getSelection || document.selection;
+			if (selection) {
+				if (zk.ie && zk.ie < 9) {
+					return selection.type == 'Text' && selection.createRange().htmlText.length > 0;
+				} else {
+					return selection().toString().length > 0;
+				}
+			}
+		}
+	}
+});
+
+zul.sel.TreeItemIter = zk.$extends(zk.Object, {
+	
+	$init: function (tree, opts) {
+		this.tree = tree;
+		this.opts = opts;
+	},
+	_init: function () {
+		if (!this._isInit) {
+			this._isInit = true;
+			this.items = this.tree.getItems(this.opts);
+			this.length = this.items.length;
+			this.cur = 0;
+		}
+	},
+	 
+	hasNext: function () {
+		this._init();
+		return this.cur < this.length;
+	},
+	
+	next: function () {
+		this._init();
+		return this.items[this.cur++];
+	}
+});
+
+
+zkreg('zul.sel.Tree');zk._m={};
+zk._m['paging']=
+function (out) {
+	var uuid = this.uuid,
+		innerWidth = this.getInnerWidth(),
+		width = innerWidth == '100%' ? ' width="100%"' : '',
+		wdStyle =  innerWidth != '100%' ? 'width:' + innerWidth : '',
+		inPaging = this.inPagingMold(), pgpos,
+		tag = zk.ie < 11 || zk.gecko ? 'a' : 'button';
+		
+	out.push('<div', this.domAttrs_(), '>');
+	
+	if (inPaging && this.paging) {
+		pgpos = this.getPagingPosition();
+		if (pgpos == 'top' || pgpos == 'both') {
+			out.push('<div id="', uuid, '-pgit" class="', this.$s('paging-top'), '">');
+			this.paging.redraw(out);
+			out.push('</div>');
+		}
+	}
+
+	
+	if (this.treecols) {
+		out.push('<div id="', uuid, '-head" class="', this.$s('header'), '">',
+				'<table id="', uuid, '-headtbl"', width,
+				' style="table-layout:fixed;', wdStyle,'">');
+		this.domFaker_(out, '-hdfaker');
+		
+		out.push('<tbody id="', uuid, '-headrows">');
+		for (var hds = this.heads, j = 0, len = hds.length; j < len;)
+			hds[j++].redraw(out);
+		
+		out.push('</tbody></table></div><div class="', this.$s('header-border'), '"></div>');
+	}
+	
+	out.push('<div id="', uuid, '-body" class="', this.$s('body'));
+	
+	if (this._autopaging)
+		out.push(' ', this.$s('autopaging'));
+	
+	out.push('"><table id="', uuid, '-cave"', width, 
+			' style="table-layout:fixed;', wdStyle,'">');
+	
+	if (this.treecols)
+		this.domFaker_(out, '-bdfaker');
+	
+	if (this.treechildren)
+		this.treechildren.redraw(out);
+	else
+		out.push('<tbody id="', this.uuid, '-rows"/>');
+	
+	out.push('</table><', tag, ' style="top:',jq.px0(this._anchorTop),';left:',jq.px0(this._anchorLeft),'" id="', uuid, 
+			 '-a"  onclick="return false;" href="javascript:;" class="z-focus-a"');
+	var tabindex = this._tabindex; 
+	if (tabindex)
+		out.push(' tabindex="' + tabindex + '"');
+	out.push('></', tag, '>', "</div>");
+	
+	if (this._nativebar && this.frozen) {
+		out.push('<div id="', uuid, '-frozen" class="', this.$s('frozen'), '">');
+		this.frozen.redraw(out);
+		out.push('</div>');
+	}
+	
+	
+	if (this.treefoot) {
+		out.push('<div id="', uuid, '-foot" class="', this.$s('footer'), '">',
+				'<table id="', uuid, '-foottbl"', width, ' style="table-layout:fixed;', wdStyle,'">');
+		if (this.treecols)
+			this.domFaker_(out, '-ftfaker');
+		
+		out.push('<tbody id="', uuid, '-footrows">');
+		this.treefoot.redraw(out);
+		out.push('</tbody></table></div>');
+	}
+	
+	
+	if (pgpos == 'bottom' || pgpos == 'both') {
+		out.push('<div id="', uuid, '-pgib" class="', this.$s('paging-bottom'), '">');
+		this.paging.redraw(out);
+		out.push('</div>');
+	}
+	out.push('</div>');
+}
+
+;zk._m['default']=[zk._p.p.Tree,'paging'];zkmld(zk._p.p.Tree,zk._m);
+(function () {
+	function _updCells(tch, jcol) {
+		if (tch)
+			for (var w = tch.firstChild, tr; w; w = w.nextSibling) {
+				if ((tr = w.treerow) && jcol < tr.nChildren) 
+					tr.getChildAt(jcol).rerender();
+
+				_updCells(w.treechildren, jcol); 
+			}
+	}
+	
+	function _sort0(treechildren, col, dir, sorting, isNumber) {
+		var d = [];
+		for (var i = 0, z = 0, w = treechildren.firstChild; w; w = w.nextSibling, z++) {
+			if (w.treechildren) 
+				_sort0(w.treechildren, col, dir, sorting, isNumber);
+			for (var k = 0, cell = w.getFirstCell(); cell; cell = cell.nextSibling, k++)
+				if (k == col) {
+					d[i++] = {
+						wgt: cell,
+						index: z
+					};
+				}
+		}
+		var dsc = dir == "ascending" ? -1 : 1;
+		d.sort(function(a, b) {
+			var v = sorting(a.wgt, b.wgt, isNumber) * dsc;
+			if (v == 0) {
+				v = (a.index < b.index ? -1 : 1);
+			}
+			return v;
+		});
+		for (var i = 0, k = d.length; i < k; i++) {
+			treechildren.appendChild(d[i].wgt.parent.parent);
+		}
+	}
+
+
+zul.sel.Treecol = zk.$extends(zul.mesh.SortWidget, {
+	
+	getTree: function () {
+		return this.parent ? this.parent.parent : null;
+	},
+	
+	getMeshBody: function () {
+		var tree = this.getTree();
+		return tree ? tree.treechildren : null;  
+	},
+	checkClientSort_: function (ascending) {
+		var tree;
+		return !(!this.getMeshBody() || !(tree = this.getTree()) || ('paging' == tree._mold))
+				&& this.$supers('checkClientSort_', arguments);
+	},
+	replaceCavedChildrenInOrder_: function (ascending) {
+		var mesh = this.getMeshWidget(),
+			body = this.getMeshBody(),
+			desktop = body.desktop;
+		try {
+			body.unbind();
+			_sort0(body, this.getChildIndex(), this.getSortDirection(), this.sorting, 
+				(this[ascending ? '_sortAscending': '_sortDescending'] == 'client(number)'));
+			this._fixDirection(ascending);
+		} finally {
+			var old = mesh._syncingbodyrows;
+			mesh._syncingbodyrows = true;
+			try {
+				mesh.clearCache();
+				jq(mesh.$n('rows')).replaceWith(body.redrawHTML_());
+				body.bind(desktop);
+				mesh._bindDomNode();
+			} finally {
+				mesh._syncingbodyrows = old;
+			}
+		}
+	},
+	$define: {
+		
+		
+		maxlength: [function (v) {
+			return !v || v < 0 ? 0 : v; 
+		}, function () {
+			if (this.desktop) {
+				this.rerender();
+				this.updateCells_();
+			}
+		}]
+	},
+	updateCells_: function () {
+		var tree = this.getTree();
+		if (tree) {
+			var jcol = this.getChildIndex(),
+				tf = tree.treefoot;
+
+			_updCells(tree.treechildren, jcol);
+
+			if (tf && jcol < tf.nChildren)
+				tf.getChildAt(jcol).rerender();
+		}
+	},
+	bind_: function () {
+		this.$supers(zul.sel.Treecol, 'bind_', arguments);
+		var n;
+		if (n = this.$n())
+			this.domListen_(n, 'onMouseOver', '_doSortMouseEvt')
+				.domListen_(n, 'onMouseOut', '_doSortMouseEvt');
+	},
+	unbind_: function () {
+		var n;
+		if (n = this.$n())
+			this.domUnlisten_(n, 'onMouseOver', '_doSortMouseEvt')
+				.domUnlisten_(n, 'onMouseOut', '_doSortMouseEvt');
+		this.$supers(zul.sel.Treecol, 'unbind_', arguments);
+	},
+	_doSortMouseEvt: function (evt) {
+		var sort = this.getSortAscending();
+		if (sort != 'none')
+			jq(this.$n())[evt.name == 'onMouseOver' ? 'addClass' : 'removeClass'](this.getZclass() + '-sort-over');
+	},
+	
+	domLabel_: function () {
+		return zUtl.encodeXML(this.getLabel(), {maxlength: this._maxlength});
+	}
+});
+
+})();
+zkreg('zul.sel.Treecol',true);zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<th', this.domAttrs_(), '><div id="', this.uuid, '-cave" class="',
+			this.$s('content'), '"', this.domTextStyleAttr_(),
+			'><div class="', this.$s('sorticon'), '"><i id="', this.uuid, '-sort-icon"></i></div>', this.domContent_());
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	out.push('</div></th>');	
+}
+
+;zkmld(zk._p.p.Treecol,zk._m);
+
+zul.sel.Treecols = zk.$extends(zul.mesh.HeadWidget, {
+	
+	getTree: function () {
+		return this.parent;
+	},
+	setVisible: function (visible) {
+		if (this._visible != visible) {
+			this.$supers('setVisible', arguments);
+			this.getTree().rerender();
+		}
+	}
+});
+
+zkreg('zul.sel.Treecols');zk._m={};
+zk._m['default']=
+zul.mesh.HeadWidget.redraw
+
+;zkmld(zk._p.p.Treecols,zk._m);
+(function () {
+	function _prevsib(child) {
+		var p;
+		if ((p=child.parent) && p.lastChild == child)
+			return child.previousSibling;
+	}
+	function _fixOnAdd(oldsib, child, ignoreDom) {
+		if (!ignoreDom) {
+			if (oldsib) oldsib._syncIcon();
+			var p;
+			if ((p=child.parent) && p.lastChild == child
+			&& (p=child.previousSibling))
+				p._syncIcon();
+		}
+	}
+	
+	function _syncFrozen(wgt) {
+		var tree = wgt.getTree(),
+			frozen;
+		if (tree && tree._nativebar && (frozen = tree.frozen))
+			frozen._syncFrozen();
+	}
+var Treechildren =
+
+zul.sel.Treechildren = zk.$extends(zul.Widget, {
+	bind_: function (desktop, skipper, after) {
+		this.$supers(Treechildren, 'bind_', arguments);
+		zWatch.listen({onResponse: this});
+		var w = this;
+		after.push(function () {
+			_syncFrozen(w);
+		});
+	},
+	unbind_: function () {
+		zWatch.unlisten({onResponse: this});
+		this.$supers(Treechildren, 'unbind_', arguments);
+	},
+	onResponse: function () {
+		if (this.desktop){
+			var tree = this.getTree();
+			if (tree && tree.frozen) {
+				tree._shallSyncFrozen = true;
+				tree.onSize();
+			}
+		}
+	},
+	
+	getTree: function () {
+		return this.isTopmost() ? this.parent : this.parent ? this.parent.getTree() : null;
+	},
+	
+	getLinkedTreerow: function () {
+		
+		return this.parent ? this.parent.treerow : null;
+	},
+	
+	isTopmost: function () {
+		return this.parent && this.parent.$instanceof(zul.sel.Tree);
+	},
+	
+	isRealElement: function () {
+		return false; 
+	},
+	
+	insertBefore: function (child, sibling, ignoreDom) {
+		var oldsib = _prevsib(child);
+		if (this.$supers('insertBefore', arguments)) {
+			_fixOnAdd(oldsib, child, ignoreDom);
+			return true;
+		}
+	},
+	
+	appendChild: function (child, ignoreDom) {
+		var oldsib = _prevsib(child);
+		if (this.$supers('appendChild', arguments)) {
+			if (!this.insertingBefore_)
+				_fixOnAdd(oldsib, child, ignoreDom);
+			return true;
+		}
+	},
+	insertChildHTML_: function (child, before, desktop) {
+		var ben, isTopmost = this.isTopmost();
+		if (before)
+			before = before.$n() ? before.getFirstNode_() : null; 
+		if (!before && !isTopmost)
+			ben = this.getCaveNode() || this.parent.getCaveNode();
+
+		if (before)
+			jq(before).before(child.redrawHTML_());
+		else if (ben)
+			jq(ben).after(child.redrawHTML_());
+		else {
+			if (isTopmost)
+				jq(this.parent.$n('rows')).append(child.redrawHTML_());
+			else
+				jq(this).append(child.redrawHTML_());
+		}
+		child.bind(desktop);
+	},
+	getCaveNode: function () {
+		for (var cn, w = this.lastChild; w; w = w.previousSibling)
+			if ((cn = w.getCaveNode())) {
+				
+				
+				if (w.treechildren) {
+					var _cn  = w.treechildren.getCaveNode();
+					if (_cn)
+						cn = _cn;
+				}
+				return cn;	
+			}
+	},
+	
+	isRealVisible: function () {
+		this._isRealVisible() && this.$supers('isRealVisible', arguments);
+	},
+	_isRealVisible: function () {
+		var p;
+		return this.isVisible() && (this.isTopmost() || 
+				((p = this.parent) && p.isOpen() && p._isRealVisible()));
+	},
+	
+	getItems: function (items, opts) {
+		items = items || [];
+		var skiphd = opts && opts.skipHidden;
+		for (var w = this.firstChild; w; w = w.nextSibling)
+			if (!skiphd || w.isVisible()) {
+				items.push(w);
+				if (w.treechildren && (!skiphd || w.isOpen())) 
+					w.treechildren.getItems(items, opts);
+			}
+		return items;
+	},
+	
+	getItemCount: function () {
+		var sz = 0;
+		for (var w = this.firstChild; w; w = w.nextSibling, ++sz)
+			if (w.treechildren)
+				sz += w.treechildren.getItemCount();
+		return sz;
+	},
+	beforeParentChanged_: function (newParent) {
+		var oldtree = this.getTree();
+		if (oldtree)
+			oldtree._onTreechildrenRemoved(this);
+			
+		if (newParent) {
+			var tree = newParent.$instanceof(zul.sel.Tree) ? newParent : newParent.getTree();
+			if (tree) tree._onTreechildrenAdded(this);
+		}
+		this.$supers("beforeParentChanged_", arguments);
+	},
+	removeHTML_: function (n) {
+		for (var cn, w = this.firstChild; w; w = w.nextSibling) {
+			cn = w.$n();
+			if (cn)
+				w.removeHTML_(cn);
+		}
+		this.$supers('removeHTML_', arguments);
+	},
+	getOldWidget_: function (n) {
+		var old = this.$supers('getOldWidget_', arguments);
+		if (old && old.$instanceof(zul.sel.Treerow)) {
+			var ti = old.parent;
+			if (ti)
+				return ti.treechildren;
+			return null;
+		}
+		return old;
+	},
+	$n: function (nm) {
+		if(this.isTopmost())
+			return this.getTree().$n('rows');
+		if (this.firstChild)
+			return nm ? this.firstChild.$n(nm) : this.firstChild.$n();
+		return null;
+	},
+	replaceWidget: function (newwgt) {
+		while (this.firstChild != this.lastChild)
+			this.lastChild.detach();
+		
+		if (this.firstChild && this.firstChild.treechildren)
+			this.firstChild.treechildren.detach();
+
+		zul.sel.Treeitem._syncSelItems(this, newwgt);
+
+		this.$supers('replaceWidget', arguments);
+	},
+	onChildAdded_: function (child) {
+		this.$supers('onChildAdded_', arguments);
+		if (this.desktop)
+			this.getTree()._syncSize();
+	},
+	onChildRemoved_: function (child) {
+		this.$supers('onChildRemoved_', arguments);
+		var selItems = this._selItems, len;
+		if (this.desktop)
+			this.getTree()._syncSize();
+	}
+});
+
+})();
+zkreg('zul.sel.Treechildren');zk._m={};
+zk._m['default']=
+function (out) {
+	if (this.parent.$instanceof(zul.sel.Tree)) {
+		out.push('<tbody id="',this.parent.uuid,'-rows" ', this.domAttrs_({id: 1}), '>');
+		for (var w = this.firstChild; w; w = w.nextSibling)
+			w.redraw(out);
+		out.push('</tbody>');
+	} else
+		for (var w = this.firstChild; w; w = w.nextSibling)
+			w.redraw(out);
+}
+
+;zkmld(zk._p.p.Treechildren,zk._m);
+(function () {
+	
+	function _closed(ti) {
+		for (; ti && !ti.$instanceof(zul.sel.Tree); ti = ti.parent)
+			if (ti.isOpen && !ti.isOpen())
+				return true;
+	}
+
+	function _rmSelItemsDown(items, wgt) {
+		if (wgt.isSelected())
+			items.$remove(wgt);
+
+		var w;
+		if (w = wgt.treechildren)
+			for (w = w.firstChild; w && items.length; w = w.nextSibling)
+				_rmSelItemsDown(items, w);
+	}
+	function _addSelItemsDown(items, wgt) {
+		if (wgt.isSelected())
+			items.push(wgt);
+
+		var w;
+		if (w = wgt.treechildren)
+			for (w = w.firstChild; w; w = w.nextSibling)
+				_addSelItemsDown(items, w);
+	}
+
+	function _showDOM(wgt, visible) {
+		var n = wgt.$n();
+		if (n)
+			n.style.display = visible ? '' : 'none';
+		var chld;
+		if (chld = wgt.treechildren)
+			for (var w = chld.firstChild; w; w = w.nextSibling)
+				if (w._visible && w._open) 
+					_showDOM(w, visible);
+	}
+	
+	function _searchPrevRenderedItem(wgt) {
+		var target;
+		if (wgt) {
+			if (wgt.treerow) {
+				return wgt;
+			}
+			if (wgt.isContainer()) {
+				for (var c = wgt.treechildren.lastChild; c; c = c.previousSibling) {
+					target = _searchPrevRenderedItem(c);
+					if (target)
+						return target;
+				}
+			}
+			target = _searchPrevRenderedItem(wgt.previousSibling);
+		}
+		return target;
+	}
+	
+	function _searchNextRenderedItem(wgt) {
+		var target;
+		if (wgt) {
+			if (wgt.treerow) {
+				return wgt;
+			}
+			if (wgt.isContainer()) {
+				for (var c = wgt.treechildren.firstChild; c; c = c.nextSibling) {
+					target = _searchNextRenderedItem(c);
+					if (target)
+						return target;
+				}
+			}
+			target = _searchNextRenderedItem(wgt.nextSibling);
+		}
+		return target;
+	}
+	
+
+zul.sel.Treeitem = zk.$extends(zul.sel.ItemWidget, {
+	_open: true,
+	$define: {
+    	
+    	
+		open : function(open, fromServer) {
+			var img = this.$n('open'),
+				icon = this.$n('icon');
+			if (!img || _closed(this.parent)) {
+				if (icon) {
+					
+					var cn = icon.className;
+					icon.className = open ? 
+						cn.replace('-right', '-down').replace('-close', '-open') : 
+						cn.replace('-down', '-right').replace('-open', '-close');
+				}
+				return;
+			}
+
+			
+			if (icon) {
+				var cn = icon.className;
+				icon.className = open ? 
+					cn.replace('-right', '-down').replace('-close', '-open') : 
+					cn.replace('-down', '-right').replace('-open', '-close');
+			}
+
+			var tree = this.getTree(),
+				ebodytbl = tree ? tree.ebodytbl : null,
+				oldwd = ebodytbl ? ebodytbl.clientWidth : 0; 
+			
+			if (!open)
+				zWatch.fireDown('onHide', this);
+			this._showKids(open);
+			if (open)
+				zUtl.fireShown(this);
+			if (tree) {
+				tree._sizeOnOpen();
+				
+				if (!fromServer)
+					this.fire('onOpen', {open : open},
+							{toServer : tree.inPagingMold() || tree.isModel()});
+
+				tree._syncFocus(this);
+				tree.focus();
+
+				if (ebodytbl) {
+					tree._fixhdwcnt = tree._fixhdwcnt || 0;
+					if (!tree._fixhdwcnt++)
+						tree._fixhdoldwd = oldwd;
+					setTimeout(function() {
+						if (!--tree._fixhdwcnt
+								&& tree.$n()
+								&& (tree._fixhdoldwd != ebodytbl.clientWidth))
+							tree._calcSize();
+					}, 250);
+				}
+			}
+		}
+	},
+	_showKids: function (open) {
+		var tc = this.treechildren;
+		if (tc)
+			for (var w = tc.firstChild, vi = tc._isRealVisible(); w; w = w.nextSibling) {
+				w.$n().style.display = vi && w.isVisible() && open ? '' : 'none';
+				if (w.isOpen())
+					w._showKids(open);
+			}
+	},
+	isStripeable_: function () {
+		return false;
+	},
+	
+	getMeshWidget: _zkf = function () {
+		return this.parent ? this.parent.getTree() : null;
+	},
+	
+	getTree: _zkf,
+	getZclass: function () {
+		if (this.treerow) return this.treerow.getZclass();
+		return null;
+	},
+	$n: function (nm) {
+		if (this.treerow)
+			return nm ? this.treerow.$n(nm) : this.treerow.$n() || jq(this.treerow.uuid, zk)[0];
+		return null;
+	},
+	
+	isContainer: function () {
+		return this.treechildren != null;
+	},
+	
+	isEmpty: function () {
+		return !this.treechildren || !this.treechildren.nChildren;
+	},
+	
+	getLevel: function () {
+		var level = 0;
+		for (var  item = this;; ++level) {
+			if (!item.parent)
+				break;
+
+			item = item.parent.parent;
+			if (!item || item.$instanceof(zul.sel.Tree))
+				break;
+		}
+		return level;
+	},
+	
+	getLabel: function () {
+		var cell = this.getFirstCell();
+		return cell ? cell.getLabel(): null;
+	},
+	
+	setLabel: function (label) {
+		this._autoFirstCell().setLabel(label);
+	},
+	
+	getFirstCell: function () {
+		return this.treerow ? this.treerow.firstChild : null;
+	},
+	_autoFirstCell: function () {
+		if (!this.treerow)
+			this.appendChild(new zul.sel.Treerow());
+
+		var cell = this.treerow.firstChild;
+		if (!cell) {
+			cell = new zul.sel.Treecell();
+			this.treerow.appendChild(cell);
+		}
+		return cell;
+	},
+	
+	getImage: function () {
+		var cell = this.getFirstCell();
+		return cell ? cell.getImage(): null;
+	},
+	
+	setImage: function (image) {
+		this._autoFirstCell().setImage(image);
+		return this;
+	},
+	
+	getParentItem: function () {
+		var p = this.parent && this.parent.parent ? this.parent.parent : null;
+		return p && p.$instanceof(zul.sel.Treeitem) ? p : null;
+	},
+	_isRealVisible: function () {
+		var p;
+		return this.isVisible() && (p = this.parent) && p._isRealVisible();
+	},
+	_isVisibleInTree: function () {
+		
+		if (!this.isVisible())
+			return;
+		var c = this.parent, p;
+		if (!c || !c.isVisible() || !(p = c.parent))
+			return false;
+		if (p.$instanceof(zul.sel.Tree))
+			return true;
+		
+		return p._isVisibleInTree(); 
+	},
+	setVisible: function (visible) {
+		if (this.isVisible() != visible) {
+			this.$supers('setVisible', arguments);
+			if (this.treerow) this.treerow.setVisible(visible);
+			
+			_showDOM(this, this._isRealVisible());
+		}
+		return this;
+	},
+	beforeParentChanged_: function(newParent) {
+		var oldtree = this.getTree();
+		if (oldtree) 
+			oldtree._onTreeitemRemoved(this);
+		
+		if (newParent) {
+			var tree = newParent.getTree();
+			if (tree) 
+				tree._onTreeitemAdded(this);
+		}
+		this.$supers("beforeParentChanged_", arguments);
+	},
+	
+	isRealElement: function () {
+		return false; 
+	},
+	
+	insertBefore: function (child, sibling, ignoreDom) {
+		if (this.$super('insertBefore', child, sibling,
+		ignoreDom || (!this.z_rod && child.$instanceof(zul.sel.Treechildren)))) {
+			this._fixOnAdd(child, ignoreDom);
+			return true;
+		}
+	},
+	
+	appendChild: function (child, ignoreDom) {
+		if (this.$super('appendChild', child,
+		ignoreDom || (!this.z_rod && child.$instanceof(zul.sel.Treechildren)))) {
+			if (!this.insertingBefore_)
+				this._fixOnAdd(child, ignoreDom);
+			return true;
+		}
+	},
+	_fixOnAdd: function (child, ignoreDom) {
+		if (child.$instanceof(zul.sel.Treerow)) 
+			this.treerow = child;
+		else if (child.$instanceof(zul.sel.Treechildren)) {
+			this.treechildren = child;
+			if (!ignoreDom && this.treerow) 
+				this.rerender();
+		}
+	},
+	onChildRemoved_: function(child) {
+		this.$supers('onChildRemoved_', arguments);
+		if (child == this.treerow) {
+			this.treerow = null;
+		} else if (child == this.treechildren) {
+			this.treechildren = null;
+			if (!this.childReplacing_) 
+				this._syncIcon(true); 
+		}
+	},
+	onChildAdded_: function(child) {
+		this.$supers('onChildAdded_', arguments);
+		if (this.childReplacing_) 
+			this._fixOnAdd(child, true);
+		else if (this.desktop)
+            this._fixOnAdd(child, true); 
+	},
+	removeHTML_: function (n) {
+		for (var cn, w = this.firstChild; w; w = w.nextSibling) {
+			cn = w.$n();
+			if (cn)
+				w.removeHTML_(cn);
+		}
+		this.$supers('removeHTML_', arguments);
+	},
+	replaceWidget: function (newwgt) {
+		zul.sel.Treeitem._syncSelItems(this, newwgt);
+		if (this.treechildren)
+			this.treechildren.detach();
+		this.$supers('replaceWidget', arguments);
+	},
+	_removeChildHTML: function (n) {
+		for(var cn, w = this.firstChild; w; w = w.nextSibling) {
+			if (w != this.treerow && (cn = w.$n()))
+				w.removeHTML_(cn);
+		}
+	},
+	_renderChildHTML: function (childHTML) {
+		var w, tarWgt, tree = this.getTree();
+		
+		if (w = this.previousSibling) {
+			
+			if (tree && tree.getMold() == 'paging') {
+				var count = tree.getPageSize();
+				for (;w && count-- > 0; w = w.previousSibling) {
+					if (w.treerow) {
+						tarWgt = w;
+						break;
+					}
+				}
+			} else {
+				tarWgt = _searchPrevRenderedItem(w); 
+			}
+			
+			if (tarWgt) {
+				var dom = tarWgt.$n();
+				if (tarWgt.isContainer()) { 
+					var lastChild = tarWgt.treechildren.lastChild;
+					for (;lastChild; lastChild = lastChild.previousSibling) {
+						var n = lastChild.$n();
+						if (n) { 
+							dom = n;
+							break;
+						}
+					}
+				}
+				jq(dom).after(childHTML);
+				return;
+			}
+		}
+		if (w = this.nextSibling) {
+			
+			if (tree && tree.getMold() == 'paging') {				
+				var count = tree.getPageSize();
+				for (;w && count-- > 0; w = w.nextSibling) {
+					if (w.treerow) {
+						tarWgt = w;
+						break;
+					}
+				}
+			} else {
+				tarWgt = _searchNextRenderedItem(w); 
+			}
+			
+			if (tarWgt) {
+				var dom = tarWgt.$n();
+				if (this.isContainer()) { 
+					var firstChild = this.treechildren.firstChild;
+					for (;firstChild; firstChild = firstChild.nextSibling) {
+						var n = firstChild.$n();
+						if (n) { 
+							dom = n;
+							break;
+						}
+					}
+				}
+				jq(dom).before(childHTML);
+				return;
+			}
+		}
+		if (w = this.getParentItem()) {
+			
+			var n = w.$n();
+			if (n)
+			    jq(n).after(childHTML);
+			else
+				w._renderChildHTML(childHTML);
+		} else if ((w = this.getTree())) {
+			var tbody = w.$n('rows');
+			if (this.isContainer()) { 
+				var firstChild = this.treechildren.firstChild;
+				if (firstChild) {
+					var dom = firstChild.$n();
+					if (dom) { 
+						jq(dom).before(childHTML);
+						return;
+					} else if (tbody.firstChild) { 
+						jq(tbody.firstChild).before(childHTML);
+						return;
+					}
+				}
+			}
+			jq(tbody).append(childHTML);
+		}
+	},
+	insertChildHTML_: function (child, before, desktop) {
+		if (before = before ? before.getFirstNode_(): null)
+			jq(before).before(child.redrawHTML_());
+		else
+			this._renderChildHTML(child.redrawHTML_());
+		
+		child.bind(desktop);
+	},
+	getOldWidget_: function (n) {
+		var old = this.$supers('getOldWidget_', arguments);
+		if (old && old.$instanceof(zul.sel.Treerow))
+			return old.parent;
+		return old;
+	},
+	replaceHTML: function (n, desktop, skipper) {
+		this._removeChildHTML(n);
+		this.$supers('replaceHTML', arguments);
+	},
+	_syncIcon: function (isRemoved) {
+		if (this.desktop && this.treerow) {
+			var i = this.treerow;
+			if (i = i.firstChild)
+				i._syncIcon(isRemoved);
+			if (i = this.treechildren)
+				for (i = i.firstChild; i; i = i.nextSibling)
+					i._syncIcon(isRemoved);
+		}
+	}
+},{
+	
+	_syncSelItems: function (oldwgt, newwgt) {
+		var items;
+		if ((items = oldwgt.getTree()) && (items = items._selItems))
+			if (oldwgt.$instanceof(zul.sel.Treechildren)) {
+				for (var item = oldwgt.firstChild; item; item = item.nextSibling)
+					_rmSelItemsDown(items, item)
+				for (var item = newwgt.firstChild; item; item = item.nextSibling)
+					_addSelItemsDown(items, item);
+			} else { 
+				_rmSelItemsDown(items, oldwgt)
+				_addSelItemsDown(items, newwgt);
+			}
+	}
+});
+})();
+zkreg('zul.sel.Treeitem');zk._m={};
+zk._m['default']=
+function (out) {
+	if (this.treerow) this.treerow.redraw(out);
+	if (this.treechildren) this.treechildren.redraw(out);
+}
+
+;zkmld(zk._p.p.Treeitem,zk._m);
+
+zul.sel.Treerow = zk.$extends(zul.Widget, {
+	
+	getTree: function () {
+		return this.parent ? this.parent.getTree() : null;
+	},
+	
+	getLevel: function () {
+		return this.parent ? this.parent.getLevel(): 0;
+	},
+	
+	getLinkedTreechildren: function () {
+		return this.parent ? this.parent.treechildren : null;
+	},
+	domClass_: function (no) {
+		var scls = this.$supers('domClass_', arguments),
+			p = this.parent;
+		if (p && (!no || !no.zclass)) {
+			var zcls = this.getZclass();
+			if (p.isDisabled())
+				scls += (scls ? ' ': '') + this.$s('disabled');
+			if (p.isSelected())
+				scls += (scls ? ' ': '') + this.$s('selected');
+		}
+		return scls;
+	},
+	domTooltiptext_ : function () {
+		return this._tooltiptext || this.parent._tooltiptext || this.parent.parent._tooltiptext;
+	},
+	
+	domStyle_: function (no) {
+		
+		return ((this.parent && !this.parent._isRealVisible() && this.isVisible()) ?
+				'display:none;' : '') + this.$supers('domStyle_', arguments);
+	},
+	
+	removeChild: function (child) {
+		for (var w = child.firstChild; w;) {
+			var n = w.nextSibling; 
+			child.removeChild(w); 
+			w = n;
+		}
+		this.$supers('removeChild', arguments);
+	},
+	
+	doClick_: function(evt) {
+		var ti = this.parent,
+			tg = evt.domTarget;
+		if (tg == this.$n('open') || tg == this.$n('icon')) {
+			ti.setOpen(!ti._open);
+			evt.stop();
+		} else if (!ti.isDisabled())
+			this.$supers('doClick_', arguments);
+	},
+	
+	scrollIntoView: function () {
+		var bar = this.getTree()._scrollbar;
+		if (bar) {
+			bar.syncSize();
+			bar.scrollToElement(this.$n());
+		} else {
+			this.$supers('scrollIntoView', arguments);
+		}
+	},
+	deferRedrawHTML_: function (out) {
+		out.push('<tr', this.domAttrs_({domClass:1}), ' class="z-renderdefer"></tr>');
+	}
+});
+zkreg('zul.sel.Treerow');zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<tr', this.domAttrs_(), '>');
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	out.push('</tr>');
+}
+
+;zkmld(zk._p.p.Treerow,zk._m);
+(function () {
+
+zul.sel.Treecell = zk.$extends(zul.LabelImageWidget, {
+	
+	setWidth: zk.$void, 
+	_colspan: 1,
+	$define: {
+    	
+    	
+		colspan: [
+			function (colspan) {
+				return colspan > 1 ? colspan: 1;
+			},
+			function () {
+				var n = this.$n();
+				if (n) n.colSpan = this._colspan;
+			}]
+	},
+	
+	getTree: function () {
+		return this.parent ? this.parent.getTree() : null;
+	},
+	domStyle_: function (no) {
+		var style = this.$super('domStyle_', zk.copy(no, {width:true})),
+				
+			tc = this.getTreecol();
+			return this.isVisible() && tc && !tc.isVisible() ? style +
+				'display:none;' : style;
+	},
+	
+	getTreecol: function () {
+		var tree = this.getTree();
+		if (tree && tree.treecols) {
+			var j = this.getChildIndex();
+			if (j < tree.treecols.nChildren)
+				return tree.treecols.getChildAt(j);
+		}
+		return null;
+	},
+	
+	getLevel: function () {
+		return this.parent ? this.parent.getLevel(): 0;
+	},
+	
+	getMaxlength: function () {
+		var tc = this.getTreecol();
+		return tc ? tc.getMaxlength() : 0;
+	},
+	domLabel_: function () {
+		return zUtl.encodeXML(this.getLabel(), {maxlength: this.getMaxlength()});
+	},
+	getTextNode: function () {
+		return this.getCaveNode();
+	},
+	domContent_: function () {
+		var s1 = this.$supers('domContent_', arguments),
+			s2 = this._colHtmlPre();
+		return s1 ? s2 ? s2 + '<span class="' + this.$s('text') + '">&nbsp;' + s1 + '</span>' : s1: s2;
+	},
+	bind_: function () {
+		this.$supers('bind_', arguments);
+		if (this._clearCache) { 
+			this._clearCache = false;
+			var p;
+			if (p = this.parent) {
+				p.clearCache(); 
+			}
+		}
+	},
+	doMouseOver_: function(evt) {
+		var n = this.$n();
+		
+		
+		if (n && zk.gecko && (this._draggable || this.parent._draggable)
+				&& !jq.nodeName(evt.domTarget, 'input', 'textarea')) {
+			jq(n).addClass('z-draggable-over');
+		}
+		this.$supers('doMouseOver_', arguments);
+	},
+	doMouseOut_: function(evt) {
+		var n = this.$n();
+		
+		
+		if (n && zk.gecko && (this._draggable || this.parent._draggable)
+				&& !jq.nodeName(evt.domTarget, 'input', 'textarea')) {
+			jq(n).removeClass('z-draggable-over'); 
+		}
+		this.$supers('doMouseOut_', arguments);
+	},
+	doFocus_: function (evt) {
+		this.$supers('doFocus_', arguments);
+		
+		var tree = this.getTree(),
+		frozen = tree ? tree.frozen : null,
+		tbody = tree && tree._treechildren ? tree._treechildren.$n() : null,
+		td, tds;
+		if (frozen && tbody) {
+			tds = jq(evt.domTarget).parents('td');
+			for (var i = 0, j = tds.length; i < j; i++) {
+				td = tds[i];
+				if (td.parentNode.parentNode == tbody) {
+					tree._moveToHidingFocusCell(td.cellIndex);
+					break;
+				}
+			}
+		}
+	},
+	_syncIcon: function (isRemoved) {
+		this.rerender(isRemoved ? -1 : false);
+		var p;
+		if (p = this.parent) {
+			this._clearCache = true;
+		}
+	},
+	_colHtmlPre: function () {
+		if (this.parent.firstChild == this) {
+			var item = this.parent.parent,
+				tree = item.getTree(),
+				sb = [];
+			if (tree) {
+				if (tree.isCheckmark()) {
+					var chkable = item.isCheckable(),
+						multi = tree.isMultiple(),
+						cmCls = multi ? item.$s('checkbox') : item.$s('radio'),
+						ckCls = multi ? ' z-icon-check' : ' z-icon-radio';
+					sb.push('<span id="', this.parent.uuid, '-cm" class="',
+							item.$s('checkable'), ' ', cmCls);
+					
+					if (!chkable || item.isDisabled())
+						sb.push(' ', item.$s('disabled'));
+					
+					sb.push('"');
+					if (!chkable)
+						sb.push(' style="visibility:hidden"');
+					
+					sb.push('><i class="', item.$s('icon'), ckCls, '"></i></span>');
+				}
+			}
+			var iconScls = tree ? tree.getZclass() : '',
+				pitems = this._getTreeitems(item, tree);
+			for (var j = 0, k = pitems.length; j < k; ++j)
+				this._appendIcon(sb, iconScls, 'spacer', false);
+			
+			if (item.isContainer()) {
+				var name = item.isOpen() ? 'open' : 'close';
+				this._appendIcon(sb, iconScls, name, true);
+			} else {
+				this._appendIcon(sb, iconScls, 'spacer', false);
+			}
+			return sb.join('');
+		} else {
+			
+			
+			return !this.getImage() && !this.getLabel()	&& !this.nChildren ? '&nbsp;' : null;
+		}
+	},
+	_getTreeitems: function (item, tree) {
+		var pitems = [];
+		for (;;) {
+			var tch = item.parent;
+			if (!tch)
+				break;
+			item = tch.parent;
+			if (!item || item == tree)
+				break;
+			pitems.unshift(item);
+		}
+		return pitems;
+	},
+	_appendIcon: function (sb, iconScls, name, button) {
+		var openCloseIcon = [];
+		sb.push('<span class="');
+		if (name == 'spacer') {
+			sb.push(iconScls, '-line ', iconScls, '-', name, '"');
+			openCloseIcon.push('&nbsp;');
+		} else {
+			var id = '';
+			if (button) {
+				var item = this.parent;
+				if (item)
+					id = item.uuid + '-icon';
+			}
+			sb.push(iconScls, '-icon"');
+			var icon = this.getIconOpenClass_();
+			if (name.indexOf('close') > -1)
+				icon = this.getIconCloseClass_();
+			
+			openCloseIcon.push('<i id="', id, '" class="', icon, ' ', iconScls, 
+					'-', name, '"></i>');
+		}
+		if (button) {
+			var item = this.parent; 
+			if (item)
+				sb.push(' id="', item.uuid, '-open"');
+		}
+		sb.push('>', openCloseIcon.join(''), '</span>');
+		openCloseIcon = null;
+	},
+	getIconOpenClass_: function () {
+		return 'z-icon-caret-down';
+	},
+	getIconCloseClass_: function () {
+		return 'z-icon-caret-right';
+	},
+	getWidth: function() {
+		var col = this.getTreecol();
+		return col ? col.getWidth() : null;
+	},
+	domAttrs_: function () {
+		return this.$supers('domAttrs_', arguments)
+			+ (this._colspan > 1 ? ' colspan="' + this._colspan + '"' : '');
+	},
+	updateDomContent_: function () {
+		this.$supers('updateDomContent_', arguments);
+		if (this.parent)
+			this.parent.clearCache();
+	},
+	deferRedrawHTML_: function (out) {
+		out.push('<td', this.domAttrs_({domClass:1}), ' class="z-renderdefer"></td>');
+	}
+});
+})();
+zkreg('zul.sel.Treecell',true);zk._m={};
+zk._m['default']=
+function (out, skipper) {
+	out.push('<td', this.domAttrs_(), '><div id="', this.uuid,
+		'-cave" class="', this.$s('content'), '"',
+		this.domTextStyleAttr_(), '>', this.domContent_());
+
+	if (!skipper)
+    	for (var w = this.firstChild; w; w = w.nextSibling)
+    		w.redraw(out);
+
+	out.push('</div></td>');
+}
+
+;zkmld(zk._p.p.Treecell,zk._m);
+
+zul.sel.Treefoot = zk.$extends(zul.Widget, {
+	
+	getTree: function () {
+		return this.parent;
+	},
+	
+	setVflex: function (v) { 
+		v = false;
+		this.$super(zul.sel.Treefoot, 'setVflex', v);
+	},
+	
+	setHflex: function (v) { 
+		v = false;
+		this.$super(zul.sel.Treefoot, 'setHflex', v);
+	},
+	deferRedrawHTML_: function (out) {
+		out.push('<tr', this.domAttrs_({domClass:1}), ' class="z-renderdefer"></tr>');
+	}
+});
+
+zkreg('zul.sel.Treefoot');zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<tr', this.domAttrs_(), '>');
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	
+	var tree = this.getTree();
+	if (tree._nativebar && !tree.frozen)
+		out.push('<td class="', this.$s('bar'), '" />');
+	
+	out.push('</tr>');
+}
+
+;zkmld(zk._p.p.Treefoot,zk._m);
+
+zul.sel.Treefooter = zk.$extends(zul.mesh.FooterWidget, {
+	
+	getTree: function () {
+		return this.getMeshWidget();
+	},
+	
+	getTreecol: function () {
+		return this.getHeaderWidget();
+	},
+	
+	getMaxlength: function () {
+		var tc = this.getTreecol();
+		return tc ? tc.getMaxlength() : 0;
+	},
+	
+	domLabel_: function () {
+		return zUtl.encodeXML(this.getLabel(), {maxlength: this.getMaxlength()});
+	}
+});
+
+zkreg('zul.sel.Treefooter',true);zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<td', this.domAttrs_(), '><div id="', this.uuid,
+		'-cave" class="', this.$s('content'), '">', this.domContent_());
+	for (var w = this.firstChild; w; w = w.nextSibling)
+		w.redraw(out);
+	out.push('</div></td>');
+}
+
+;zkmld(zk._p.p.Treefooter,zk._m);
+}finally{zk.setLoaded(zk._p.n);}});zk.setLoaded('zul.sel',1);

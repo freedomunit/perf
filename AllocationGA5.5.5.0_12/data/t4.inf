@@ -1,0 +1,11 @@
+[t4]
+FileName1=t4.htm
+URL1=http://10.125.2.182/bin-java/efsnPackage.do_userLoginWarning;jsessionid=645DEDDFCF243ACDAE70CAC902256A85.tomcat01?dump=0.2426554132305876
+Total=1
+RequestHeaderFile=t4_RequestHeader.txt
+RequestBodyFile=NONE
+ResponseHeaderFile=t4_ResponseHeader.txt
+ContentType=text/html
+SnapshotXmlFile=snapshot_4.xml
+[ProtocolInfo]
+ProtocolId=QTWeb

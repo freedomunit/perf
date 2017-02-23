@@ -1,0 +1,4 @@
+"dtid=z_g8k&cmd_0=onCellFocus&uuid_0=jU0Qo&data_0=%7B%22sheetId%22%3A%22bc_sheet_18%22%2C%22row"
+"%22%3A0%2C%22col%22%3A0%7D&cmd_1=onOpenPanel&uuid_1=jU0Ql1&data_1=%7B%22isOpen%22%3Atrue%7D&cm"
+"d_2=onClick&uuid_2=jU0Ql1&data_2=%7B%22pageX%22%3A400%2C%22pageY%22%3A96%2C%22which%22%3A1%2C%"
+"22x%22%3A14%2C%22y%22%3A10%7D"

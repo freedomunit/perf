@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>7thonline Direct-to-Consumer</title>
+    <link rel="shortcut icon" href="/images/common/favicon.ico" type="image/ico" />
+    <link rel="styleSheet" type="text/css" href="/javascript/7thonline_default_v3.css" />
+    <link rel="stylesheet" type="text/css" href="/branding/opti/stylesheet.css" title="branding" />
+    <!-- 7thonline/stylesheet -->
+    <script>
+        pleasewait='Please Wait';
+        wait='Wait';
+    </script>
+    <script src="/javascript/jquery-3.1.1.min.js"></script>
+	<script src="/javascript/jquery-ui-1.12.0.min.js"></script> 
+	<script src="/javascript/jquery4.js"></script>
+</head>
+<body>
+<!---   version <VERSION_NUMBER> (Do not remove)    -->
+<form action="" method="post">
+    <input type="hidden" id="need_check_opti_notification" value="false" />
+    <input type="hidden" id="notification_min" value="1" />
+</form>
+<a name="t" id="t" tabindex="6" accesskey="t"></a>
+<div id="ff">
+<div id="topcontainer">
+  <div class="topbar">
+    <div class="loht">
+      <div id="logouthelp">
+      
+      <a href="/bin-java/efsnPackage.do_userLogoff" class="logout"><small>Log&nbsp;Out</small></a>
+            <br /><br /><div id="myOnPageContent" style="display:none"></div>
+            <input alt="#TB_inline?height=200&amp;width=400&amp;inlineId=myOnPageContent" title="<b>Notification</b>" id="notification" class="thickbox" type="button" style="display:none" />
+      </div>
+      <div id="support2"></div>
+    </div>
+    <a href="/bin-java/efsnPackage.do_userGoHome?dump=0.45448096035289987"  id="mlogo" title="&lt;&lt; Home">&lt;&lt; Home</a>
+  </div>
+  <div id="topMenu">
+  <!--topMenutemplate-->
+    <div id="nav-container">
+      <div id="menuContent">
+	    
+	    
+	    
+	    
+	    <!--toptemplatedisablehome--><!--toptemplatedisablehomee-->
+	    
+     	<div style="padding:5px 5px 10px 0">
+  
+  
+  
+  
+  <!--toptemplatedisableallocation-->
+     <!--security_allocation-->
+        <div class="tdright" style="display:table-cell">
+          <ul>  
+            <li class="navtitle"><span>Allocation</span></li>
+             <!--security_allocation_assormentmix-->
+               <li><a href="/bin-java/cmm.do_assortmentMixSearchCriteria">Assortment Mix</a></li>
+             <!--security_allocation_assormentmixe-->
+             
+             
+             <!--security_allocation_allocationplan-->
+            <li><a href="/bin-java/efsnPackage.do_allocationCriteria?allocationtype=allocationdailytask">Daily Tasks</a></li>
+             <!--security_allocation_allocationplane-->
+          </ul>
+        </div>
+     <!--security_allocatione-->
+    <!--toptemplatedisableallocatione-->
+    
+    
+  <!--toptemplatedisablereport-->
+	  <div class="tdright" style="display:table-cell">
+	     <ul>  
+	       <li class="navtitle"><span>Reporting</span></li>
+	         
+	       
+	       <!--security_reports_reportbuilder-->
+	       <li><a href="/bin-java/report.do_reportBuilder?dump=1">Report Builder</a></li>
+	       <!--security_reports_reportbuildere-->       
+          </ul></div>
+  <!--toptemplatedisablereporte-->
+    
+  <!--toptemplatedisableadministrative--> 
+        <div style="display:table-cell">
+          <ul>
+            <li class="navtitle"><span>Setup</span></li>  
+                      <!--li><a href="/bin-java/cmm.do_cmmDollsheetPreference?dump=1">Assortment Profile</a></li-->
+                      <!--li><a href="/bin-java/cmm.do_allocationTransferRules?dump=1">Allocation & Transfer Rules</a></li-->
+                      <li><a href="/bin-java/efsnPackage.do_memberPassword?dump=1">Change My Password</a></li>
+                      
+                     <!--hidefornonadmin--> 
+                        <li><a href="/bin-java/efsnPackage.do_companyUserList?dump=1">Company Users</a></li>
+                     <!--hidefornonadmine-->
+                        <!--hidefordenyaccess-->
+                        <li><a href="/bin-java/cmm.do_cmmDepartmentProfileSettings?dump=1">Brand Profile</a></li>
+                        <!--hidefordenyaccesse-->
+                        <li><a href="/bin-java/cmm.do_doorInfoEntryApplet?dump=1">Door Info</a></li >
+                     <!--displayfileuploadlink-->
+                        <li><a href="/bin-java/efsnPackage.do_fileUploads?dump=1">File Uploads</a></li>
+                     <!--displayfileuploadlinke-->
+                     <!--hidefornonadmin-->
+                        <li><a href="/bin-java/cmm.do_setPlanAttribute?dump=1" class="random">Planning Levels</a></li>                     
+                        <li><a href="/bin-java/cmm.do_resetPassword?dump=1">Reset User's Password</a></li>                   
+                         
+                     <!--hidefornonadmine-->
+                     <!--security_style_bank-->
+                  <li><a href="/bin-java/efsnPackage.do_vendorStyleBank?dump=1">Style Bank</a></li>
+              		<!--security_style_banke-->
+          </ul></div>
+    <!--toptemplatedisableadministrativee-->  
+         </div>
+          </div>
+        </div>
+        <!--topMenutemplatee-->
+      </div>
+      <div class="tog-container"><div id="tog"><a href="javascript:void(0)" onfocus="this.hideFocus=true;" id="menuTrigger" title="Click to Open/Close">NAVIGATION</a></div></div>
+      <div id="poweredby"><em>Powered by</em> <b>7th</b><span>Online</span><em>, Inc.</em></div>
+    </div>
+    <div id="maincontent">
+      <div id="wrapper">
+      <!--notenabletab-->
+        <div id="notabcontent">
+      <!--notenabletabe-->
+      
+        <!-- start allocationcriteria.htm -->
+<style type="text/css">
+    .opdisabled {color:#ccc;}
+</style>
+<script type="text/javascript">
+var allselected = "All Selected";
+var hierarchyattr = "hierarchyattr";
+var ajaxRequest;
+var reportid = 0;
+var url = '/bin-java/report.do_AllocationCriteriaValueUpdate?selectedStockCategory=10002';
+var template = 'allocationfiltercriteriadropdown.htm';
+
+$(function(){
+	$('#stockcategory').change(function(){
+		var selectedStockCategory = $('option:selected', this).val();
+		url = '/bin-java/report.do_AllocationCriteriaValueUpdate?selectedStockCategory=' + selectedStockCategory;
+	});
+	
+    $('#mlogo').addClass('allocation');
+    showtrans();
+    $('#dailytasktype').change(function() {
+    	showtrans();
+    });
+       
+    $('#databreakdownviewtype').change(function() {
+    	var v = $(this).val();
+    	$('#datasourcetype').val(v);
+    	$('#posource, #asnsource, #recsource').css('display', 'none');
+    	if (v == '1'){
+            $('#posource').css('display', '');      
+        }else if (v == '3'){
+            $('#asnsource').css('display', '');
+        } else if (v == '4'){
+            $('#recsource').css('display', '');
+        }
+    }).trigger('change');
+
+    dpoptions = $.extend({
+    	showOn: "button",
+        buttonImage: "/images/common/x.gif",
+        changeMonth: true,
+        changeYear: true,
+        minDate: "-4Y", 
+        maxDate: "+4Y",
+        buttonImageOnly: true}, 
+        $.datepicker.regional[$('html').attr('lang')]
+    );  
+    $("#dp1, #dp2").datepicker(dpoptions);  
+	
+	$('#trans_dc').change(function(){
+		var dcval = $('option:selected', this).val();
+		if (dcval == ""){
+  		    $('#trans_stockcategory').html('<option value=""></option>');
+		} else {
+			getState(dcval);
+		};
+	});
+});
+function showtrans(){
+	if ($('#dailytasktype').val() === '-1'){ 
+		$('.transhide').hide();  
+		$('.allocatehide').show();
+	} else {
+		$('.transhide').show();
+		$('.allocatehide').hide(); 
+    }
+};
+function getState(dcval) {
+	$.ajax({
+		type: "POST",
+		url: '/bin-java/efsnPackage.do_allocationCriteriaTransferStockCategoryDropdown',
+	    data:'trans_dc='+dcval,
+		success: function(data){
+			if (data.indexOf('[ER-10003]') != -1){
+				location.reload();
+			}else {
+				$("#trans_stockcategory").html(data);
+			}
+		},
+	    error:function(result){ console.log(["error", result]); }
+	});
+};
+</script>
+<script src="/javascript/criteriafilter.js"></script>
+
+<table width="750" cellpadding="0" cellspacing="0" border="0" class="publicnone">
+	<tr>
+		<td><big class="title1"></big><big class="title2"></big><!--dailytaskoptions--><big class="title1">Daily</big><big class="title2">Task</big><!--dailytaskoptionse--></td>
+		<td align="right" nowrap><b><small>[<span class="required"> &#42;Required </span>]</small></b></td>
+	</tr>
+</table>
+
+<form  name="message" method="post" action="/bin-java/efsnPackage.do_AllocationDailyTaskEntry">
+<input type="hidden" id="allocationtype" name="allocationtype" value="allocationdailytask" />
+<input type="submit" value="Submit" class="mb" alt="none" />
+<table width="950" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td valign="top">
+            <table width="100%" cellpadding="0" cellspacing="2" border="0">
+<!--dailytaskoptions-->
+                <tr>
+                    <td align="right" nowrap="nowrap"><b class="required">*Task:</b></td>
+                    <td>
+                        <select name="dailytasktype" id="dailytasktype">
+                        <!--displayallocationforeditaccess-->
+                         
+                        <option value="44"  >Pre-Allocation</option>
+                         
+                        <option value="45"  >Mid-Allocation</option>
+                         
+                        <option value="46"  selected='selected'>Post-Allocation</option>
+                        
+                        <!--displayallocationforeditaccesse-->
+                       <!--displayforeditaccess-->
+                        
+                        <option value="-1" >Transfer</option>
+                        
+                        <!--displayforeditaccesse-->
+                        </select>
+                        <b class="transhide">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Screen:</b>
+                        <select name="screentype" id="screentype" class="transhide">
+                          <option value="1" >Detail</option>
+                          <option value="2" >Detail by Color by Door</option>
+                          <option value="3" >Detail by Size by Door</option>
+                          <option value="4" selected='selected'>Summary</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="transhide">
+	                <td align="right" nowrap="nowrap"><b>Status:</b></td>
+	                <td>
+	                        <select name="status" id="status">
+	                        <option value="1" selected='selected' >All Transactions</option>
+	                        <option value="2"  >Approved Transactions Only</option>
+	                        <option value="3"  >Open Transactions only</option>
+	                        <option value="4"  >Approved Transactions with Discrepancies</option>
+	                    </select>
+	                 </td>
+                </tr>
+                <tr>
+                    <td align="right" nowrap="nowrap"><b>Order&nbsp;City:</b></td>
+                    <td>
+                        <!--hideifmulti-->
+                        10002
+                        <input type="hidden" id="stockcategory" name="stockcategory" value="10002" />
+                        <!--hideifmultie-->
+                        
+                     </td>
+                </tr>
+                <tr>
+                    <td align="right" nowrap="nowrap"><b>Style&nbsp;#(s):</b></td>
+                    <td width="100%">
+                     <input id="stylenumbers" type="text" maxlength="32700" name="stylenumbers" size="60" style="width:470px" value=""  /> 
+                     <input type="checkbox" name="enablestyleexactmatch" />Enable Style Exact Match
+                    </td>
+                </tr>
+                <tr  class="transhide">
+                    <td align="right" nowrap="nowrap">
+                       <select name="datasourcetype">
+                            <option value="1" selected='selected'>PO</option>
+                            <option value="3" >ASN</option>
+                            <option value="4" >Receiver</option>
+                        </select>
+                        <b>#(s):</b>                      
+                    </td>
+                    <td>
+                     <input id="sourcenumbers" type="text" maxlength="32700" name="sourcenumber" size="60" style="width:470px" value=""  />                      
+                    </td>
+                </tr>              
+<!--dailytaskoptionse-->
+            
+
+            
+                
+                <tr>
+                    <td></td>
+                    <td>(Number separator: Comma, Space, or Tab. Maximum of 2500 Number's.)</td>
+                </tr>
+            </table>
+            <br/>
+            <table cellspacing="1" cellpadding="2" border="0" class="transhide">
+                <tbody>
+                    <tr>
+                        <td colspan="5" nowrap="nowrap"><b>Please select the PO/PO Update/ASN/Receiver data Shop Date time range.</b></td>
+                    </tr>
+                    <tr>
+                         <td><b> From: </b></td>
+                         <td><input type="text" name="fromorderdate" id="dp1" value="08/01/2016" size="8" style="width:75px;" /></td>
+                         <td><b> To: </b></td>
+                         <td><input type="text" name="toorderdate" id="dp2" value="09/01/2016" size="8" style="width:75px;" /></td>
+                         <td>
+                         <b><input type="radio" name="timerangeselection" value="0"  checked='checked' />Shop&nbsp;Date</b>
+                         <b><input type="radio" name="timerangeselection" value="1"  />In DC Date</b>
+                         </td>
+                    </tr>
+                </tbody>
+            </table> 
+            <br class="transhide">
+            
+            <!-- filter hierarchy begin -->
+            <table width="740" cellpadding="0" cellspacing="0" border="0" id="filtertable" class="table1">
+            <tr>
+                <th colspan="5">Filter Hierarchy</th>
+            </tr>
+            <tbody class="nohover">
+            
+            <tr class="droppable draggable filtertablerow">
+                <td width="15" align="right" style="background-color:#fff"></td>
+                <td style="background-color:#fff">
+                <select class="fhsl">
+                <option value="">&nbsp;</option>
+                <option value="departments">Brand</option><option value="storecategory">Business Circle</option><option value="class">Category</option><option value="Country">Country</option><option value="hangfold">Feeling</option><option value="division">Grand Category</option><option value="fibercontent">Price Point</option><option value="prodcategorycode">Product Line</option><option value="Sleeve">Shape</option><option value="styleseason">Style Season</option><option selected value="styleyear">Style Year</option>
+                </select>
+                </td>
+                <td width="100%" style="background-color:#fff">
+                     <!-- begin allocationfiltercriteriadropdown.htm -->
+<div class="multiCwrap"><div class="multiCtext" title="All Selected">All Selected</div>
+	<div class="multiC"><table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<tr><th><label><input type="checkbox" name="" value="All Selected">All Selected</label></th></tr>
+		<tr><td><label><input name="styleyear" value="2012" type="checkbox" />2012</label></td></tr><tr><td><label><input name="styleyear" value="2013" type="checkbox" />2013</label></td></tr><tr><td><label><input name="styleyear" value="2014" type="checkbox" />2014</label></td></tr><tr><td><label><input name="styleyear" value="2015" type="checkbox" />2015</label></td></tr><tr><td><label><input name="styleyear" value="2016" type="checkbox" checked/>2016</label></td></tr><tr><td><label><input name="styleyear" value="2017" type="checkbox" />2017</label></td></tr><tr><td><label><input name="styleyear" value="2018" type="checkbox" />2018</label></td></tr><tr><td><label><input name="styleyear" value="2019" type="checkbox" />2019</label></td></tr>
+	</table></div>
+</div>
+<!-- end allocationfiltercriteriadropdown.htm -->
+
+                </td>
+                <td width="25" nowrap="nowrap"><input type="button" value="+" title="Add Filter" name="" alt="none" class="b add" /></td>
+                <td width="25" nowrap="nowrap"><input type="button" value="-" title="Remove Filter" name="" alt="none" class="b remove" /></td>
+            </tr>
+            
+            <tr class="droppable draggable filtertablerow">
+                <td width="15" align="right" style="background-color:#fff"></td>
+                <td style="background-color:#fff">
+                <select class="fhsl">
+                <option value="">&nbsp;</option>
+                <option value="departments">Brand</option><option value="storecategory">Business Circle</option><option value="class">Category</option><option value="Country">Country</option><option value="hangfold">Feeling</option><option value="division">Grand Category</option><option value="fibercontent">Price Point</option><option value="prodcategorycode">Product Line</option><option value="Sleeve">Shape</option><option selected value="styleseason">Style Season</option><option value="styleyear">Style Year</option>
+                </select>
+                </td>
+                <td width="100%" style="background-color:#fff">
+                     <!-- begin allocationfiltercriteriadropdown.htm -->
+<div class="multiCwrap"><div class="multiCtext" title="All Selected">All Selected</div>
+	<div class="multiC"><table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<tr><th><label><input type="checkbox" name="" value="All Selected">All Selected</label></th></tr>
+		<tr><td><label><input name="styleseason" value="29" type="checkbox" checked/>AUTUMN</label></td></tr><tr><td><label><input name="styleseason" value="3" type="checkbox" />SPRING</label></td></tr><tr><td><label><input name="styleseason" value="4" type="checkbox" />SUMMER</label></td></tr><tr><td><label><input name="styleseason" value="6" type="checkbox" />WINTER</label></td></tr>
+	</table></div>
+</div>
+<!-- end allocationfiltercriteriadropdown.htm -->
+
+                </td>
+                <td width="25" nowrap="nowrap"><input type="button" value="+" title="Add Filter" name="" alt="none" class="b add" /></td>
+                <td width="25" nowrap="nowrap"><input type="button" value="-" title="Remove Filter" name="" alt="none" class="b remove" /></td>
+            </tr>
+            
+            </tbody>
+           </table>
+     </td>
+    <td width="15">&nbsp;&nbsp;</td>
+    <td valign="top" align="right">
+        <table id="key" width="190" cellpadding="3" cellspacing="1" border="0" class="table4">
+            <tr>
+                <th colspan="2">Filtered By</th>
+            </tr>
+            
+            <tr><td id="fbdepartments" width="15"></td><td align="left" class="">Brand</td></tr>
+            
+            <tr><td id="fbstorecategory" width="15"></td><td align="left" class="">Business Circle</td></tr>
+            
+            <tr><td id="fbclass" width="15"></td><td align="left" class="">Category</td></tr>
+            
+            <tr><td id="fbCountry" width="15"></td><td align="left" class="">Country</td></tr>
+            
+            <tr><td id="fbhangfold" width="15"></td><td align="left" class="">Feeling</td></tr>
+            
+            <tr><td id="fbdivision" width="15"></td><td align="left" class="">Grand Category</td></tr>
+            
+            <tr><td id="fbfibercontent" width="15"></td><td align="left" class="">Price Point</td></tr>
+            
+            <tr><td id="fbprodcategorycode" width="15"></td><td align="left" class="">Product Line</td></tr>
+            
+            <tr><td id="fbSleeve" width="15"></td><td align="left" class="">Shape</td></tr>
+            
+            <tr><td id="fbstyleseason" width="15"></td><td align="left" class="">Style Season</td></tr>
+            
+            <tr><td id="fbstyleyear" width="15"></td><td align="left" class="">Style Year</td></tr>
+            
+        </table>
+    </td>
+</tr>
+</table>
+<input type="submit" value="Submit" class="mb" alt="none" />
+</form>
+<!-- end allocationcriteria.htm -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Start footer.htm -->
+<div id="foot" >
+	<div class="printcreateby">
+		Wed Oct 26 11:23:00 CST 2016 Created by J B
+	</div>
+	<div id="copy"><small>&copy; 1999-2016 7thonline, Inc. All Rights Reserved.</small></div>
+		<a name="b" id="b" tabindex="6" accesskey="b"></a>
+</div>
+<!-- End footer.htm-->
+
+
+</body>
+</html>
+<!-- End top level template buyertemplate.htm -->
+

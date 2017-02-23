@@ -1,0 +1,17 @@
+[t13]
+FileName1=t13.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=4
+RequestHeaderFile=t13_RequestHeader.txt
+RequestBodyFile=t13_RequestBody.txt
+ResponseHeaderFile=t13_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_13.xml
+FileName2=t13_ss_jU0Qo_bc_sheet_12.css
+URL2=http://10.125.2.182/bin-java/zkau/view/z_g8k/jU0Qo/j0l/1/ss_jU0Qo_bc_sheet_12.css
+FileName3=t13_ss_jU0Qo_bc_sheet_12.css
+URL3=http://10.125.2.182/bin-java/zkau/view/z_g8k/jU0Qo/j0l/2/ss_jU0Qo_bc_sheet_12.css
+FileName4=t13_IconMenuDownArrow.png
+URL4=http://10.125.2.182/bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/IconMenuDownArrow.png
+[ProtocolInfo]
+ProtocolId=QTWeb

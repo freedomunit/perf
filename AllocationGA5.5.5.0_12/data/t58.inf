@@ -1,0 +1,11 @@
+[t58]
+FileName1=t58.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=1
+RequestHeaderFile=t58_RequestHeader.txt
+RequestBodyFile=t58_RequestBody.txt
+ResponseHeaderFile=t58_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_58.xml
+[ProtocolInfo]
+ProtocolId=QTWeb

@@ -1,0 +1,13 @@
+[t30]
+FileName1=t30.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=2
+RequestHeaderFile=t30_RequestHeader.txt
+RequestBodyFile=t30_RequestBody.txt
+ResponseHeaderFile=t30_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_30.xml
+FileName2=t30_dl-spinner-button-bg.gif
+URL2=http://10.125.2.182/bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/dl-spinner-button-bg.gif
+[ProtocolInfo]
+ProtocolId=QTWeb

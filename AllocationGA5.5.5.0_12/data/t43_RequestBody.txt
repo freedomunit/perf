@@ -1,0 +1,7 @@
+"dtid=z_g8k&cmd_0=onAnchorPos&uuid_0=jU0Qu&data_0=%7B%22top%22%3A350%2C%22left%22%3A0%7D&cmd_1="
+"onAnchorPos&uuid_1=jU0Qu&data_1=%7B%22top%22%3A333%2C%22left%22%3A0%7D&cmd_2=onSelect&uuid_2=j"
+"U0Qu&data_2=%7B%22items%22%3A%5B%22jU0Q16%22%2C%22jU0Qy5%22%2C%22jU0Qw5%22%2C%22jU0Qu5%22%2C%2"
+"2jU0Qs5%22%2C%22jU0Qo5%22%2C%22jU0Qc5%22%2C%22jU0Qa5%22%5D%2C%22reference%22%3A%22jU0Q_6%22%2C"
+"%22clearFirst%22%3Afalse%2C%22selectAll%22%3A%22%22%2C%22pageX%22%3A19%2C%22pageY%22%3A482%2C%"
+"22which%22%3A1%2C%22x%22%3A8%2C%22y%22%3A377%7D&cmd_3=onClick&uuid_3=jU0Q_6&data_3=%7B%22pageX"
+"%22%3A19%2C%22pageY%22%3A482%2C%22which%22%3A1%2C%22x%22%3A8%2C%22y%22%3A3%7D"

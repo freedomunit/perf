@@ -1,0 +1,17 @@
+{"rs":[["rm",["jU0Q04"]],["rm",["jU0Qz3"]],["rm",["jU0Qx3"]],["rm",["jU0Qv3"]],["rm",["jU0Qt3"]],["rm",["jU0Qr3"]],["rm",["jU0Qp3"]],["rm",["jU0Qn3"]],["rm",["jU0Ql3"]],["rm",["jU0Q14"]],["rm",["jU0Q34"]],["rm",["jU0Q54"]],["rm",["jU0Q74"]],["rm",["jU0Q94"]],["rm",["jU0Qb4"]],["rm",["jU0Qd4"]],["rm",["jU0Qf4"]],["addChd",["jU0Q40",[
+['zul.sel.Listitem','jU0Qi4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:0},[
+['zul.sel.Listcell','jU0Qh4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Receiver #'},[]]]]],[
+['zul.sel.Listitem','jU0Qk4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:1},[
+['zul.sel.Listcell','jU0Qj4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Status'},[]]]]],[
+['zul.sel.Listitem','jU0Qm4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:2},[
+['zul.sel.Listcell','jU0Ql4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Style #'},[]]]]],[
+['zul.sel.Listitem','jU0Qo4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:3},[
+['zul.sel.Listcell','jU0Qn4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Store #'},[]]]]],[
+['zul.sel.Listitem','jU0Qq4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:4},[
+['zul.sel.Listcell','jU0Qp4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Store Description'},[]]]]],[
+['zul.sel.Listitem','jU0Qs4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:5},[
+['zul.sel.Listcell','jU0Qr4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Image'},[]]]]],[
+['zul.sel.Listitem','jU0Qu4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:6},[
+['zul.sel.Listcell','jU0Qt4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Gender'},[]]]]],[
+['zul.sel.Listitem','jU0Qw4',{$$0onSwipe:true,$$0onAfterSize:true,$onDrop:true,sclass:'nohover',style:'background:',draggable:'d3',droppable:'d3',_loaded:true,_index:7},[
+['zul.sel.Listcell','jU0Qv4',{$$0onSwipe:true,$$0onAfterSize:true,label:'Style Season'},[]]]]]]],["setAttr",[{$u:'jU0Q40'},"_lastoffset",0]],["setAttr",[{$u:'jU0Q40'},"resetDataLoader",true]],["setAttr",[{$u:'jU0Q40'},"model",true]],["setAttr",[{$u:'jU0Q40'},"visibleItemCount",32]]],"rid":34}

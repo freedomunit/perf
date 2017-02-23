@@ -1,0 +1,157 @@
+{"rs":[["rm",["v71Qr40"]],["rm",["v71Qf40"]],["rm",["v71Q7g"]],["rm",["v71Q760"]],["rm",["v71Q470"]],["rm",["v71Q270"]],["rm",["v71Q070"]],["rm",["v71Qz60"]],["rm",["v71Qh60"]],["rm",["v71Qf60"]],["rm",["v71Q870"]],["rm",["v71Q670"]],["rm",["v71Qp60"]],["rm",["v71Qn60"]],["rm",["v71Ql60"]],["addBfr",["v71Q4o0",[
+['zul.sel.Listitem','v71Qm60',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:0},[
+['zul.sel.Listcell','v71Qj60',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'Group Default'},[]],
+['zul.sel.Listcell','v71Qk60',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q160',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'deny',style:'width:100%',_value:'Deny',readonly:true},[]]]],
+['zul.sel.Listcell','v71Q260',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q_60',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'deny',style:'width:100%',_value:'Deny',readonly:true},[]]]],
+['zul.sel.Listcell','v71Q060',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qt60',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'view',style:'width:100%',_value:'View',readonly:true},[]]]],
+['zul.sel.Listcell','v71Qu60',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qr60',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'view',style:'width:100%',_value:'View',readonly:true},[]]]],
+['zul.sel.Listcell','v71Qs60',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q6h',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'view',style:'width:100%',_value:'View',readonly:true},[]]]]]]],[
+['zul.sel.Listitem','v71Q5h',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'dblline',_loaded:true,_index:1},[
+['zul.sel.Listcell','v71Q8h',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',style:'font-weight:bold',label:'Apply to All'},[]],
+['zul.sel.Listcell','v71Q7h',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qah',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q9h',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q360',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q460',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qzg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qyg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q0h',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q_h',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q2h',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Q1h',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:2},[
+['zul.sel.Listcell','v71Q4h',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CKA-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Q3h',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qrg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qqg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qtg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qsg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qvg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qug',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qxg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qwg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qjg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qig',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:3},[
+['zul.sel.Listcell','v71Qlg',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CKJ-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qkg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qng',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qmg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qpg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qog',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qbg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qag',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qdg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qcg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qfg',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qeg',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:4},[
+['zul.sel.Listcell','v71Qhg',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CUM-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qgg',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qva0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qwa0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qxa0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qya0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q5g',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qa70',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q9g',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q8g',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qna0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qoa0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:5},[
+['zul.sel.Listcell','v71Qpa0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CUW-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qqa0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qra0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qsa0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qta0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qua0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qab0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qbb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qcb0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qdb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qja0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qka0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:6},[
+['zul.sel.Listcell','v71Qla0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CKS-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qma0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q2b0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q3b0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q4b0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q5b0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q6b0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q7b0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q8b0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q9b0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qqb0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qrb0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:7},[
+['zul.sel.Listcell','v71Qsb0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CPA-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qtb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qza0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q_b0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q0b0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q1b0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qib0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qjb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qkb0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qlb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qmb0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qnb0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:8},[
+['zul.sel.Listcell','v71Qob0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-SWK-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qpb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q5c0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q6c0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q7c0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q8c0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qeb0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qfb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qgb0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qhb0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qio0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qho0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:9},[
+['zul.sel.Listcell','v71Qko0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CPW-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qjo0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qmo0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qlo0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qoo0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qno0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qqo0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qpo0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qso0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qro0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Quo0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qto0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:10},[
+['zul.sel.Listcell','v71Qwo0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CPM-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qvo0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qyo0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qxo0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q_p0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qzo0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q1p0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q0p0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q3p0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q2p0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q5p0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Q4p0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:11},[
+['zul.sel.Listcell','v71Q7p0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CUB-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Q6p0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Q9p0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Q8p0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qbp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qap0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qdp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qcp0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qfp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qep0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qhp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]],[
+['zul.sel.Listitem','v71Qgp0',{$$0onSwipe:true,$$0onAfterSize:true,_loaded:true,_index:12},[
+['zul.sel.Listcell','v71Qjp0',{$$0onSwipe:true,$$0onAfterSize:true,sclass:'firstrowcell',label:'HK-JV-JV-IN-CUG-USD-CKASIA'},[]],
+['zul.sel.Listcell','v71Qip0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qlp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qkp0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qnp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qmp0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qpp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qop0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qrp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]],
+['zul.sel.Listcell','v71Qqp0',{$$0onSwipe:true,$$0onAfterSize:true},[
+['zul.inp.Textbox','v71Qtp0',{$$0onBlur:true,$$0onSwipe:true,$$0onError:true,$$0onAfterSize:true,$$0onChanging:true,$$1onChange:true,$onChange:true,$$1onSelection:true,$$0onFocus:true,sclass:'df',style:'width:100%',tooltiptext:'Click to change',_value:'Default'},[]]]]]]]]],["setAttr",[{$u:'v71Qvn0'},"width","234"]],["setAttr",[{$u:'v71Q3o0'},"_lastoffset",0]],["setAttr",[{$u:'v71Q3o0'},"resetDataLoader",true]],["setAttr",[{$u:'v71Q3o0'},"model",true]],["setAttr",[{$u:'v71Q3o0'},"visibleItemCount",19]]],"rid":14}

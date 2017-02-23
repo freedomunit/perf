@@ -1,0 +1,13 @@
+[t75]
+FileName1=t75.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t75_RequestHeader.txt
+RequestBodyFile=t75_RequestBody.txt
+ResponseHeaderFile=t75_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_75.xml
+FileName2=t75_SecurityAccessDownload_20161124-095043.html
+URL2=https://10.125.2.174/bin-java/zkau/view/z_fd6/dwnmed-1/kr71/SecurityAccessDownload_20161124-095043.xlsx
+[ProtocolInfo]
+ProtocolId=QTWeb

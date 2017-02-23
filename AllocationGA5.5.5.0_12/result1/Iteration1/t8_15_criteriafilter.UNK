@@ -1,0 +1,266 @@
+$(function(){
+	var countdown;
+	var reportid = $('input[name=reportid]').val();
+	addremovemulti(); 
+	DisableOptions(); //manages attribute checklist and disabling of attr
+	rownumbers();   //manages numbering of each attribute row
+
+// START -- THIS IS A HACK AND SHOULD BE REMOVED ASAP
+// SEE LAST COMMENT ON PAGE
+	if ($.browser.msie) { 
+		$('input:checkbox').click(function () { 
+			this.blur(); 
+			this.focus(); 
+		}); 
+		//add this to fix Bug #21261
+		$('input:text').focus(); 
+	}; 	
+// FINISH -- THIS IS A HACK AND SHOULD BE REMOVED ASAP	
+	
+//START fitertable
+$('#filtertable tr.filtertablerow').each(function() {
+			varchanged = 'n';
+			thisis = $(this)
+			getValues()
+	});	
+
+$('#filtertable').on('click', '.multiCtext', function() {
+		eq = $(this).closest('tr.filtertablerow').index();
+		if ($(this).hasClass('reloaded') && ($('.on').length=='0')){
+			closesttr = $(this).closest('tr.filtertablerow');
+			ddcell = $(closesttr).find('td:eq(2)');
+			var selectedval = $(closesttr).find('select.fhsl option:selected').val();
+			clearlowerchecks(eq);
+			$(ddcell).empty().addClass('spinner-left');
+			abortAjaxRequest();
+			filtertajax(selectedval, 'on')	
+		}else{
+			if ($('.on').length=='0'){
+				$(this).next('.multiC').addClass('on');
+			}else{
+				$(this).next('.multiC').removeClass('on');
+				if ( varchanged == 'y'){
+					clearlowerchecks(eq);
+					getValues();
+					varchanged = 'n';
+				};
+			};
+		};
+	}).on('change', '.multiCwrap', function(){
+			varchanged = 'y';
+	}).on('mouseleave mouseenter', '.multiCwrap', function(event){
+		var eq = $(this).closest('tr.filtertablerow').index();
+			if ($(this).find('.on').length == '1'){
+				thisis = $(this)
+				if (event.type == 'mouseleave') {
+					countdown = setTimeout(function(){ 
+							thisis.find('.multiC').scrollTop(0).removeClass('on');
+							if ( varchanged == 'y'){
+								clearlowerchecks(eq);
+								getValues();
+								varchanged = 'n';
+							};
+						}, 500);
+					}else if (event.type == 'mouseenter') {
+						clearTimeout(countdown)
+					}
+				};
+	}).on('click', 'input[type=button].add', function(event){
+		var closesTr = $(this).closest('tr.filtertablerow');
+		var eq = $(closesTr).index();
+		var row = $(closesTr).clone(true);
+		
+		$('div.multiCwrap', row).remove();
+		$(row).removeClass('invalidfilter');
+		$('select.fhsl option', row).prop('selected',false);
+		$('select.fhsl option:first', row).prop('selected',true);
+		$(closesTr).after(row);
+		rownumbers();
+		$.when(removeorchange()).then(DisableOptions());
+		addremovemulti();
+	}).on('click', 'input[type=button].remove', function(event){
+		var closesTr = $(this).closest('tr');
+		var eq = $(closesTr).index();
+		var trlen = $('#filtertable tr').length;
+		var attrSelect = $('select.fhsl option:selected', closesTr).val();
+		var all = $('.multiCtext', closesTr).text();
+		
+		if (!(attrSelect == '' || all == allselected)){
+			clearlowerchecks(eq);
+			abortAjaxRequest();	
+		};	
+		$(closesTr).remove();
+		rownumbers();
+		$.when(removeorchange()).then(DisableOptions());
+	    addremovemulti();
+	}).on('change', 'select.fhsl', function(event){
+		var selectedval = $('option:selected', this).val();
+		closesttr = $(this).closest('tr');
+		ddcell = $(closesttr).find('td:eq(2)');
+		eq = $(closesttr).index();
+		clearlowerchecks(eq);
+		$(ddcell).empty().addClass('spinner-left');
+		abortAjaxRequest();
+		if (selectedval == ""){
+  		    $(ddcell).empty();
+			addremovemulti();
+			$.when(removeorchange()).then(DisableOptions());
+			$(ddcell).removeClass('spinner-left');
+		} else {
+			filtertajax(selectedval, '')
+		}
+	});
+//END fitertable	
+	
+$('#filterby').on('click', 'input[type=button].remove', function(event){
+		$(this).closest('tr').remove();
+		$('#filterby').find('input[type=button].remove').css('visibility','visible');
+		$('#filterby').find('input[type=button].remove:first').css('visibility','hidden');
+	}).on('click', 'input[type=button].add', function(event){
+		var row = $(this).closest('tr').clone(true);
+		$('select:first option:first', row).prop('selected',true);
+		$('select.clearonload option', row).remove(); //Added for 2nd dynamic select list. Add class="clearonload" to that select 
+		$('input[type=text]', row).val('');
+		$(this).closest('tr').after(row);
+
+		$('#filterby').find('input[type=button].remove').css('visibility','visible');
+		$('#filterby').find('input[type=button].remove:first').css('visibility','hidden');
+	}).find('input[type=button].remove:first').css('visibility','hidden');
+});
+
+ //END DOCUMENT READY--------------------------------------------------------------------------
+function filtertajax(selectedval, open){
+	ajaxRequest = $.ajax({
+   	   type: 'POST',
+   	   url:  url,
+   	   data: $.param(getDataMap(selectedval, eq), true),
+   	   success: function(data){
+   		if (data.indexOf('[ER-10003]') != -1){
+ 			location.reload();
+        }else {
+	    	$(ddcell).html(data);
+	      	addremovemulti();
+	    	var trindex = eq;
+	    	var alltrbelow = $('#filtertable').find('tr.filtertablerow:gt('+trindex+')');
+	    	$.when(removeorchange()).then(DisableOptions());
+	    	$(ddcell).removeClass('spinner-left').find('.multiC').addClass(open);
+	      } 
+	},
+    error:function(result){ console.log(["error", result]); }
+	 });
+ }
+ 
+ 
+ 
+// START NEW CODE
+function clearlowerchecks(eq){
+	$('#filtertable')
+	.find('tr.filtertablerow:gt('+eq+')')
+	.find('.multiCtext').addClass('reloaded').text('All Selected').prop('title', 'All Selected').parent()
+	.find('tr.checkedrowcolor').removeClass('checkedrowcolor')
+	.find('input[type=checkbox]').prop('checked',false)
+ } 
+ 
+ function getValues(){
+	if ((thisis.find('input:checkbox:first').is(':checked')) || (thisis.find('label:has(:checked)').length==0) ){
+		thisis.find('tr.checkedrowcolor').removeClass('checkedrowcolor').find('input:checkbox').prop('checked', false);
+		thisis.find('.multiCtext').text('All Selected').prop('title', 'All Selected');
+	}else{
+		var selectedID = [];
+		thisis.find('.adept:checked').each(function(){
+    		selectedID.push("#"+this.id+"-c label:has(:checked)");
+		});
+		values = thisis.find('tr label:has(:checked)').not(selectedID.join(', ')).map(function(){
+  				return $(this).text();
+			}).get().join(', ');
+			thisis.find('.multiCtext').text(values).prop('title', values);
+	}
+};
+
+// END NEW CODE
+
+function abortAjaxRequest(){
+	if(ajaxRequest && ajaxRequest.readystate != 4){
+		ajaxRequest.abort();
+    }
+}
+
+function getDataMap(selectedval, eq){
+	//data collection
+    var dataMap = {}; 
+    var previousattr = [];
+    dataMap['reportid'] = reportid;
+    dataMap['currentattr'] = selectedval;
+    $('select.fhsl option:selected').each(function(i, selected) {
+    	var selectedItem = $(selected).val();
+    	if (selectedval != selectedItem && i < eq){
+        	var values = [];
+        	$(selected).closest('tr').find('input[type=checkbox]:checked').each(function(j, checked) {
+        		var checkedval = $(checked).val();
+        		if (j == 0 && checkedval == allselected){
+        			return false;
+        		}
+            	values[j] = checkedval;
+        	});
+        	if (values.length != 0){
+        		previousattr[i] = selectedItem;
+        		dataMap[selectedItem] = values;
+        	}
+    	}
+    });
+    
+    dataMap['previousattr'] = previousattr;
+    dataMap['dump'] = Math.random();
+    dataMap['datafrom'] = $('#datafrom').val();
+    dataMap['assignmentid'] = $('#assignmentid').val();
+    dataMap['mptypeid'] = toUndefined($('#mptypeid').val()) ==""? $('#mptype').val() : $('#mptypeid').val();
+    dataMap['cmplanid'] = $('#cmplanid').val();
+    return dataMap;
+};
+
+function toUndefined(para){
+   if (typeof(para) == "undefined") {
+       return "";
+   }
+   return  para ;  
+}
+
+function rownumbers(){
+	$('#filtertable tbody .filtertablerow > td:first-child').each(function(i){
+		var count = (i+1);
+		$(this).html('<big><b>'+count+'.</b></big><input type="hidden" value="'+count+'" name="" />').closest('tr').prop('id','r'+count).find('.fhsl').prop('name', hierarchyattr + count);
+	});
+};
+
+
+function addremovemulti(){ //add remove button
+	var filter = $('#filtertable tr.filtertablerow').length;
+    if(filter=='1'){
+		$('#filtertable').find('input[type=button].remove').css('visibility','hidden');
+	}else{
+		$('#filtertable').find('input[type=button].remove').css('visibility','visible');
+	};
+	$('select.fhsl option[value=""]:selected').closest('tr').find('.add').css('visibility','hidden');
+	$('select.fhsl option[value!=""]:selected').closest('tr').find('.add').css('visibility','visible');
+}
+
+function removeorchange(){
+	var eq = $(this).parent().parent().index();
+    $("select.fhsl option").css("color","").prop("disabled",false);
+	$('#key td').removeClass('checkinfo');
+};
+
+function DisableOptions(){
+    var arr=[];
+    $("select.fhsl option:selected").each(function(){
+		$('#fb'+($(this).val())).addClass('checkinfo');
+		if ($(this).val().length>0){
+			arr.push($(this).val()); 
+	    };
+    });
+ 
+    $("select.fhsl option:not(:selected)").filter(function(){       
+    	return $.inArray($(this).val(),arr)>-1;
+ 	}).css("color","#ccc").prop("disabled",true);
+   
+};

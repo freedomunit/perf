@@ -1,0 +1,11 @@
+[t34]
+FileName1=t34.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=1
+RequestHeaderFile=t34_RequestHeader.txt
+RequestBodyFile=t34_RequestBody.txt
+ResponseHeaderFile=t34_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_34.xml
+[ProtocolInfo]
+ProtocolId=QTWeb

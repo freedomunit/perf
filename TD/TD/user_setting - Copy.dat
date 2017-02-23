@@ -1,0 +1,7 @@
+url,userName,passwd,groupName,editBtnRow,groupNameLen,renameOptionIndex,deleteGroupRow,deleteGroupRow_pageY,deleteGroupRow_Y,renameLen,singleRunSecurity
+10.125.2.173,Aleung,wuhan02,ZZZ_ALEUNG,1,10,22,242,457,342,17,1
+10.125.2.173,aluk,wuhan02,zzz_aluk,2,8,23,243,477,362,15,1
+10.125.2.173,cktest,wuhan02,zzz_cktest,3,10,24,244,497,382,17,1
+10.125.2.173,helenchu,wuhan02,zzz_helenchu,4,12,25,246,517,402,19,1
+10.125.2.173,jip,wuhan02,zzz_jip,5,7,26,245,537,422,14,1
+10.125.2.173,pcheng,wuhan02,zzz_pcheng,6,10,27,557,457,442,17,1

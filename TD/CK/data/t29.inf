@@ -1,0 +1,13 @@
+[t29]
+FileName1=t29.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t29_RequestHeader.txt
+RequestBodyFile=t29_RequestBody.txt
+ResponseHeaderFile=t29_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_29.xml
+FileName2=t29_ss_w60Qn_p0_sheet_3.css
+URL2=https://10.125.2.174/bin-java/zkau/view/z_ed6/w60Qn/0kp/4/ss_w60Qn_p0_sheet_3.css
+[ProtocolInfo]
+ProtocolId=QTWeb

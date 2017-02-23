@@ -1,0 +1,4 @@
+"allocationtype=allocationdailytask&dailytasktype=46&screentype=4&status=1&stockcategory=10002&"
+"stylenumbers=&datasourcetype=1&sourcenumber=&fromorderdate=08%2F01%2F2016&toorderdate=09%2F01%"
+"2F2016&timerangeselection=0&hierarchyattr1=styleyear&styleyear=2016&hierarchyattr2=styleseason"
+"&styleseason=29"

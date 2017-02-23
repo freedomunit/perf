@@ -1,0 +1,977 @@
+[API Trapper      ( d60: dd0)] Recording in 32-bit mode: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+[Network Analyzer ( d60: dd0)] ------------------------------------------------------------------------------------------
+[Network Analyzer ( d60: dd0)] Load Network Traffic Analyzers:
+[Network Analyzer ( d60: dd0)]     Analyzer Module: WPLUS (value=)
+[Network Analyzer ( d60: dd0)]     Analyzer Module: WebBase (value=GetHttpProtocolAnalyzer:api_http_filter.dll)
+[Network Analyzer ( d60: dd0)]     + Network Analyzer: api_http_filter.dll @ GetHttpProtocolAnalyzer Loaded!
+[Network Analyzer ( d60: dd0)]     + Interception Auditors: WinInetWplusInterceptionAudit:api_http_filter.dll
+[Network Analyzer ( d60: dd0)]     Analyzer Module: QTWeb (value=GetWebSocketProtocolAnalyzer:WebSocketAnalyzer.dll)
+[Network Analyzer ( d60: dd0)]     + Network Analyzer: WebSocketAnalyzer.dll @ GetWebSocketProtocolAnalyzer Loaded!
+[Network Analyzer ( d60: dd0)]     Analyzer Module: local_server (value=)
+[Network Analyzer ( d60: dd0)] ------------------------------------------------------------------------------------------
+[Network Analyzer ( d60: b20)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: dd0)] Establish Listener @ 127.0.0.1:1254
+[Network Analyzer ( d60: dd0)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: dd0)] Request Connection: Remote Server @ 127.0.0.1:1254   (Service=)  (Sid=  2)  PROXIED!
+[Network Analyzer ( d60: dd0)] Accept Connection : Service @ 127.0.0.1:1254  ,  Remote Client @ 127.0.0.1:1255
+[Network Analyzer ( d60: b20)]   (Sid:  2) Connection Terminated (by Client)
+[Network Analyzer ( d60: b20)]   (Sid:  3) Connection Terminated (by Client)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid=  4)  PROXIED!
+[Web Request      ( d60: b20)] "GET /"   
+[Network Analyzer ( d60: b20)]   (Sid:  4) Client -> Server @ : 286 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  4) Server -> Client : 420 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /favicon.ico"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid:  4) Client -> Server @ : 297 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  4) Server -> Client : 680 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid=  5)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/login?f=general/login.htm"   
+[Network Analyzer ( d60: b20)]   (Sid:  5) Client -> Server @ : 320 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  5) Server -> Client : 2505 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/stylesheet_public.css"   
+[Network Analyzer ( d60: b20)]   (Sid:  5) Client -> Server @ : 341 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /javascript/jquery-3.1.1.min.js"   
+[Network Analyzer ( d60: b20)]   (Sid:  4) Client -> Server @ : 321 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid:  5) Server -> Client : 1354 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  4) Server -> Client : 5840 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  4) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid=  6)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid:  4) Server -> Client : 8196 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /javascript/jquery-ui-1.12.0.min.js"   
+[Network Analyzer ( d60: b20)]   (Sid:  6) Client -> Server @ : 325 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid:  6) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid=  7)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid:  6) Server -> Client : 16384 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /javascript/jquery4.js"   
+[Network Analyzer ( d60: b20)]   (Sid:  7) Client -> Server @ : 312 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  6) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  7) Server -> Client : 14387 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  6) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  6) Server -> Client : 16291 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/7thonline/7thonline_logo.png"   
+[Network Analyzer ( d60: b20)]   (Sid:  4) Client -> Server @ : 358 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  4) Server -> Client : 2802 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/os_bg.jpg"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid:  6) Client -> Server @ : 345 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/login.gif"   
+[Network Analyzer ( d60: b20)]   (Sid:  4) Client -> Server @ : 345 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/bg_password.gif"   
+[Network Analyzer ( d60: b20)]   (Sid:  5) Client -> Server @ : 351 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/bg_username.gif"   
+[Network Analyzer ( d60: b20)]   (Sid:  7) Client -> Server @ : 351 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  4) Server -> Client : 3137 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  5) Server -> Client : 866 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  6) Server -> Client : 1270 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  7) Server -> Client : 676 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid=  8)  PROXIED!
+[Web Request      ( d60: b20)] "GET /images/common/loadingAnimation.gif"   
+[Network Analyzer ( d60: b20)]   (Sid:  8) Client -> Server @ : 355 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  8) Server -> Client : 1460 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid:  8) Server -> Client : 4705 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid:  6) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid:  4) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid:  5) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid:  7) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid:  8) Connection Terminated (by Server)
+[Net An. Warning  ( d60: 784)] Request Connection: Remote Server @ 172.217.26.110:443 (Service=) Failed attempt #1. Unable to connect to remote server: rc = -1 , le = 10060)
+[Net An. Warning  ( d60: 784)] Request Connection: Remote Server @ 172.217.26.110:443 (Service=) Failed attempt #2. Unable to connect to remote server: rc = -1 , le = 10060)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 172.217.26.110:443   (Service=)  (Sid=  9)  PROXIED!
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 10)  PROXIED!
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Web Request      ( d60: b20)] "GET /images/common/x.gif"   
+[Network Analyzer ( d60: b20)]   (Sid: 10) Client -> Server @ : 341 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 11)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/efsnPackage.do_userAuth"   
+[Network Analyzer ( d60: b20)]   (Sid: 11) Client -> Server @ : 488 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Server -> Client : 342 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 475 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/efsnPackage.do_userLoginWarning;jsessionid=645DEDDFCF243ACDAE70CAC902256A85.tomcat01?dump=0.2426554132305876"   
+[Network Analyzer ( d60: b20)]   (Sid: 10) Client -> Server @ : 530 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Server -> Client : 1241 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 63.245.215.95:443   (Service=)  (Sid= 12)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/efsnPackage.do_userAuth"   
+[Network Analyzer ( d60: b20)]   (Sid: 10) Client -> Server @ : 612 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Server -> Client : 707 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/efsnPackage.do_userGoHome?dump=0.1389028949622646"   
+[Network Analyzer ( d60: b20)]   (Sid: 10) Client -> Server @ : 863 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Server -> Client : 3389 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /javascript/7thonline_default_v3.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 10) Client -> Server @ : 365 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/stylesheet.css"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 11) Client -> Server @ : 358 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Server -> Client : 11737 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 13)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 176 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /images/common/favicon.ico"   
+[Network Analyzer ( d60: b20)]   (Sid: 13) Client -> Server @ : 311 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/homepage_logo_default.jpg"   
+[Network Analyzer ( d60: b20)]   (Sid: 11) Client -> Server @ : 384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 13) Server -> Client : 681 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 16052 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/bg-nav-search-top_grey.gif"   
+[Network Analyzer ( d60: b20)]   (Sid: 11) Client -> Server @ : 355 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/btn-nav-search-top_bt.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 10) Client -> Server @ : 354 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/bg-nav-search-bottom_trans.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 13) Client -> Server @ : 359 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Server -> Client : 3455 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 1388 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 13) Server -> Client : 1349 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/efsnPackage.do_allocationCriteria?allocationtype=allocationdailytask"   
+[Network Analyzer ( d60: b20)]   (Sid: 11) Client -> Server @ : 823 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 5034 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /javascript/criteriafilter.js"   
+[Network Analyzer ( d60: b20)]   (Sid: 11) Client -> Server @ : 362 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 3017 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /images/common/icon_formWcheckboxes2_trans.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 11) Client -> Server @ : 367 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/brandingSprite.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 10) Client -> Server @ : 347 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /images/common/checked-red.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 13) Client -> Server @ : 351 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Server -> Client : 4672 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Server -> Client : 623 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 13) Server -> Client : 1546 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 11) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 10) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 13) Connection Terminated (by Server)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 14)  PROXIED!
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Web Request      ( d60: b20)] "POST /bin-java/report.do_AllocationCriteriaValueUpdate?selectedStockCategory=10002"   
+[Network Analyzer ( d60: b20)]   (Sid: 14) Client -> Server @ : 1045 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 15)  PROXIED!
+[Web Request      ( d60: b20)] "GET /images/common/spinner_ongrey_s.gif"   
+[Network Analyzer ( d60: b20)]   (Sid: 15) Client -> Server @ : 356 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 15) Server -> Client : 3590 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 14) Server -> Client : 546 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/report.do_AllocationCriteriaValueUpdate?selectedStockCategory=10002"   
+[Network Analyzer ( d60: b20)]   (Sid: 15) Client -> Server @ : 1085 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 15) Server -> Client : 543 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 14) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 15) Connection Terminated (by Server)
+[User action                 ] RendezvousEvent loadAllocation [User action                 ] StartTransactionEvent loadAllocation [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 16)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/efsnPackage.do_AllocationDailyTaskEntry"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 1181 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 2473 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zk/do_loadZKTemplate?f=allocate.zul&zk.redrawCtrl=page"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 773 bytes (Service=HTTP)
+[Net An. Error    ( d60: ed8)]   (Sid:  9) SSL handshake with remote server Failed!
+[Net An. Error    ( d60: ce8)] SSL_connect(ssl_id = 126004072 = 00000000) Failed, ctx = 0782AB68, err = "@œâ[~8~ø,—pZ", err code = 1541590880
+[Network Analyzer ( d60: ce8)]   (Sid: 12) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.2, ciphers:(NONE))
+[Network Analyzer ( d60: ce8)]   (Sid: 12) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: b20)]   (Sid: 12) Connection Terminated (by Client)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 14250 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 14722 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/_zkiju-zkstyle/zul/css/zk.wcs"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 747 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 17)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 16384 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/js/zk.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 845 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 11563 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /branding/opti/loader-whiteonblue.gif"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 351 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 2126 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 18)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 7513 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/js/zul.lang.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 851 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 2952 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/js/zssex.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 848 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 5216 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv3.9.0/js/zss.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 713 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/0/ss_jU0Qo_bc_sheet_8.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 751 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /javascript/zul.js?_=1477452200116"   
+[Network Analyzer ( d60: b20)]   (Sid: 18) Client -> Server @ : 471 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 3148 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 6347 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.box.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 18) Client -> Server @ : 722 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.utl.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 722 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 2001 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 5840 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 10046 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 19)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.wnd.wpd"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 722 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 20)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 12533 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.menu.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 20) Client -> Server @ : 723 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 20) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 21)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 20) Server -> Client : 6867 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 8769 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.tab.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 722 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.inp.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 722 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.layout.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 725 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 9611 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 8143 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 6254 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zk.fmt.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 721 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 3903 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zkex.inp.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 723 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 7587 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 16335 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /images/common/close_grey.gif"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 363 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/ui-menu.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 18) Client -> Server @ : 743 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/plus.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 740 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/control-stop-000-small.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 20) Client -> Server @ : 758 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 385 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 686 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 583 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/control-stop-270-small.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 21) Client -> Server @ : 758 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 20) Server -> Client : 677 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/zul/less/font/fontawesome-webfont.woff?v=4.0.1"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 817 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 21) Server -> Client : 661 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 16384 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/zk-menu-sprite.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 18) Client -> Server @ : 780 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-bold.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 745 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 16384 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-italic.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 20) Client -> Server @ : 747 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-color.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 21) Client -> Server @ : 746 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 598 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 20) Server -> Client : 559 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 21) Server -> Client : 701 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 361 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zkex.cmsp.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 20) Client -> Server @ : 724 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 5940 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/paint-can-color.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 751 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 20) Server -> Client : 1651 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 1068 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-bottom.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 21) Client -> Server @ : 749 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-vertical-alignment-top.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 763 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-alignment.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 18) Client -> Server @ : 750 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 696 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-top.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 746 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-wrap.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 20) Client -> Server @ : 745 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 21) Server -> Client : 600 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-left.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 747 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 573 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 624 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 20) Server -> Client : 688 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 639 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 14020 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-right.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 21) Client -> Server @ : 748 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 18) Client -> Server @ : 742 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-all.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 746 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 21) Server -> Client : 638 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-outside.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 750 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 587 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 599 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-inside.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 20) Client -> Server @ : 749 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 644 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-horizontal.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 753 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/border-vertical.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 21) Client -> Server @ : 751 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-alignment-center.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 16) Client -> Server @ : 757 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-vertical-alignment-middle.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 766 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-vertical-alignment.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 18) Client -> Server @ : 759 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 614 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 20) Server -> Client : 661 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Server -> Client : 575 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 752 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Server -> Client : 700 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/zss/img/edit-alignment-right.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 19) Client -> Server @ : 756 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 21) Server -> Client : 652 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Server -> Client : 574 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 3479 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 367 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau/comet?dtid=z_g8k"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 892 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 20) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 16) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 21) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 18) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 19) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent loadAllocation [User action                 ] RendezvousEvent switchTab [User action                 ] StartTransactionEvent switchTab [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 22)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 1334 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 13235 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 336 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 23)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 7300 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 16384 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/1/ss_jU0Qo_bc_sheet_12.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 23) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 10533 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 23) Server -> Client : 5840 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 23) Server -> Client : 1586 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 1281 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/2/ss_jU0Qo_bc_sheet_12.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 23) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 23) Server -> Client : 5840 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 23) Server -> Client : 1585 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/IconMenuDownArrow.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 23) Client -> Server @ : 783 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 23) Server -> Client : 1313 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 24)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 7389 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/3/ss_jU0Qo_bc_sheet_12.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 23) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 12872 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 23) Server -> Client : 7425 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 15693 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 24) Connection Terminated (by Client)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 3305 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 436 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 22) Client -> Server @ : 991 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 22) Server -> Client : 367 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 23) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent switchTab [Network Analyzer ( d60: b20)]   (Sid: 22) Connection Terminated (by Server)
+[User action                 ] RendezvousEvent populate [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 25)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 1090 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 1266 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.sel.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 722 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 6249 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.mesh.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 723 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 5428 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 1789 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 1883 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 5840 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 12598 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 994 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 461 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 26)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/4/ss_jU0Qo_bc_sheet_12.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 26) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 26) Server -> Client : 7426 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 2324 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 2678 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 26) Connection Terminated (by Server)
+[User action                 ] StartTransactionEvent populate [Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 1136 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 525 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 2206 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 2968 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 3183 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 27)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/5/ss_jU0Qo_bc_sheet_16.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 27) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 27) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 27) Server -> Client : 4507 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 11331 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/6/ss_jU0Qo_bc_sheet_16.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 27) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 9408 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 27) Server -> Client : 7426 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 1973 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 437 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 25) Client -> Server @ : 1879 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 27) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 25) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent populate [User action                 ] RendezvousEvent download [User action                 ] StartTransactionEvent download [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 28)  PROXIED!
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/dl-spinner-button-bg.gif"   
+[Network Analyzer ( d60: b20)]   (Sid: 28) Client -> Server @ : 786 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 29)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 29) Client -> Server @ : 1026 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 29) Server -> Client : 467 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 28) Server -> Client : 1188 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 28) Client -> Server @ : 1872 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 29) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 28) Server -> Client : 505 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 28) Client -> Server @ : 994 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 30)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 28) Server -> Client : 461 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/dwnmed-0/a931/allocatetemplate.xlsx.xlsx"   
+[Network Analyzer ( d60: b20)]   (Sid: 30) Client -> Server @ : 801 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 12983 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 30) Client -> Server @ : 1879 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 28) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 30) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent download [User action                 ] RendezvousEvent clickEditBtn [User action                 ] StartTransactionEvent clickEditBtn [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 31)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 1671 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Server -> Client : 465 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 1873 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Server -> Client : 7667 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 5246 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Server -> Client : 461 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 32)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/7/ss_jU0Qo_bc_sheet_18.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 32) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 32) Server -> Client : 3242 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 1142 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 31) Client -> Server @ : 5077 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 32) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 31) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent clickEditBtn [User action                 ] RendezvousEvent editOptions [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 54.148.104.15:443   (Service=)  (Sid= 33)  PROXIED!
+[Network Analyzer ( d60: 150)]   (Sid: 33) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: 150)]   (Sid: 33) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: b20)]   (Sid: 33) Connection Terminated (by Client)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 52.36.22.84:443   (Service=)  (Sid= 34)  PROXIED!
+[Network Analyzer ( d60: 5bc)]   (Sid: 34) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: 5bc)]   (Sid: 34) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: b20)]   (Sid: 34) Connection Terminated (by Client)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 52.36.22.84:443   (Service=)  (Sid= 35)  PROXIED!
+[User action                 ] StartTransactionEvent editOptions [Network Analyzer ( d60: ca4)]   (Sid: 35) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: ca4)]   (Sid: 35) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: b20)]   (Sid: 35) Connection Terminated (by Client)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 36)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 36) Client -> Server @ : 1202 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 36) Server -> Client : 2972 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 36) Client -> Server @ : 1789 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 36) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 36) Connection Terminated (by Server)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 37)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 37) Client -> Server @ : 1454 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 37) Server -> Client : 752 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 37) Client -> Server @ : 1468 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 37) Server -> Client : 771 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 37) Client -> Server @ : 1532 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 37) Server -> Client : 756 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 37) Client -> Server @ : 1517 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 37) Server -> Client : 735 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 37) Client -> Server @ : 966 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 37) Server -> Client : 648 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 37) Client -> Server @ : 2149 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 37) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 37) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent editOptions [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 52.88.147.203:443   (Service=)  (Sid= 38)  PROXIED!
+[Network Analyzer ( d60: d9c)]   (Sid: 38) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: d9c)]   (Sid: 38) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: b20)]   (Sid: 38) Connection Terminated (by Client)
+[User action                 ] RendezvousEvent modifyCell [User action                 ] StartTransactionEvent modifyCell [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 39)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 39) Client -> Server @ : 1537 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 39) Server -> Client : 369 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 39) Client -> Server @ : 1396 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 39) Server -> Client : 475 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 39) Client -> Server @ : 1392 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 282 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 39) Server -> Client : 1066 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 1215 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau/comet?dtid=z_g8k"   
+[Network Analyzer ( d60: b20)]   (Sid: 39) Client -> Server @ : 892 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 477 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 1887 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 2657 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 5251 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 40)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/8/ss_jU0Qo_bc_sheet_20.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 40) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 40) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 40) Server -> Client : 322 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 7746 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/9/ss_jU0Qo_bc_sheet_20.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 752 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 40) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 40) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 3241 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 40) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 40) Client -> Server @ : 594 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 40) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 1879 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 17) Client -> Server @ : 1789 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Server -> Client : 368 bytes  (Service=HTTP)
+[User action                 ] EndTransactionEvent modifyCell [Network Analyzer ( d60: b20)]   (Sid: 40) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 17) Connection Terminated (by Server)
+[User action                 ] RendezvousEvent save [User action                 ] StartTransactionEvent save [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 41)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 41) Client -> Server @ : 1024 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 41) Server -> Client : 459 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 41) Client -> Server @ : 1866 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 41) Server -> Client : 419 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 41) Client -> Server @ : 994 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 41) Server -> Client : 461 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 41) Client -> Server @ : 1879 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 41) Server -> Client : 368 bytes  (Service=HTTP)
+[User action                 ] EndTransactionEvent save [Network Analyzer ( d60: b20)]   (Sid: 41) Connection Terminated (by Server)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 42)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 1225 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 4669 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 1882 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 43)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/a/ss_jU0Qo_bc_sheet_16.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 43) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 43) Server -> Client : 5840 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 43) Server -> Client : 1586 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 2478 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 2210 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/b/ss_jU0Qo_bc_sheet_22.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 43) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 43) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 43) Server -> Client : 4505 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 881 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 10245 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/c/ss_jU0Qo_bc_sheet_22.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 43) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 43) Server -> Client : 1460 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 43) Server -> Client : 5965 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 437 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 2327 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 42) Client -> Server @ : 1791 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 43) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 42) Connection Terminated (by Server)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 63.245.215.95:443   (Service=)  (Sid= 44)  PROXIED!
+[Network Analyzer ( d60: d5c)]   (Sid: 44) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: d5c)]   (Sid: 44) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( d60: b20)]   (Sid: 44) Connection Terminated (by Client)
+[User action                 ] RendezvousEvent createJob [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 45)  PROXIED!
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 45) Client -> Server @ : 1091 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 46)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/IconMenuUpArrow.png"   
+[Network Analyzer ( d60: b20)]   (Sid: 46) Client -> Server @ : 781 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 46) Server -> Client : 1340 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 1475 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.db.wpd"   
+[Network Analyzer ( d60: b20)]   (Sid: 45) Client -> Server @ : 721 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 16201 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 45) Client -> Server @ : 2776 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 9834 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 45) Client -> Server @ : 994 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/d/ss_jU0Qo_bc_sheet_22.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 46) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 461 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 46) Server -> Client : 7425 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 45) Client -> Server @ : 2324 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 45) Client -> Server @ : 2678 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 46) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 45) Connection Terminated (by Server)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 47)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 47) Client -> Server @ : 1528 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 47) Server -> Client : 1071 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 47) Connection Terminated (by Server)
+[User action                 ] StartTransactionEvent createJob [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 48)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 1027 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 506 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 2142 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 5678 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 2084 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 49)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 16384 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/e/ss_jU0Qo_bc_sheet_24.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 49) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 49) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 8719 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 49) Server -> Client : 4506 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 2243 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/f/ss_jU0Qo_bc_sheet_24.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 49) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 49) Server -> Client : 1460 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 49) Server -> Client : 5965 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 11983 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/g/ss_jU0Qo_bc_sheet_24.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 49) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 49) Server -> Client : 7425 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 9960 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 15005 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 1879 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 48) Client -> Server @ : 1345 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 49) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 48) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent createJob [User action                 ] RendezvousEvent cancelJob [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 50)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 1091 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 1142 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 2774 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 3038 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 994 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 461 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 51)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/h/ss_jU0Qo_bc_sheet_24.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 51) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 51) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 51) Server -> Client : 4506 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 1879 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 3122 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 1528 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 1065 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 51) Connection Terminated (by Server)
+[User action                 ] StartTransactionEvent cancelJob [Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 1139 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 16384 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 10291 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 1141 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 52)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/i/ss_jU0Qo_bc_sheet_24.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 52) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 707 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 52) Server -> Client : 7426 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 2605 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 52) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 14334 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 7877 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 16384 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 11242 bytes (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 53)  PROXIED!
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 1460 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 11359 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau/view/z_g8k/jU0Qo/j0l/j/ss_jU0Qo_nl_sheet_12.css"   
+[Network Analyzer ( d60: b20)]   (Sid: 53) Client -> Server @ : 752 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 53) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 53) Server -> Client : 4494 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 1970 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 2856 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 368 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 50) Client -> Server @ : 2678 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Server -> Client : 368 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 53) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 50) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent cancelJob [User action                 ] RendezvousEvent saveeClose [User action                 ] StartTransactionEvent saveClose [Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 54)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 54) Client -> Server @ : 1136 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 54) Server -> Client : 469 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: b20)]   (Sid: 54) Client -> Server @ : 1873 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 54) Server -> Client : 501 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/zkau?dtid=z_g8k&cmd_0=rmDesktop&opt_0=i"   
+[Network Analyzer ( d60: b20)]   (Sid: 54) Client -> Server @ : 821 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 39) Server -> Client : 266 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 54) Server -> Client : 354 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/efsnPackage.do_allocationCriteria?allocationtype=allocationdailytask&dump=0.36669907063019247"   
+[Network Analyzer ( d60: b20)]   (Sid: 39) Client -> Server @ : 838 bytes (Service=HTTP)
+[Web Request      ( d60: b20)] "POST /bin-java/zkau"   
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: b20)]   (Sid: 54) Client -> Server @ : 994 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 54) Server -> Client : 374 bytes  (Service=HTTP)
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 55)  PROXIED!
+[Web Request      ( d60: b20)] "POST /bin-java/zkau/comet?dtid=z_g8k"   
+[Network Analyzer ( d60: b20)]   (Sid: 55) Client -> Server @ : 892 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 55) Server -> Client : 303 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 39) Server -> Client : 2920 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 39) Server -> Client : 2114 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 54) Connection Terminated (by Server)
+[Network Analyzer ( d60: b20)]   (Sid: 55) Connection Terminated (by Server)
+[User action                 ] EndTransactionEvent saveClose [Network Analyzer ( d60: b20)]   (Sid: 39) Connection Terminated (by Server)
+[Network Analyzer ( d60: 784)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( d60: 784)] Request Connection: Remote Server @ 10.125.2.182:80   (Service=)  (Sid= 56)  PROXIED!
+[Web Request      ( d60: b20)] "GET /bin-java/efsnPackage.do_userLogoff"   
+[Network Analyzer ( d60: b20)]   (Sid: 56) Client -> Server @ : 824 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 56) Server -> Client : 874 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /"   
+[Network Analyzer ( d60: b20)]   (Sid: 56) Client -> Server @ : 419 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 56) Server -> Client : 419 bytes  (Service=HTTP)
+[Web Request      ( d60: b20)] "GET /bin-java/login?f=general/login.htm"   
+[Network Analyzer ( d60: b20)]   (Sid: 56) Client -> Server @ : 382 bytes (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 56) Server -> Client : 2504 bytes  (Service=HTTP)
+[Network Analyzer ( d60: b20)]   (Sid: 56) Connection Terminated (by Client)

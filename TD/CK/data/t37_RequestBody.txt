@@ -1,0 +1,2 @@
+"dtid=z_ed6&cmd_0=onClick&uuid_0=w60Qf0&data_0=%7B%22pageX%22%3A100%2C%22pageY%22%3A74%2C%22whi"
+"ch%22%3A1%2C%22x%22%3A10%2C%22y%22%3A10%7D"

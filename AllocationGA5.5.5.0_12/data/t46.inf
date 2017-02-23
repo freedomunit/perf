@@ -1,0 +1,11 @@
+[t46]
+FileName1=t46.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=1
+RequestHeaderFile=t46_RequestHeader.txt
+RequestBodyFile=t46_RequestBody.txt
+ResponseHeaderFile=t46_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_46.xml
+[ProtocolInfo]
+ProtocolId=QTWeb

@@ -1,0 +1,13 @@
+[t37]
+FileName1=t37.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t37_RequestHeader.txt
+RequestBodyFile=t37_RequestBody.txt
+ResponseHeaderFile=t37_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_37.xml
+FileName2=t37_AccountAssignmentDownload_20161124-093837.html
+URL2=https://10.125.2.174/bin-java/zkau/view/z_ed6/dwnmed-0/upt1/AccountAssignmentDownload_20161124-093837.xlsx
+[ProtocolInfo]
+ProtocolId=QTWeb

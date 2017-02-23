@@ -1,0 +1,13 @@
+[t36]
+FileName1=t36.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t36_RequestHeader.txt
+RequestBodyFile=t36_RequestBody.txt
+ResponseHeaderFile=t36_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_36.xml
+FileName2=t36_dl-spinner-button-bg.gif
+URL2=https://10.125.2.174/bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/dl-spinner-button-bg.gif
+[ProtocolInfo]
+ProtocolId=QTWeb

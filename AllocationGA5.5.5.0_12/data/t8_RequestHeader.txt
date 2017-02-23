@@ -1,0 +1,15 @@
+POST /bin-java/report.do_AllocationCriteriaValueUpdate?selectedStockCategory=10002 HTTP/1.1
+Host: 10.125.2.182
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Referer: http://10.125.2.182/bin-java/efsnPackage.do_allocationCriteria?allocationtype=allocationdailytask
+Content-Length: 141
+Cookie: EFSNCOOKIE=130723485918969525949807; EFSNPARENTCOMPANYCOOKIE=36421698603942311967; EFSNATSREPORTCOOKIE=36421698603942311967; SHOWREPORTBUILDERCOOKIE=36421698603942311967; ENABLELOGICALWORKFLOWCOOKIE=36421698603942311967; ALLOWESHOWROOMCOOKIE=36421698603942311967; ALLOWCOLLABORATECOOKIE=36421698603942311967; JSESSIONID=645DEDDFCF243ACDAE70CAC902256A85.tomcat01
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+

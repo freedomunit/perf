@@ -1,0 +1,2 @@
+"reportid=0&currentattr=styleseason&styleyear=2016&previousattr=styleyear&dump=0.32601758670149"
+"394&datafrom=&assignmentid=&mptypeid=&cmplanid="

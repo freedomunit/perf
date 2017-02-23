@@ -1,0 +1,13 @@
+[t95]
+FileName1=t95.htm
+URL1=https://10.125.2.179/bin-java/efsnPackage.do_logicalWorkflow?dump=1
+Total=2
+RequestHeaderFile=t95_RequestHeader.txt
+RequestBodyFile=NONE
+ResponseHeaderFile=t95_ResponseHeader.txt
+ContentType=text/html
+SnapshotXmlFile=snapshot_95.xml
+FileName2=t95_tip.gif
+URL2=https://10.125.2.179/images/common/tip.gif
+[ProtocolInfo]
+ProtocolId=QTWeb

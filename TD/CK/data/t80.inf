@@ -1,0 +1,13 @@
+[t80]
+FileName1=t80.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=2
+RequestHeaderFile=t80_RequestHeader.txt
+RequestBodyFile=t80_RequestBody.txt
+ResponseHeaderFile=t80_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_80.xml
+FileName2=t80_SecurityTemplateDownload_20161124-100056.html
+URL2=https://10.125.2.174/bin-java/zkau/view/z_fd6/dwnmed-2/5ke/SecurityTemplateDownload_20161124-100056.xlsx
+[ProtocolInfo]
+ProtocolId=QTWeb

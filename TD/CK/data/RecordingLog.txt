@@ -1,0 +1,469 @@
+[API Trapper      ( 570: f54)] Recording in 32-bit mode: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+[Network Analyzer ( 570: f54)] ------------------------------------------------------------------------------------------
+[Network Analyzer ( 570: f54)] Load Network Traffic Analyzers:
+[Network Analyzer ( 570: f54)]     Analyzer Module: WPLUS (value=)
+[Network Analyzer ( 570: f54)]     Analyzer Module: WebBase (value=GetHttpProtocolAnalyzer:api_http_filter.dll)
+[Network Analyzer ( 570: f54)]     + Network Analyzer: api_http_filter.dll @ GetHttpProtocolAnalyzer Loaded!
+[Network Analyzer ( 570: f54)]     + Interception Auditors: WinInetWplusInterceptionAudit:api_http_filter.dll
+[Network Analyzer ( 570: f54)]     Analyzer Module: QTWeb (value=GetWebSocketProtocolAnalyzer:WebSocketAnalyzer.dll)
+[Network Analyzer ( 570: f54)]     + Network Analyzer: WebSocketAnalyzer.dll @ GetWebSocketProtocolAnalyzer Loaded!
+[Network Analyzer ( 570: f54)]     Analyzer Module: local_server (value=)
+[Network Analyzer ( 570: f54)] ------------------------------------------------------------------------------------------
+[Network Analyzer ( 570: ee4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: f54)] Establish Listener @ 127.0.0.1:3810
+[Network Analyzer ( 570: f54)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: f54)] Request Connection: Remote Server @ 127.0.0.1:3810   (Service=)  (Sid=  2)  PROXIED!
+[Network Analyzer ( 570: f54)] Accept Connection : Service @ 127.0.0.1:3810  ,  Remote Client @ 127.0.0.1:3811
+[Network Analyzer ( 570: ee4)]   (Sid:  2) Connection Terminated (by Client)
+[Network Analyzer ( 570: ee4)]   (Sid:  3) Connection Terminated (by Client)
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid=  4)  PROXIED!
+[Network Analyzer ( 570: 150)]   (Sid:  4) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: 150)]   (Sid:  4) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( 570: ee4)]   (Sid:  4) Connection Terminated (by Client)
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid=  5)  PROXIED!
+[Network Analyzer ( 570: 93c)]   (Sid:  5) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: 93c)]   (Sid:  5) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( 570: ee4)]   (Sid:  5) Connection Terminated (by Client)
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid=  6)  PROXIED!
+[Network Analyzer ( 570: 378)]   (Sid:  6) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: 378)]   (Sid:  6) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Web Request      ( 570: ee4)] "GET /"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 286 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 420 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /favicon.ico"   
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 297 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 678 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid=  7)  PROXIED!
+[Network Analyzer ( 570: de4)]   (Sid:  7) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: de4)]   (Sid:  7) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Web Request      ( 570: ee4)] "GET /bin-java/login?f=general/login.htm"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 320 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 176 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 5239 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/login.css"   
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 335 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/jquery-3.1.1.min.js"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 322 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 269 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 286 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 3118 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid=  8)  PROXIED!
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid=  9)  PROXIED!
+[Network Analyzer ( 570: 868)]   (Sid:  8) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid= 10)  PROXIED!
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: d70)]   (Sid:  9) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: 868)]   (Sid:  8) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 6709 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/jquery-ui-1.10.0.min.js"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 326 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 288 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: d70)]   (Sid:  9) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Web Request      ( 570: ee4)] "GET /images/public_2013/favicon128.ico"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 319 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 337 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/jquery4.js"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 313 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 5060 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 286 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ed4)] Address lookup for QA-55 = 10.125.2.55
+[Network Analyzer ( 570: 83c)]   (Sid: 10) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: ed4)] Request Connection: Remote Server @ 10.125.2.179:443   (Service=)  (Sid= 11)  PROXIED!
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: 83c)]   (Sid: 10) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/jquery.cookie.js"   
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Client -> Server @ : 319 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 285 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 1670 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 4574 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: fc8)]   (Sid: 11) Negotiate Proxy -> Server SSL Handshake (ssl:TLSv1.1, ciphers:ECDHE-RSA-AES256-SHA)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8000 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 3259 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: fc8)]   (Sid: 11) Negotiate Client -> Proxy SSL Handshake (ssl:TLSv1.2, ciphers:DHE-RSA-AES128-SHA)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/os_bg.jpg"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 344 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/7thonline_logo.svgz"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 354 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/bg_username.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 350 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/login.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 344 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 298 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 669 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 1263 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/bg_password.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Client -> Server @ : 350 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 2296 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 270 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/button_bg.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Client -> Server @ : 348 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 3931 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 859 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 536 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/loadingAnimation.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 356 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 271 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 5886 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/x.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 340 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 334 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "POST /bin-java/efsnPackage.do_userAuth"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 514 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 808 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/efsnPackage.do_userGoHome;jsessionid=4731C025E561E733079771E59B5DCD75.tomcat01?dump=1"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 858 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 187 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 538 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/7thonline_default_v4.css"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 420 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/stylesheet.css"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 418 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/favicon.ico"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 329 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 333 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/jquery-ui-1.12.0.min.js"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 404 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 332 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 678 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 4603 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 4483 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 359 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 6420 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 4846 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 5 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/navtips.js"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 391 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/x.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 419 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/icon_emailN.png"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 429 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 334 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 1113 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 1508 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/bg-nav-search-top_grey.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 384 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/btn-nav-search-top_bt.png"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 383 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/checkbox_s.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 428 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/sidetab_bt.png"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 372 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 270 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 355 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 322 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 3178 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 271 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/bg-nav-search-bottom_trans.png"   
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Client -> Server @ : 388 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/tip.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Client -> Server @ : 362 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/efsnPackage.do_logicalWorkflow?dump=1"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 863 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 4900 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 590 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 959 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 270 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 2546 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/efsnPackage.do_securityEntry?dump=0.8183569356638731"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 885 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 232 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 3979 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/efsnPackage.do_logicalWorkflow?dump=1"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 830 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zk/do_loadZKTemplate?dump=0.467239065758302&f=security.zul&zk.redrawCtrl=page&dump=0.8183569356638731"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 875 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 959 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 200 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 1968 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/b34f6723/_zkiju-zkstyle/zul/css/zk.wcs"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 802 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/b34f6723/js/zk.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 900 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 365 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 3158 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /branding/7thonline/loader-whiteonblue.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 380 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 270 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 373 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 1849 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 7287 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/b34f6723/js/zul.lang.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 906 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 244 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 2708 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/b34f6723/js/zssex.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 903 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 372 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 4860 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv3.9.0/js/zss.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 768 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.box.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 777 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.sel.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 777 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.tab.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 777 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.mesh.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Client -> Server @ : 778 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.inp.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Client -> Server @ : 777 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 372 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 372 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 371 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 372 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 371 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 372 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 7772 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 1491 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.utl.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 777 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zhtml.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 775 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 5072 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 5898 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 2001 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 629 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 1466 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /javascript/zul.js?_=1480068015214"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 503 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.wnd.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Client -> Server @ : 777 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.menu.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Client -> Server @ : 778 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 346 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zk.fmt.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 776 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 3253 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 372 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 371 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 6117 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 371 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 3532 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Server -> Client : 3976 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 1231 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zul.layout.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 780 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 371 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 1056 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/_zv2015042817/js/zkex.inp.wpd"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 778 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 371 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 7216 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/close_grey.gif"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 395 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/b34f6723/zkstyle/zul/img/menu/zk-menu-sprite.png"   
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Client -> Server @ : 822 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/b34f6723/zkstyle/zul/img/common/bar-bg.png"   
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Client -> Server @ : 816 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /images/common/disabed_bg_stripe.png"   
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Client -> Server @ : 397 bytes (SSL)(Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/web/b34f6723/zul/less/font/fontawesome-webfont.woff?v=4.0.1"   
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Client -> Server @ : 859 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 342 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Server -> Client : 1279 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 378 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Server -> Client : 1235 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 401 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 8184 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Server -> Client : 5646 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 6 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 526 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 147 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 2 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Server -> Client : 5 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "POST /bin-java/zkau"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 1081 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 467 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/view/z_hxu/dwnmed-0/pul1/SecurityTemplateDownload_20161125-180026.xlsx"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 875 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 383 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 1436 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "POST /bin-java/zkau"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 1079 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 465 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid: 10) Connection Terminated (by Server)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau/view/z_hxu/dwnmed-1/7h01/SecurityAccessDownload_20161125-180032.xlsx"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 873 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 383 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8096 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 4380 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  6) Connection Terminated (by Server)
+[Network Analyzer ( 570: ee4)]   (Sid:  7) Connection Terminated (by Server)
+[Network Analyzer ( 570: ee4)]   (Sid:  9) Connection Terminated (by Server)
+[Network Analyzer ( 570: ee4)]   (Sid: 11) Connection Terminated (by Server)
+[User action                 ] StartTransactionEvent saveClose [Web Request      ( 570: ee4)] "POST /bin-java/zkau"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 1079 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 436 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "POST /bin-java/zkau"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 1110 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 451 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/zkau?dtid=z_hxu&cmd_0=rmDesktop&opt_0=i"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 876 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 286 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/efsnPackage.do_userGoHome"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 825 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 232 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 5055 bytes (SSL) (Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 8 bytes (SSL) (Service=HTTP)
+[Web Request      ( 570: ee4)] "GET /bin-java/efsnPackage.do_logicalWorkflow?dump=1"   
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Client -> Server @ : 803 bytes (SSL)(Service=HTTP)
+[Network Analyzer ( 570: ee4)]   (Sid:  8) Server -> Client : 959 bytes (SSL) (Service=HTTP)
+[User action                 ] EndTransactionEvent saveClose 

@@ -1,0 +1,283 @@
+zk.load('zul',function(){if(zk._p=zkpi('zul.utl'))try{
+
+
+zul.utl.Script = zk.$extends(zk.Widget, {
+	$define: {
+    	
+    	
+		content: function (cnt) {
+			if (cnt) {
+				this._fn = typeof cnt == 'function' ? cnt: new Function(cnt);
+				if (this.desktop) 
+					this._exec();
+			} else
+				this._fn = null;
+		},
+		
+		
+		src: function (src) {
+			if (src) {
+				this._srcrun = false;
+				if (this.desktop)
+					this._exec();
+			}
+		},
+		
+		
+		charset: null
+	},
+
+	_exec: function () {
+		var pkgs = this.packages; 
+		if (!pkgs) return this._exec0();
+
+		this.packages = null; 
+		zk.load(pkgs);
+
+		if (zk.loading)
+			zk.afterLoad(this.proxy(this._exec0));
+		else
+			this._exec0();
+	},
+	_exec0: function () {
+		var wgt = this, fn = this._fn;
+		if (fn) {
+			this._fn = null; 
+			zk.afterMount(function () {fn.apply(wgt);});
+		}
+		if (this._src && !this._srcrun) {
+			this._srcrun = true; 
+			zk.loadScript(this._src, null, this._charset);
+		}
+	},
+	ignoreFlexSize_: function (attr) {
+		
+		return true;
+	},
+	
+	redraw: function () {
+	},
+	bind_: function () {
+		this.$supers(zul.utl.Script, 'bind_', arguments);
+		this._visible = false; 
+		this._exec();
+	}
+});
+
+zkreg('zul.utl.Script');
+
+zul.utl.Timer = zk.$extends(zk.Widget, {
+	_running: true,
+	_delay: 0,
+
+	$define: {
+    	
+    	
+		repeats: _zkf = function () {
+			if (this.desktop) this._sync();
+		},
+		
+		
+		delay: _zkf,
+		
+		
+		running: _zkf
+	},
+	
+	play: function () {
+		this.setRunning(true);
+	},
+	
+	stop: function () {
+		this.setRunning(false);
+	},
+
+	_sync: function () {
+		this._stop();
+		this._play();
+	},
+	_play: function () {
+		if (this._running) {
+			var fn = this.proxy(this._tmfn);
+			if (this._repeats) {
+				this._iid = setInterval(fn, this._delay);
+				zAu.onError(this.proxy(this._onErr));
+			} else
+				this._tid = setTimeout(fn, this._delay);
+		}
+	},
+	_stop: function () {
+		var id = this._iid;
+		if (id) {
+			this._iid = null;
+			clearInterval(id)
+		}
+		id = this._tid;
+		if (id) {
+			this._tid = null;
+			clearTimeout(id);
+		}
+		zAu.unError(this.proxy(this._onErr));
+	},
+	_onErr: function (req, errCode) {
+		if (errCode == 410 || errCode == 404 || errCode == 405)
+			this._stop();
+	},
+	_tmfn: function () {
+		if (!this._repeats) this._running = false;
+		this.fire('onTimer', null, {ignorable: true});
+	},
+
+	
+	redraw: function () {
+	},
+	bind_: function () {
+		this.$supers(zul.utl.Timer, 'bind_', arguments);
+		this._visible = false; 
+		if (this._running) this._play();
+	},
+	unbind_: function () {
+		this._stop();
+		this.$supers(zul.utl.Timer, 'unbind_', arguments);
+	}
+});
+
+zkreg('zul.utl.Timer');
+
+zul.utl.Style = zk.$extends(zk.Widget, {
+	$define: {
+    	
+		
+		src: function () {
+			this._content = null;
+			this.rerender();
+		},
+		
+		
+		content: function () {
+			this._src = null;
+			this.rerender();
+		},
+		
+		
+		media: function (v) {
+			var n = this.$n('real');
+			if (n) n.media = v;
+		}
+	},
+	bind_: zk.ie8_ ? function () {
+		this.$supers(zul.utl.Style, 'bind_', arguments);
+
+		
+		if (this._src) {
+			var self = this;
+			setTimeout(function () {
+				var n = self.$n('real');
+				if (n) n.href = self._src;
+			});
+		}
+	} : function () {
+		this.$supers(zul.utl.Style, 'bind_', arguments);
+	}
+});
+zkreg('zul.utl.Style');zk._m={};
+zk._m['default']=
+function (out) {
+	var src, v;
+	
+	out.push('<div style="display:none" id="', this.uuid, '">&#160;');
+	if (src = this._src)
+		out.push('<link id="', this.uuid, '-real" rel="stylesheet" type="text/css" href="', src, '"');
+	else
+		out.push('<style id="', this.uuid, '-real"');
+
+	if (v = this._media)
+		out.push(' media="', v, '"');
+	out.push(this.domAttrs_({id:true}));
+
+	if (src)
+		out.push('/>');
+	else {
+		out.push('>');
+		if (v = this._content)
+			out.push(v);
+		out.push('</style>');
+	}
+	out.push('</div>');
+}
+
+;zkmld(zk._p.p.Style,zk._m);
+
+
+
+
+zul.utl.Iframe = zk.$extends(zul.Widget, {
+	_scrolling: 'auto',
+
+	$define: {
+		src: function (v) {
+			var n = this.$n();
+			if (n) n.src = v || '';
+		},
+		
+		
+		scrolling: function (v) {
+			if (!v) this._scrolling = v = 'auto';
+			var n = this.$n();
+			if (n) {
+				if (zk.gecko || zk.opera)
+					n.scrolling = 'true' === v ? 'yes': 'false' === v ? 'no': v;	
+				else 
+					this.rerender();
+			}
+		},
+		
+		
+		align: function (v) {
+			var n = this.$n();
+			if (n) n.align = v || '';
+		},
+		
+		
+		name: function (v) {
+			var n = this.$n();
+			if (n) n.name = v || '';
+		},
+		
+		
+		autohide: function (v) {
+			var n = this.$n();
+			if (n) jq(n).attr('z_autohide', v);
+		}
+	},
+	
+	bind_: function (desktop, skipper, after) {
+		this.$supers(zul.utl.Iframe, 'bind_', arguments);
+		if (this._src) {
+			var self = this;
+			after.push(function () {self.$n().src = self._src;});
+		}
+	},
+	domAttrs_: function(no){
+		var attr = this.$supers('domAttrs_', arguments)
+				+ ' src="' + zjq.src0 + '" frameborder="0"',
+		v = this._scrolling;
+		if ('auto' != v)
+			attr += ' scrolling="' + ('true' === v ? 'yes': 'false' === v ? 'no': v) + '"';	
+		if (v = this._align) 
+			attr += ' align="' + v + '"';
+		if (v = this._name) 
+			attr += ' name="' + v + '"';
+		if (v = this._autohide) 
+			attr += ' z_autohide="' + v + '"';
+		return attr;
+	}
+});
+
+zkreg('zul.utl.Iframe');zk._m={};
+zk._m['default']=
+function (out) {
+	out.push('<iframe', this.domAttrs_(), '>', '</iframe>');
+}
+;zkmld(zk._p.p.Iframe,zk._m);
+}finally{zk.setLoaded(zk._p.n);}});zk.setLoaded('zul.utl',1);

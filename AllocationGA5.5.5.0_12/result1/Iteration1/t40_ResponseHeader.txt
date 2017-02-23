@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Date: Wed, 09 Nov 2016 08:09:02 GMT
+Server: Apache
+Pragma: no-cache
+Cache-Control: no-store
+Expires: -1
+Content-Language: en-US
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 135
+Keep-Alive: timeout=15, max=65
+Connection: Keep-Alive
+Content-Type: text/plain;charset=UTF-8
+

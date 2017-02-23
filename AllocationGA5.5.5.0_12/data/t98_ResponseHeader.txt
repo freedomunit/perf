@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Wed, 26 Oct 2016 03:50:00 GMT
+Server: Apache
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 4798
+Keep-Alive: timeout=15, max=96
+Connection: Keep-Alive
+Content-Type: text/html;charset=UTF-8
+

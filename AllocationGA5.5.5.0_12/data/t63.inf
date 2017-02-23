@@ -1,0 +1,13 @@
+[t63]
+FileName1=t63.txt
+URL1=http://10.125.2.182/bin-java/zkau
+Total=2
+RequestHeaderFile=t63_RequestHeader.txt
+RequestBodyFile=t63_RequestBody.txt
+ResponseHeaderFile=t63_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_63.xml
+FileName2=t63_ss_jU0Qo_bc_sheet_22.css
+URL2=http://10.125.2.182/bin-java/zkau/view/z_g8k/jU0Qo/j0l/c/ss_jU0Qo_bc_sheet_22.css
+[ProtocolInfo]
+ProtocolId=QTWeb

@@ -1,0 +1,11 @@
+[t82]
+FileName1=t82.txt
+URL1=https://10.125.2.174/bin-java/zkau
+Total=1
+RequestHeaderFile=t82_RequestHeader.txt
+RequestBodyFile=t82_RequestBody.txt
+ResponseHeaderFile=t82_ResponseHeader.txt
+ContentType=text/plain
+SnapshotXmlFile=snapshot_82.xml
+[ProtocolInfo]
+ProtocolId=QTWeb
